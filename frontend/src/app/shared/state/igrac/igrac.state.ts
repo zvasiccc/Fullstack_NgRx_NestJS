@@ -11,5 +11,11 @@ export const initialStateIgrac: IgracState = {
       prezime: 'Jankovic',
       rejting: 1200,
     },
+    {
+      id: 2,
+      ime: 'Dzontra',
+      prezime: 'Dzontric',
+      rejting: 1200,
+    },
   ],
 };

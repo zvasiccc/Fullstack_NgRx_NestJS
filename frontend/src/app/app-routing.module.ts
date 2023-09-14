@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { KreiranjeTurniraComponent } from './kreiranje-turnira/kreiranje-turnira.component';
 import { KorpaComponent } from './korpa/korpa.component';
 import { ProfilComponent } from './profil/profil.component';
+import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent,
+  },
+  {
+    path: 'prijavljeniIgraci/:turnirId', // Parametar :turnirId
+    component: IgraciNaTurniruComponent,
   },
 ];
 

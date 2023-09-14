@@ -16,7 +16,8 @@ import { korpaReducer } from './shared/state/korpa/korpa.reducer';
 import { IgracComponent } from './igrac/igrac.component';
 import { ProfilComponent } from './profil/profil.component';
 import { igracReducer } from './shared/state/igrac/igrac.reducer';
-
+import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,12 +29,14 @@ import { igracReducer } from './shared/state/igrac/igrac.reducer';
     KorpaComponent,
     IgracComponent,
     ProfilComponent,
+    IgraciNaTurniruComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatDialogModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('turniri', turnirReducer),
     StoreModule.forFeature('turniriKorpa', korpaReducer),

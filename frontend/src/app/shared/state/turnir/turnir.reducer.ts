@@ -5,7 +5,6 @@ import * as TurnirActions from './turnir.actions';
 
 export const turnirReducer = createReducer(
   initialStateTurnir,
-  // Obrada akcije za dodavanje turnira
   on(TurnirActions.kreirajTurnir, (state, { turnir }) => {
     return {
       ...state,
@@ -14,13 +13,11 @@ export const turnirReducer = createReducer(
     //i vracamo novo stanje
   }),
 
-  // Obrada akcije za uređivanje turnira
   on(TurnirActions.urediTurnir, (state, { turnir }) => {
     const index = state.turniri.findIndex((t) => t.id === turnir.id);
     if (index === -1) {
       return state;
     }
-
     const updatedTurniri = [...state.turniri];
     updatedTurniri[index] = turnir;
 
@@ -29,8 +26,6 @@ export const turnirReducer = createReducer(
       turniri: updatedTurniri,
     };
   }),
-
-  // Obrada akcije za brisanje turnira
   on(TurnirActions.obrisiTurnir, (state, { turnirId }) => {
     return {
       ...state,
@@ -38,8 +33,7 @@ export const turnirReducer = createReducer(
     };
   }),
 
-  // Obrada akcije za dohvatanje svih turnira
   on(TurnirActions.vratiSveTurnire, (state) => {
-    return state; // U ovom slučaju, nema promene stanja, jer će se dohvat turnira obaviti van reducera
+    return state;
   })
 );

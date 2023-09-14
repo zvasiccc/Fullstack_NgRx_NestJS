@@ -1,3 +1,5 @@
+import { Turnir } from './turnir';
+
 export class Igrac {
   id: number;
   ime: string;
