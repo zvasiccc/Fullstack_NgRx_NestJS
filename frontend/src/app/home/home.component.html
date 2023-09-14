@@ -5,4 +5,10 @@
       <app-turnir [turnir]="turnir"></app-turnir>
     </li>
   </ul>
+  <h1>Svi igraci</h1>
+  <ul>
+    <li *ngFor="let igrac of sviIgraci$ | async">
+      <app-igrac [igrac]="igrac"></app-igrac>
+    </li>
+  </ul>
 </div>

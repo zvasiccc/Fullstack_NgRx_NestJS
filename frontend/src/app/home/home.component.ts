@@ -3,6 +3,8 @@ import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Observable } from 'rxjs';
 import { KorpaService } from '../services/korpa/korpa.service';
+import { IgracService } from '../services/igrac/igrac.service';
+import { Igrac } from '../shared/models/igrac';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +13,10 @@ import { KorpaService } from '../services/korpa/korpa.service';
 })
 export class HomeComponent implements OnInit {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.vratiSveTurnire(); //new Observable<Turnir[]>(); //observable nad turnirima
-  constructor(private turnirService: TurnirService) {}
+  sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
+  constructor(
+    private turnirService: TurnirService,
+    private igracService: IgracService
+  ) {}
   ngOnInit(): void {}
 }

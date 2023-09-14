@@ -15,6 +15,7 @@ import { KorpaComponent } from './korpa/korpa.component';
 import { korpaReducer } from './shared/state/korpa/korpa.reducer';
 import { IgracComponent } from './igrac/igrac.component';
 import { ProfilComponent } from './profil/profil.component';
+import { igracReducer } from './shared/state/igrac/igrac.reducer';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProfilComponent } from './profil/profil.component';
     StoreModule.forRoot({}),
     StoreModule.forFeature('turniri', turnirReducer),
     StoreModule.forFeature('turniriKorpa', korpaReducer),
+    StoreModule.forFeature('igraci', igracReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],
