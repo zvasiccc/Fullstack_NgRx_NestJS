@@ -1,0 +1,10 @@
+<p>turniri u korpi</p>
+<ul>
+  <li *ngFor="let turnir of sviTurniriUKorpi$ | async">
+    <div class="container">
+      <div class="naziv">{{ turnir.naziv }}</div>
+      <div class="datumOdrzavanja">{{ turnir.datumOdrzavanja }}</div>
+      <div class="brojUcesnika">{{ turnir.brojUcesnika }}</div>
+    </div>
+  </li>
+</ul>
