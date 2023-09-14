@@ -10,14 +10,7 @@ import { KorpaService } from '../services/korpa/korpa.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  //sviTurniri$: Obs
   sviTurniri$: Observable<Turnir[]> = this.turnirService.vratiSveTurnire(); //new Observable<Turnir[]>(); //observable nad turnirima
-  constructor(
-    private turnirService: TurnirService,
-    private korpaService: KorpaService
-  ) {}
+  constructor(private turnirService: TurnirService) {}
   ngOnInit(): void {}
-  dodajTurnirUKorpu(turnir: Turnir) {
-    this.korpaService.dodajTurnirUKorpu(turnir);
-  }
 }

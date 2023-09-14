@@ -20,6 +20,7 @@ import { korpaReducer } from './shared/state/korpa/korpa.reducer';
     TurnirComponent,
     HomeComponent,
     HeaderComponent,
+    TurnirComponent,
     KreiranjeTurniraComponent,
     KorpaComponent,
   ],

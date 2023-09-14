@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Turnir } from '../shared/models/turnir';
+import { KorpaService } from '../services/korpa/korpa.service';
 
 @Component({
   selector: 'app-turnir',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./turnir.component.css'],
 })
 export class TurnirComponent {
-  constructor() {}
+  @Input() turnir: Turnir = new Turnir(0, '', '', 0);
+  constructor(private korpaService: KorpaService) {}
+  dodajTurnirUKorpu(turnir: Turnir) {
+    this.korpaService.dodajTurnirUKorpu(turnir);
+  }
 }

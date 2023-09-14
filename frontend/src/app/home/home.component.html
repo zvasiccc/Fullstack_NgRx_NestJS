@@ -1,4 +1,4 @@
-<p>sada cu prikazati sve turnire</p>
+<!-- <p>sada cu prikazati sve turnire</p>
 <ul>
   <li *ngFor="let turnir of sviTurniri$ | async">
     <div class="container">
@@ -10,4 +10,14 @@
       </button>
     </div>
   </li>
-</ul>
+</ul> -->
+<!-- home.component.html -->
+
+<div class="container">
+  <h1>Svi Turniri</h1>
+  <ul>
+    <li *ngFor="let turnir of sviTurniri$ | async">
+      <app-turnir [turnir]="turnir"></app-turnir>
+    </li>
+  </ul>
+</div>

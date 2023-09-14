@@ -1,1 +1,6 @@
-
+<div class="turnir">
+  <h2>{{ turnir.naziv }}</h2>
+  <p>Datum održavanja: {{ turnir.datumOdrzavanja }}</p>
+  <p>Broj učesnika: {{ turnir.brojUcesnika }}</p>
+  <button (click)="dodajTurnirUKorpu(turnir)">Dodaj u korpu</button>
+</div>
