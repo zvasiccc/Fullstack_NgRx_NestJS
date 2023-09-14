@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { KreiranjeTurniraComponent } from './kreiranje-turnira/kreiranje-turnira.component';
 import { KorpaComponent } from './korpa/korpa.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'korpa',
     component: KorpaComponent,
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
   },
 ];
 

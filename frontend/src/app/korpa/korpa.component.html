@@ -1,11 +1,9 @@
 <p>turniri u korpi</p>
-<ul>
-  <li *ngFor="let turnir of sviTurniriUKorpi$ | async">
-    <div class="container">
-      <div class="naziv">{{ turnir.naziv }}</div>
-      <div class="datumOdrzavanja">{{ turnir.datumOdrzavanja }}</div>
-      <div class="brojUcesnika">{{ turnir.brojUcesnika }}</div>
-    </div>
+<div class="container">
+  <ul>
+    <li *ngFor="let turnir of sviTurniriUKorpi$ | async">
+      <app-turnir [turnir]="turnir"></app-turnir>
+    </li>
     <button class="primary">Kreiraj prijavu</button>
-  </li>
-</ul>
+  </ul>
+</div>

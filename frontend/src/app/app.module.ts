@@ -13,6 +13,8 @@ import { turnirReducer } from './shared/state/turnir/turnir.reducer';
 import { CommonModule } from '@angular/common';
 import { KorpaComponent } from './korpa/korpa.component';
 import { korpaReducer } from './shared/state/korpa/korpa.reducer';
+import { IgracComponent } from './igrac/igrac.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { korpaReducer } from './shared/state/korpa/korpa.reducer';
     TurnirComponent,
     KreiranjeTurniraComponent,
     KorpaComponent,
+    IgracComponent,
+    ProfilComponent,
   ],
   imports: [
     CommonModule,

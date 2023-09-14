@@ -17,4 +17,7 @@ export class HeaderComponent {
   navigirajNaPocetnu() {
     this.router.navigateByUrl('');
   }
+  navigirajNaProfil() {
+    this.router.navigateByUrl('profil');
+  }
 }
