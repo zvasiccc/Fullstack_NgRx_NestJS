@@ -37,3 +37,10 @@ export const turnirReducer = createReducer(
     return state;
   })
 );
+export const turnirReducerBaza = createReducer(
+  initialStateTurnir,
+  on(TurnirActions.vratiSveTurnireSuccess, (state, { turniri }) => ({
+    ...state,
+    turniri,
+  }))
+);

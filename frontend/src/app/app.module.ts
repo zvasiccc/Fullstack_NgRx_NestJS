@@ -20,6 +20,7 @@ import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { RegistracijaComponent } from './registracija/registracija.component';
   imports: [
     CommonModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     MatDialogModule,

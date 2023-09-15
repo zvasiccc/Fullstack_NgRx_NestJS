@@ -20,9 +20,19 @@ export const obrisiTurnir = createAction(
   props<{ turnirId: number }>()
 );
 export const vratiSveTurnire = createAction('[Turnir] Vrati sve turnire');
+
+// Akcija za uspešno vraćanje svih turnira sa servera
+export const vratiSveTurnireSuccess = createAction(
+  '[Turnir] Vrati sve turnire Success',
+  props<{ turniri: Turnir[] }>()
+);
+
+// Akcija za grešku prilikom dobijanja svih turnira sa servera
+export const vratiSveTurnireFailure = createAction(
+  '[Turnir] Vrati sve turnire Failure',
+  props<{ error: any }>()
+);
 export const vratiPrijavljeneIgrace = createAction(
   '[Turnir] vrati prijavljene igrace za turnir',
   props<{ turnirId: number }>()
 );
-// Ostale akcije za upravljanje turnirima
-// ...
