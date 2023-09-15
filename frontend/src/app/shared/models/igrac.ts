@@ -4,11 +4,12 @@ export class Igrac {
   id: number;
   ime: string;
   prezime: string;
-  rejting: number;
-  constructor(id: number, ime: string, prezime: string, rejting: number) {
+  vodjaTima: boolean;
+  //prijave:Prijava[];
+  constructor(id: number, ime: string, prezime: string, vodjaTima: boolean) {
     this.id = id;
     this.ime = ime;
     this.prezime = prezime;
-    this.rejting = rejting;
+    this.vodjaTima = vodjaTima;
   }
 }

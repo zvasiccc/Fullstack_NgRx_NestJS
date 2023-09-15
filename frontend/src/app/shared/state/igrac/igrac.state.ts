@@ -9,13 +9,13 @@ export const initialStateIgrac: IgracState = {
       id: 1,
       ime: 'Milos',
       prezime: 'Jankovic',
-      rejting: 1200,
+      vodjaTima: true,
     },
     {
       id: 2,
       ime: 'Dzontra',
       prezime: 'Dzontric',
-      rejting: 1200,
+      vodjaTima: false,
     },
   ],
 };

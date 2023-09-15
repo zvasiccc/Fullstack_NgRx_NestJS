@@ -7,6 +7,6 @@ import { Igrac } from '../shared/models/igrac';
   styleUrls: ['./igrac.component.css'],
 })
 export class IgracComponent {
-  @Input() igrac: Igrac = new Igrac(0, '', '', 0);
+  @Input() igrac: Igrac = new Igrac(0, '', '', false);
   constructor() {}
 }
