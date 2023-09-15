@@ -3,15 +3,12 @@
 <div *ngIf="turnirId !== null; else noTurnir">
   <p>Turnir ID: {{ turnirId }}</p>
 
-  <!-- Ovde možete prikazati listu prijavljenih igrača -->
   <ul>
     <li *ngFor="let igrac of prijavljeniIgraci$ | async">
-      {{ igrac.ime }} {{ igrac.prezime }}
+      <app-profil [igrac]="igrac"></app-profil>
     </li>
   </ul>
 </div>
-
-<!-- Poruka ako nema odabranog turnira -->
 <ng-template #noTurnir>
   <p>Nije odabran nijedan turnir.</p>
 </ng-template>

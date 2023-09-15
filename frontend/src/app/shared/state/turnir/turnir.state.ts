@@ -15,6 +15,7 @@ export const initialStateTurnir: TurnirState = {
       prijavljeniIgraci: [
         {
           id: 1,
+          korisnickoIme: 'somi123',
           ime: 'Milos',
           prezime: 'Jankovic',
           vodjaTima: false,
@@ -31,6 +32,7 @@ export const initialStateTurnir: TurnirState = {
       prijavljeniIgraci: [
         {
           id: 2,
+          korisnickoIme: 'dzontranjeze',
           ime: 'Dzontra',
           prezime: 'Dzontric',
           vodjaTima: true,

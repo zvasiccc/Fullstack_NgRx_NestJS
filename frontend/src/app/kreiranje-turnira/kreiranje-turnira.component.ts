@@ -8,7 +8,7 @@ import { TurnirService } from '../services/turnir/turnir.service';
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
 export class KreiranjeTurniraComponent {
-  turnir: Turnir = new Turnir(0, '', '', '', 0);
+  turnir!: Turnir;
   constructor(private turnirService: TurnirService) {}
   submitForm() {
     // Ovde možete dodati logiku za slanje podataka na server ili druge operacije

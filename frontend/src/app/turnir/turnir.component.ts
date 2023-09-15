@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./turnir.component.css'],
 })
 export class TurnirComponent {
-  @Input() turnir: Turnir = new Turnir(0, '', '', '', 0);
+  @Input()
+  turnir!: Turnir;
   constructor(
     private korpaService: KorpaService,
     private turnirService: TurnirService,

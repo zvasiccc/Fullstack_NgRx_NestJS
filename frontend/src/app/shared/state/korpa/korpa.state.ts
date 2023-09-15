@@ -15,6 +15,7 @@ export const initialStateKorpa: KorpaState = {
       prijavljeniIgraci: [
         {
           id: 3,
+          korisnickoIme: 'veljko123',
           ime: 'Veljko',
           prezime: 'Antic',
           vodjaTima: false,

@@ -7,6 +7,6 @@ import { Igrac } from '../shared/models/igrac';
   styleUrls: ['./profil.component.css'],
 })
 export class ProfilComponent {
-  @Input() igrac: Igrac = new Igrac(0, '', '', false);
+  @Input() igrac!: Igrac;
   constructor() {}
 }
