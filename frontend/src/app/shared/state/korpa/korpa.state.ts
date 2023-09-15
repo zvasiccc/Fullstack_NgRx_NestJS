@@ -9,7 +9,7 @@ export const initialStateKorpa: KorpaState = {
       id: 3,
       naziv: 'turnir3',
       datumOdrzavanja: '3.3.2023.',
-      brojUcesnika: 30,
+      maxBrojUcesnika: 30,
       minRejting: 800,
       maxRejting: 1400,
       prijavljeniIgraci: [

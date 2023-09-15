@@ -9,7 +9,7 @@ export const initialStateTurnir: TurnirState = {
       id: 1,
       naziv: 'turnir1',
       datumOdrzavanja: '3.3.2023.',
-      brojUcesnika: 30,
+      maxBrojUcesnika: 30,
       minRejting: 800,
       maxRejting: 1400,
       prijavljeniIgraci: [
@@ -25,7 +25,7 @@ export const initialStateTurnir: TurnirState = {
       id: 2,
       naziv: 'turnir2',
       datumOdrzavanja: '8.3.2023.',
-      brojUcesnika: 55,
+      maxBrojUcesnika: 55,
       minRejting: 1100,
       maxRejting: 1600,
       prijavljeniIgraci: [

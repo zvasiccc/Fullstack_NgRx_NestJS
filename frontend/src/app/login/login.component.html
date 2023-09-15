@@ -1,0 +1,24 @@
+<div class="login">
+  <h2>Prijava</h2>
+  <form (ngSubmit)="submitLogin()">
+    <label for="korisnickoIme">Korisničko ime:</label>
+    <input
+      type="text"
+      id="korisnickoIme"
+      [(ngModel)]="korisnickoIme"
+      name="korisnickoIme"
+      required
+    />
+
+    <label for="lozinka">Lozinka:</label>
+    <input
+      type="password"
+      id="lozinka"
+      [(ngModel)]="lozinka"
+      name="lozinka"
+      required
+    />
+
+    <button type="submit">Prijavi se</button>
+  </form>
+</div>

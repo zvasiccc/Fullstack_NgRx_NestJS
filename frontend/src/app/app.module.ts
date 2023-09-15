@@ -18,6 +18,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { igracReducer } from './shared/state/igrac/igrac.reducer';
 import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
+import { RegistracijaComponent } from './registracija/registracija.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     IgracComponent,
     ProfilComponent,
     IgraciNaTurniruComponent,
+    LoginComponent,
+    RegistracijaComponent,
   ],
   imports: [
     CommonModule,

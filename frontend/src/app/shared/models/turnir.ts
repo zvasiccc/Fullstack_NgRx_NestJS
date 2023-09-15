@@ -4,7 +4,7 @@ export class Turnir {
   id: number;
   naziv: string;
   datumOdrzavanja: string;
-  brojUcesnika: number;
+  maxBrojUcesnika: number;
   minRejting: number;
   maxRejting: number;
   prijavljeniIgraci: Igrac[] = [];
@@ -13,14 +13,14 @@ export class Turnir {
     id: number,
     naziv: string,
     datum: string,
-    brojUcesnika: number,
+    maxBrojUcesnika: number,
     minRejting: number,
     maxRejting: number
   ) {
     this.id = id;
     this.naziv = naziv;
     this.datumOdrzavanja = datum;
-    this.brojUcesnika = brojUcesnika;
+    this.maxBrojUcesnika = maxBrojUcesnika;
     this.minRejting = minRejting;
     this.maxRejting = maxRejting;
   }
