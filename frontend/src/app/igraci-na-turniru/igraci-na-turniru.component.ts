@@ -12,8 +12,7 @@ import { Turnir } from '../shared/models/turnir';
 })
 export class IgraciNaTurniruComponent {
   turnirId: number = 0;
-  prijavljeniIgraci$: Observable<Igrac[]> =
-    this.turnirService.vratiPrijavljeneIgrace(this.turnirId);
+  prijavljeniIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
   constructor(
     private route: ActivatedRoute,
     private turnirService: TurnirService
@@ -22,6 +21,9 @@ export class IgraciNaTurniruComponent {
     const turnirIdParam = this.route.snapshot.paramMap.get('turnirId');
     if (turnirIdParam !== null) {
       this.turnirId = +turnirIdParam;
+      this.prijavljeniIgraci$ = this.turnirService.vratiPrijavljeneIgrace(
+        this.turnirId
+      );
     }
   }
 }

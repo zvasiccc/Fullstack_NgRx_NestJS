@@ -26,6 +26,7 @@ export class TurnirService {
   }
 
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
-    return this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
+    return this.store.select(selectPrijavljeniIgraciZaTurnir(turnirId)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
 }
+// Gde je komponenta koja poziva servt

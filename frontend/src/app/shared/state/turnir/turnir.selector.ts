@@ -1,6 +1,7 @@
 // turnir.selectors.ts
 import {
   MemoizedSelector,
+  State,
   createFeatureSelector,
   createSelector,
 } from '@ngrx/store';
@@ -30,10 +31,9 @@ export const selectBrojTurnira = createSelector(
   selectSviTurniri,
   (turniri) => turniri.length
 );
-export const selectPrijavljeniIgraciZaTurnir = createSelector(
-  selectSviTurniri,
-  (turniri: Turnir[], props: { id: number }) => {
-    const turnir = turniri.find((t) => t.id === props.id);
+
+export const selectPrijavljeniIgraciZaTurnir = (turnirId: number) =>
+  createSelector(selectTurniriFeature, (turniri: any) => {
+    const turnir = (turniri.turniri as Turnir[]).find((t) => t.id === turnirId);
     return turnir ? turnir.prijavljeniIgraci : [];
-  }
-);
+  });
