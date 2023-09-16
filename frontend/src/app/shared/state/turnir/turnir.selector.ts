@@ -12,6 +12,8 @@ import { Turnir } from '../../models/turnir';
 export const selectTurniri = (state: AppState) => state.turnirState;
 
 const selectTurniriFeature = createFeatureSelector<Turnir[]>('turniri');
+const selectPrijavljeniTurniriFeature =
+  createFeatureSelector<Turnir[]>('prijavljeniTurniri');
 //export const selectSviTurniri = createSelector(selectTurniriFeature, (p) => p);
 export const selectSviTurniri = createSelector(
   selectTurniriFeature,
@@ -37,3 +39,7 @@ export const selectPrijavljeniIgraciZaTurnir = (turnirId: number) =>
     const turnir = (turniri.turniri as Turnir[]).find((t) => t.id === turnirId);
     return turnir ? turnir.prijavljeniIgraci : [];
   });
+export const selectPrijavljeniTurniri = createSelector(
+  selectPrijavljeniTurniriFeature,
+  (prijavljeniTurniri) => prijavljeniTurniri
+);

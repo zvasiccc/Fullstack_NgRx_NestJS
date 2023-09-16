@@ -27,4 +27,13 @@ export class TurnirService {
       },
     ];
   }
+  odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
+    return {
+      id: 3,
+      naziv: `pronadjen +${naziv}`,
+      datumOdrzavanja: `pronadjen +${mesto}`,
+      mestoOdrzavanja: `pronadjen+ ${datum}`,
+      maxBrojUcesnika: 55,
+    };
+  }
 }

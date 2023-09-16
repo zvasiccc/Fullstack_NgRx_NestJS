@@ -13,7 +13,7 @@ import { Igrac } from '../shared/models/igrac';
 })
 export class HomeComponent implements OnInit {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza(); //new Observable<Turnir[]>(); //observable nad turnirima
-  sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
+  // sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService

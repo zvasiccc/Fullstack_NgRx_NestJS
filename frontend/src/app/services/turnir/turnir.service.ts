@@ -11,6 +11,7 @@ import {
 } from 'src/app/shared/state/turnir/turnir.actions';
 import {
   selectPrijavljeniIgraciZaTurnir,
+  selectPrijavljeniTurniri,
   selectSviTurniri,
 } from 'src/app/shared/state/turnir/turnir.selector';
 
@@ -33,5 +34,11 @@ export class TurnirService {
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store.select(selectPrijavljeniIgraciZaTurnir(turnirId)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
+  vratiPrijavljeniTUrnir(): Observable<Turnir[]> {
+    return this.store
+      .select(selectPrijavljeniTurniri)
+      .pipe(map((p: any) => p.prijavljeniTurniri));
+  }
+  //TODO klikne na turnir i dodam ga u store, nakon toga se priakze lisa igraca on izabere saigrace, nakon toga izabere preference
+  //TODO ima mozda pregled sve sto je izabrao i klikne se potvrdi sto salje zahtev na back za kreiranje prijave
 }
-// Gde je komponenta koja poziva servt

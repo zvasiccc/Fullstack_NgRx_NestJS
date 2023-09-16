@@ -6,6 +6,7 @@ import { KorpaComponent } from './korpa/korpa.component';
 import { ProfilComponent } from './profil/profil.component';
 import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
 import { LoginComponent } from './login/login.component';
+import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'sviIgraci',
+    component: SviIgraciComponent,
   },
 ];
 

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { TurnirService } from './turnir.service';
 
 @Controller('turnir')
@@ -7,5 +7,13 @@ export class TurnirController {
   @Get('sviTurniri')
   vratiSveTurnire() {
     return this.turnirService.vratiSveTurnire();
+  }
+  @Get('odgovarajuciTurniri/:naziv/:mesto/:datum')
+  odgovarajuciTurnir(
+    @Param('naziv') naziv: string,
+    @Param('mesto') mesto: string,
+    @Param('datum') datum: string,
+  ) {
+    return this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
   }
 }
