@@ -19,11 +19,11 @@ export class SviIgraciComponent {
     private turnirService: TurnirService
   ) {}
   sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
-  prijavljeniTurnir: Observable<Turnir> =
-    this.turnirService.vratiPrijavljeniTUrnir();
+  // prijavljeniTurnir: Observable<Turnir> =
+  //   this.turnirService.vratiPrijavljeniTUrnir();
   ngOnInit() {
     //this.prijavljeniTurnir$ = this.turnirService.vratiPrijavljeniTUrnir();
-    this.prijavljeniTurnir = this.turnirService.vratiPrijavljeniTUrnir();
+    // this.prijavljeniTurnir = this.turnirService.vratiPrijavljeniTUrnir();
   }
   dodajIgracaUtim(igrac: Igrac) {
     this.igracService.dodajIgracaUTim(igrac);

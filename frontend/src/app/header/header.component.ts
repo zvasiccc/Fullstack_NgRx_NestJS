@@ -23,4 +23,7 @@ export class HeaderComponent {
   navigirajNaPrijavljivanje() {
     this.router.navigateByUrl('login');
   }
+  navigirajNaPrijavu() {
+    this.router.navigateByUrl('prijava');
+  }
 }

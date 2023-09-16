@@ -1,0 +1,6 @@
+<h1>Turnir je</h1>
+<div *ngIf="prijavljeniTurnir | async as turnir">
+  <app-turnir [turnir]="turnir"></app-turnir>
+  <p>proba</p>
+  {{ turnir.naziv }}
+</div>

@@ -7,6 +7,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
 import { LoginComponent } from './login/login.component';
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
+import { PrijavaComponent } from './prijava/prijava.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'sviIgraci',
     component: SviIgraciComponent,
+  },
+  {
+    path: 'prijava',
+    component: PrijavaComponent,
   },
 ];
 

@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 //import { KorpaService } from '../services/korpa/korpa.service';
 import { IgracService } from '../services/igrac/igrac.service';
 import { Igrac } from '../shared/models/igrac';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +19,22 @@ export class HomeComponent implements OnInit {
   // sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
   constructor(
     private turnirService: TurnirService,
-    private igracService: IgracService
+    private igracService: IgracService,
+    private router: Router,
+    private store: Store
   ) {}
   ngOnInit(): void {}
+  prikaziPrijavljeneIgrace() {
+    //!ne radi
+    //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
+    this.router.navigateByUrl(`prijavljeniIgraci`);
+  }
+  // PrijaviSeNaTurnir(turnir: Turnir) {
+  //   this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));
+  //   this.router.navigateByUrl('sviIgraci');
+  // }
+  prijaviSeNaTurnir(turnir: Turnir) {
+    this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
+    this.router.navigateByUrl('sviIgraci');
+  }
 }

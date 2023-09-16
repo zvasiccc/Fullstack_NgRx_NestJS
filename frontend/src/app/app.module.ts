@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OdgovarajuciTurniriComponent } from './odgovarajuci-turniri/odgovarajuci-turniri.component';
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
+import { PrijavaComponent } from './prijava/prijava.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
     RegistracijaComponent,
     OdgovarajuciTurniriComponent,
     SviIgraciComponent,
+    PrijavaComponent,
   ],
   imports: [
     CommonModule,

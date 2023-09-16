@@ -23,16 +23,4 @@ export class TurnirComponent {
   // dodajTurnirUKorpu(turnir: Turnir) {
   //   this.korpaService.dodajTurnirUKorpu(turnir);
   // }
-  prikaziPrijavljeneIgrace() {
-    //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
-    this.router.navigateByUrl(`prijavljeniIgraci/${this.turnir.id}`);
-  }
-  // PrijaviSeNaTurnir(turnir: Turnir) {
-  //   this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));
-  //   this.router.navigateByUrl('sviIgraci');
-  // }
-  prijaviSeNaTurnir(turnir: Turnir) {
-    this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
-    this.router.navigateByUrl('sviIgraci');
-  }
 }
