@@ -8,3 +8,10 @@ export const igracReducer = createReducer(
     return state;
   })
 );
+export const igracReducerBaza = createReducer(
+  initialStateIgrac,
+  on(IgracActions.vratiSveIgracSuccess, (state, { igraci }) => ({
+    ...state,
+    igraci,
+  }))
+);

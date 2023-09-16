@@ -1,6 +1,8 @@
-<div class="igraci">
-  <!-- Ostali sadržaj o igracima -->
-
-  <!-- Prikazivanje profila igrača -->
-  <app-profil [igrac]="igrac"></app-profil>
+<div class="igrac">
+  <p>ovo je igrac</p>
+  <p>Korisnicko ime: {{ igrac.korisnickoIme }}</p>
+  <p></p>
+  <p>Ime: {{ igrac.ime }}</p>
+  <p>Prezime: {{ igrac.prezime }}</p>
+  <p>Vodja tima: {{ igrac.vodjaTima ? "Jeste" : "Nije" }}</p>
 </div>

@@ -8,4 +8,8 @@ export class IgracController {
   vratiSveIgrace() {
     return this.igracService.vratiSveIgrace();
   }
+  @Get('prijavljeniIgrac')
+  vratiPrijavljenogIgraca() {
+    return this.igracService.vratiPrijavljenogIgraca();
+  }
 }

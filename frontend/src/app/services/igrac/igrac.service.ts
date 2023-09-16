@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
@@ -9,10 +10,18 @@ import { selectPrijavljeniIgraciZaTurnir } from 'src/app/shared/state/turnir/tur
   providedIn: 'root',
 })
 export class IgracService {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private http: HttpClient) {}
+  private sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci';
+  private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   vratiSveIgrace(): Observable<Igrac[]> {
-    return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));
+    return this.http.get<Igrac[]>(this.sviIgraciUrl);
   }
+  vratiPrijavljenogIgraca(): Observable<Igrac> {
+    return this.http.get<Igrac>(this.prijavljeniIgracUrl);
+  }
+  // vratiSveIgrace(): Observable<Igrac[]> {
+  //   return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));
+  // }
   // vratiPrijavljeneIgraceZaTurnir(turnirId: number): Observable<Igrac[]> {
   //   return this.store.select(selectPrijavljeniIgraciZaTurnir, {
   //     id: turnirId,

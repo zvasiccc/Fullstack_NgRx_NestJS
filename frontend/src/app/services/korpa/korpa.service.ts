@@ -13,6 +13,7 @@ export class KorpaService {
     this.store.dispatch(KorpaActions.dodajTurnirUKorpu({ turnir }));
   }
   sviTurniriUKorpi(): Observable<Turnir[]> {
+    //dohvata se iz store
     return this.store
       .select(selectSviTurniriKorpa1)
       .pipe(map((p: any) => p.turniri));

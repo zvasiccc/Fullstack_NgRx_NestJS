@@ -1,7 +1,11 @@
-<div class="profil">
-  <p>Korisnicko ime: {{ igrac.korisnickoIme }}</p>
-  <p></p>
+<!-- profil.component.html -->
+
+<div *ngIf="trenutnoPrijavljeniIgrac$ | async as igrac; else loading">
+  <h2>Trenutno prijavljeni igrac</h2>
   <p>Ime: {{ igrac.ime }}</p>
   <p>Prezime: {{ igrac.prezime }}</p>
-  <p>Vodja tima: {{ igrac.vodjaTima ? "Jeste" : "Nije" }}</p>
 </div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

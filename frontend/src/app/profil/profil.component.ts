@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Igrac } from '../shared/models/igrac';
+import { IgracService } from '../services/igrac/igrac.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profil',
@@ -7,6 +9,10 @@ import { Igrac } from '../shared/models/igrac';
   styleUrls: ['./profil.component.css'],
 })
 export class ProfilComponent {
-  @Input() igrac!: Igrac;
-  constructor() {}
+  trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
+  constructor(private igracService: IgracService) {}
+  ngOnInit(): void {
+    this.trenutnoPrijavljeniIgrac$ =
+      this.igracService.vratiPrijavljenogIgraca();
+  }
 }

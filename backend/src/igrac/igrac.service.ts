@@ -24,4 +24,12 @@ export class IgracService {
       },
     ];
   }
+  vratiPrijavljenogIgraca(){
+   return {
+    id: 3,
+    ime: 'Petar',
+    prezime: 'Mancic',
+    vodjaTima: false
+   }
+  }
 }
