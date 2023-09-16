@@ -5,7 +5,8 @@ import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
 import { selectPrijavljeniIgraciZaTurnir } from 'src/app/shared/state/turnir/turnir.selector';
-
+import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +21,12 @@ export class IgracService {
     return this.http.get<Igrac>(this.prijavljeniIgracUrl);
   }
   dodajIgracaUTim(igrac: Igrac) {
-    //postavi ga u store
+    return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
+  }
+  vratiIgraceIzTima() {
+    return this.store
+      .select(selectIgraciUPrijavi)
+      .pipe(map((p: any) => p.igraciUTimu));
   }
   // vratiSveIgrace(): Observable<Igrac[]> {
   //   return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));

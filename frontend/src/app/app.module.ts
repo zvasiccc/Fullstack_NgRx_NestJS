@@ -59,6 +59,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
     //StoreModule.forFeature('turniriKorpa', korpaReducer),
     StoreModule.forFeature('igraci', igracReducer),
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
+    StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

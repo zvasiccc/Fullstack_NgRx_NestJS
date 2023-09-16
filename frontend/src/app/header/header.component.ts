@@ -26,4 +26,7 @@ export class HeaderComponent {
   navigirajNaPrijavu() {
     this.router.navigateByUrl('prijava');
   }
+  navigirajNaBiranjeIgraca() {
+    this.router.navigateByUrl('sviIgraci');
+  }
 }

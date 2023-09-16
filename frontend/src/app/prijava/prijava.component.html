@@ -1,6 +1,12 @@
-<h1>Turnir je</h1>
-<div *ngIf="prijavljeniTurnir | async as turnir">
+<h1>Turnir</h1>
+<div *ngIf="prijavljeniTurnir$ | async as turnir">
   <app-turnir [turnir]="turnir"></app-turnir>
-  <p>proba</p>
-  {{ turnir.naziv }}
+
+  <!-- Dodajte prikaz igracaUTimu$ ispod ovog div-a -->
+  <h1>Igrači u timu</h1>
+  <ul>
+    <li *ngFor="let igrac of igraciUTimu$ | async">
+      <app-igrac [igrac]="igrac"></app-igrac>
+    </li>
+  </ul>
 </div>
