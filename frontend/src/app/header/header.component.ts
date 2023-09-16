@@ -11,9 +11,9 @@ export class HeaderComponent {
   navigirajNaKreiranjeTurnira() {
     this.router.navigateByUrl('kreiranjeTurnira');
   }
-  navigirajNaKorpu() {
-    this.router.navigateByUrl('korpa');
-  }
+  // navigirajNaKorpu() {
+  //   this.router.navigateByUrl('korpa');
+  // }
   navigirajNaPocetnu() {
     this.router.navigateByUrl('');
   }

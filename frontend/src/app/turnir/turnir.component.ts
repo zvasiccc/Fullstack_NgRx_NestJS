@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Turnir } from '../shared/models/turnir';
-import { KorpaService } from '../services/korpa/korpa.service';
+// /import { KorpaService } from '../services/korpa/korpa.service';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -14,14 +14,14 @@ export class TurnirComponent {
   @Input()
   turnir!: Turnir;
   constructor(
-    private korpaService: KorpaService,
+    //private korpaService: KorpaService,
     private turnirService: TurnirService,
     private store: Store,
     private router: Router
   ) {}
-  dodajTurnirUKorpu(turnir: Turnir) {
-    this.korpaService.dodajTurnirUKorpu(turnir);
-  }
+  // dodajTurnirUKorpu(turnir: Turnir) {
+  //   this.korpaService.dodajTurnirUKorpu(turnir);
+  // }
   prikaziPrijavljeneIgrace() {
     //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
     this.router.navigateByUrl(`prijavljeniIgraci/${this.turnir.id}`);
