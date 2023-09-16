@@ -19,6 +19,9 @@ export class IgracService {
   vratiPrijavljenogIgraca(): Observable<Igrac> {
     return this.http.get<Igrac>(this.prijavljeniIgracUrl);
   }
+  dodajIgracaUTim(igrac: Igrac) {
+    //postavi ga u store
+  }
   // vratiSveIgrace(): Observable<Igrac[]> {
   //   return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));
   // }

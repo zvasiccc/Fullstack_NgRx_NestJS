@@ -5,6 +5,7 @@ import { TurnirService } from '../services/turnir/turnir.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
+import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -26,8 +27,12 @@ export class TurnirComponent {
     //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
     this.router.navigateByUrl(`prijavljeniIgraci/${this.turnir.id}`);
   }
-  PrijaviSeNaTurnir(turnir: Turnir) {
-    this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));
+  // PrijaviSeNaTurnir(turnir: Turnir) {
+  //   this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));
+  //   this.router.navigateByUrl('sviIgraci');
+  // }
+  prijaviSeNaTurnir(turnir: Turnir) {
+    this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
     this.router.navigateByUrl('sviIgraci');
   }
 }

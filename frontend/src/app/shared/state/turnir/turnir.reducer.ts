@@ -42,13 +42,13 @@ export const turnirReducerBaza = createReducer(
   on(TurnirActions.vratiSveTurnireSuccess, (state, { turniri }) => ({
     ...state,
     turniri,
-  })),
-  on(TurnirActions.prijaviSeNaTurnir, (state, { turnir }) => {
-    // Dodajte trenutni turnir u listu prijavljenih turnira
-    const prijavljeniTurniri = [...state.prijavljeniTurniri, turnir];
-    return {
-      ...state,
-      prijavljeniTurniri,
-    };
-  })
+  }))
+  // on(TurnirActions.prijaviSeNaTurnir, (state, { turnir }) => {
+  //   // Dodajte trenutni turnir u listu prijavljenih turnira
+  //   const prijavljeniTurniri = [...state.prijavljeniTurniri, turnir];
+  //   return {
+  //     ...state,
+  //     prijavljeniTurniri,
+  //   };
+  //})
 );

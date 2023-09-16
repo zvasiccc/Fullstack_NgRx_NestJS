@@ -26,6 +26,7 @@ import { RegistracijaComponent } from './registracija/registracija.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OdgovarajuciTurniriComponent } from './odgovarajuci-turniri/odgovarajuci-turniri.component';
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
+import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
     StoreModule.forFeature('prijavljeniTurniri', turnirReducerBaza),
     //StoreModule.forFeature('turniriKorpa', korpaReducer),
     StoreModule.forFeature('igraci', igracReducer),
+    StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

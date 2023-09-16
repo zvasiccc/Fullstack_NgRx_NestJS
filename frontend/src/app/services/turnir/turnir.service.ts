@@ -14,6 +14,7 @@ import {
   selectPrijavljeniTurniri,
   selectSviTurniri,
 } from 'src/app/shared/state/turnir/turnir.selector';
+import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +35,13 @@ export class TurnirService {
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store.select(selectPrijavljeniIgraciZaTurnir(turnirId)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
-  vratiPrijavljeniTUrnir(): Observable<Turnir[]> {
+  vratiPrijavljeniTUrnir(): Observable<Turnir> {
+    // return this.store
+    //   .select(selectPrijavljeniTurniri)
+    //   .pipe(map((p: any) => p.prijavljeniTurniri));
     return this.store
-      .select(selectPrijavljeniTurniri)
-      .pipe(map((p: any) => p.prijavljeniTurniri));
+      .select(selectTurnirUPrijavi)
+      .pipe(map((p: any) => p.turnir));
   }
   //TODO klikne na turnir i dodam ga u store, nakon toga se priakze lisa igraca on izabere saigrace, nakon toga izabere preference
   //TODO ima mozda pregled sve sto je izabrao i klikne se potvrdi sto salje zahtev na back za kreiranje prijave

@@ -36,7 +36,7 @@ export const vratiPrijavljeneIgrace = createAction(
   '[Turnir] vrati prijavljene igrace za turnir',
   props<{ turnirId: number }>()
 );
-export const prijaviSeNaTurnir = createAction(
-  '[Turnir] Prijavi se na turnir',
-  props<{ turnir: Turnir }>()
-);
+// export const prijaviSeNaTurnir = createAction(
+//   '[Turnir] Prijavi se na turnir',
+//   props<{ turnir: Turnir }>()
+// );
