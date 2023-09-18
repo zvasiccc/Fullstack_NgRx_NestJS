@@ -10,3 +10,15 @@
     </li>
   </ul>
 </div>
+<h1>Prijave</h1>
+<div
+  *ngIf="
+    preferencePotrebanBrojSlusalica$ | async as preferencePotrebanBrojSlusalica
+  "
+>
+  <h1>Preferences</h1>
+  <p>Potreban broj slušalica: {{ preferencePotrebanBrojSlusalica }}</p>
+</div>
+<button (click)="izaberiPreference()" routerLink="preference">
+  Izaberi preference tima
+</button>

@@ -10,3 +10,12 @@ export const dodajIgracaUTim = createAction(
   '[Prijava] dodaj igraca u tim',
   props<{ igrac: Igrac }>()
 );
+export const dodajPreferenceUPrijavu = createAction(
+  '[prijava] dodaj preference u prijavu',
+  props<{
+    potrebanBrojSlusalica: number;
+    potrebanBrojRacunara: number;
+    potrebanBrojTastatura: number;
+    potrebanBrojMiseva: number;
+  }>()
+);

@@ -8,6 +8,7 @@ import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.
 import { LoginComponent } from './login/login.component';
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { PrijavaComponent } from './prijava/prijava.component';
+import { PreferenceComponent } from './preference/preference.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'prijava',
     component: PrijavaComponent,
+  },
+  {
+    path: 'preference',
+    component: PreferenceComponent,
   },
 ];
 

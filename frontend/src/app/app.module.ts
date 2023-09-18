@@ -28,6 +28,7 @@ import { OdgovarajuciTurniriComponent } from './odgovarajuci-turniri/odgovarajuc
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
 import { PrijavaComponent } from './prijava/prijava.component';
+import { PreferenceComponent } from './preference/preference.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
     OdgovarajuciTurniriComponent,
     SviIgraciComponent,
     PrijavaComponent,
+    PreferenceComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
     StoreModule.forFeature('igraci', igracReducer),
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
+    StoreModule.forFeature('potrebanBrojSlusalica', prijavaReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

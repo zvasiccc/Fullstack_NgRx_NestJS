@@ -2,9 +2,10 @@ import { Igrac } from './igrac'; // Pretpostavljam da već postoji interfejs ili
 import { Turnir } from './turnir'; // Pretpostavljam da već postoji interfejs ili model za Turnir
 
 export interface Prijava {
-  zeljeniSok: string;
-  zeljenaHrana: string;
-  sopstvenaOprema: boolean;
+  potrebanBrojSlusalica: number;
+  potrebanBrojRacunara: number;
+  potrebanBrojTastatura: number;
+  potrebanBrojMiseva: number;
   igraci: Igrac[]; //
   turnir: Turnir; //
 }
