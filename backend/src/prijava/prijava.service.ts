@@ -5,9 +5,12 @@ export class PrijavaService {
   vratiPrijavuPoId(id: number) {
     return [
       {
-        zeljeniSok: 'pepsi',
-        zeljenaHrana: 'pljeskavica',
-        potrebnaOprema: true,
+        id: id,
+        nazivTima: 'Tim back 1',
+        potrebanBrojSlusalica: 4,
+        potrebanBrojRacunara: 2,
+        potrebanBrojTastatura: 3,
+        potrebanBrojMiseva: 3,
         igraci: [
           {
             id: 2,

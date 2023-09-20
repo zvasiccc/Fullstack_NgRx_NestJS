@@ -1,10 +1,12 @@
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Collection } from 'typeorm';
 
 @Entity()
 export class IgracEntity {
   @PrimaryGeneratedColumn()
   id: number;
+  @Column()
+  korisnickoIme: string;
   @Column()
   ime: string;
   @Column()

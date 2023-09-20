@@ -1,6 +1,6 @@
-export class Preference {
-  potrebanBrojSlusalica: number = 0;
-  potrebanBrojRacunara: number = 0;
-  potrebanBrojTastatura: number = 0;
-  potrebanBrojMiseva: number = 0;
+export interface Preference {
+  potrebanBrojSlusalica: number;
+  potrebanBrojRacunara: number;
+  potrebanBrojTastatura: number;
+  potrebanBrojMiseva: number;
 }

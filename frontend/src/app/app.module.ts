@@ -62,7 +62,7 @@ import { PreferenceComponent } from './preference/preference.component';
     StoreModule.forFeature('igraci', igracReducer),
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
-    StoreModule.forFeature('potrebanBrojSlusalica', prijavaReducer),
+    StoreModule.forFeature('preferenceUPrijavi', prijavaReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

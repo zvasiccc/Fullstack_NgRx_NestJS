@@ -10,22 +10,8 @@ export const prijavaReducer = createReducer(
     const noviIgraciUTimu = [...state.igraciUTimu, igrac];
     return { ...state, igraciUTimu: noviIgraciUTimu };
   }),
-  on(
-    PrijavaActions.dodajPreferenceUPrijavu,
-    (
-      state,
-      {
-        potrebanBrojSlusalica,
-        potrebanBrojRacunara,
-        potrebanBrojTastatura,
-        potrebanBrojMiseva,
-      }
-    ) => ({
-      ...state,
-      potrebanBrojSlusalica,
-      potrebanBrojRacunara,
-      potrebanBrojTastatura,
-      potrebanBrojMiseva,
-    })
-  )
+  on(PrijavaActions.dodajPreferenceUPrijavu, (state, { preference }) => ({
+    ...state,
+    preference: { ...preference },
+  }))
 );

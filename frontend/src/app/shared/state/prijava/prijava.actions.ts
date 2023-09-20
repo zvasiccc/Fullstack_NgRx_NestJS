@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Turnir } from '../../models/turnir';
 import { Igrac } from '../../models/igrac';
+import { Preference } from '../../models/preference';
 
 export const prijaviSeNaTurnir = createAction(
   '[Prijava] prijavi se na turnir',
@@ -12,10 +13,5 @@ export const dodajIgracaUTim = createAction(
 );
 export const dodajPreferenceUPrijavu = createAction(
   '[prijava] dodaj preference u prijavu',
-  props<{
-    potrebanBrojSlusalica: number;
-    potrebanBrojRacunara: number;
-    potrebanBrojTastatura: number;
-    potrebanBrojMiseva: number;
-  }>()
+  props<{ preference: Preference }>()
 );

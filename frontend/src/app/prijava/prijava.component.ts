@@ -6,7 +6,10 @@ import { IgracService } from '../services/igrac/igrac.service';
 import { Igrac } from '../shared/models/igrac';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
+import { PreferenceComponent } from '../preference/preference.component';
+import { Preference } from '../shared/models/preference';
+import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
+//import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
 
 @Component({
   selector: 'app-prijava',
@@ -17,17 +20,16 @@ export class PrijavaComponent {
   prijavljeniTurnir$: Observable<Turnir> =
     this.turnirService.vratiPrijavljeniTUrnir();
   igraciUTimu$: Observable<Igrac[]> = this.igracService.vratiIgraceIzTima();
-  preferencePotrebanBrojSlusalica$: Observable<number> = this.store
-    .select(selectPotrebanBrojSlusalica)
-    .pipe(map((p: any) => p.potrebanBrojSlusalica));
-
+  // preferencePotrebanBrojSlusalica$: Observable<number> = this.store
+  //   .select(selectPotrebanBrojSlusalica)
+  //   .pipe(map((p: any) => p.potrebanBrojSlusalica));
+  preference$: Observable<Preference> = this.store
+    .select(selectPreferenceUPrijavi)
+    .pipe(map((p: any) => p.preference));
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
     private router: Router,
     private store: Store
   ) {}
-  izaberiPreference() {
-    this.router.navigateByUrl('preference');
-  }
 }

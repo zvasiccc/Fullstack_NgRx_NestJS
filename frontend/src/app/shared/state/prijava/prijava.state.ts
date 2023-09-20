@@ -1,13 +1,11 @@
 import { Igrac } from '../../models/igrac';
+import { Preference } from '../../models/preference';
 import { Turnir } from '../../models/turnir';
 
 export interface PrijavaState {
   turnir: Turnir;
   igraciUTimu: Igrac[];
-  potrebanBrojSlusalica: number;
-  potrebanBrojRacunara: number;
-  potrebanBrojTastatura: number;
-  potrebanBrojMiseva: number;
+  preference: Preference;
 }
 export const initialStatePrijava: PrijavaState = {
   turnir: {
@@ -19,8 +17,10 @@ export const initialStatePrijava: PrijavaState = {
     prijavljeniIgraci: [],
   },
   igraciUTimu: [],
-  potrebanBrojSlusalica: 0,
-  potrebanBrojRacunara: 0,
-  potrebanBrojTastatura: 0,
-  potrebanBrojMiseva: 0,
+  preference: {
+    potrebanBrojSlusalica: 1,
+    potrebanBrojRacunara: 1,
+    potrebanBrojTastatura: 1,
+    potrebanBrojMiseva: 1,
+  },
 };

@@ -8,13 +8,13 @@ export class PrijavaEntity {
   @Column()
   nazivTima: string;
   @Column()
-  potrebneSlusalice: boolean; //TODO potreban broj namesti, da neki ponesu neki ne moraju
+  potrebanBrojSlusalica: number;
   @Column()
-  potrebniRacunari: boolean;
+  potrebanBrojRacunara: number;
   @Column()
-  potrebneTastature: boolean;
+  potrebanBrojTastatura: number;
   @Column()
-  potrebniMisevi: boolean;
+  potrebanBrojMiseva: number;
   //!vise igraca cine jednu prijavu tj jedan tim
   igraci: IgracEntity[];
   turnir: TurnirEntity;

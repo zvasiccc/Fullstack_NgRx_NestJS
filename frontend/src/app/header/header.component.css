@@ -1,0 +1,39 @@
+/* Stil za dobrodošli tekst */
+.welcome-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stil za dugmad za navigaciju */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.primary {
+  background-color: #007bff;
+}
+
+.secondary {
+  background-color: #555;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}

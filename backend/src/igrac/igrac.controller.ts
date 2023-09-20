@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { IgracService } from './igrac.service';
 
 @Controller('igrac')
@@ -11,5 +11,9 @@ export class IgracController {
   @Get('prijavljeniIgrac')
   vratiPrijavljenogIgraca() {
     return this.igracService.vratiPrijavljenogIgraca();
+  }
+  @Get('korisnickoIme/:korisnickoIme')
+  vratiIgracePoKorisnickomImenu(@Param('korisnickoIme') korisnickoIme: string) {
+    return this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
   }
 }

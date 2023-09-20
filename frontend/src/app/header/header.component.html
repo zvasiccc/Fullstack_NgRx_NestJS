@@ -1,16 +1,48 @@
-<p>Dobrodosli na sajt za pronalazak turnira</p>
-<button (click)="navigirajNaKreiranjeTurnira()" routerLink="/kreiranjeTurnira">
-  Kreiraj turnir
-</button>
-<!-- <button (click)="navigirajNaKorpu()" routerLink="/korpa">Korpa</button> -->
-<button (click)="navigirajNaPocetnu()" routerLink="">Pocetna</button>
-<button (click)="navigirajNaProfil()" routerLink="profil">Profil</button>
-<button (click)="navigirajNaBiranjeIgraca()" routerLink="sviIgraci">
-  Biraj igrace za tim
-</button>
-<button (click)="navigirajNaPrijavljivanje()" routerLink="Prijavljivanje">
-  Prijavi se
-</button>
-<button (click)="navigirajNaPrijavu()" routerLink="prijava">
-  Pregledaj prijavu
-</button>
+<p class="welcome-text">Dobrodošli na sajt za pronalazak turnira</p>
+
+<div class="button-container">
+  <button
+    (click)="navigirajNaKreiranjeTurnira()"
+    routerLink="/kreiranjeTurnira"
+    class="nav-button"
+  >
+    Kreiraj turnir
+  </button>
+  <!-- <button (click)="navigirajNaKorpu()" routerLink="/korpa" class="nav-button">
+    Korpa
+  </button> -->
+  <button (click)="navigirajNaProfil()" routerLink="profil" class="nav-button">
+    Profil
+  </button>
+  <button (click)="navigirajNaPocetnu()" routerLink="" class="nav-button">
+    Početna
+  </button>
+  <button
+    (click)="navigirajNaBiranjeIgraca()"
+    routerLink="sviIgraci"
+    class="nav-button"
+  >
+    Biraj igrače za tim
+  </button>
+  <button
+    (click)="izaberiPreference()"
+    routerLink="preference"
+    class="nav-button"
+  >
+    Izaberi preference tima
+  </button>
+  <button
+    (click)="navigirajNaPrijavu()"
+    routerLink="prijava"
+    class="nav-button"
+  >
+    Pregledaj prijavu
+  </button>
+  <button
+    (click)="navigirajNaPrijavljivanje()"
+    routerLink="Prijavljivanje"
+    class="nav-button"
+  >
+    Login
+  </button>
+</div>

@@ -28,6 +28,10 @@ export class IgracService {
       .select(selectIgraciUPrijavi)
       .pipe(map((p: any) => p.igraciUTimu));
   }
+  vratiIgracePoKorisnickomImenu(korisnickoIme: string): Observable<Igrac[]> {
+    const url = `http://localhost:3000/igrac/korisnickoIme/${korisnickoIme}`;
+    return this.http.get<Igrac[]>(url);
+  }
   // vratiSveIgrace(): Observable<Igrac[]> {
   //   return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));
   // }

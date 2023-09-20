@@ -29,4 +29,7 @@ export class HeaderComponent {
   navigirajNaBiranjeIgraca() {
     this.router.navigateByUrl('sviIgraci');
   }
+  izaberiPreference() {
+    this.router.navigateByUrl('preference');
+  }
 }

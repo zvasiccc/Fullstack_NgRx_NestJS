@@ -19,13 +19,15 @@ export class SviIgraciComponent {
     private turnirService: TurnirService
   ) {}
   sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
-  // prijavljeniTurnir: Observable<Turnir> =
-  //   this.turnirService.vratiPrijavljeniTUrnir();
-  ngOnInit() {
-    //this.prijavljeniTurnir$ = this.turnirService.vratiPrijavljeniTUrnir();
-    // this.prijavljeniTurnir = this.turnirService.vratiPrijavljeniTUrnir();
-  }
+  pretragaIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
+  uneseniIgrac: string = '';
+
+  ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
     this.igracService.dodajIgracaUTim(igrac);
+  }
+  pretraziIgrace(uneseniIgrac: string) {
+    this.pretragaIgraci$ =
+      this.igracService.vratiIgracePoKorisnickomImenu(uneseniIgrac);
   }
 }
