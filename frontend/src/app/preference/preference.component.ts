@@ -10,10 +10,6 @@ import { Preference } from '../shared/models/preference';
   styleUrls: ['./preference.component.css'],
 })
 export class PreferenceComponent {
-  // potrebanBrojSlusalica: number = 0;
-  // potrebanBrojRacunara: number = 0;
-  // potrebanBrojTastatura: number = 0;
-  // potrebanBrojMiseva: number = 0;
   zeljenePreference: Preference = {
     potrebanBrojSlusalica: 0,
     potrebanBrojRacunara: 0,

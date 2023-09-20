@@ -7,5 +7,5 @@ export interface Prijava {
   potrebanBrojTastatura: number;
   potrebanBrojMiseva: number;
   igraci: Igrac[]; //
-  turnir: Turnir; //
+  turnir: Turnir | null; //
 }

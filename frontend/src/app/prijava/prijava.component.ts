@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { PreferenceComponent } from '../preference/preference.component';
 import { Preference } from '../shared/models/preference';
 import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
+import { Prijava } from '../shared/models/prijava';
 //import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
 
 @Component({
@@ -20,16 +21,38 @@ export class PrijavaComponent {
   prijavljeniTurnir$: Observable<Turnir> =
     this.turnirService.vratiPrijavljeniTUrnir();
   igraciUTimu$: Observable<Igrac[]> = this.igracService.vratiIgraceIzTima();
-  // preferencePotrebanBrojSlusalica$: Observable<number> = this.store
-  //   .select(selectPotrebanBrojSlusalica)
-  //   .pipe(map((p: any) => p.potrebanBrojSlusalica));
   preference$: Observable<Preference> = this.store
     .select(selectPreferenceUPrijavi)
     .pipe(map((p: any) => p.preference));
+  prijava: Prijava = {
+    potrebanBrojSlusalica: 0,
+    potrebanBrojRacunara: 0,
+    potrebanBrojTastatura: 0,
+    potrebanBrojMiseva: 0,
+    igraci: [],
+    turnir: null,
+  };
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
     private router: Router,
     private store: Store
   ) {}
+  posaljiPrijavu() {
+    this.prijavljeniTurnir$.subscribe((turnir) => {
+      this.prijava.turnir = turnir;
+    });
+
+    this.igraciUTimu$.subscribe((igraci) => {
+      this.prijava.igraci = igraci;
+    });
+
+    this.preference$.subscribe((preference) => {
+      this.prijava.potrebanBrojSlusalica = preference.potrebanBrojSlusalica;
+      this.prijava.potrebanBrojRacunara = preference.potrebanBrojRacunara;
+      this.prijava.potrebanBrojTastatura = preference.potrebanBrojTastatura;
+      this.prijava.potrebanBrojMiseva = preference.potrebanBrojMiseva;
+    });
+    console.log(this.prijava);
+  }
 }

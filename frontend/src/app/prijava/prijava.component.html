@@ -12,9 +12,9 @@
 </div>
 <h1>Prijave</h1>
 <div *ngIf="preference$ | async as preference">
-  <h1>Preferences</h1>
   <p>Potreban broj slušalica: {{ preference.potrebanBrojSlusalica }}</p>
   <p>Potreban broj racunara: {{ preference.potrebanBrojRacunara }}</p>
   <p>Potreban broj tastatura: {{ preference.potrebanBrojTastatura }}</p>
   <p>Potreban broj miseva: {{ preference.potrebanBrojMiseva }}</p>
 </div>
+<button (click)="posaljiPrijavu()">Prijavi se na turnir</button>
