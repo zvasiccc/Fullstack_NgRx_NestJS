@@ -1,39 +1,32 @@
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { TurnirEntity } from './turnir.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TurnirService {
-  vratiSveTurnire() {
-    return [
-      {
-        id: 1,
-        naziv: ' Turnir back 1',
-        datumOdrzavanja: '3.3.2023.',
-        mestoOdrzavanja: 'Prcevac',
-        maxBrojUcesnika: 30,
-      },
-      {
-        id: 2,
-        naziv: ' Turnir back 2',
-        datumOdrzavanja: '3.3.2023.',
-        mestoOdrzavanja: 'Radindol',
-        maxBrojUcesnika: 40,
-      },
-      {
-        id: 3,
-        naziv: ' Turnir back 3',
-        datumOdrzavanja: '3.3.2023.',
-        mestoOdrzavanja: 'Sukovo',
-        maxBrojUcesnika: 55,
-      },
-    ];
+  constructor(
+    @InjectRepository(TurnirEntity)
+    private turnirRepository: Repository<TurnirEntity>,
+  ) {}
+  async vratiSveTurnire() {
+    return await this.turnirRepository.find();
   }
-  odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
-    return {
-      id: 3,
-      naziv: `pronadjen +${naziv}`,
-      datumOdrzavanja: `pronadjen +${mesto}`,
-      mestoOdrzavanja: `pronadjen+ ${datum}`,
-      maxBrojUcesnika: 55,
-    };
+  async odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
+    return await this.turnirRepository.find({
+      where: {
+        naziv: naziv,
+        mestoOdrzavanja: mesto,
+        datumOdrzavanja: datum,
+      },
+    });
+  }
+  async dodajTurnir(turnir: TurnirEntity) {
+    const noviTurnir = this.turnirRepository.create();
+    noviTurnir.naziv = turnir.naziv;
+    noviTurnir.datumOdrzavanja = turnir.datumOdrzavanja;
+    noviTurnir.mestoOdrzavanja = turnir.mestoOdrzavanja;
+    noviTurnir.maxBrojUcesnika = turnir.maxBrojUcesnika;
+    return await this.turnirRepository.save(noviTurnir);
   }
 }

@@ -1,19 +1,24 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { TurnirService } from './turnir.service';
+import { TurnirEntity } from './turnir.entity';
 
 @Controller('turnir')
 export class TurnirController {
   constructor(private turnirService: TurnirService) {}
   @Get('sviTurniri')
-  vratiSveTurnire() {
-    return this.turnirService.vratiSveTurnire();
+  async vratiSveTurnire() {
+    return await this.turnirService.vratiSveTurnire();
   }
   @Get('odgovarajuciTurniri/:naziv/:mesto/:datum')
-  odgovarajuciTurnir(
+  async odgovarajuciTurnir(
     @Param('naziv') naziv: string,
     @Param('mesto') mesto: string,
     @Param('datum') datum: string,
   ) {
-    return this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
+    return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
+  }
+  @Post('dodajTurnir')
+  async dodajTurnir(@Body() turnir: TurnirEntity) {
+    return await this.turnirService.dodajTurnir(turnir);
   }
 }

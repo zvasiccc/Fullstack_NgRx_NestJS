@@ -10,30 +10,8 @@ export class IgracService {
     private igracRepository: Repository<IgracEntity>,
   ) {}
 
-  vratiSveIgrace() {
-    return [
-      {
-        id: 1,
-        korisnickoIme: 'milos123',
-        ime: 'Milos',
-        prezime: 'Djordjevic',
-        vodjaTima: true,
-      },
-      {
-        id: 2,
-        korisnickoIme: 'baneroti',
-        ime: 'Dimitrije',
-        prezime: 'Zivkovic',
-        vodjaTima: false,
-      },
-      {
-        id: 3,
-        korisnickoIme: 'ludjakat',
-        ime: 'Petar',
-        prezime: 'Mancic',
-        vodjaTima: false,
-      },
-    ];
+  async vratiSveIgrace() {
+    return await this.igracRepository.find();
   }
   vratiPrijavljenogIgraca() {
     return {
@@ -57,7 +35,7 @@ export class IgracService {
     ];
   }
 
-  async post(igrac: any) {
+  async dodajIgraca(igrac: any) {
     const p = this.igracRepository.create();
     p.korisnickoIme = igrac.korisnickoIme;
     p.ime = igrac.ime;

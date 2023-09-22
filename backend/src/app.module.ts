@@ -42,5 +42,3 @@ import { TurnirEntity } from './turnir/turnir.entity';
   providers: [AppService, IgracService, TurnirService, PrijavaService],
 })
 export class AppModule {}
-
-// Po ovome ovk ti kad god nekvo promenis ovde moras build, pa compose up pak

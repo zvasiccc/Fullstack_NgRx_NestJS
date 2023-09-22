@@ -5,8 +5,8 @@ import { IgracService } from './igrac.service';
 export class IgracController {
   constructor(private igracService: IgracService) {}
   @Get('sviIgraci')
-  vratiSveIgrace() {
-    return this.igracService.vratiSveIgrace();
+  async vratiSveIgrace() {
+    return await this.igracService.vratiSveIgrace();
   }
   @Get('prijavljeniIgrac')
   vratiPrijavljenogIgraca() {
@@ -17,8 +17,8 @@ export class IgracController {
     return this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
   }
 
-  @Post('post')
+  @Post('dodajIgraca')
   async post(@Body() igrac: any) {
-    return await this.igracService.post(igrac);
+    return await this.igracService.dodajIgraca(igrac);
   }
 }
