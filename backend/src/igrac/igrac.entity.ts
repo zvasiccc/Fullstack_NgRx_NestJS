@@ -22,6 +22,5 @@ export class IgracEntity {
   vodjaTima: boolean;
   //prijave: PrijavaEntity[];
   @ManyToMany(() => PrijavaEntity, (prijava) => prijava.igraci)
-  //@JoinTable()
   prijave: PrijavaEntity[];
 }

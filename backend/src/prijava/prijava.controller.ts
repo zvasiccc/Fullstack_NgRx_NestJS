@@ -13,8 +13,4 @@ export class PrijavaController {
   async dodajPrijavu(@Body() prijava: PrijavaEntity) {
     return await this.prijavaService.dodajPrijavu(prijava);
   }
-  @Get('pronadjiIgraceZaPrijavu/:id')
-  async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
-    return await this.prijavaService.pronadjiIgraceZaPrijavu(id);
-  }
 }

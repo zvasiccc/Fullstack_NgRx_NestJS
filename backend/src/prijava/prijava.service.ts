@@ -42,14 +42,4 @@ export class PrijavaService {
     return await this.prijavaRepository.save(novaPrijava);
     // return await this.prijavaRepository.save(novaPrijava);
   }
-  async pronadjiIgraceZaPrijavu(prijavaId: number) {
-    // Koristimo "createQueryBuilder" za pravljenje upita
-    const query = this.igracRepository
-      .createQueryBuilder('igrac')
-      .innerJoin('igrac.prijave', 'prijava') // Povezujemo preko "prijave" veze
-      .where('prijava.id = :prijavaId', { prijavaId }) // Filtriramo po ID prijave
-      .getMany(); // Dobijamo rezultate
-
-    return await query;
-  }
 }

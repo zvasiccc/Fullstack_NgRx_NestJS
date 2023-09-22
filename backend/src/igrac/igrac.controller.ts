@@ -8,17 +8,23 @@ export class IgracController {
   async vratiSveIgrace() {
     return await this.igracService.vratiSveIgrace();
   }
-  @Get('prijavljeniIgrac')
+  @Get('prijavljeniIgrac') //TODO hardkodirano je trenutno
   vratiPrijavljenogIgraca() {
     return this.igracService.vratiPrijavljenogIgraca();
   }
   @Get('korisnickoIme/:korisnickoIme')
-  vratiIgracePoKorisnickomImenu(@Param('korisnickoIme') korisnickoIme: string) {
-    return this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
+  async vratiIgracePoKorisnickomImenu(
+    @Param('korisnickoIme') korisnickoIme: string,
+  ) {
+    return await this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
   }
 
   @Post('dodajIgraca')
   async post(@Body() igrac: any) {
     return await this.igracService.dodajIgraca(igrac);
+  }
+  @Get('pronadjiIgraceZaPrijavu/:id')
+  async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
+    return await this.igracService.pronadjiIgraceZaPrijavu(id);
   }
 }
