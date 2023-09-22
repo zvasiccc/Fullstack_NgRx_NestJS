@@ -1,8 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { IgracEntity } from './igrac.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class IgracService {
+  constructor(
+    @InjectRepository(IgracEntity)
+    private igracRepository: Repository<IgracEntity>,
+  ) {}
+
   vratiSveIgrace() {
     return [
       {
@@ -48,5 +55,14 @@ export class IgracService {
         vodjaTima: true,
       },
     ];
+  }
+
+  async post(igrac: any) {
+    const p = this.igracRepository.create();
+    p.korisnickoIme = igrac.korisnickoIme;
+    p.ime = igrac.ime;
+    p.prezime = igrac.prezime;
+    p.vodjaTima = igrac.vodjaTima;
+    return await this.igracRepository.save(p);
   }
 }

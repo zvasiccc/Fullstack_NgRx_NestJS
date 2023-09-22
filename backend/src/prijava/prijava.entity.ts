@@ -1,7 +1,15 @@
 import { IgracEntity } from 'src/igrac/igrac.entity';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity()
 export class PrijavaEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,8 +24,13 @@ export class PrijavaEntity {
   @Column()
   potrebanBrojMiseva: number;
   //!vise igraca cine jednu prijavu tj jedan tim
+  //igraci: IgracEntity[];
+  //turnir: TurnirEntity;
+  @ManyToMany(() => IgracEntity, (igrac) => igrac.prijave)
+  @JoinTable()
   igraci: IgracEntity[];
+
+  // Veza sa turnirom
+  @ManyToOne(() => TurnirEntity, (turnir) => turnir.prijave)
   turnir: TurnirEntity;
 }
-//TODO u store treba 1turnir, niz igraca i jedna preferenca,(koliko slusalica,racunara...)
-//i mozda filteri pretrage koja je unesena na front

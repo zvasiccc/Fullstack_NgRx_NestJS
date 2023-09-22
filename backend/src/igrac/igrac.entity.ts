@@ -1,5 +1,12 @@
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
-import { Entity, Column, PrimaryGeneratedColumn, Collection } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Collection,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class IgracEntity {
@@ -13,5 +20,8 @@ export class IgracEntity {
   prezime: string;
   @Column()
   vodjaTima: boolean;
-  prijave: PrijavaEntity[]; //jer prijava sadrzi vise turnira
+  //prijave: PrijavaEntity[];
+  @ManyToMany(() => PrijavaEntity, (prijava) => prijava.igraci)
+  //@JoinTable()
+  prijave: PrijavaEntity[];
 }

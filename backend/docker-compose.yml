@@ -1,0 +1,22 @@
+version: '3'
+services:
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - DATABASE_HOST=db
+  db:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - '2345:5432'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: puflander
+      POSTGRES_DB: RWA_PROJEKAT

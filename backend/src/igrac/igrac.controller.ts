@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { IgracService } from './igrac.service';
 
 @Controller('igrac')
@@ -15,5 +15,10 @@ export class IgracController {
   @Get('korisnickoIme/:korisnickoIme')
   vratiIgracePoKorisnickomImenu(@Param('korisnickoIme') korisnickoIme: string) {
     return this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
+  }
+
+  @Post('post')
+  async post(@Body() igrac: any) {
+    return await this.igracService.post(igrac);
   }
 }
