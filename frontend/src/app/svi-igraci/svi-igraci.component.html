@@ -1,4 +1,4 @@
-<h1>Svi igraci</h1>
+<h2>igraci</h2>
 <label for="uneseniIgrac"> Unesite ime igraca</label>
 <input
   type="text"
@@ -13,10 +13,10 @@
     <button (click)="dodajIgracaUtim(igrac)">Dodaj u tim</button>
   </li>
 </ul>
-<h3>pretraga igraci</h3>
 <ul>
   <li *ngFor="let igrac of pretragaIgraci$ | async">
     <app-igrac [igrac]="igrac"></app-igrac>
     <button (click)="dodajIgracaUtim(igrac)">Dodaj u tim</button>
   </li>
 </ul>
+<button (click)="navigirajNaPreference()">Preference</button>

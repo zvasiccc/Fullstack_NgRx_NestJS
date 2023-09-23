@@ -26,10 +26,10 @@ export class HeaderComponent {
   navigirajNaPrijavu() {
     this.router.navigateByUrl('prijava');
   }
-  navigirajNaBiranjeIgraca() {
-    this.router.navigateByUrl('sviIgraci');
-  }
-  izaberiPreference() {
-    this.router.navigateByUrl('preference');
-  }
+  // navigirajNaBiranjeIgraca() {
+  //   this.router.navigateByUrl('sviIgraci');
+  // }
+  // izaberiPreference() {
+  //   this.router.navigateByUrl('preference');
+  // }
 }

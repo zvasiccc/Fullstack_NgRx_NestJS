@@ -8,19 +8,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Stilizacija za naslov ('h2') */
 .turnir h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-/* Stilizacija za tekst o datumu ('p') */
 .turnir p {
   font-size: 1rem;
   margin: 5px 0;
 }
 
-/* Stilizacija za dugme ('button') */
 .turnir button {
   background-color: #007bff;
   color: #fff;
@@ -30,7 +27,6 @@
   border-radius: 3px;
 }
 
-/* Promena stila dugmeta na hover */
 .turnir button:hover {
   background-color: #0056b3;
 }

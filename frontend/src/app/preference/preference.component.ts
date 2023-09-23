@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { dodajPreferenceUPrijavu } from '../shared/state/prijava/prijava.actions';
 import { map } from 'rxjs';
 import { Preference } from '../shared/models/preference';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preference',
@@ -16,12 +17,13 @@ export class PreferenceComponent {
     potrebanBrojTastatura: 0,
     potrebanBrojMiseva: 0,
   };
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
   potvrdiPreference() {
     this.store.dispatch(
       dodajPreferenceUPrijavu({
         preference: this.zeljenePreference,
       })
     );
+    this.router.navigateByUrl('prijava');
   }
 }

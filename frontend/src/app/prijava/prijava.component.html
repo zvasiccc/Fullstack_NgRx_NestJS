@@ -1,9 +1,9 @@
-<h1>Turnir</h1>
+<h2>Turnir</h2>
 <div *ngIf="prijavljeniTurnir$ | async as turnir">
   <app-turnir [turnir]="turnir"></app-turnir>
 
   <!-- Dodajte prikaz igracaUTimu$ ispod ovog div-a -->
-  <h1>Igrači u timu</h1>
+  <h2>Igraci u timu</h2>
   <ul>
     <li *ngFor="let igrac of igraciUTimu$ | async">
       <app-igrac [igrac]="igrac"></app-igrac>
@@ -11,7 +11,7 @@
     </li>
   </ul>
 </div>
-<h1>Prijave</h1>
+<h2>Preference</h2>
 <div *ngIf="preference$ | async as preference">
   <p>Potreban broj slušalica: {{ preference.potrebanBrojSlusalica }}</p>
   <p>Potreban broj racunara: {{ preference.potrebanBrojRacunara }}</p>
@@ -26,4 +26,7 @@
   name="nazivTima"
   required
 />
-<button (click)="posaljiPrijavu()">Prijavi se na turnir</button>
+<br />
+<br />
+<br />
+<button (click)="posaljiPrijavu()">Posalji prijavu</button>

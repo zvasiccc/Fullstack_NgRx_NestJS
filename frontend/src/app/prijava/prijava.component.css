@@ -1,0 +1,65 @@
+/* Stilizacija za naslove h2 */
+h2 {
+  font-size: 24px;
+  margin-top: 20px;
+  color: #333;
+}
+
+/* Stilizacija za div sa klasom 'container' */
+.container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Stilizacija za ul listu */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Stilizacija za listu sa igracima */
+ul li {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Stilizacija za dugme "Izbaci iz tima" */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Stilizacija za polje za unos teksta */
+input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Stilizacija za dugme "Posalji prijavu" */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}

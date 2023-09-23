@@ -7,6 +7,7 @@ import { TurnirService } from '../services/turnir/turnir.service';
 import { Store } from '@ngrx/store';
 import { selectPrijavljeniTurniri } from '../shared/state/turnir/turnir.selector';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-svi-igraci',
   templateUrl: './svi-igraci.component.html',
@@ -15,8 +16,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SviIgraciComponent {
   constructor(
     private igracService: IgracService,
-    private store: Store,
     private turnirService: TurnirService,
+    private store: Store,
+    private router: Router,
     private _snackBar: MatSnackBar
   ) {}
   sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
@@ -34,5 +36,8 @@ export class SviIgraciComponent {
   pretraziIgrace(uneseniIgrac: string) {
     this.pretragaIgraci$ =
       this.igracService.vratiIgracePoKorisnickomImenu(uneseniIgrac);
+  }
+  navigirajNaPreference() {
+    this.router.navigateByUrl('preference');
   }
 }
