@@ -37,7 +37,8 @@ export class IgracService {
     const p = this.igracRepository.create();
     p.korisnickoIme = igrac.korisnickoIme;
     p.ime = igrac.ime;
-    p.prezime = igrac.prezime;
+    p.prezime = igrac.prezime; //cek, to je taj json sto je consol logovan od front
+    // A kkvo s front da posaljemo? kako mislis //cek da ti stavim sve na1 sdesktop
     p.vodjaTima = igrac.vodjaTima;
     return await this.igracRepository.save(p);
   }

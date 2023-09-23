@@ -9,18 +9,18 @@ export interface PrijavaState {
 }
 export const initialStatePrijava: PrijavaState = {
   turnir: {
-    id: 1,
-    naziv: 'turnir iz initial',
-    datumOdrzavanja: '3.3.2012.',
-    mestoOdrzavanja: 'mzgos',
-    maxBrojUcesnika: 4,
+    id: 0,
+    naziv: '',
+    datumOdrzavanja: '',
+    mestoOdrzavanja: '',
+    maxBrojUcesnika: 0,
     prijavljeniIgraci: [],
   },
   igraciUTimu: [],
   preference: {
-    potrebanBrojSlusalica: 1,
-    potrebanBrojRacunara: 1,
-    potrebanBrojTastatura: 1,
-    potrebanBrojMiseva: 1,
+    potrebanBrojSlusalica: 0,
+    potrebanBrojRacunara: 0,
+    potrebanBrojTastatura: 0,
+    potrebanBrojMiseva: 0,
   },
 };

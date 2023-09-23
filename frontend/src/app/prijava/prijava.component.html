@@ -17,4 +17,12 @@
   <p>Potreban broj tastatura: {{ preference.potrebanBrojTastatura }}</p>
   <p>Potreban broj miseva: {{ preference.potrebanBrojMiseva }}</p>
 </div>
+<label for="nazivTima">naziv tima</label>
+<input
+  type="text"
+  id="nazivTima"
+  [(ngModel)]="prijava.nazivTima"
+  name="nazivTima"
+  required
+/>
 <button (click)="posaljiPrijavu()">Prijavi se na turnir</button>

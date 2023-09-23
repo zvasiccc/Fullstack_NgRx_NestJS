@@ -43,6 +43,10 @@ export class TurnirService {
       .select(selectTurnirUPrijavi)
       .pipe(map((p: any) => p.turnir));
   }
-  //TODO klikne na turnir i dodam ga u store, nakon toga se priakze lisa igraca on izabere saigrace, nakon toga izabere preference
-  //TODO ima mozda pregled sve sto je izabrao i klikne se potvrdi sto salje zahtev na back za kreiranje prijave
+  kreirajTurnir(turnir: Turnir) {
+    const url = 'http://localhost:3000/turnir/dodajTurnir';
+    return this.http
+      .post(url, turnir)
+      .subscribe((p) => alert('uspesno ste kreirali turnir'));
+  }
 }

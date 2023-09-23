@@ -24,7 +24,7 @@ export class PrijavaService {
     novaPrijava.potrebanBrojMiseva = prijava.potrebanBrojMiseva;
     novaPrijava.potrebanBrojRacunara = prijava.potrebanBrojRacunara;
     novaPrijava.potrebanBrojSlusalica = prijava.potrebanBrojSlusalica;
-    novaPrijava.potrebanBrojTastatura = prijava.potrebanBrojTastatura;
+    novaPrijava.potrebanBrojTastatura = prijava.potrebanBrojTastatura; //cek cek
     const noviTurnir = await this.turnirRepository.findOne({
       where: { id: prijava.turnir.id },
     });

@@ -10,6 +10,7 @@ import { PreferenceComponent } from '../preference/preference.component';
 import { Preference } from '../shared/models/preference';
 import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
 import { Prijava } from '../shared/models/prijava';
+import { PrijavaService } from '../services/prijava.service';
 //import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
 
 @Component({
@@ -25,6 +26,7 @@ export class PrijavaComponent {
     .select(selectPreferenceUPrijavi)
     .pipe(map((p: any) => p.preference));
   prijava: Prijava = {
+    nazivTima: '',
     potrebanBrojSlusalica: 0,
     potrebanBrojRacunara: 0,
     potrebanBrojTastatura: 0,
@@ -35,6 +37,7 @@ export class PrijavaComponent {
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
+    private prijavaService: PrijavaService,
     private router: Router,
     private store: Store
   ) {}
@@ -53,6 +56,8 @@ export class PrijavaComponent {
       this.prijava.potrebanBrojTastatura = preference.potrebanBrojTastatura;
       this.prijava.potrebanBrojMiseva = preference.potrebanBrojMiseva;
     });
+
     console.log(this.prijava);
+    this.prijavaService.posaljiPrijavuUBazu(this.prijava);
   }
 }

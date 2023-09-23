@@ -10,7 +10,8 @@ export class PrijavaController {
     return this.prijavaService.vratiPrijavuPoId(id);
   }
   @Post('dodajPrijavu')
-  async dodajPrijavu(@Body() prijava: PrijavaEntity) {
+  async dodajPrijavu(@Body() prijava: any) {
+    console.log(prijava);
     return await this.prijavaService.dodajPrijavu(prijava);
   }
 }
