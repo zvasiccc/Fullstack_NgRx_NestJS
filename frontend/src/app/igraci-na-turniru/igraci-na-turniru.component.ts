@@ -12,7 +12,8 @@ import { Turnir } from '../shared/models/turnir';
 })
 export class IgraciNaTurniruComponent {
   turnirId: number = 0;
-  prijavljeniIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
+  prijavljeniIgraci$: Observable<Igrac[]> =
+    this.turnirService.vratiPrijavljeneIgrace(this.turnirId);
   constructor(
     private route: ActivatedRoute,
     private turnirService: TurnirService

@@ -6,7 +6,7 @@ import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Store } from '@ngrx/store';
 import { selectPrijavljeniTurniri } from '../shared/state/turnir/turnir.selector';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-svi-igraci',
   templateUrl: './svi-igraci.component.html',
@@ -16,7 +16,8 @@ export class SviIgraciComponent {
   constructor(
     private igracService: IgracService,
     private store: Store,
-    private turnirService: TurnirService
+    private turnirService: TurnirService,
+    private _snackBar: MatSnackBar
   ) {}
   sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
   pretragaIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
@@ -25,6 +26,10 @@ export class SviIgraciComponent {
   ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
     this.igracService.dodajIgracaUTim(igrac);
+    console.log(igrac.korisnickoIme);
+    this._snackBar.open('igrac je dodat u tim', 'Zatvori', {
+      duration: 2000,
+    }); //prikazuje se skroz na dno
   }
   pretraziIgrace(uneseniIgrac: string) {
     this.pretragaIgraci$ =

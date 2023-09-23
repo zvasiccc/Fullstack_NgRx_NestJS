@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-kreiranje-turnira',
@@ -16,7 +17,10 @@ export class KreiranjeTurniraComponent {
     maxBrojUcesnika: 0,
     prijavljeniIgraci: [],
   };
-  constructor(private turnirService: TurnirService) {}
+  constructor(
+    private turnirService: TurnirService,
+    private _snackBar: MatSnackBar
+  ) {}
   // submitForm() {
   //   // Ovde možete dodati logiku za slanje podataka na server ili druge operacije
   //   // Ovde ispisujemo unete podatke na konzoli kao primer
@@ -34,5 +38,8 @@ export class KreiranjeTurniraComponent {
       maxBrojUcesnika: 0,
       prijavljeniIgraci: [],
     };
+    this._snackBar.open('Turnir je uspešno kreiran', 'Zatvori', {
+      duration: 2000, // Vreme trajanja poruke u milisekundama (2 sekunde u ovom primeru)
+    });
   }
 }

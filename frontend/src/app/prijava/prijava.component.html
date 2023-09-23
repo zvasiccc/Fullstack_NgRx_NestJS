@@ -7,6 +7,7 @@
   <ul>
     <li *ngFor="let igrac of igraciUTimu$ | async">
       <app-igrac [igrac]="igrac"></app-igrac>
+      <button (click)="izbaciIgracaIzTima(igrac)">Izbaci iz tima</button>
     </li>
   </ul>
 </div>

@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
     private store: Store
   ) {}
   ngOnInit(): void {}
-  prikaziPrijavljeneIgrace() {
+  prikaziPrijavljeneIgrace(turnir: Turnir) {
     //!ne radi
     //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
-    this.router.navigateByUrl(`prijavljeniIgraci`);
+    this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
   }
   // PrijaviSeNaTurnir(turnir: Turnir) {
   //   this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));

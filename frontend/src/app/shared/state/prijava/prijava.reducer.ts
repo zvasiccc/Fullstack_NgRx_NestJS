@@ -10,6 +10,10 @@ export const prijavaReducer = createReducer(
     const noviIgraciUTimu = [...state.igraciUTimu, igrac];
     return { ...state, igraciUTimu: noviIgraciUTimu };
   }),
+  on(PrijavaActions.izbaciIgracaIzTima, (state, { igrac }) => {
+    const noviIgraciUTimu = state.igraciUTimu.filter((i) => i !== igrac);
+    return { ...state, igraciUTimu: noviIgraciUTimu };
+  }),
   on(PrijavaActions.dodajPreferenceUPrijavu, (state, { preference }) => ({
     ...state,
     preference: { ...preference },

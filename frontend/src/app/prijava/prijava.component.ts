@@ -60,4 +60,7 @@ export class PrijavaComponent {
     console.log(this.prijava);
     this.prijavaService.posaljiPrijavuUBazu(this.prijava);
   }
+  izbaciIgracaIzTima(igrac: Igrac) {
+    this.prijavaService.izbaciIgracaIzTima(igrac);
+  }
 }

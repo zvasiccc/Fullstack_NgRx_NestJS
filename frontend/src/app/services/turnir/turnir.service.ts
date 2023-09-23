@@ -12,7 +12,6 @@ import {
 import {
   selectPrijavljeniIgraciZaTurnir,
   selectPrijavljeniTurniri,
-  selectSviTurniri,
 } from 'src/app/shared/state/turnir/turnir.selector';
 import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 
@@ -26,14 +25,16 @@ export class TurnirService {
   dodajTurnir(turnir: Turnir) {
     this.store.dispatch(kreirajTurnir({ turnir }));
   }
-  vratiSveTurnire(): Observable<Turnir[]> {
-    return this.store.select(selectSviTurniri).pipe(map((p: any) => p.turniri));
-  }
+  // vratiSveTurnire(): Observable<Turnir[]> {
+  //   return this.store.select(selectSviTurniri).pipe(map((p: any) => p.turniri));
+  // }
   getTurniriBaza(): Observable<Turnir[]> {
     return this.http.get<Turnir[]>(this.apiUrl);
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
-    return this.store.select(selectPrijavljeniIgraciZaTurnir(turnirId)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
+    return this.store
+      .select(selectPrijavljeniIgraciZaTurnir(turnirId))
+      .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
   vratiPrijavljeniTUrnir(): Observable<Turnir> {
     // return this.store
@@ -45,8 +46,6 @@ export class TurnirService {
   }
   kreirajTurnir(turnir: Turnir) {
     const url = 'http://localhost:3000/turnir/dodajTurnir';
-    return this.http
-      .post(url, turnir)
-      .subscribe((p) => alert('uspesno ste kreirali turnir'));
+    return this.http.post(url, turnir).subscribe((p) => p);
   }
 }

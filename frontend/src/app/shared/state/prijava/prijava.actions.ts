@@ -15,3 +15,7 @@ export const dodajPreferenceUPrijavu = createAction(
   '[prijava] dodaj preference u prijavu',
   props<{ preference: Preference }>()
 );
+export const izbaciIgracaIzTima = createAction(
+  '[Prijava] izbaci igraca iz tima',
+  props<{ igrac: Igrac }>()
+);
