@@ -2,6 +2,11 @@
   <button (click)="navigirajNaProfil()" routerLink="profil">Profil</button>
 </div> -->
 
+<!-- [pretragaNaziv]="pretragaNaziv"
+[pretragaMesto]="pretragaMesto"
+[pretragaPocetniDatum]="pretragaPocetniDatum"
+[pretragaKrajnjiDatum]="pretragaKrajnjiDatum" -->
+<app-search-bar></app-search-bar>
 <div class="container">
   <h3>Svi Turniri</h3>
   <ul>
@@ -13,10 +18,4 @@
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
     </li>
   </ul>
-  <!-- <h1>Svi igraci</h1>
-  <ul>
-    <li *ngFor="let igrac of sviIgraci$ | async">
-      <app-igrac [igrac]="igrac"></app-igrac>
-    </li>
-  </ul> -->
 </div>

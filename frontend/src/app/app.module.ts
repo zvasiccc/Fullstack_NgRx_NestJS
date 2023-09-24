@@ -32,6 +32,7 @@ import { PreferenceComponent } from './preference/preference.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { BackArrowComponent } from './back-arrow/back-arrow.component';
     PrijavaComponent,
     PreferenceComponent,
     BackArrowComponent,
+    SearchBarComponent,
   ],
   imports: [
     CommonModule,

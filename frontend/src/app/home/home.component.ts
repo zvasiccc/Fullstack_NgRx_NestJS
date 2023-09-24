@@ -17,6 +17,7 @@ import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 export class HomeComponent implements OnInit {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza(); //new Observable<Turnir[]>(); //observable nad turnirima
   // sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
+  filtriraniTurniri: any[] = [];
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
