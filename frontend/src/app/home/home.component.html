@@ -3,15 +3,16 @@
 ></app-search-bar>
 <div class="container">
   <h3>turniri</h3>
-  <!-- <ul *ngIf="!(filtriraniTurniri && filtriraniTurniri.length > 0)">
+  <ul>
     <li *ngFor="let turnir of sviTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
       <button (click)="prikaziPrijavljeneIgrace(turnir)">
         Prijavljeni učesnici
       </button>
-      <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+      <button (click)="prijaviSeNaTurnir(turnir)">Prijavi tim</button>
+      <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
     </li>
-  </ul> -->
+  </ul>
   <ul *ngIf="!pretragaIzvrsena">
     <li>Ovde ce se prikazati turniri nakon pretrage</li>
   </ul>
@@ -27,6 +28,7 @@
         Prijavljeni učesnici
       </button>
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+      <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
     </li>
   </ul>
 </div>

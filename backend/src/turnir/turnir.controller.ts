@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { TurnirService } from './turnir.service';
 import { TurnirEntity } from './turnir.entity';
 
@@ -40,5 +48,9 @@ export class TurnirController {
       pretragaPocetniDatum,
       pretragaKrajnjiDatum,
     );
+  }
+  @Delete('obrisiTurnir/:id')
+  async obrisiTurnir(@Param('id') id: number) {
+    return this.turnirService.obrisiTurnir(id);
   }
 }

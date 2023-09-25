@@ -57,4 +57,8 @@ export class TurnirService {
     const url = `http://localhost:3000/turnir/filtrirajTurnire/${pretragaNaziv}/${pretragaMesto}/${pretragaPocetniDatum}/${pretragaKrajnjiDatum}`;
     return this.http.get(url);
   }
+  async obrisiTurnir(turnirId: number) {
+    const url = `http://localhost:3000/turnir/obrisiTurnir/${turnirId}`;
+    return this.http.delete(url);
+  }
 }
