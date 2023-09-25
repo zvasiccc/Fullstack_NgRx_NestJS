@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { TurnirEntity } from './turnir.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -28,5 +28,31 @@ export class TurnirService {
     noviTurnir.mestoOdrzavanja = turnir.mestoOdrzavanja;
     noviTurnir.maxBrojUcesnika = turnir.maxBrojUcesnika;
     return await this.turnirRepository.save(noviTurnir);
+  }
+  async filtrirajTurnire(
+    pretragaNaziv: string,
+    pretragaMesto: string,
+    pretragaPocetniDatum: string,
+    pretragaKrajnjiDatum: string,
+  ) {
+    const whereClause: any = {};
+
+    if (pretragaNaziv != '') {
+      whereClause.naziv = pretragaNaziv;
+    }
+
+    if (pretragaMesto != '') {
+      whereClause.mestoOdrzavanja = pretragaMesto;
+    }
+
+    if (pretragaPocetniDatum != '' && pretragaKrajnjiDatum != '') {
+      whereClause.datumOdrzavanja = Between(
+        pretragaPocetniDatum,
+        pretragaKrajnjiDatum,
+      );
+    }
+    return await this.turnirRepository.find({
+      where: whereClause,
+    });
   }
 }

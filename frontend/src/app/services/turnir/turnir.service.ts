@@ -48,4 +48,13 @@ export class TurnirService {
     const url = 'http://localhost:3000/turnir/dodajTurnir';
     return this.http.post(url, turnir).subscribe((p) => p);
   }
+  async filtrirajTurnire(
+    pretragaNaziv: string,
+    pretragaMesto: string,
+    pretragaPocetniDatum: string,
+    pretragaKrajnjiDatum: string
+  ) {
+    const url = `http://localhost:3000/turnir/filtrirajTurnire/${pretragaNaziv}/${pretragaMesto}/${pretragaPocetniDatum}/${pretragaKrajnjiDatum}`;
+    return this.http.get(url);
+  }
 }

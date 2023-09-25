@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { TurnirService } from './turnir.service';
 import { TurnirEntity } from './turnir.entity';
 
@@ -20,5 +20,25 @@ export class TurnirController {
   @Post('dodajTurnir')
   async dodajTurnir(@Body() turnir: TurnirEntity) {
     return await this.turnirService.dodajTurnir(turnir);
+  }
+  @Get(
+    'filtrirajTurnire/:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum',
+  )
+  async filtrirajTurnire(
+    @Param('pretragaNaziv') pretragaNaziv: string,
+    @Param('pretragaMesto') pretragaMesto: string,
+    @Param('pretragaPocetniDatum') pretragaPocetniDatum: string,
+    @Param('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
+    // @Query('pretragaNaziv') pretragaNaziv: string,
+    // @Query('pretragaMesto') pretragaMesto: string,
+    // @Query('pretragaPocetniDatum') pretragaPocetniDatum: string,
+    // @Query('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
+  ) {
+    return this.turnirService.filtrirajTurnire(
+      pretragaNaziv,
+      pretragaMesto,
+      pretragaPocetniDatum,
+      pretragaKrajnjiDatum,
+    );
   }
 }

@@ -17,7 +17,10 @@ import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 export class HomeComponent implements OnInit {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza(); //new Observable<Turnir[]>(); //observable nad turnirima
   // sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
-  filtriraniTurniri: any[] = [];
+  //filtriraniTurniri$: Observable<Turnir[]> = new Observable();
+  filtriraniTurniri: Turnir[] = [];
+  postojeFiltriraniTurniri: boolean = false;
+  pretragaIzvrsena: boolean = false;
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
@@ -30,10 +33,14 @@ export class HomeComponent implements OnInit {
     //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
     this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
   }
-  // PrijaviSeNaTurnir(turnir: Turnir) {
-  //   this.store.dispatch(TurnirActions.prijaviSeNaTurnir({ turnir }));
-  //   this.router.navigateByUrl('sviIgraci');
-  // }
+  handlePretragaRezultati(rezultati: Turnir[]) {
+    // Ovde možete obraditi rezultate koji su emitovani iz SearchBarComponent
+    console.log('Rezultati pretrage:', rezultati);
+    this.filtriraniTurniri = rezultati;
+    this.postojeFiltriraniTurniri =
+      this.filtriraniTurniri && this.filtriraniTurniri.length > 0;
+    this.pretragaIzvrsena = true;
+  }
   prijaviSeNaTurnir(turnir: Turnir) {
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
     this.router.navigateByUrl('sviIgraci');

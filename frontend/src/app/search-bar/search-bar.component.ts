@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TurnirService } from '../services/turnir/turnir.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,13 +13,24 @@ export class SearchBarComponent {
   pretragaMesto: string = '';
   pretragaPocetniDatum: string = '';
   pretragaKrajnjiDatum: string = '';
-  pretraziTurnire() {
-    const rezultati = {
-      naziv: this.pretragaNaziv,
-      mesto: this.pretragaMesto,
-      pocetniDatum: this.pretragaPocetniDatum,
-      krajnjiDatum: this.pretragaKrajnjiDatum,
-    };
-    this.pretragaRezultati.emit(rezultati);
+  constructor(private turnirService: TurnirService) {}
+  async filtrirajTurnire() {
+    (
+      await this.turnirService.filtrirajTurnire(
+        this.pretragaNaziv,
+        this.pretragaMesto,
+        this.pretragaPocetniDatum,
+        this.pretragaKrajnjiDatum
+      )
+    ).subscribe((rezultati) => {
+      this.pretragaRezultati.emit(rezultati);
+    });
+    // const rezultati = {
+    //   naziv: this.pretragaNaziv,
+    //   mesto: this.pretragaMesto,
+    //   pocetniDatum: this.pretragaPocetniDatum,
+    //   krajnjiDatum: this.pretragaKrajnjiDatum,
+    // };
+    // this.pretragaRezultati.emit(rezultati);
   }
 }
