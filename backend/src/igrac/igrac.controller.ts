@@ -19,10 +19,11 @@ export class IgracController {
     return await this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
   }
 
-  @Post('dodajIgraca')
+  @Post('registrujIgraca')
   async post(@Body() igrac: any) {
-    return await this.igracService.dodajIgraca(igrac);
+    return await this.igracService.registrujIgraca(igrac);
   }
+
   @Get('pronadjiIgraceZaPrijavu/:id')
   async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
     return await this.igracService.pronadjiIgraceZaPrijavu(id);

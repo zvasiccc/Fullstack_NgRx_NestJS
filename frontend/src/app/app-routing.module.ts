@@ -10,6 +10,7 @@ import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { PrijavaComponent } from './prijava/prijava.component';
 import { PreferenceComponent } from './preference/preference.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
+import { RegistracijaComponent } from './registracija/registracija.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'prijavljeniTimovi/:turnirId',
     component: TimoviNaTurniruComponent,
+  },
+  {
+    path: 'registracija',
+    component: RegistracijaComponent,
   },
 ];
 

@@ -1,6 +1,13 @@
 import { IgracEntity } from 'src/igrac/igrac.entity';
+import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class TurnirEntity {
@@ -18,4 +25,6 @@ export class TurnirEntity {
   nagrada: number;
   @OneToMany(() => PrijavaEntity, (prijava) => prijava.turnir)
   prijave: PrijavaEntity[];
+  @ManyToOne(() => OrganizatorEntity, (organizator) => organizator.turniri)
+  organizator: OrganizatorEntity;
 }

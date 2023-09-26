@@ -26,6 +26,9 @@ export class HeaderComponent {
   navigirajNaPrijavu() {
     this.router.navigateByUrl('prijava');
   }
+  navigirajNaRegistraciju() {
+    this.router.navigateByUrl('registracija');
+  }
   // navigirajNaBiranjeIgraca() {
   //   this.router.navigateByUrl('sviIgraci');
   // }

@@ -12,6 +12,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IgracEntity } from './igrac/igrac.entity';
 import { PrijavaEntity } from './prijava/prijava.entity';
 import { TurnirEntity } from './turnir/turnir.entity';
+import { OrganizatorController } from './organizator/organizator.controller';
+import { OrganizatorService } from './organizator/organizator.service';
 
 @Module({
   imports: [
@@ -38,7 +40,8 @@ import { TurnirEntity } from './turnir/turnir.entity';
     IgracController,
     TurnirController,
     PrijavaController,
+    OrganizatorController,
   ],
-  providers: [AppService, IgracService, TurnirService, PrijavaService],
+  providers: [AppService, IgracService, TurnirService, PrijavaService, OrganizatorService],
 })
 export class AppModule {}
