@@ -27,4 +27,8 @@ export class IgracController {
   async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
     return await this.igracService.pronadjiIgraceZaPrijavu(id);
   }
+  @Get('prijavljeniIgraciNaTurniru/:turnirId')
+  async prijavljeniIgraciNaTurniru(@Param('turnirId') turnirId: number) {
+    return await this.igracService.prijavljeniIgraciNaTurniru(turnirId);
+  }
 }

@@ -17,36 +17,41 @@ export class TurnirController {
   async vratiSveTurnire() {
     return await this.turnirService.vratiSveTurnire();
   }
-  @Get('odgovarajuciTurniri/:naziv/:mesto/:datum')
-  async odgovarajuciTurnir(
-    @Param('naziv') naziv: string,
-    @Param('mesto') mesto: string,
-    @Param('datum') datum: string,
-  ) {
-    return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
-  }
+  // @Get('odgovarajuciTurniri/:naziv/:mesto/:datum')
+  // async odgovarajuciTurnir(
+  //   @Param('naziv') naziv: string,
+  //   @Param('mesto') mesto: string,
+  //   @Param('datum') datum: string,
+  // ) {
+  //   return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
+  // }
   @Post('dodajTurnir')
   async dodajTurnir(@Body() turnir: TurnirEntity) {
     return await this.turnirService.dodajTurnir(turnir);
   }
-  @Get(
-    'filtrirajTurnire/:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum',
-  )
+  ///:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum
+  @Get('filtrirajTurnire')
   async filtrirajTurnire(
-    @Param('pretragaNaziv') pretragaNaziv: string,
-    @Param('pretragaMesto') pretragaMesto: string,
-    @Param('pretragaPocetniDatum') pretragaPocetniDatum: string,
-    @Param('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
-    // @Query('pretragaNaziv') pretragaNaziv: string,
-    // @Query('pretragaMesto') pretragaMesto: string,
-    // @Query('pretragaPocetniDatum') pretragaPocetniDatum: string,
-    // @Query('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
+    // @Param('pretragaNaziv') pretragaNaziv: string,
+    // @Param('pretragaMesto') pretragaMesto: string,
+    // @Param('pretragaPocetniDatum') pretragaPocetniDatum: string,
+    // @Param('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
+    // @Param('pretragaPocetnaNagrada') pretragaPocetnaNagrada: number,
+    // @Param('pretragaKrajnjaNagrada') pretragaKrajnjaNagrada: number,
+    @Query('pretragaNaziv') pretragaNaziv: string,
+    @Query('pretragaMesto') pretragaMesto: string,
+    @Query('pretragaPocetniDatum') pretragaPocetniDatum: string,
+    @Query('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
+    @Query('pretragaPocetnaNagrada') pretragaPocetnaNagrada: number,
+    @Query('pretragaKrajnjaNagrada') pretragaKrajnjaNagrada: number,
   ) {
     return this.turnirService.filtrirajTurnire(
       pretragaNaziv,
       pretragaMesto,
       pretragaPocetniDatum,
       pretragaKrajnjiDatum,
+      pretragaPocetnaNagrada,
+      pretragaKrajnjaNagrada,
     );
   }
   @Delete('obrisiTurnir/:id')

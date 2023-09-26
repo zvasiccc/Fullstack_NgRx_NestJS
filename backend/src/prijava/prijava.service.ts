@@ -42,4 +42,8 @@ export class PrijavaService {
     return await this.prijavaRepository.save(novaPrijava);
     // return await this.prijavaRepository.save(novaPrijava);
   }
+  async vratiPrijaveZaTurnir(turnirId) {
+    const turnir = this.turnirRepository.findOne({ where: { id: turnirId } });
+    if (!turnir) return null;
+  }
 }

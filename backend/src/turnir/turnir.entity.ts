@@ -14,8 +14,8 @@ export class TurnirEntity {
   mestoOdrzavanja: string;
   @Column()
   maxBrojUcesnika: number;
-  //prijave: PrijavaEntity[];
-
+  @Column()
+  nagrada: number;
   @OneToMany(() => PrijavaEntity, (prijava) => prijava.turnir)
   prijave: PrijavaEntity[];
 }

@@ -14,4 +14,8 @@ export class PrijavaController {
     console.log(prijava);
     return await this.prijavaService.dodajPrijavu(prijava);
   }
+  @Get('vratiPrijaveZaTurnir')
+  async vratiPrijaveZaTurnir(@Param() turnirId: number) {
+    return await this.prijavaService.vratiPrijaveZaTurnir(turnirId);
+  }
 }

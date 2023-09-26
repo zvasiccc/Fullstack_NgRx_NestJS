@@ -31,7 +31,6 @@ export class PrijavaEntity {
   })
   @JoinTable()
   igraci: IgracEntity[];
-
   // Veza sa turnirom
   @ManyToOne(() => TurnirEntity, (turnir) => turnir.prijave)
   turnir: TurnirEntity;

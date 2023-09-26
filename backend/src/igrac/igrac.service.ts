@@ -3,6 +3,7 @@ import { IgracEntity } from './igrac.entity';
 import { Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
+import { TurnirEntity } from 'src/turnir/turnir.entity';
 
 @Injectable()
 export class IgracService {
@@ -11,6 +12,8 @@ export class IgracService {
     private igracRepository: Repository<IgracEntity>,
     @InjectRepository(PrijavaEntity)
     private prijavaRepository: Repository<PrijavaEntity>,
+    @InjectRepository(TurnirEntity)
+    private turnirRepository: Repository<TurnirEntity>,
   ) {}
 
   async vratiSveIgrace() {
@@ -57,5 +60,22 @@ export class IgracService {
       },
     });
     return igraci;
+  }
+  async prijavljeniIgraciNaTurniru(turnirId: number) {
+    const turnir = await this.turnirRepository.findOne({
+      where: { id: turnirId },
+    });
+    const prijava = await this.prijavaRepository.findOne({
+      where: { id: turnirId },
+    });
+    console.log(prijava);
+    console.log(turnir);
+    let trazenaPrijava: PrijavaEntity = new PrijavaEntity();
+    turnir.prijave.forEach((prijava) => {
+      if (prijava.turnir.id === turnirId) {
+        trazenaPrijava = prijava;
+      }
+    });
+    return trazenaPrijava.igraci;
   }
 }

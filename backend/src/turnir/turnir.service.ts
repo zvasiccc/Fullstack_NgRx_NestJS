@@ -12,21 +12,23 @@ export class TurnirService {
   async vratiSveTurnire() {
     return await this.turnirRepository.find();
   }
-  async odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
-    return await this.turnirRepository.find({
-      where: {
-        naziv: naziv,
-        mestoOdrzavanja: mesto,
-        datumOdrzavanja: datum,
-      },
-    });
-  }
+  // async odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
+  //   return await this.turnirRepository.find({
+  //     where: {
+  //       naziv: naziv,
+  //       mestoOdrzavanja: mesto,
+  //       datumOdrzavanja: datum,
+  //     },
+  //   });
+  // }
   async dodajTurnir(turnir: TurnirEntity) {
     const noviTurnir = this.turnirRepository.create();
     noviTurnir.naziv = turnir.naziv;
     noviTurnir.datumOdrzavanja = turnir.datumOdrzavanja;
     noviTurnir.mestoOdrzavanja = turnir.mestoOdrzavanja;
     noviTurnir.maxBrojUcesnika = turnir.maxBrojUcesnika;
+    noviTurnir.nagrada = turnir.nagrada;
+    //noviTurnir.prijave = [];
     return await this.turnirRepository.save(noviTurnir);
   }
   async obrisiTurnir(turnirId: number) {
@@ -43,6 +45,8 @@ export class TurnirService {
     pretragaMesto: string,
     pretragaPocetniDatum: string,
     pretragaKrajnjiDatum: string,
+    pretragaPocetnaNagrada: number,
+    pretragaKrajnjaNagrada: number,
   ) {
     const whereClause: any = {};
 
@@ -54,14 +58,23 @@ export class TurnirService {
       whereClause.mestoOdrzavanja = pretragaMesto;
     }
 
-    if (pretragaPocetniDatum != '' && pretragaKrajnjiDatum != '') {
+    if (!pretragaPocetniDatum && !pretragaKrajnjiDatum) {
       whereClause.datumOdrzavanja = Between(
         pretragaPocetniDatum,
         pretragaKrajnjiDatum,
       );
     }
-    return await this.turnirRepository.find({
+    if (pretragaKrajnjaNagrada != 0 && pretragaPocetnaNagrada != 0) {
+      whereClause.nagrada = Between(
+        pretragaPocetnaNagrada,
+        pretragaKrajnjaNagrada,
+      );
+    }
+    console.log(whereClause);
+    const turniri: TurnirEntity[] = await this.turnirRepository.find({
       where: whereClause,
     });
+    if (!turniri) return [];
+    return turniri;
   }
 }
