@@ -1,1 +1,12 @@
-<p>timovi-na-turniru works!</p>
+<div>
+  <ul>
+    <h2>Prijavljeni timovi</h2>
+    <li *ngFor="let prijava of prijave$ | async">
+      <h3>{{ prijava.nazivTima }}</h3>
+      <app-igrac
+        *ngFor="let igrac of prijava.igraci"
+        [igrac]="igrac"
+      ></app-igrac>
+    </li>
+  </ul>
+</div>

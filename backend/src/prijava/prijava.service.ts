@@ -42,8 +42,18 @@ export class PrijavaService {
     return await this.prijavaRepository.save(novaPrijava);
     // return await this.prijavaRepository.save(novaPrijava);
   }
-  async vratiPrijaveZaTurnir(turnirId) {
-    const turnir = this.turnirRepository.findOne({ where: { id: turnirId } });
-    if (!turnir) return null;
+  async prijaveNaTurniru(turnirId: number) {
+    // const turnir = await this.turnirRepository
+    //   .createQueryBuilder('turnir')
+    //   .where('turnir.id = :id', { id: turnirId })
+    //   .leftJoinAndSelect('turnir.prijave', 'prijava')
+    //   .leftJoinAndSelect('prijava.igraci', 'igrac')
+    //   .getOne();
+    const prijave = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .where('prijava.turnir = :id', { id: turnirId })
+      .leftJoinAndSelect('prijava.igraci', 'igrac')
+      .getMany();
+    return prijave;
   }
 }

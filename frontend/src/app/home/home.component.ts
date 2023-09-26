@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
       this.filtriraniTurniri && this.filtriraniTurniri.length > 0;
     this.pretragaIzvrsena = true;
   }
-  prikaziPrijavljeneIgrace(turnir: Turnir) {
-    //!ne radi
-    //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
-    this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
-  }
+  // prikaziPrijavljeneIgrace(turnir: Turnir) {
+  //   //!ne radi
+  //   //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
+  //   this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
+  // }
   prijaviSeNaTurnir(turnir: Turnir) {
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
     this.router.navigateByUrl('sviIgraci');

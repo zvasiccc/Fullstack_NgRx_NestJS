@@ -61,21 +61,4 @@ export class IgracService {
     });
     return igraci;
   }
-  async prijavljeniIgraciNaTurniru(turnirId: number) {
-    const turnir = await this.turnirRepository.findOne({
-      where: { id: turnirId },
-    });
-    const prijava = await this.prijavaRepository.findOne({
-      where: { id: turnirId },
-    });
-    console.log(prijava);
-    console.log(turnir);
-    let trazenaPrijava: PrijavaEntity = new PrijavaEntity();
-    turnir.prijave.forEach((prijava) => {
-      if (prijava.turnir.id === turnirId) {
-        trazenaPrijava = prijava;
-      }
-    });
-    return trazenaPrijava.igraci;
-  }
 }

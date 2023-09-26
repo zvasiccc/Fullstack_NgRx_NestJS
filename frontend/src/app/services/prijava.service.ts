@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Prijava } from '../shared/models/prijava';
 import { Igrac } from '../shared/models/igrac';
 import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +20,8 @@ export class PrijavaService {
   izbaciIgracaIzTima(igrac: Igrac) {
     this.store.dispatch(PrijavaActions.izbaciIgracaIzTima({ igrac }));
   }
-  vratiPrijaveZaTurnir(turnirId: number) {
-    const url = `http://localhost:3000/prijava/vratiPrijaveZaTurnir/${turnirId}`;
-    return this.http.get(url);
+  vratiPrijaveZaTurnir(turnirId: number): Observable<Prijava[]> {
+    const url = `http://localhost:3000/prijava/prijaveNaTurniru/${turnirId}`;
+    return this.http.get<Prijava[]>(url);
   }
 }
