@@ -14,6 +14,7 @@ import { PrijavaEntity } from './prijava/prijava.entity';
 import { TurnirEntity } from './turnir/turnir.entity';
 import { OrganizatorController } from './organizator/organizator.controller';
 import { OrganizatorService } from './organizator/organizator.service';
+import { OrganizatorEntity } from './organizator/organizator.entity';
 
 @Module({
   imports: [
@@ -29,11 +30,16 @@ import { OrganizatorService } from './organizator/organizator.service';
         username: 'user',
         password: 'puflander',
         database: 'RWA_PROJEKAT',
-        entities: [IgracEntity, PrijavaEntity, TurnirEntity],
+        entities: [IgracEntity, PrijavaEntity, TurnirEntity, OrganizatorEntity],
         synchronize: true,
       }),
     }),
-    TypeOrmModule.forFeature([IgracEntity, PrijavaEntity, TurnirEntity]),
+    TypeOrmModule.forFeature([
+      IgracEntity,
+      PrijavaEntity,
+      TurnirEntity,
+      OrganizatorEntity,
+    ]),
   ],
   controllers: [
     AppController,
@@ -42,6 +48,12 @@ import { OrganizatorService } from './organizator/organizator.service';
     PrijavaController,
     OrganizatorController,
   ],
-  providers: [AppService, IgracService, TurnirService, PrijavaService, OrganizatorService],
+  providers: [
+    AppService,
+    IgracService,
+    TurnirService,
+    PrijavaService,
+    OrganizatorService,
+  ],
 })
 export class AppModule {}

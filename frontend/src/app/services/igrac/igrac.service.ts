@@ -32,12 +32,8 @@ export class IgracService {
     const url = `http://localhost:3000/igrac/korisnickoIme/${korisnickoIme}`;
     return this.http.get<Igrac[]>(url);
   }
-  // vratiSveIgrace(): Observable<Igrac[]> {
-  //   return this.store.select(selectSviIgraci).pipe(map((p: any) => p.igraci));
-  // }
-  // vratiPrijavljeneIgraceZaTurnir(turnirId: number): Observable<Igrac[]> {
-  //   return this.store.select(selectPrijavljeniIgraciZaTurnir, {
-  //     id: turnirId,
-  //   }) as Observable<Igrac[]>;
-  // }
+  registrujSeKaoIgrac(igrac: Igrac) {
+    const url = 'http://localhost:3000/igrac/registrujIgraca';
+    return this.http.post(url, igrac).subscribe((p) => p);
+  }
 }

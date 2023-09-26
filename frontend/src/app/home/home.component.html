@@ -6,9 +6,6 @@
   <ul>
     <li *ngFor="let turnir of sviTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <!-- <button (click)="prikaziPrijavljeneIgrace(turnir)">
-        Prijavljeni učesnici
-      </button> -->
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi tim</button>
       <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
       <button (click)="prikaziPrijavljeneTimove(turnir.id)">
@@ -27,9 +24,6 @@
   <ul *ngIf="filtriraniTurniri && filtriraniTurniri.length > 0">
     <li *ngFor="let turnir of filtriraniTurniri">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <!-- <button (click)="prikaziPrijavljeneIgrace(turnir)">
-        Prijavljeni učesnici
-      </button> -->
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
       <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
       <button (click)="prikaziPrijavljeneTimove(turnir.id)">

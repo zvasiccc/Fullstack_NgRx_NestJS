@@ -37,12 +37,12 @@ export class IgracService {
   }
 
   async registrujIgraca(igrac: IgracEntity) {
-    const p = this.igracRepository.create();
-    p.korisnickoIme = igrac.korisnickoIme;
-    p.ime = igrac.ime;
-    p.prezime = igrac.prezime;
-    p.vodjaTima = igrac.vodjaTima;
-    return await this.igracRepository.save(p);
+    const noviIgrac = this.igracRepository.create();
+    noviIgrac.korisnickoIme = igrac.korisnickoIme;
+    noviIgrac.ime = igrac.ime;
+    noviIgrac.prezime = igrac.prezime;
+    noviIgrac.vodjaTima = igrac.vodjaTima;
+    return await this.igracRepository.save(noviIgrac);
   }
   async pronadjiIgraceZaPrijavu(prijavaId: number) {
     const prijava = await this.prijavaRepository.findOne({

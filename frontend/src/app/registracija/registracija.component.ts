@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
+import { HttpClient } from '@angular/common/http';
+import { IgracService } from '../services/igrac/igrac.service';
+import { OrganizatorService } from '../services/organizator.service';
 
 @Component({
   selector: 'app-registracija',
@@ -13,6 +16,7 @@ export class RegistracijaComponent {
   igrac: Igrac = {
     id: 0,
     korisnickoIme: '',
+    lozinka: '',
     ime: '',
     prezime: '',
     vodjaTima: false,
@@ -22,22 +26,16 @@ export class RegistracijaComponent {
     korisnickoIme: '',
     lozinka: '',
   };
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+    private igracService: IgracService,
+    private organizatorService: OrganizatorService
+  ) {}
 
-  registrujSe() {
-    console.log(this.igrac);
-    console.log(this.organizator);
-    this.igrac = {
-      id: 0,
-      korisnickoIme: '',
-      ime: '',
-      prezime: '',
-      vodjaTima: false,
-    };
-    this.organizator = {
-      id: 0,
-      korisnickoIme: '',
-      lozinka: '',
-    };
+  registrujSeKaoIgrac() {
+    return this.igracService.registrujSeKaoIgrac(this.igrac);
+  }
+  registrujSeKaoOrganizator() {
+    return this.organizatorService.registrujSeKaoOrganizator(this.organizator);
   }
 }

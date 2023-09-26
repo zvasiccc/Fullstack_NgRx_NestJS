@@ -40,6 +40,7 @@
         required
       />
     </div>
+    <button (click)="registrujSeKaoOrganizator()">Registruj se</button>
   </div>
 
   <div *ngIf="tipRegistracije === 'igrac'">
@@ -76,6 +77,6 @@
         name="vodjaTima"
       />
     </div>
+    <button (click)="registrujSeKaoIgrac()">Registruj se</button>
   </div>
-  <button (click)="registrujSe()">Registruj se</button>
 </form>
