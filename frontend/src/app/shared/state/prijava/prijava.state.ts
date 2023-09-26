@@ -14,6 +14,7 @@ export const initialStatePrijava: PrijavaState = {
     datumOdrzavanja: '',
     mestoOdrzavanja: '',
     maxBrojUcesnika: 0,
+    nagrada: 0,
     prijavljeniIgraci: [],
   },
   igraciUTimu: [],

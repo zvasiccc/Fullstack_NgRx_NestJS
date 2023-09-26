@@ -19,4 +19,8 @@ export class PrijavaService {
   izbaciIgracaIzTima(igrac: Igrac) {
     this.store.dispatch(PrijavaActions.izbaciIgracaIzTima({ igrac }));
   }
+  vratiPrijaveZaTurnir(turnirId: number) {
+    const url = `http://localhost:3000/prijava/vratiPrijaveZaTurnir/${turnirId}`;
+    return this.http.get(url);
+  }
 }

@@ -1,0 +1,11 @@
+body {
+  background-color: hsl(225, 6%, 22%);
+  padding: 50px;
+}
+
+webrouk-custom-range {
+  /* Expected variables from inside the component (optional) */
+  --primary-color: hsl(218, 95%, 54%);
+  --text-color: hsl(0, 100%, 100%);
+  --line-color: hsl(0, 0%, 93%);
+}

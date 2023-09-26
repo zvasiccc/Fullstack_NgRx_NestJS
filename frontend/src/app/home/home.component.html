@@ -11,6 +11,9 @@
       </button>
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi tim</button>
       <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+      <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+        prijavljeni timovi
+      </button>
     </li>
   </ul>
   <ul *ngIf="!pretragaIzvrsena">
@@ -29,6 +32,9 @@
       </button>
       <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
       <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+      <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+        Prijavljeni timovi
+      </button>
     </li>
   </ul>
 </div>

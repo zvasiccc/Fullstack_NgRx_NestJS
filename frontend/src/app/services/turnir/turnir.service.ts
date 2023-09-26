@@ -4,7 +4,7 @@ import { StoreDevtools } from '@ngrx/store-devtools';
 import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   kreirajTurnir,
   vratiSveTurnire,
@@ -52,9 +52,27 @@ export class TurnirService {
     pretragaNaziv: string,
     pretragaMesto: string,
     pretragaPocetniDatum: string,
-    pretragaKrajnjiDatum: string
+    pretragaKrajnjiDatum: string,
+    pretragaPocetnaNagrada: number,
+    pretragaKrajnjaNagrada: number
   ) {
-    const url = `http://localhost:3000/turnir/filtrirajTurnire/${pretragaNaziv}/${pretragaMesto}/${pretragaPocetniDatum}/${pretragaKrajnjiDatum}`;
+    let params = new HttpParams();
+    params = params.append('pretragaNaziv', pretragaNaziv);
+    params = params.append('pretragaMesto', pretragaMesto);
+    params = params.append('pretragaPocetniDatum', pretragaPocetniDatum);
+    params = params.append('pretragaKrajnjiDatum', pretragaKrajnjiDatum);
+    params = params.append(
+      'pretragaPocetnaNagrada',
+      pretragaPocetnaNagrada.toString()
+    );
+    params = params.append(
+      'pretragaKrajnjaNagrada',
+      pretragaKrajnjaNagrada.toString()
+    );
+
+    // Kreiraj URL sa parametrima
+    const url =
+      'http://localhost:3000/turnir/filtrirajTurnire' + '?' + params.toString();
     return this.http.get(url);
   }
   async obrisiTurnir(turnirId: number) {

@@ -33,6 +33,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { RangeSliderComponent } from './range-slider/range-slider.component';
+import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     PreferenceComponent,
     BackArrowComponent,
     SearchBarComponent,
+    RangeSliderComponent,
+    TimoviNaTurniruComponent,
   ],
   imports: [
     CommonModule,

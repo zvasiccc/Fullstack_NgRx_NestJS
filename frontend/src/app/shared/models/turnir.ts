@@ -6,6 +6,7 @@ export interface Turnir {
   datumOdrzavanja: string;
   mestoOdrzavanja: string;
   maxBrojUcesnika: number;
+  nagrada: number;
   prijavljeniIgraci: Igrac[];
 
   // constructor(

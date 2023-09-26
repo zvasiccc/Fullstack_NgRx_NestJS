@@ -28,11 +28,7 @@ export class HomeComponent implements OnInit {
     private store: Store
   ) {}
   ngOnInit(): void {}
-  prikaziPrijavljeneIgrace(turnir: Turnir) {
-    //!ne radi
-    //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
-    this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
-  }
+
   handlePretragaRezultati(rezultati: Turnir[]) {
     // Ovde možete obraditi rezultate koji su emitovani iz SearchBarComponent
     console.log('Rezultati pretrage:', rezultati);
@@ -40,6 +36,11 @@ export class HomeComponent implements OnInit {
     this.postojeFiltriraniTurniri =
       this.filtriraniTurniri && this.filtriraniTurniri.length > 0;
     this.pretragaIzvrsena = true;
+  }
+  prikaziPrijavljeneIgrace(turnir: Turnir) {
+    //!ne radi
+    //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
+    this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
   }
   prijaviSeNaTurnir(turnir: Turnir) {
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
@@ -52,5 +53,8 @@ export class HomeComponent implements OnInit {
       );
       this.sviTurniri$ = this.turnirService.getTurniriBaza(); //todo obrisati kasnije
     });
+  }
+  async prikaziPrijavljeneTimove(turnirId: number) {
+    this.router.navigateByUrl(`prijavljeniTimovi/${turnirId}`);
   }
 }
