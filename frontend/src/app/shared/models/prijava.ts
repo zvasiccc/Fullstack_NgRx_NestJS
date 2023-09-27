@@ -2,6 +2,7 @@ import { Igrac } from './igrac'; // Pretpostavljam da već postoji interfejs ili
 import { Turnir } from './turnir'; // Pretpostavljam da već postoji interfejs ili model za Turnir
 
 export interface Prijava {
+  id: number;
   nazivTima: string;
   potrebanBrojSlusalica: number;
   potrebanBrojRacunara: number;

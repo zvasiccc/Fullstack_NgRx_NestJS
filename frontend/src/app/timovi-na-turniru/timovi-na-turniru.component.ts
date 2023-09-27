@@ -25,4 +25,7 @@ export class TimoviNaTurniruComponent {
       this.prijave$ = this.prijavaService.vratiPrijaveZaTurnir(this.turnirId);
     }
   }
+  izbaciTimSaTurnira(prijavaId: number) {
+    this.prijavaService.izbaciTimSaTurnira(prijavaId);
+  }
 }

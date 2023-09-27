@@ -56,4 +56,26 @@ export class PrijavaService {
       .getMany();
     return prijave;
   }
+  async izbaciTimSaTurnira(prijavaId: number) {
+    const trazenaPrijava = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .where('prijava.id=:id', { id: prijavaId })
+      .leftJoinAndSelect('prijava.turnir', 'turnir')
+      .getOne();
+    console.log(trazenaPrijava); //! radi
+    // const turnir = prijava.turnir;
+    // if (turnir) {
+
+    const turnir = await this.turnirRepository
+      .createQueryBuilder('turnir')
+      .leftJoinAndSelect('turnir.prijave', 'prijava')
+      .where('turnir.id=:id', { id: trazenaPrijava.turnir.id })
+      .getOne();
+    if (turnir) {
+      turnir.prijave = turnir.prijave.filter((p) => p.id !== prijavaId);
+    }
+    console.log(turnir);
+    await this.prijavaRepository.remove(trazenaPrijava);
+    return await this.turnirRepository.save(turnir);
+  }
 }

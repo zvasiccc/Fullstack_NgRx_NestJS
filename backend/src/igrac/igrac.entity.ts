@@ -1,4 +1,5 @@
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
+import { Role } from 'src/roles/role.enum';
 import {
   Entity,
   Column,
@@ -22,7 +23,8 @@ export class IgracEntity {
   prezime: string;
   @Column()
   vodjaTima: boolean;
-  //prijave: PrijavaEntity[];
+
+  //roles: Role[];
   @ManyToMany(() => PrijavaEntity, (prijava) => prijava.igraci)
   prijave: PrijavaEntity[];
 }

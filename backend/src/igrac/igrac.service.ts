@@ -48,6 +48,7 @@ export class IgracService {
     noviIgrac.ime = igrac.ime;
     noviIgrac.prezime = igrac.prezime;
     noviIgrac.vodjaTima = igrac.vodjaTima;
+    //noviIgrac.roles = igrac.roles;
     return await this.igracRepository.save(noviIgrac);
   }
   async pronadjiIgraceZaPrijavu(prijavaId: number) {

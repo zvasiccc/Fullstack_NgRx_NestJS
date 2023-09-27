@@ -24,4 +24,8 @@ export class PrijavaService {
     const url = `http://localhost:3000/prijava/prijaveNaTurniru/${turnirId}`;
     return this.http.get<Prijava[]>(url);
   }
+  izbaciTimSaTurnira(prijavaId: number) {
+    const url = `http://localhost:3000/prijava/izbaciTimSaTurnira/${prijavaId}`;
+    return this.http.delete(url).subscribe((p) => p);
+  }
 }

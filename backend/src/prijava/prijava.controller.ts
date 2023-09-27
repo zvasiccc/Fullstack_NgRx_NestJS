@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PrijavaService } from './prijava.service';
 import { PrijavaEntity } from './prijava.entity';
 import { IgracService } from 'src/igrac/igrac.service';
@@ -22,5 +22,9 @@ export class PrijavaController {
   @Get('prijaveNaTurniru/:turnirId')
   async prijaveNaTurniru(@Param('turnirId') turnirId: number) {
     return await this.prijavaService.prijaveNaTurniru(turnirId);
+  }
+  @Delete('izbaciTimSaTurnira/:prijavaId')
+  async izbaciTimSaTurnira(@Param('prijavaId') prijavaId: number) {
+    return await this.prijavaService.izbaciTimSaTurnira(prijavaId);
   }
 }

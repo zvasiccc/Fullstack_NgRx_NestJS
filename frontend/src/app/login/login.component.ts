@@ -9,14 +9,7 @@ export class LoginComponent {
   korisnickoIme: string = '';
   lozinka: string = '';
 
-  submitLogin() {
-    // Ovde možete postaviti logiku za proveru korisničkog imena i lozinke
-    if (this.korisnickoIme === 'zeljko' && this.lozinka === 'zeljko') {
-      // Uspela prijava
-      alert('Uspešno ste se prijavili.');
-    } else {
-      // Neuspešna prijava
-      alert('Pogrešno korisničko ime ili lozinka.');
-    }
-  }
+  //todo kako saljem login i kako da znam koji tip korisinka je prijavljen
+  //todo kako saljem token?
+  submitLogin() {}
 }

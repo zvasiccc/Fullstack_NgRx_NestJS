@@ -26,6 +26,7 @@ export class PrijavaComponent {
     .select(selectPreferenceUPrijavi)
     .pipe(map((p: any) => p.preference));
   prijava: Prijava = {
+    id: 0,
     nazivTima: '',
     potrebanBrojSlusalica: 0,
     potrebanBrojRacunara: 0,
