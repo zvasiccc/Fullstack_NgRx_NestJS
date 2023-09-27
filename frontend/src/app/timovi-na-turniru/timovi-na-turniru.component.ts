@@ -26,6 +26,8 @@ export class TimoviNaTurniruComponent {
     }
   }
   izbaciTimSaTurnira(prijavaId: number) {
-    this.prijavaService.izbaciTimSaTurnira(prijavaId);
+    this.prijavaService.izbaciTimSaTurnira(prijavaId).subscribe(() => {
+      this.prijave$ = this.prijavaService.vratiPrijaveZaTurnir(this.turnirId);
+    });
   }
 }

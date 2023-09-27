@@ -14,7 +14,7 @@ export class PrijavaService {
   posaljiPrijavuUBazu(prijava: Prijava) {
     const url = 'http://localhost:3000/prijava/dodajPrijavu';
     return this.http.post(url, prijava).subscribe((p) => {
-      p;
+      if (p == null) alert('nema mesta na turniru');
     });
   }
   izbaciIgracaIzTima(igrac: Igrac) {
@@ -24,8 +24,8 @@ export class PrijavaService {
     const url = `http://localhost:3000/prijava/prijaveNaTurniru/${turnirId}`;
     return this.http.get<Prijava[]>(url);
   }
-  izbaciTimSaTurnira(prijavaId: number) {
+  izbaciTimSaTurnira(prijavaId: number): Observable<any> {
     const url = `http://localhost:3000/prijava/izbaciTimSaTurnira/${prijavaId}`;
-    return this.http.delete(url).subscribe((p) => p);
+    return this.http.delete(url);
   }
 }

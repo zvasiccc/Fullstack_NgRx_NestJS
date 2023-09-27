@@ -57,8 +57,6 @@ export class PrijavaComponent {
       this.prijava.potrebanBrojTastatura = preference.potrebanBrojTastatura;
       this.prijava.potrebanBrojMiseva = preference.potrebanBrojMiseva;
     });
-
-    console.log(this.prijava);
     this.prijavaService.posaljiPrijavuUBazu(this.prijava);
   }
   izbaciIgracaIzTima(igrac: Igrac) {

@@ -25,22 +25,24 @@ export class PrijavaService {
     novaPrijava.potrebanBrojRacunara = prijava.potrebanBrojRacunara;
     novaPrijava.potrebanBrojSlusalica = prijava.potrebanBrojSlusalica;
     novaPrijava.potrebanBrojTastatura = prijava.potrebanBrojTastatura; //cek cek
-    const noviTurnir = await this.turnirRepository.findOne({
+    const turnir = await this.turnirRepository.findOne({
       where: { id: prijava.turnir.id },
     });
-    console.log('turnir iz prijave je' + noviTurnir.naziv);
-    novaPrijava.turnir = noviTurnir;
+
+    const postojecePrijave = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .where('prijava.turnir = :id', { id: turnir.id })
+      .leftJoinAndSelect('prijava.igraci', 'igrac')
+      .getMany();
+    let ukupanBroj = 0;
+    postojecePrijave.forEach((prijava) => {
+      ukupanBroj += prijava.igraci.length;
+    });
+    if (ukupanBroj + prijava.igraci.length > turnir.maxBrojUcesnika)
+      return null;
+    novaPrijava.turnir = turnir;
     novaPrijava.igraci = prijava.igraci;
-    // novaPrijava.igraci = [];
-    // prijava.igraci.forEach(async (igracUPrijavi) => {
-    //   const igrac = await this.igracRepository.findOne({
-    //     where: { id: igracUPrijavi.id },
-    //   });
-    //   novaPrijava.igraci.push(igrac);
-    //   console.log(igrac.korisnickoIme);
-    // });
     return await this.prijavaRepository.save(novaPrijava);
-    // return await this.prijavaRepository.save(novaPrijava);
   }
   async prijaveNaTurniru(turnirId: number) {
     // const turnir = await this.turnirRepository
