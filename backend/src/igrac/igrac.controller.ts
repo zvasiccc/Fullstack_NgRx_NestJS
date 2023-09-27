@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards } from '@nestjs/common';
 import { IgracService } from './igrac.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('igrac')
 export class IgracController {
   constructor(private igracService: IgracService) {}
+  @UseGuards(JwtAuthGuard)
   @Get('sviIgraci')
   async vratiSveIgrace() {
     return await this.igracService.vratiSveIgrace();
@@ -27,5 +29,9 @@ export class IgracController {
   @Get('pronadjiIgraceZaPrijavu/:id')
   async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
     return await this.igracService.pronadjiIgraceZaPrijavu(id);
+  }
+  @Get('findOne/:username')
+  findOne(@Param('username') username: string) {
+    return this.igracService.findOne(username);
   }
 }

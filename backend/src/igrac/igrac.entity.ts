@@ -15,6 +15,8 @@ export class IgracEntity {
   @Column()
   korisnickoIme: string;
   @Column()
+  lozinka: string;
+  @Column()
   ime: string;
   @Column()
   prezime: string;

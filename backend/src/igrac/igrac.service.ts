@@ -15,10 +15,23 @@ export class IgracService {
     @InjectRepository(TurnirEntity)
     private turnirRepository: Repository<TurnirEntity>,
   ) {}
-
+  //!
   async vratiSveIgrace() {
     return await this.igracRepository.find();
   }
+
+  async vratiIgracePoKorisnickomImenu(korisnickoIme: string) {
+    return await this.igracRepository.find({
+      where: {
+        korisnickoIme: Like(`%${korisnickoIme}%`),
+      },
+    });
+  }
+  //!
+  async findOne(username: string): Promise<IgracEntity | undefined> {
+    return this.igracRepository.findOne({ where: { korisnickoIme: username } });
+  }
+
   vratiPrijavljenogIgraca() {
     return {
       id: 3,
@@ -28,17 +41,10 @@ export class IgracService {
       vodjaTima: false,
     };
   }
-  async vratiIgracePoKorisnickomImenu(korisnickoIme: string) {
-    return await this.igracRepository.find({
-      where: {
-        korisnickoIme: Like(`%${korisnickoIme}%`),
-      },
-    });
-  }
-
   async registrujIgraca(igrac: IgracEntity) {
     const noviIgrac = this.igracRepository.create();
     noviIgrac.korisnickoIme = igrac.korisnickoIme;
+    noviIgrac.lozinka = igrac.lozinka;
     noviIgrac.ime = igrac.ime;
     noviIgrac.prezime = igrac.prezime;
     noviIgrac.vodjaTima = igrac.vodjaTima;

@@ -15,6 +15,8 @@ import { TurnirEntity } from './turnir/turnir.entity';
 import { OrganizatorController } from './organizator/organizator.controller';
 import { OrganizatorService } from './organizator/organizator.service';
 import { OrganizatorEntity } from './organizator/organizator.entity';
+import { AuthModule } from './auth/auth.module';
+import { IgracModule } from './igrac/igrac.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { OrganizatorEntity } from './organizator/organizator.entity';
       TurnirEntity,
       OrganizatorEntity,
     ]),
+    AuthModule,
+    IgracModule,
   ],
   controllers: [
     AppController,

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 //TODO  prijavljeni ucenisici, kad se klikne na turnir da izadju prijavljeni ucesnici
 //todo i neke informacije, dodaj mogucnost organizatoru da obrise prijavu za tim,vidi prijave na turniru, da vidi svoje turnire, autentifikacija passport js
-//da igrac vidi svoje turnire na koje je prijavljen
+//todo da igrac vidi svoje turnire na koje je prijavljen
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
     id: 0,
