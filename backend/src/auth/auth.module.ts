@@ -7,9 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { IgracModule } from 'src/igrac/igrac.module';
 import { JwtStrategy } from './jwt.strategy';
+import { OrganizatorModule } from 'src/organizator/organizator.module';
 @Module({
   imports: [
     IgracModule,
+    OrganizatorModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

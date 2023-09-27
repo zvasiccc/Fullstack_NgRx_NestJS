@@ -17,6 +17,7 @@ import { OrganizatorService } from './organizator/organizator.service';
 import { OrganizatorEntity } from './organizator/organizator.entity';
 import { AuthModule } from './auth/auth.module';
 import { IgracModule } from './igrac/igrac.module';
+import { OrganizatorModule } from './organizator/organizator.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { IgracModule } from './igrac/igrac.module';
     ]),
     AuthModule,
     IgracModule,
+    OrganizatorModule,
   ],
   controllers: [
     AppController,

@@ -9,6 +9,14 @@ export class OrganizatorService {
     @InjectRepository(OrganizatorEntity)
     private organizatorRepository: Repository<OrganizatorEntity>,
   ) {}
+  async vratiSveOrganizatore() {
+    return await this.organizatorRepository.find();
+  }
+  async findOne(username: string): Promise<OrganizatorEntity | undefined> {
+    return this.organizatorRepository.findOne({
+      where: { korisnickoIme: username },
+    });
+  }
   async registrujOrganizatora(organizator: OrganizatorEntity) {
     const noviOrganizator: OrganizatorEntity =
       this.organizatorRepository.create();

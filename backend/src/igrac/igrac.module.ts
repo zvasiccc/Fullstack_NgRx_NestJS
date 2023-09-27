@@ -4,10 +4,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IgracEntity } from './igrac.entity';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
+import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([IgracEntity, PrijavaEntity, TurnirEntity]),
+    TypeOrmModule.forFeature([
+      IgracEntity,
+      OrganizatorEntity,
+      PrijavaEntity,
+      TurnirEntity,
+    ]),
   ],
   providers: [IgracService],
   exports: [IgracService],
