@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  UseGuards,
+  Headers,
+} from '@nestjs/common';
 import { IgracService } from './igrac.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/roles/roles.decorator';
@@ -18,10 +26,10 @@ export class IgracController {
   async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
     return await this.igracService.slobodniIgraciZaTurnir(turnirId);
   }
-  @Get('prijavljeniIgrac') //TODO hardkodirano je trenutno
-  vratiPrijavljenogIgraca() {
-    return this.igracService.vratiPrijavljenogIgraca();
-  }
+  // @Get('prijavljeniIgrac') //TODO hardkodirano je trenutno
+  // vratiPrijavljenogIgraca() {
+  //   return this.igracService.vratiPrijavljenogIgraca();
+  // }
   @UseGuards(JwtAuthGuard)
   @Roles(Role.Organizator)
   @Get('korisnickoIme/:korisnickoIme')
@@ -34,6 +42,24 @@ export class IgracController {
   @Post('registrujIgraca')
   async post(@Body() igrac: any) {
     return await this.igracService.registrujIgraca(igrac);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.Igrac)
+  @Get('dohvatiIgraca/:korisnickoIme')
+  async dohvatiIgraca(@Param('korisnickoIme') korisnickoIme: string) {
+    return this.igracService.dohvatiIgraca(korisnickoIme);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.Igrac)
+  @Get('vratiIgracaIzTokena')
+  vratiIgracaIzTokena(@Headers('authorization') authorization: string) {
+    if (authorization) {
+      //const token = authorization.replace('Bearer ', ''); // Uklonimo "Bearer " prefiks
+      return this.igracService.vratiIgracaIzTokena(authorization); // Prosleđujemo token servisu
+    } else {
+      // Nema tokena u zaglavlju, obradite to kako želite
+      return null;
+    }
   }
 
   @Get('pronadjiIgraceZaPrijavu/:id')

@@ -4,6 +4,8 @@ import { In, Like, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
+import { JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 
 @Injectable()
 export class IgracService {
@@ -14,10 +16,38 @@ export class IgracService {
     private prijavaRepository: Repository<PrijavaEntity>,
     @InjectRepository(TurnirEntity)
     private turnirRepository: Repository<TurnirEntity>,
+    private jwtService: JwtService,
   ) {}
   //!
   async vratiSveIgrace() {
     return await this.igracRepository.find();
+  }
+  async vratiIgracaIzTokena(token: string) {
+    try {
+      const noviToken = token.split(' ')[1];
+
+      const dekodiraniToken = (await this.jwtService.verify(noviToken, {
+        secret: 'SECRET',
+      })) as any;
+      const igrac = await this.igracRepository.findOne({
+        where: { korisnickoIme: dekodiraniToken.username },
+      });
+      console.log('IGRAC JE ', igrac);
+
+      if (!igrac) {
+        throw new NotFoundException('Igrac nije pronadjen');
+      }
+
+      const { lozinka, ...igracBezLozinke } = igrac;
+      return igracBezLozinke;
+    } catch (error) {
+      throw new NotFoundException('nevazeci token');
+    }
+  }
+  async dohvatiIgraca(korisnickoIme: string) {
+    return await this.igracRepository.findOne({
+      where: { korisnickoIme: korisnickoIme },
+    });
   }
   async slobodniIgraciZaTurnir(turnirId: number) {
     //da vratimo sve igrace koji se ne nalaze u prijavama za turnir

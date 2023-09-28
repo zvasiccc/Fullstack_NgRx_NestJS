@@ -1,6 +1,6 @@
 <div class="login">
   <h2>Prijava</h2>
-  <form (ngSubmit)="submitLogin()">
+  <form>
     <label for="korisnickoIme">Korisničko ime:</label>
     <input
       type="text"
@@ -18,7 +18,25 @@
       name="lozinka"
       required
     />
+    <label for="role">I am:</label>
+    <input
+      type="checkbox"
+      id="igrac"
+      [(ngModel)]="isIgrac"
+      name="role"
+      value="igrac"
+    />
+    <label for="igrac">Igrac</label>
 
-    <button type="submit">Prijavi se</button>
+    <input
+      type="checkbox"
+      id="organizator"
+      [(ngModel)]="isOrganizator"
+      name="role"
+      value="organizator"
+    />
+    <label for="organizator">Organizator</label>
+
+    <button (click)="prijaviSe()">Prijavi se</button>
   </form>
 </div>

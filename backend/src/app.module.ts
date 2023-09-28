@@ -21,6 +21,7 @@ import { OrganizatorModule } from './organizator/organizator.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './roles/roles.guard';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { JwtModule } from '@nestjs/jwt';
     TurnirService,
     PrijavaService,
     OrganizatorService,
+    JwtStrategy,
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
