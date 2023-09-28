@@ -18,9 +18,4 @@ export class ProfilComponent {
       .select(selectPrijavljeniIgrac)
       .pipe(map((p: any) => p.prijavljeniIgrac));
   }
-  ngOnInit() {
-    this.trenutnoPrijavljeniIgrac$ = this.store
-      .select(selectPrijavljeniIgrac)
-      .pipe(map((p: any) => p.prijavljeniIgrac));
-  }
 }
