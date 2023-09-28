@@ -24,24 +24,26 @@ export class PrijavaService {
     novaPrijava.potrebanBrojMiseva = prijava.potrebanBrojMiseva;
     novaPrijava.potrebanBrojRacunara = prijava.potrebanBrojRacunara;
     novaPrijava.potrebanBrojSlusalica = prijava.potrebanBrojSlusalica;
-    novaPrijava.potrebanBrojTastatura = prijava.potrebanBrojTastatura; //cek cek
+    novaPrijava.potrebanBrojTastatura = prijava.potrebanBrojTastatura;
     const turnir = await this.turnirRepository.findOne({
       where: { id: prijava.turnir.id },
     });
-
     const postojecePrijave = await this.prijavaRepository
       .createQueryBuilder('prijava')
       .where('prijava.turnir = :id', { id: turnir.id })
       .leftJoinAndSelect('prijava.igraci', 'igrac')
       .getMany();
-    let ukupanBroj = 0;
-    postojecePrijave.forEach((prijava) => {
-      ukupanBroj += prijava.igraci.length;
-    });
-    if (ukupanBroj + prijava.igraci.length > turnir.maxBrojUcesnika)
-      return null;
+    // let ukupanBroj = 0;
+    // postojecePrijave.forEach((prijava) => {
+    //   ukupanBroj += prijava.igraci.length;
+    // });
+    // if (ukupanBroj + prijava.igraci.length > turnir.maxBrojUcesnika)
+    //   return null;
+    if (postojecePrijave.length + 1 > turnir.maxBrojTimova) return null;
     novaPrijava.turnir = turnir;
     novaPrijava.igraci = prijava.igraci;
+    turnir.trenutniBrojTimova++;
+    await this.turnirRepository.save(turnir);
     return await this.prijavaRepository.save(novaPrijava);
   }
   async prijaveNaTurniru(turnirId: number) {
@@ -77,6 +79,7 @@ export class PrijavaService {
       turnir.prijave = turnir.prijave.filter((p) => p.id !== prijavaId);
     }
     console.log(turnir);
+    turnir.trenutniBrojTimova--;
     await this.prijavaRepository.remove(trazenaPrijava);
     return await this.turnirRepository.save(turnir);
   }

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IgracEntity } from './igrac.entity';
-import { Like, Repository } from 'typeorm';
+import { In, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
@@ -62,7 +62,7 @@ export class IgracService {
     }
     const igraci = await this.igracRepository.find({
       where: {
-        prijave: [prijava],
+        id: In([...prijava.igraci]),
       },
     });
     return igraci;

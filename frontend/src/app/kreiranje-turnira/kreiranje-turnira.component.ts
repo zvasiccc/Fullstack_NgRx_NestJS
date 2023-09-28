@@ -8,8 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './kreiranje-turnira.component.html',
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
-//TODO  prijavljeni ucenisici, kad se klikne na turnir da izadju prijavljeni ucesnici
-//todo i neke informacije, dodaj mogucnost organizatoru da obrise prijavu za tim,vidi prijave na turniru, da vidi svoje turnire, autentifikacija passport js
+//todo i neke informacije kada se klikne na turnir, da vidi svoje turnire organizator, autentifikacija passport js
 //todo da igrac vidi svoje turnire na koje je prijavljen
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
@@ -17,7 +16,8 @@ export class KreiranjeTurniraComponent {
     naziv: '',
     datumOdrzavanja: '',
     mestoOdrzavanja: '',
-    maxBrojUcesnika: 0,
+    maxBrojTimova: 0,
+    trenutniBrojTimova: 0,
     nagrada: 0,
     prijavljeniIgraci: [],
   };
@@ -39,7 +39,8 @@ export class KreiranjeTurniraComponent {
       naziv: '',
       datumOdrzavanja: '',
       mestoOdrzavanja: '',
-      maxBrojUcesnika: 0,
+      maxBrojTimova: 0,
+      trenutniBrojTimova: 0,
       nagrada: 0,
       prijavljeniIgraci: [],
     };

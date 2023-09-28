@@ -26,9 +26,9 @@ export class TurnirService {
     noviTurnir.naziv = turnir.naziv;
     noviTurnir.datumOdrzavanja = turnir.datumOdrzavanja;
     noviTurnir.mestoOdrzavanja = turnir.mestoOdrzavanja;
-    noviTurnir.maxBrojUcesnika = turnir.maxBrojUcesnika;
+    noviTurnir.maxBrojTimova = turnir.maxBrojTimova;
     noviTurnir.nagrada = turnir.nagrada;
-    //noviTurnir.prijave = [];
+    noviTurnir.trenutniBrojTimova = 0;
     return await this.turnirRepository.save(noviTurnir);
   }
   async obrisiTurnir(turnirId: number) {

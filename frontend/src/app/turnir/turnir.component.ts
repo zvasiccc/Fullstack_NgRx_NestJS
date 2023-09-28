@@ -20,6 +20,7 @@ export class TurnirComponent {
     private store: Store,
     private router: Router
   ) {}
+  //todo da se vidi trenutni broj prijavljenih igraca(ili mozda timova)
   // dodajTurnirUKorpu(turnir: Turnir) {
   //   this.korpaService.dodajTurnirUKorpu(turnir);
   // }

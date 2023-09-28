@@ -17,7 +17,7 @@ export class IgracController {
     return this.igracService.vratiPrijavljenogIgraca();
   }
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Igrac)
+  @Roles(Role.Organizator)
   @Get('korisnickoIme/:korisnickoIme')
   async vratiIgracePoKorisnickomImenu(
     @Param('korisnickoIme') korisnickoIme: string,

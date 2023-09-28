@@ -32,12 +32,22 @@
       />
     </div>
     <div class="form-group">
-      <label for="maxBrojUcesnika">Broj učesnika:</label>
+      <label for="maxBrojTimova">Maksimalni broj timova: </label>
       <input
         type="number"
-        id="maxBrojUcesnika"
-        name="maxBrojUcesnika"
-        [(ngModel)]="turnir.maxBrojUcesnika"
+        id="maxBrojTimova"
+        name="maxBrojTimova"
+        [(ngModel)]="turnir.maxBrojTimova"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="nagrada"> Nagrada pobedniku: </label>
+      <input
+        type="number"
+        id="nagrada"
+        name="nagrada"
+        [(ngModel)]="turnir.nagrada"
         required
       />
     </div>

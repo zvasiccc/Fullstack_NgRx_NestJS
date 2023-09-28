@@ -24,7 +24,7 @@ export class IgracEntity {
   @Column()
   vodjaTima: boolean;
 
-  //roles: Role[];
+  roles: Role[];
   @ManyToMany(() => PrijavaEntity, (prijava) => prijava.igraci)
   prijave: PrijavaEntity[];
 }
