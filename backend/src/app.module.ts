@@ -18,6 +18,9 @@ import { OrganizatorEntity } from './organizator/organizator.entity';
 import { AuthModule } from './auth/auth.module';
 import { IgracModule } from './igrac/igrac.module';
 import { OrganizatorModule } from './organizator/organizator.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './roles/roles.guard';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -46,6 +49,7 @@ import { OrganizatorModule } from './organizator/organizator.module';
     AuthModule,
     IgracModule,
     OrganizatorModule,
+    JwtModule,
   ],
   controllers: [
     AppController,
@@ -60,6 +64,10 @@ import { OrganizatorModule } from './organizator/organizator.module';
     TurnirService,
     PrijavaService,
     OrganizatorService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}

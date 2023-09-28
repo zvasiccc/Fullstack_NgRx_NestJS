@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { IgracService } from 'src/igrac/igrac.service';
 import { OrganizatorService } from 'src/organizator/organizator.service';
@@ -27,7 +27,10 @@ export class AuthService {
     return null;
   }
   async login(igrac: any) {
-    const payload = { username: igrac.username, sub: igrac.userId };
+    const payload = {
+      username: igrac.korisnickoIme,
+      sub: igrac.id,
+    };
     return {
       access_token: this.jwtService.sign(payload),
     };

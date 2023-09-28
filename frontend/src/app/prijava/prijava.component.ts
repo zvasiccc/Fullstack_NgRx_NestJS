@@ -58,6 +58,19 @@ export class PrijavaComponent {
       this.prijava.potrebanBrojMiseva = preference.potrebanBrojMiseva;
     });
     this.prijavaService.posaljiPrijavuUBazu(this.prijava);
+    this.prijavljeniTurnir$ = new Observable<Turnir>();
+    this.igraciUTimu$ = new Observable<Igrac[]>();
+    this.preference$ = new Observable<Preference>();
+    this.prijava = {
+      id: 0,
+      nazivTima: '',
+      potrebanBrojSlusalica: 0,
+      potrebanBrojRacunara: 0,
+      potrebanBrojTastatura: 0,
+      potrebanBrojMiseva: 0,
+      igraci: [],
+      turnir: null,
+    };
   }
   izbaciIgracaIzTima(igrac: Igrac) {
     this.prijavaService.izbaciIgracaIzTima(igrac);

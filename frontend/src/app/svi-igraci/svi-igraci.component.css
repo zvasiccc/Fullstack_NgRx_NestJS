@@ -1,7 +1,5 @@
-/* Centriraj snackbar vertikalno */
-::ng-deep .mat-snack-bar-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: auto; /* Poništite stil za dno ako je postavljen */
+/* styles.css */
+.custom-snackbar {
+  background-color: aqua;
+  margin-bottom: 500px;
 }

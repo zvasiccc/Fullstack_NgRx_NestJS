@@ -45,7 +45,7 @@ export class KreiranjeTurniraComponent {
       prijavljeniIgraci: [],
     };
     this._snackBar.open('Turnir je uspešno kreiran', 'Zatvori', {
-      duration: 2000, // Vreme trajanja poruke u milisekundama (2 sekunde u ovom primeru)
+      duration: 2000,
     });
   }
 }
