@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
-import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
+import {
+  selectPrijavljeniIgrac,
+  selectSviIgraci,
+} from 'src/app/shared/state/igrac/igrac.selector';
 import { selectPrijavljeniIgraciZaTurnir } from 'src/app/shared/state/turnir/turnir.selector';
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
@@ -17,9 +20,12 @@ export class IgracService {
   vratiSveIgrace(): Observable<Igrac[]> {
     return this.http.get<Igrac[]>(this.sviIgraciUrl);
   }
-  vratiPrijavljenogIgraca(): Observable<Igrac> {
-    return this.http.get<Igrac>(this.prijavljeniIgracUrl);
-  }
+  // vratiPrijavljenogIgraca() {
+  //   // return this.http.get<Igrac>(this.prijavljeniIgracUrl);
+  //   return this.store
+  //     .select(selectPrijavljeniIgrac)
+
+  // }
   dodajIgracaUTim(igrac: Igrac) {
     return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
   }

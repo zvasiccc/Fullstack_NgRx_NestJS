@@ -4,13 +4,16 @@ import { LoginService } from '../services/login.service';
 import { IgracService } from '../services/igrac/igrac.service';
 import { OrganizatorService } from '../services/organizator.service';
 import { mergeMap, of } from 'rxjs';
-
+import { Igrac } from '../shared/models/igrac';
+import { Store } from '@ngrx/store';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  prijavljeniIgrac: Igrac | undefined;
   korisnickoIme: string = '';
   lozinka: string = '';
   isIgrac: boolean = false; // Initialize to false
@@ -18,6 +21,7 @@ export class LoginComponent {
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
+    private store: Store,
     private igracService: IgracService,
     private organizatorService: OrganizatorService
   ) {}
@@ -28,7 +32,7 @@ export class LoginComponent {
       this.lozinka
     );
     let jwtToken: any;
-    (await tokenObservable).subscribe(async (token: any) => {
+    tokenObservable.subscribe(async (token: any) => {
       jwtToken = token.access_token;
       console.log(jwtToken);
       const headers = new HttpHeaders({
@@ -36,7 +40,13 @@ export class LoginComponent {
       });
       const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
       const response: any = await this.http.get(url, { headers }).toPromise();
-      console.log(response);
+      this.prijavljeniIgrac = response;
+      console.log(this.prijavljeniIgrac);
+      this.store.dispatch(
+        IgracActions.postaviPrijavljenogIgraca({
+          prijavljeniIgrac: this.prijavljeniIgrac as Igrac,
+        })
+      );
     });
     // tokenObservable
     //   .pipe(
@@ -45,7 +55,6 @@ export class LoginComponent {
     //       const headers = new HttpHeaders({
     //         Authorization: `Bearer ${jwtToken}`,
     //       });
-
     //       if (this.isIgrac) {
     //         const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
     //         return this.http.get(url, { headers });

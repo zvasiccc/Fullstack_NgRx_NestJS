@@ -16,8 +16,8 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('igrac')
 export class IgracController {
   constructor(private igracService: IgracService) {}
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.Igrac)
+  // @UseGuards(JwtAuthGuard)
+  // @Roles(Role.Igrac)
   @Get('sviIgraci')
   async vratiSveIgrace() {
     return await this.igracService.vratiSveIgrace();

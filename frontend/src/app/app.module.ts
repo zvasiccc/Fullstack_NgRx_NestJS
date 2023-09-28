@@ -73,6 +73,7 @@ import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.
     StoreModule.forFeature('prijavljeniTurniri', turnirReducerBaza),
     //StoreModule.forFeature('turniriKorpa', korpaReducer),
     StoreModule.forFeature('igraci', igracReducer),
+    StoreModule.forFeature('prijavljeniIgrac', igracReducer),
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
     StoreModule.forFeature('preferenceUPrijavi', prijavaReducer),

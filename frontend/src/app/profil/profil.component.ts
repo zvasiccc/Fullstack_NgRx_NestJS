@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Igrac } from '../shared/models/igrac';
 import { IgracService } from '../services/igrac/igrac.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectPrijavljeniIgrac } from '../shared/state/igrac/igrac.selector';
 
 @Component({
   selector: 'app-profil',
@@ -9,10 +11,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./profil.component.css'],
 })
 export class ProfilComponent {
-  trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
-  constructor(private igracService: IgracService) {}
-  ngOnInit(): void {
-    this.trenutnoPrijavljeniIgrac$ =
-      this.igracService.vratiPrijavljenogIgraca();
+  //trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
+  trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
+  constructor(private igracService: IgracService, private store: Store) {
+    this.trenutnoPrijavljeniIgrac$ = this.store
+      .select(selectPrijavljeniIgrac)
+      .pipe(map((p: any) => p.prijavljeniIgrac));
+  }
+  ngOnInit() {
+    this.trenutnoPrijavljeniIgrac$ = this.store
+      .select(selectPrijavljeniIgrac)
+      .pipe(map((p: any) => p.prijavljeniIgrac));
   }
 }
