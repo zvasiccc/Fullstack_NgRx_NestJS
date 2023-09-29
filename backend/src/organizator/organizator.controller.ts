@@ -10,20 +10,18 @@ import {
 import { OrganizatorService } from './organizator.service';
 import { OrganizatorEntity } from './organizator.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Roles } from 'src/roles/roles.decorator';
 import { Role } from 'src/roles/role.enum';
+import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
 
 @Controller('organizator')
 export class OrganizatorController {
   constructor(private organizatorService: OrganizatorService) {}
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.Organizator)
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Get('sviOrganizatori')
   vratiSveOrganizatore() {
     return this.organizatorService.vratiSveOrganizatore();
   }
-  @UseGuards(JwtAuthGuard)
-  @Roles(Role.Organizator)
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Get('vratiOrganizatoraIzTokena')
   vratiOrganizatoraIzTokena(@Headers('authorization') authorization: string) {
     if (authorization)

@@ -19,8 +19,6 @@ export class AppController {
     return this.authService.login(req.user);
   }
 
-  // Nosen li si po svata cosetija?, jesam al nesm bs u libelu ahahhahahahahaha
-  //cek da te poz
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {

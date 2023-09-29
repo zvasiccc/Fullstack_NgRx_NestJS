@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
 import { IgracModule } from './igrac/igrac.module';
 import { OrganizatorModule } from './organizator/organizator.module';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './roles/roles.guard';
+
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
 
@@ -66,10 +66,6 @@ import { JwtStrategy } from './auth/jwt.strategy';
     PrijavaService,
     OrganizatorService,
     JwtStrategy,
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
   ],
 })
 export class AppModule {}

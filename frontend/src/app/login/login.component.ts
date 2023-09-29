@@ -31,7 +31,10 @@ export class LoginComponent {
     private organizatorService: OrganizatorService,
     private router: Router
   ) {}
-  //todo onemoguciti prijavu nakon sto je neko vec prijavljen
+  //todo da se sa backa vraca token i korisnik
+  //todo treba mi samo jedan store za korisnika, u njega cuvam korisnika i token
+  //todo da nema psoebnih za orgazniatroa i igraca, sve je korisnik i na osnovu korosink.role mrckam
+  //todo nema vise radio buton, postavljam korisnika u store
   async prijaviSe() {
     const tokenObservable = this.loginService.posaljiZahtevZaLogin(
       this.korisnickoIme,
@@ -51,7 +54,7 @@ export class LoginComponent {
         console.log(this.prijavljeniIgrac);
         this.store.dispatch(
           IgracActions.postaviPrijavljenogIgraca({
-            prijavljeniIgrac: this.prijavljeniIgrac as Igrac,
+            prijavljeniIgrac: this.prijavljeniIgrac as Igrac, //todo postavljam ga kao igrac ako je korisnik.role
           })
         );
         this.prijavljen = true;

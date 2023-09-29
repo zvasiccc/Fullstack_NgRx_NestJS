@@ -9,6 +9,7 @@ export class LoginService {
   posaljiZahtevZaLogin(korisnickoIme: string, lozinka: string) {
     const url = 'http://localhost:3000/auth/login';
     const obj = { username: korisnickoIme, password: lozinka };
-    return this.http.post(url, obj); //vraca token
+    return this.http.post(url, obj); //vraca token i korisnika
+    //todo korisnik.role odlucuje da li je igrac ili org
   }
 }

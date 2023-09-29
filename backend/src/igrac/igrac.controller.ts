@@ -1,17 +1,16 @@
 import {
+  Body,
   Controller,
   Get,
+  Headers,
   Param,
   Post,
-  Body,
   UseGuards,
-  Headers,
 } from '@nestjs/common';
-import { IgracService } from './igrac.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Roles } from 'src/roles/roles.decorator';
 import { Role } from 'src/roles/role.enum';
-import { AuthGuard } from '@nestjs/passport';
+
+import { IgracService } from './igrac.service';
 
 @Controller('igrac')
 export class IgracController {
@@ -31,7 +30,6 @@ export class IgracController {
   //   return this.igracService.vratiPrijavljenogIgraca();
   // }
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Organizator)
   @Get('korisnickoIme/:korisnickoIme')
   async vratiIgracePoKorisnickomImenu(
     @Param('korisnickoIme') korisnickoIme: string,
@@ -44,13 +42,11 @@ export class IgracController {
     return await this.igracService.registrujIgraca(igrac);
   }
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Igrac)
   @Get('dohvatiIgraca/:korisnickoIme')
   async dohvatiIgraca(@Param('korisnickoIme') korisnickoIme: string) {
     return this.igracService.dohvatiIgraca(korisnickoIme);
   }
   @UseGuards(JwtAuthGuard)
-  @Roles(Role.Igrac)
   @Get('vratiIgracaIzTokena')
   vratiIgracaIzTokena(@Headers('authorization') authorization: string) {
     if (authorization) {

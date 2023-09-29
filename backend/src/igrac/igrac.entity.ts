@@ -23,7 +23,7 @@ export class IgracEntity {
   prezime: string;
   @Column()
   vodjaTima: boolean;
-  roles: Role[];
+  roles: Role;
   @ManyToMany(() => PrijavaEntity, (prijava) => prijava.igraci)
   prijave: PrijavaEntity[];
 }

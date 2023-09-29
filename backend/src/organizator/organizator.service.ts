@@ -17,7 +17,6 @@ export class OrganizatorService {
   async vratiOrganizatoraIzTokena(token: string) {
     try {
       const noviToken = token.split(' ')[1];
-
       const dekodiraniToken = (await this.jwtService.verify(noviToken, {
         secret: 'SECRET',
       })) as any;
@@ -49,3 +48,4 @@ export class OrganizatorService {
     return await this.organizatorRepository.save(noviOrganizator);
   }
 }
+//todo iz klase korisnik izvedi igraca i organizatora i onda barataj s njega

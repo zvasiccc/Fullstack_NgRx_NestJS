@@ -1,3 +1,4 @@
+import { Role } from 'src/roles/role.enum';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
 import {
   Column,
@@ -16,6 +17,7 @@ export class OrganizatorEntity {
   @Column()
   lozinka: string;
   //ima vise turnira
+  roles: Role;
   @OneToMany(() => TurnirEntity, (turnir) => turnir.organizator)
   turniri: TurnirEntity[];
 }
