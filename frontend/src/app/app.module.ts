@@ -80,6 +80,7 @@ import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
     StoreModule.forFeature('preferenceUPrijavi', prijavaReducer),
     StoreModule.forFeature('prijavljeniKorisnik', korisnikReducer),
+    StoreModule.forFeature('token', korisnikReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,5 +13,9 @@ export const korisnikReducer = createReducer(
   on(KorisnikActions.odjaviPrijavljenogKorisnika, (state) => ({
     ...state,
     prijavljeniKorisnik: undefined,
+  })),
+  on(KorisnikActions.postaviTokenPrijavljenogKorisnika, (state, { token }) => ({
+    ...state,
+    token,
   }))
 );

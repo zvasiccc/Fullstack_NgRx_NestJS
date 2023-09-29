@@ -9,3 +9,7 @@ export const postaviPrijavljenogKorisnika = createAction(
 export const odjaviPrijavljenogKorisnika = createAction(
   '[Korisnik] odjavi prijavljenog korisnika'
 );
+export const postaviTokenPrijavljenogKorisnika = createAction(
+  '[korisnik] postaviToken',
+  props<{ token: string }>()
+);

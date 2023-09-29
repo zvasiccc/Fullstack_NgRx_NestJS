@@ -31,9 +31,6 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  //todo treba mi samo jedan store za korisnika, u njega cuvam korisnika i token
-  //todo da nema psoebnih za orgazniatroa i igraca, sve je korisnik i na osnovu korosink.role mrckam
-  //todo nema vise radio buton, postavljam korisnika u store
   async prijaviSe() {
     const tokenObservable = this.loginService.posaljiZahtevZaLogin(
       this.korisnickoIme,
@@ -42,7 +39,6 @@ export class LoginComponent {
     let jwtToken: any;
     tokenObservable.subscribe(async (token: any) => {
       jwtToken = token.access_token;
-      console.log(jwtToken);
       let korisnik: Igrac | Organizator | undefined = token.korisnik;
       console.log(korisnik);
       if (korisnik) {
@@ -51,16 +47,22 @@ export class LoginComponent {
             ? (korisnik as Igrac)
             : (korisnik as Organizator);
       }
-      if (this.prijavljeniKorisnik)
+      if (this.prijavljeniKorisnik) {
         this.store.dispatch(
           KorisnikActions.postaviPrijavljenogKorisnika({
             prijavljeniKorisnik: this.prijavljeniKorisnik,
           })
         );
+        this.store.dispatch(
+          KorisnikActions.postaviTokenPrijavljenogKorisnika({
+            token: jwtToken,
+          })
+        );
+      }
 
-      // const headers = new HttpHeaders({
-      //   Authorization: `Bearer ${jwtToken}`,
-      // });
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${jwtToken}`,
+      });
       //   if (this.isIgrac) {
       //     const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
       //     const response: any = await this.http.get(url, { headers }).toPromise();

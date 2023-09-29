@@ -4,7 +4,7 @@ import { StoreDevtools } from '@ngrx/store-devtools';
 import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {
   kreirajTurnir,
   vratiSveTurnire,
@@ -14,13 +14,14 @@ import {
   selectPrijavljeniTurniri,
 } from 'src/app/shared/state/turnir/turnir.selector';
 import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
+import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TurnirService {
   constructor(private store: Store, private http: HttpClient) {}
-  private apiUrl = 'http://localhost:3000/turnir/sviTurniri';
+  //private apiUrl = 'http://localhost:3000/turnir/sviTurniri';
 
   dodajTurnir(turnir: Turnir) {
     this.store.dispatch(kreirajTurnir({ turnir }));
@@ -29,7 +30,18 @@ export class TurnirService {
   //   return this.store.select(selectSviTurniri).pipe(map((p: any) => p.turniri));
   // }
   getTurniriBaza(): Observable<Turnir[]> {
-    return this.http.get<Turnir[]>(this.apiUrl);
+    let jwtTokenObservable = this.store
+      .select(selectTokenPrijavljenogKorisnika)
+      .pipe(map((p: any) => p.token));
+    let jwtTokenString: string = 'mrk';
+    jwtTokenObservable.subscribe((token: string) => {
+      jwtTokenString = token;
+    });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${jwtTokenString}`,
+    });
+    const url = 'http://localhost:3000/turnir/sviTurniri';
+    return this.http.get<Turnir[]>(url, { headers });
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store
