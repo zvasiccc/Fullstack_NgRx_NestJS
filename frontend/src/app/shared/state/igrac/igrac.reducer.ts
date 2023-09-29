@@ -10,6 +10,10 @@ export const igracReducer = createReducer(
   on(IgracActions.postaviPrijavljenogIgraca, (state, { prijavljeniIgrac }) => ({
     ...state,
     prijavljeniIgrac,
+  })),
+  on(IgracActions.odjaviPrijavljenogIgraca, (state) => ({
+    ...state,
+    prijavljeniIgrac: null,
   }))
 );
 // export const igracReducerBaza = createReducer(

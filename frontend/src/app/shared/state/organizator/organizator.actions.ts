@@ -5,3 +5,6 @@ export const postaviPrijavljenogOrganizatora = createAction(
   '[Organizator] postavi prijavljenog organizatora',
   props<{ prijavljeniOrganizator: Organizator }>()
 );
+export const odjaviPrijavljenogOrganizatora = createAction(
+  '[Organizator] odjavi prijavljenog organizatora'
+);

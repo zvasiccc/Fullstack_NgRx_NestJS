@@ -11,6 +11,9 @@ export const vratiSveIgraceFailure = createAction(
   props<{ error: any }>()
 );
 export const postaviPrijavljenogIgraca = createAction(
-  '[Login Component] Postavi Prijavljenog Igraca',
+  '[Igrac] Postavi Prijavljenog Igraca',
   props<{ prijavljeniIgrac: Igrac }>()
+);
+export const odjaviPrijavljenogIgraca = createAction(
+  '[Igrac] odjavi Prijavljenog Igraca'
 );

@@ -9,5 +9,9 @@ export const organizatorReducer = createReducer(
       ...state,
       prijavljeniOrganizator,
     })
-  )
+  ),
+  on(OrganizatorActions.odjaviPrijavljenogOrganizatora, (state) => ({
+    ...state,
+    prijavljeniOrganizator: null,
+  }))
 );
