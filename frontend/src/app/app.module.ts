@@ -35,6 +35,7 @@ import { BackArrowComponent } from './back-arrow/back-arrow.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
+import { organizatorReducer } from './shared/state/organizator/organizator.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +78,7 @@ import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
     StoreModule.forFeature('preferenceUPrijavi', prijavaReducer),
+    StoreModule.forFeature('prijavljeniOrganizator', organizatorReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

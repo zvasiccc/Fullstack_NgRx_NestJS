@@ -1,14 +1,22 @@
 <!-- profil.component.html -->
 
-<div *ngIf="trenutnoPrijavljeniIgrac$ | async as igrac; else loading">
+<div *ngIf="trenutnoPrijavljeniIgrac$ | async as igrac; else organizator">
   <h2>Trenutno prijavljeni igrac</h2>
   <p>Ime: {{ igrac.ime }}</p>
   <p>Prezime: {{ igrac.prezime }}</p>
 </div>
+<ng-template #organizator>
+  <div
+    *ngIf="trenutnoPrijavljeniOrganizator$ | async as organizator; else loading"
+  >
+    <h2>Trenutno prijavljeni organizator</h2>
+    <p>korisnicko ime: {{ organizator.korisnickoIme }}</p>
+  </div>
+</ng-template>
 
 <ng-template #loading>
   <br />
   <br />
   <br />
-  <h2>Morate da se prijavite da biste videli svoj profil</h2>
+  <h2>Niste prijavljeni. Prijavite se da biste videli svoj proifl.</h2>
 </ng-template>

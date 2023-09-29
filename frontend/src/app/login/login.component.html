@@ -37,6 +37,14 @@
     />
     <label for="organizator">Organizator</label>
 
-    <button (click)="prijaviSe()">Prijavi se</button>
+    <button
+      (click)="prijaviSe()"
+      [ngClass]="{
+        'enabled-button': !prijavljen,
+        'disabled-button': prijavljen
+      }"
+    >
+      Prijavi se
+    </button>
   </form>
 </div>

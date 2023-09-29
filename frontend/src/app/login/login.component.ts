@@ -7,6 +7,9 @@ import { mergeMap, of } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
 import { Store } from '@ngrx/store';
 import * as IgracActions from '../shared/state/igrac/igrac.actions';
+import { Organizator } from '../shared/models/organizator';
+import * as OrgnizatorActions from '../shared/state/organizator/organizator.actions';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,18 +17,21 @@ import * as IgracActions from '../shared/state/igrac/igrac.actions';
 })
 export class LoginComponent {
   prijavljeniIgrac: Igrac | undefined;
+  prijavljeniOrganizator: Organizator | undefined;
   korisnickoIme: string = '';
   lozinka: string = '';
   isIgrac: boolean = false; // Initialize to false
   isOrganizator: boolean = false; // Initialize to false
+  prijavljen: boolean = false;
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
     private store: Store,
     private igracService: IgracService,
-    private organizatorService: OrganizatorService
+    private organizatorService: OrganizatorService,
+    private router: Router
   ) {}
-
+  //todo onemoguciti prijavu nakon sto je neko vec prijavljen
   async prijaviSe() {
     const tokenObservable = this.loginService.posaljiZahtevZaLogin(
       this.korisnickoIme,
@@ -38,40 +44,33 @@ export class LoginComponent {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${jwtToken}`,
       });
-      const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
-      const response: any = await this.http.get(url, { headers }).toPromise();
-      this.prijavljeniIgrac = response;
-      console.log(this.prijavljeniIgrac);
-      this.store.dispatch(
-        IgracActions.postaviPrijavljenogIgraca({
-          prijavljeniIgrac: this.prijavljeniIgrac as Igrac,
-        })
-      );
+      if (this.isIgrac) {
+        const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
+        const response: any = await this.http.get(url, { headers }).toPromise();
+        this.prijavljeniIgrac = response;
+        console.log(this.prijavljeniIgrac);
+        this.store.dispatch(
+          IgracActions.postaviPrijavljenogIgraca({
+            prijavljeniIgrac: this.prijavljeniIgrac as Igrac,
+          })
+        );
+        this.prijavljen = true;
+        this.router.navigateByUrl('');
+      }
+      if (this.isOrganizator) {
+        const url =
+          'http://localhost:3000/organizator/vratiOrganizatoraIzTokena';
+        const response: any = await this.http.get(url, { headers }).toPromise();
+        this.prijavljeniOrganizator = response;
+        console.log(this.prijavljeniOrganizator);
+        this.store.dispatch(
+          OrgnizatorActions.postaviPrijavljenogOrganizatora({
+            prijavljeniOrganizator: this.prijavljeniOrganizator as Organizator,
+          })
+        );
+        this.prijavljen = true;
+        this.router.navigateByUrl('');
+      }
     });
-    // tokenObservable
-    //   .pipe(
-    //     mergeMap((token: any) => {
-    //       const jwtToken = token.access_token;
-    //       const headers = new HttpHeaders({
-    //         Authorization: `Bearer ${jwtToken}`,
-    //       });
-    //       if (this.isIgrac) {
-    //         const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
-    //         return this.http.get(url, { headers });
-    //       }
-
-    //       return of(null); // Vratite Observable sa null ako nije igrac
-    //     })
-    //   )
-    //   .subscribe(
-    //     (response: any) => {
-    //       console.log(response);
-    //       // Ovde možete obaviti dodatne akcije nakon što dobijete odgovor
-    //     },
-    //     (error: any) => {
-    //       console.error(error);
-    //       // Obradite grešku ovde
-    //     }
-    //   );
   }
 }

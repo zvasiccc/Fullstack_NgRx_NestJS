@@ -33,7 +33,7 @@
   font-size: 1rem;
 }
 
-.login button {
+.login .enabled-button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -43,6 +43,11 @@
   cursor: pointer;
 }
 
-.login button:hover {
+.login .enabled-button:hover {
   background-color: #0056b3;
+}
+.login .disabled-button {
+  background-color: lightgray; /* Promenite boju pozadine za onemogućeno dugme */
+  color: gray; /* Promenite boju teksta za onemogućeno dugme */
+  cursor: not-allowed; /* Promenite kursor za onemogućeno dugme */
 }

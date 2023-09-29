@@ -5,6 +5,7 @@ import { IgracEntity } from 'src/igrac/igrac.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { OrganizatorService } from './organizator.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { OrganizatorService } from './organizator.service';
       TurnirEntity,
     ]),
   ],
-  providers: [OrganizatorService],
+  providers: [OrganizatorService, JwtService],
   exports: [OrganizatorService],
 })
 export class OrganizatorModule {}
