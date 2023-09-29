@@ -20,11 +20,13 @@ export class RegistracijaComponent {
     ime: '',
     prezime: '',
     vodjaTima: false,
+    role: 'igrac',
   };
   organizator: Organizator = {
     id: 0,
     korisnickoIme: '',
     lozinka: '',
+    role: 'organizator',
   };
   constructor(
     private http: HttpClient,

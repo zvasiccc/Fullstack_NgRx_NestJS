@@ -18,30 +18,12 @@
       name="lozinka"
       required
     />
-    <label for="role">Prijavi se kao</label>
-    <input
-      type="radio"
-      id="igrac"
-      [(ngModel)]="isIgrac"
-      name="role"
-      value="igrac"
-    />
-    <label for="igrac">Igrac</label>
-
-    <input
-      type="radio"
-      id="organizator"
-      [(ngModel)]="isOrganizator"
-      name="role"
-      value="organizator"
-    />
-    <label for="organizator">Organizator</label>
 
     <button
       (click)="prijaviSe()"
       [ngClass]="{
-        'enabled-button': !prijavljen,
-        'disabled-button': prijavljen
+        'enabled-button': prijavljeniKorisnik === undefined,
+        'disabled-button': prijavljeniKorisnik !== undefined
       }"
     >
       Prijavi se

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as IgracActions from '../shared/state/igrac/igrac.actions';
-import * as OrganizatorActions from '../shared/state/organizator/organizator.actions';
+import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -23,8 +22,7 @@ export class HeaderComponent {
     this.router.navigateByUrl('login');
   }
   OdjaviSe() {
-    this.store.dispatch(IgracActions.odjaviPrijavljenogIgraca());
-    this.store.dispatch(OrganizatorActions.odjaviPrijavljenogOrganizatora());
+    this.store.dispatch(KorisnikActions.odjaviPrijavljenogKorisnika());
     this.router.navigateByUrl('');
   }
   navigirajNaPrijavu() {

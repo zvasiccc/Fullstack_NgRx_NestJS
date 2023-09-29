@@ -8,4 +8,5 @@ export interface Igrac {
   ime: string;
   prezime: string;
   vodjaTima: boolean;
+  role: string;
 }

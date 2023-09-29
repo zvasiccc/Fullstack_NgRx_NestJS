@@ -9,7 +9,7 @@ export const selectSviIgraci = createSelector(
   (igrac) => igrac
 );
 
-export const selectPrijavljeniIgrac = createSelector(
-  selectPrijavljeniIgracFeature,
-  (state) => state
-);
+// export const selectPrijavljeniIgrac = createSelector(
+//   selectPrijavljeniIgracFeature,
+//   (state) => state
+// );

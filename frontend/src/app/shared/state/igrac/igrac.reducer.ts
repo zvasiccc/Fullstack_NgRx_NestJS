@@ -6,15 +6,15 @@ export const igracReducer = createReducer(
   initialStateIgrac,
   on(IgracActions.vratiSveIgrace, (state) => {
     return state;
-  }),
-  on(IgracActions.postaviPrijavljenogIgraca, (state, { prijavljeniIgrac }) => ({
-    ...state,
-    prijavljeniIgrac,
-  })),
-  on(IgracActions.odjaviPrijavljenogIgraca, (state) => ({
-    ...state,
-    prijavljeniIgrac: null,
-  }))
+  })
+  // on(IgracActions.postaviPrijavljenogIgraca, (state, { prijavljeniIgrac }) => ({
+  //   ...state,
+  //   prijavljeniIgrac,
+  // })),
+  // on(IgracActions.odjaviPrijavljenogIgraca, (state) => ({
+  //   ...state,
+  //   prijavljeniIgrac: null,
+  // }))
 );
 // export const igracReducerBaza = createReducer(
 //   initialStateIgrac,

@@ -10,10 +10,10 @@ export const vratiSveIgraceFailure = createAction(
   '[Igrac] vrati sve igrace failure',
   props<{ error: any }>()
 );
-export const postaviPrijavljenogIgraca = createAction(
-  '[Igrac] Postavi Prijavljenog Igraca',
-  props<{ prijavljeniIgrac: Igrac }>()
-);
-export const odjaviPrijavljenogIgraca = createAction(
-  '[Igrac] odjavi Prijavljenog Igraca'
-);
+// export const postaviPrijavljenogIgraca = createAction(
+//   '[Igrac] Postavi Prijavljenog Igraca',
+//   props<{ prijavljeniIgrac: Igrac }>()
+// );
+// export const odjaviPrijavljenogIgraca = createAction(
+//   '[Igrac] odjavi Prijavljenog Igraca'
+// );

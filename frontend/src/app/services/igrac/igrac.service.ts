@@ -3,10 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
-import {
-  selectPrijavljeniIgrac,
-  selectSviIgraci,
-} from 'src/app/shared/state/igrac/igrac.selector';
+import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
 import { selectPrijavljeniIgraciZaTurnir } from 'src/app/shared/state/turnir/turnir.selector';
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';

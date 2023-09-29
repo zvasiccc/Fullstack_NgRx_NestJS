@@ -8,7 +8,7 @@ import { Igrac } from '../shared/models/igrac';
 import { Store } from '@ngrx/store';
 import * as IgracActions from '../shared/state/igrac/igrac.actions';
 import { Organizator } from '../shared/models/organizator';
-import * as OrgnizatorActions from '../shared/state/organizator/organizator.actions';
+import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -16,13 +16,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  prijavljeniIgrac: Igrac | undefined;
-  prijavljeniOrganizator: Organizator | undefined;
+  prijavljeniKorisnik: Igrac | Organizator | undefined;
   korisnickoIme: string = '';
   lozinka: string = '';
-  isIgrac: boolean = false; // Initialize to false
-  isOrganizator: boolean = false; // Initialize to false
-  prijavljen: boolean = false;
+  // isIgrac: boolean = false; // Initialize to false
+  // isOrganizator: boolean = false; // Initialize to false
+  // prijavljen: boolean = false;
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
@@ -31,7 +30,7 @@ export class LoginComponent {
     private organizatorService: OrganizatorService,
     private router: Router
   ) {}
-  //todo da se sa backa vraca token i korisnik
+
   //todo treba mi samo jedan store za korisnika, u njega cuvam korisnika i token
   //todo da nema psoebnih za orgazniatroa i igraca, sve je korisnik i na osnovu korosink.role mrckam
   //todo nema vise radio buton, postavljam korisnika u store
@@ -44,36 +43,52 @@ export class LoginComponent {
     tokenObservable.subscribe(async (token: any) => {
       jwtToken = token.access_token;
       console.log(jwtToken);
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${jwtToken}`,
-      });
-      if (this.isIgrac) {
-        const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
-        const response: any = await this.http.get(url, { headers }).toPromise();
-        this.prijavljeniIgrac = response;
-        console.log(this.prijavljeniIgrac);
+      let korisnik: Igrac | Organizator | undefined = token.korisnik;
+      console.log(korisnik);
+      if (korisnik) {
+        this.prijavljeniKorisnik =
+          korisnik.role == 'igrac'
+            ? (korisnik as Igrac)
+            : (korisnik as Organizator);
+      }
+      if (this.prijavljeniKorisnik)
         this.store.dispatch(
-          IgracActions.postaviPrijavljenogIgraca({
-            prijavljeniIgrac: this.prijavljeniIgrac as Igrac, //todo postavljam ga kao igrac ako je korisnik.role
+          KorisnikActions.postaviPrijavljenogKorisnika({
+            prijavljeniKorisnik: this.prijavljeniKorisnik,
           })
         );
-        this.prijavljen = true;
-        this.router.navigateByUrl('');
-      }
-      if (this.isOrganizator) {
-        const url =
-          'http://localhost:3000/organizator/vratiOrganizatoraIzTokena';
-        const response: any = await this.http.get(url, { headers }).toPromise();
-        this.prijavljeniOrganizator = response;
-        console.log(this.prijavljeniOrganizator);
-        this.store.dispatch(
-          OrgnizatorActions.postaviPrijavljenogOrganizatora({
-            prijavljeniOrganizator: this.prijavljeniOrganizator as Organizator,
-          })
-        );
-        this.prijavljen = true;
-        this.router.navigateByUrl('');
-      }
+
+      // const headers = new HttpHeaders({
+      //   Authorization: `Bearer ${jwtToken}`,
+      // });
+      //   if (this.isIgrac) {
+      //     const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
+      //     const response: any = await this.http.get(url, { headers }).toPromise();
+      //     this.prijavljeniIgrac = response;
+      //     console.log(this.prijavljeniIgrac);
+      //     this.store.dispatch(
+      //       IgracActions.postaviPrijavljenogIgraca({
+      //         prijavljeniIgrac: this.prijavljeniIgrac as Igrac, //todo postavljam ga kao igrac ako je korisnik.role
+      //       })
+      //       //todo na back postavi dekoratori za fje sve
+      //     );
+      //     this.prijavljen = true;
+      //     this.router.navigateByUrl('');
+      //   }
+      //   if (this.isOrganizator) {
+      //     const url =
+      //       'http://localhost:3000/organizator/vratiOrganizatoraIzTokena';
+      //     const response: any = await this.http.get(url, { headers }).toPromise();
+      //     this.prijavljeniOrganizator = response;
+      //     console.log(this.prijavljeniOrganizator);
+      //     this.store.dispatch(
+      //       OrgnizatorActions.postaviPrijavljenogOrganizatora({
+      //         prijavljeniOrganizator: this.prijavljeniOrganizator as Organizator,
+      //       })
+      //     );
+      //     this.prijavljen = true;
+      //     this.router.navigateByUrl('');
+      //   }
     });
   }
 }
