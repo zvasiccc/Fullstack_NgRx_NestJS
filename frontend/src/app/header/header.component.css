@@ -1,39 +1,42 @@
-/* Stil za dobrodošli tekst */
-.welcome-text {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Stil za dugmad za navigaciju */
-.button-container {
+/* Stilizacija navigacijske trake */
+.navbar {
+  background-color: #333;
+  padding: 10px 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nav-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
+/* Stilizacija liste opcija u traci */
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* Stilizacija svake opcije */
+.navbar li {
+  margin: 0 20px;
+}
+
+/* Stilizacija linkova u opcijama */
+.navbar a {
   text-decoration: none;
-  transition: background-color 0.3s;
+  color: #fff;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.3s;
 }
 
-.primary {
-  background-color: #007bff;
+/* Stilizacija linkova kada su na hover */
+.navbar a:hover {
+  color: #ff5733;
+  transform: scale(1.1);
 }
 
-.secondary {
-  background-color: #555;
-}
-
-.nav-button:hover {
-  background-color: #0056b3;
+/* Stilizacija opcije "Odjavi se" */
+.logout {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
 }

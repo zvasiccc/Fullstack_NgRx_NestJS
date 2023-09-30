@@ -1,43 +1,36 @@
-<p class="welcome-text">Dobrodošli na sajt za pronalazak turnira</p>
+<nav class="navbar">
+  <ul>
+    <li *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
+      <ng-container *ngIf="prijavljeniKorisnik.role === 'organizator'">
+        <a
+          (click)="navigirajNaKreiranjeTurnira()"
+          routerLink="/kreiranjeTurnira"
+          >Kreiraj turnir</a
+        >
+      </ng-container>
+    </li>
+    <li *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
+      <a (click)="navigirajNaProfil()" routerLink="profil">Profil</a>
+    </li>
+    <li>
+      <a (click)="navigirajNaPocetnu()" routerLink="">Početna</a>
+    </li>
+    <li>
+      <a (click)="navigirajNaPrijavu()" routerLink="prijava"
+        >Pregledaj prijavu</a
+      >
+    </li>
+    <li *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)">
+      <a (click)="navigirajNaLogin()" routerLink="login">Login</a>
+    </li>
 
-<div class="button-container">
-  <div *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
-    <button
-      *ngIf="prijavljeniKorisnik.role === 'organizator'"
-      (click)="navigirajNaKreiranjeTurnira()"
-      routerLink="/kreiranjeTurnira"
-      class="nav-button"
-    >
-      Kreiraj turnir
-    </button>
-  </div>
-  <!-- <button (click)="navigirajNaKorpu()" routerLink="/korpa" class="nav-button">
-    Korpa
-  </button> -->
-  <button (click)="navigirajNaProfil()" routerLink="profil" class="nav-button">
-    Profil
-  </button>
-  <button (click)="navigirajNaPocetnu()" routerLink="" class="nav-button">
-    Početna
-  </button>
-  <button
-    (click)="navigirajNaPrijavu()"
-    routerLink="prijava"
-    class="nav-button"
-  >
-    Pregledaj prijavu
-  </button>
-  <button (click)="navigirajNaLogin()" routerLink="login" class="nav-button">
-    Login
-  </button>
-  <button (click)="OdjaviSe()" routerLink="" class="nav-button">
-    Odjavi se
-  </button>
-  <button
-    (click)="navigirajNaRegistraciju()"
-    routerLink="Registracija"
-    class="nav-button"
-  >
-    Registracija
-  </button>
-</div>
+    <li *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)">
+      <a (click)="navigirajNaRegistraciju()" routerLink="Registracija"
+        >Registracija</a
+      >
+    </li>
+  </ul>
+  <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async">
+    <a (click)="OdjaviSe()" routerLink="" class="logout">Odjavi se</a>
+  </ng-container>
+</nav>
