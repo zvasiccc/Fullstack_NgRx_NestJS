@@ -24,7 +24,7 @@ export class HeaderComponent {
       .select(selectPrijavljeniKorisnik)
       .pipe(map((p: any) => p?.prijavljeniKorisnik));
   }
-  //todo prebaci u navbar
+
   navigirajNaKreiranjeTurnira() {
     this.router.navigateByUrl('kreiranjeTurnira');
   }

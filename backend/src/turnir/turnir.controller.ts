@@ -17,7 +17,7 @@ import { IgracGuard } from 'src/auth/igrac.role.guard';
 @Controller('turnir')
 export class TurnirController {
   constructor(private turnirService: TurnirService) {}
-
+  @UseGuards(JwtAuthGuard)
   @Get('sviTurniri')
   async vratiSveTurnire() {
     return await this.turnirService.vratiSveTurnire();
