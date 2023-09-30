@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TurnirService } from '../services/turnir/turnir.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Prijava } from '../shared/models/prijava';
 import { PrijavaService } from '../services/prijava.service';
+import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
+import { Store } from '@ngrx/store';
+import { Organizator } from '../shared/models/organizator';
+import { Igrac } from '../shared/models/igrac';
 
 @Component({
   selector: 'app-timovi-na-turniru',
@@ -11,11 +15,18 @@ import { PrijavaService } from '../services/prijava.service';
   styleUrls: ['./timovi-na-turniru.component.css'],
 })
 export class TimoviNaTurniruComponent {
+  trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
+    new Observable();
   constructor(
     private route: ActivatedRoute,
     private turnirService: TurnirService,
-    private prijavaService: PrijavaService
-  ) {}
+    private prijavaService: PrijavaService,
+    private store: Store
+  ) {
+    this.trenutnoPrijavljeniKorisnik$ = this.store
+      .select(selectPrijavljeniKorisnik)
+      .pipe(map((p: any) => p?.prijavljeniKorisnik));
+  }
   prijave$: Observable<Prijava[]> = new Observable();
   turnirId: number = 0;
   ngOnInit() {

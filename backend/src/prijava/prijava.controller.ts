@@ -32,7 +32,7 @@ export class PrijavaController {
     console.log(prijava);
     return await this.prijavaService.dodajPrijavu(prijava);
   }
-  @UseGuards(JwtAuthGuard, OrganizatorGuard, IgracGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('prijaveNaTurniru/:turnirId')
   async prijaveNaTurniru(@Param('turnirId') turnirId: number) {
     return await this.prijavaService.prijaveNaTurniru(turnirId);

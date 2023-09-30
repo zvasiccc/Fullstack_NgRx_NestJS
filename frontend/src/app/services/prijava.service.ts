@@ -11,29 +11,37 @@ import { selectTokenPrijavljenogKorisnika } from '../shared/state/korisnik/koris
   providedIn: 'root',
 })
 export class PrijavaService {
+  jwtTokenString: string = '';
+  headers: HttpHeaders = new HttpHeaders();
   constructor(private store: Store, private http: HttpClient) {}
-  posaljiPrijavuUBazu(prijava: Prijava) {
+  pribaviToken() {
     let jwtTokenObservable = this.store
       .select(selectTokenPrijavljenogKorisnika)
       .pipe(map((p: any) => p.token));
-    let jwtTokenString: string = 'mrk';
+
     jwtTokenObservable.subscribe((token: string) => {
-      jwtTokenString = token;
+      this.jwtTokenString = token;
     });
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${jwtTokenString}`,
+    this.headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtTokenString}`,
     });
+  }
+  posaljiPrijavuUBazu(prijava: Prijava) {
+    this.pribaviToken();
     const url = 'http://localhost:3000/prijava/dodajPrijavu';
-    return this.http.post(url, prijava, { headers }).subscribe((p) => {
-      if (p == null) alert('nema mesta na turniru');
-    });
+    return this.http
+      .post(url, prijava, { headers: this.headers })
+      .subscribe((p) => {
+        if (p == null) alert('nema mesta na turniru');
+      });
   }
   izbaciIgracaIzTima(igrac: Igrac) {
     this.store.dispatch(PrijavaActions.izbaciIgracaIzTima({ igrac }));
   }
   vratiPrijaveZaTurnir(turnirId: number): Observable<Prijava[]> {
+    this.pribaviToken();
     const url = `http://localhost:3000/prijava/prijaveNaTurniru/${turnirId}`;
-    return this.http.get<Prijava[]>(url);
+    return this.http.get<Prijava[]>(url, { headers: this.headers });
   }
   izbaciTimSaTurnira(prijavaId: number): Observable<any> {
     const url = `http://localhost:3000/prijava/izbaciTimSaTurnira/${prijavaId}`;

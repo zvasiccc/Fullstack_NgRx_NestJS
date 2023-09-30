@@ -5,4 +5,20 @@
   <p>Nagrada: {{ turnir.nagrada }}$</p>
   <p>Maksimalni broj ucesnika: {{ turnir.maxBrojTimova }}</p>
   <p>trenutni broj timova: {{ turnir.trenutniBrojTimova }}</p>
+  <div container>
+    <ul>
+      <p>dugmici</p>
+      <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
+        <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+          Prijavljeni timovi
+        </button>
+        <ng-container *ngIf="korisnik.role === 'igrac'">
+          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+        </ng-container>
+        <!-- <ng-container *ngIf="korisnik.role === 'organizator'">
+          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+        </ng-container> -->
+      </ng-container>
+    </ul>
+  </div>
 </div>

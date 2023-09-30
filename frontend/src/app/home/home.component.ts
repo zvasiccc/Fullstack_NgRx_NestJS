@@ -50,19 +50,4 @@ export class HomeComponent implements OnInit {
   //   //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
   //   this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
   // }
-  prijaviSeNaTurnir(turnir: Turnir) {
-    this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
-    this.router.navigateByUrl('sviIgraci');
-  }
-  async obrisiTurnir(turnirId: number) {
-    (await this.turnirService.obrisiTurnir(turnirId)).subscribe(() => {
-      this.filtriraniTurniri = this.filtriraniTurniri.filter(
-        (turnir) => turnir.id !== turnirId
-      );
-      this.sviTurniri$ = this.turnirService.getTurniriBaza(); //todo obrisati kasnije
-    });
-  }
-  async prikaziPrijavljeneTimove(turnirId: number) {
-    this.router.navigateByUrl(`prijavljeniTimovi/${turnirId}`);
-  }
 }
