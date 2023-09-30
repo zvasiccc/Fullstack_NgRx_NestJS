@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 //import { KorpaService } from '../services/korpa/korpa.service';
 import { IgracService } from '../services/igrac/igrac.service';
 import { Igrac } from '../shared/models/igrac';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
+import { Organizator } from '../shared/models/organizator';
 
 @Component({
   selector: 'app-home',
@@ -21,12 +23,18 @@ export class HomeComponent implements OnInit {
   filtriraniTurniri: Turnir[] = [];
   postojeFiltriraniTurniri: boolean = false;
   pretragaIzvrsena: boolean = false;
+  trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
+    new Observable();
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
     private router: Router,
     private store: Store
-  ) {}
+  ) {
+    this.trenutnoPrijavljeniKorisnik$ = this.store
+      .select(selectPrijavljeniKorisnik)
+      .pipe(map((p: any) => p?.prijavljeniKorisnik));
+  }
   ngOnInit(): void {}
 
   handlePretragaRezultati(rezultati: Turnir[]) {

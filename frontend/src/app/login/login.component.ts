@@ -59,38 +59,7 @@ export class LoginComponent {
           })
         );
       }
-
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${jwtToken}`,
-      });
-      //   if (this.isIgrac) {
-      //     const url = 'http://localhost:3000/igrac/vratiIgracaIzTokena';
-      //     const response: any = await this.http.get(url, { headers }).toPromise();
-      //     this.prijavljeniIgrac = response;
-      //     console.log(this.prijavljeniIgrac);
-      //     this.store.dispatch(
-      //       IgracActions.postaviPrijavljenogIgraca({
-      //         prijavljeniIgrac: this.prijavljeniIgrac as Igrac, //todo postavljam ga kao igrac ako je korisnik.role
-      //       })
-      //       //todo na back postavi dekoratori za fje sve
-      //     );
-      //     this.prijavljen = true;
-      //     this.router.navigateByUrl('');
-      //   }
-      //   if (this.isOrganizator) {
-      //     const url =
-      //       'http://localhost:3000/organizator/vratiOrganizatoraIzTokena';
-      //     const response: any = await this.http.get(url, { headers }).toPromise();
-      //     this.prijavljeniOrganizator = response;
-      //     console.log(this.prijavljeniOrganizator);
-      //     this.store.dispatch(
-      //       OrgnizatorActions.postaviPrijavljenogOrganizatora({
-      //         prijavljeniOrganizator: this.prijavljeniOrganizator as Organizator,
-      //       })
-      //     );
-      //     this.prijavljen = true;
-      //     this.router.navigateByUrl('');
-      //   }
+      this.router.navigateByUrl('');
     });
   }
 }

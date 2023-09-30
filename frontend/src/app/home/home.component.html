@@ -6,11 +6,17 @@
   <ul>
     <li *ngFor="let turnir of sviTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <button (click)="prijaviSeNaTurnir(turnir)">Prijavi tim</button>
-      <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-      <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-        Prijavljeni timovi
-      </button>
+      <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
+        <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+          Prijavljeni timovi
+        </button>
+        <ng-container *ngIf="korisnik.role === 'igrac'">
+          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+        </ng-container>
+        <ng-container *ngIf="korisnik.role === 'organizator'">
+          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+        </ng-container>
+      </ng-container>
     </li>
   </ul>
   <ul *ngIf="!pretragaIzvrsena">
@@ -24,11 +30,15 @@
   <ul *ngIf="filtriraniTurniri && filtriraniTurniri.length > 0">
     <li *ngFor="let turnir of filtriraniTurniri">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
-      <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-      <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-        Prijavljeni timovi
-      </button>
+      <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
+        <ng-container *ngIf="korisnik.role === 'igrac'">
+          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+          <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+            Prijavljeni timovi
+          </button>
+        </ng-container>
+      </ng-container>
     </li>
   </ul>
 </div>

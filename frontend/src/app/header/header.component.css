@@ -40,3 +40,6 @@
   color: #fff;
   font-weight: 600;
 }
+.login-link {
+  margin-left: 600px; /* Podesite željeni razmak za "Login" */
+}

@@ -12,11 +12,12 @@ import { TurnirService } from './turnir.service';
 import { TurnirEntity } from './turnir.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
+import { IgracGuard } from 'src/auth/igrac.role.guard';
 
 @Controller('turnir')
 export class TurnirController {
   constructor(private turnirService: TurnirService) {}
-  @UseGuards(JwtAuthGuard, OrganizatorGuard)
+
   @Get('sviTurniri')
   async vratiSveTurnire() {
     return await this.turnirService.vratiSveTurnire();

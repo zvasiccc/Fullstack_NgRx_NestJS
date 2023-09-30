@@ -25,7 +25,8 @@ export class PrijavaController {
   vratiPrijavuPoId(@Param('id') id: number) {
     return this.prijavaService.vratiPrijavuPoId(id);
   }
-  @UseGuards(JwtAuthGuard, OrganizatorGuard, IgracGuard)
+  //todo kada treba da stiti od nelogovanog korisnika ali bilo koji logovan da moze ne radi
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Post('dodajPrijavu')
   async dodajPrijavu(@Body() prijava: any) {
     console.log(prijava);
