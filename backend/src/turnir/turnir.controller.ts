@@ -39,8 +39,11 @@ export class TurnirController {
   }
   @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Post('dodajTurnir')
-  async dodajTurnir(@Body() turnir: TurnirEntity) {
-    return await this.turnirService.dodajTurnir(turnir);
+  async dodajTurnir(
+    @Body() turnir: TurnirEntity,
+    @Headers('authorization') authorization: string,
+  ) {
+    return await this.turnirService.dodajTurnir(turnir, authorization);
   }
   ///:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum
   @Get('filtrirajTurnire')

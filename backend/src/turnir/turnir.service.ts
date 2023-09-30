@@ -4,12 +4,15 @@ import { TurnirEntity } from './turnir.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from 'src/roles/role.enum';
+import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 
 @Injectable()
 export class TurnirService {
   constructor(
     @InjectRepository(TurnirEntity)
     private turnirRepository: Repository<TurnirEntity>,
+    @InjectRepository(OrganizatorEntity)
+    private organizatorRepository: Repository<OrganizatorEntity>,
     private jwtService: JwtService,
   ) {}
   async vratiSveTurnire() {
@@ -23,7 +26,7 @@ export class TurnirService {
     })) as any;
     if (dekodiraniToken.role === Role.Igrac) {
       const idIgraca = dekodiraniToken.sub;
-      const turniri1 = this.turnirRepository
+      const turniri = this.turnirRepository
         .createQueryBuilder('turnir')
         .leftJoinAndSelect('turnir.prijave', 'prijava')
         .leftJoinAndSelect('prijava.igraci', 'igrac')
@@ -38,8 +41,25 @@ export class TurnirService {
           'turnir.nagrada',
         ])
         .getMany();
-
-      return turniri1;
+      return turniri;
+    }
+    if (dekodiraniToken.role === Role.Organizator) {
+      const idOrganizatora = dekodiraniToken.sub;
+      const turniri = this.turnirRepository
+        .createQueryBuilder('turnir')
+        .leftJoinAndSelect('turnir.organizator', 'organizator')
+        .where('organizator.id=:id', { id: idOrganizatora })
+        .select([
+          'turnir.id',
+          'turnir.naziv',
+          'turnir.datumOdrzavanja',
+          'turnir.mestoOdrzavanja',
+          'turnir.maxBrojTimova',
+          'turnir.trenutniBrojTimova',
+          'turnir.nagrada',
+        ])
+        .getMany();
+      return turniri;
     }
   }
   // async odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
@@ -51,7 +71,11 @@ export class TurnirService {
   //     },
   //   });
   // }
-  async dodajTurnir(turnir: TurnirEntity) {
+  async dodajTurnir(turnir: TurnirEntity, token: string) {
+    const noviToken = token.split(' ')[1];
+    const dekodiraniToken = (await this.jwtService.verify(noviToken, {
+      secret: 'SECRET',
+    })) as any;
     const noviTurnir = this.turnirRepository.create();
     noviTurnir.naziv = turnir.naziv;
     noviTurnir.datumOdrzavanja = turnir.datumOdrzavanja;
@@ -59,6 +83,10 @@ export class TurnirService {
     noviTurnir.maxBrojTimova = turnir.maxBrojTimova;
     noviTurnir.nagrada = turnir.nagrada;
     noviTurnir.trenutniBrojTimova = 0;
+    const organizator = await this.organizatorRepository.findOne({
+      where: { id: dekodiraniToken.sub },
+    });
+    noviTurnir.organizator = organizator;
     return await this.turnirRepository.save(noviTurnir);
   }
   async obrisiTurnir(turnirId: number) {

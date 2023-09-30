@@ -72,8 +72,18 @@ export class TurnirService {
     //   .pipe(map((p: any) => p.prijavljeniTurniri));
   }
   kreirajTurnir(turnir: Turnir) {
+    let jwtTokenObservable = this.store
+      .select(selectTokenPrijavljenogKorisnika)
+      .pipe(map((p: any) => p.token));
+    let jwtTokenString: string = '';
+    jwtTokenObservable.subscribe((token: string) => {
+      jwtTokenString = token;
+    });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${jwtTokenString}`,
+    });
     const url = 'http://localhost:3000/turnir/dodajTurnir';
-    return this.http.post(url, turnir).subscribe((p) => p);
+    return this.http.post(url, turnir, { headers }).subscribe((p) => p);
   }
   async filtrirajTurnire(
     pretragaNaziv: string,
