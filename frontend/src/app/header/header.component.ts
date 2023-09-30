@@ -47,4 +47,7 @@ export class HeaderComponent {
   navigirajNaRegistraciju() {
     this.router.navigateByUrl('registracija');
   }
+  navigirajNaMojeTurnire() {
+    this.router.navigateByUrl('mojiTurniri');
+  }
 }

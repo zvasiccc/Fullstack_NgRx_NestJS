@@ -36,6 +36,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
+import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
     SearchBarComponent,
     RangeSliderComponent,
     TimoviNaTurniruComponent,
+    MojiTurniriComponent,
   ],
   imports: [
     CommonModule,

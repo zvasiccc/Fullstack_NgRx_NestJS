@@ -26,6 +26,8 @@ export class RegistracijaComponent {
     id: 0,
     korisnickoIme: '',
     lozinka: '',
+    ime: '',
+    prezime: '',
     role: 'organizator',
   };
   constructor(

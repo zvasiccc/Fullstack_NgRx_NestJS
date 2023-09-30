@@ -22,6 +22,7 @@ import { APP_GUARD } from '@nestjs/core';
 
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { TurnirModule } from './turnir/turnir.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
     AuthModule,
     IgracModule,
     OrganizatorModule,
+    TurnirModule,
     JwtModule,
   ],
   controllers: [

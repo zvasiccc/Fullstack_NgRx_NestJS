@@ -33,7 +33,7 @@ export class TurnirService {
     let jwtTokenObservable = this.store
       .select(selectTokenPrijavljenogKorisnika)
       .pipe(map((p: any) => p.token));
-    let jwtTokenString: string = 'mrk';
+    let jwtTokenString: string = '';
     jwtTokenObservable.subscribe((token: string) => {
       jwtTokenString = token;
     });
@@ -41,6 +41,21 @@ export class TurnirService {
       Authorization: `Bearer ${jwtTokenString}`,
     });
     const url = 'http://localhost:3000/turnir/sviTurniri';
+    return this.http.get<Turnir[]>(url, { headers });
+  }
+  getMojiTurniri(): Observable<Turnir[]> {
+    let jwtTokenObservable = this.store
+      .select(selectTokenPrijavljenogKorisnika)
+      .pipe(map((p: any) => p.token));
+    let jwtTokenString: string = '';
+    jwtTokenObservable.subscribe((token: string) => {
+      jwtTokenString = token;
+    });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${jwtTokenString}`,
+    });
+    const url = 'http://localhost:3000/turnir/mojiTurniri';
+    console.log('token na frontu je' + jwtTokenString);
     return this.http.get<Turnir[]>(url, { headers });
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {

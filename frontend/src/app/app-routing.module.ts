@@ -11,6 +11,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
 import { PreferenceComponent } from './preference/preference.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
+import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'registracija',
     component: RegistracijaComponent,
+  },
+  {
+    path: 'mojiTurniri',
+    component: MojiTurniriComponent,
   },
 ];
 

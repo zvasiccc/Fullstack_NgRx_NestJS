@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Headers,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -17,7 +18,7 @@ import { IgracGuard } from 'src/auth/igrac.role.guard';
 @Controller('turnir')
 export class TurnirController {
   constructor(private turnirService: TurnirService) {}
-  @UseGuards(JwtAuthGuard)
+
   @Get('sviTurniri')
   async vratiSveTurnire() {
     return await this.turnirService.vratiSveTurnire();
@@ -30,6 +31,12 @@ export class TurnirController {
   // ) {
   //   return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
   // }
+  @UseGuards(JwtAuthGuard)
+  @Get('mojiTurniri')
+  async vratiMojeTurnire(@Headers('authorization') authorization: string) {
+    console.log(authorization);
+    return await this.turnirService.vratiMojeTurnire(authorization);
+  }
   @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Post('dodajTurnir')
   async dodajTurnir(@Body() turnir: TurnirEntity) {

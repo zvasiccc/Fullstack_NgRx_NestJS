@@ -1,13 +1,12 @@
 <div *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
   <h1>Dobrodošli, {{ prijavljeniKorisnik.korisnickoIme }}</h1>
   <div *ngIf="prijavljeniKorisnik.role === 'igrac'">
-    <!-- Content for igrac role -->
     <p>Ovo je profil igrača.</p>
   </div>
   <div *ngIf="prijavljeniKorisnik.role === 'organizator'">
-    <!-- Content for organizator role -->
     <p>Ovo je profil organizatora.</p>
   </div>
+  <p>Korisnicko ime:{{ prijavljeniKorisnik.korisnickoIme }}</p>
 </div>
 <div *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)">
   <!-- Content to display when no user is logged in -->
