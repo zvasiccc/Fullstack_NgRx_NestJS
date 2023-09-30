@@ -1,14 +1,30 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
+import { IgracService } from '../services/igrac/igrac.service';
+import { Observable, map } from 'rxjs';
+import { Igrac } from '../shared/models/igrac';
+import { Organizator } from '../shared/models/organizator';
+import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(private router: Router, private store: Store) {}
+  trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
+    new Observable();
+  constructor(
+    private igracService: IgracService,
+    private router: Router,
+    private store: Store
+  ) {
+    this.trenutnoPrijavljeniKorisnik$ = this.store
+      .select(selectPrijavljeniKorisnik)
+      .pipe(map((p: any) => p?.prijavljeniKorisnik));
+  }
+  //todo prebaci u navbar
   navigirajNaKreiranjeTurnira() {
     this.router.navigateByUrl('kreiranjeTurnira');
   }
@@ -31,10 +47,4 @@ export class HeaderComponent {
   navigirajNaRegistraciju() {
     this.router.navigateByUrl('registracija');
   }
-  // navigirajNaBiranjeIgraca() {
-  //   this.router.navigateByUrl('sviIgraci');
-  // }
-  // izaberiPreference() {
-  //   this.router.navigateByUrl('preference');
-  // }
 }

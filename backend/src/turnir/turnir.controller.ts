@@ -29,6 +29,7 @@ export class TurnirController {
   // ) {
   //   return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
   // }
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Post('dodajTurnir')
   async dodajTurnir(@Body() turnir: TurnirEntity) {
     return await this.turnirService.dodajTurnir(turnir);
@@ -58,6 +59,7 @@ export class TurnirController {
       pretragaKrajnjaNagrada,
     );
   }
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Delete('obrisiTurnir/:id')
   async obrisiTurnir(@Param('id') id: number) {
     return this.turnirService.obrisiTurnir(id);

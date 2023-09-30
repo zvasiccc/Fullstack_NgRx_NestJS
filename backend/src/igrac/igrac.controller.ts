@@ -46,17 +46,17 @@ export class IgracController {
   async dohvatiIgraca(@Param('korisnickoIme') korisnickoIme: string) {
     return this.igracService.dohvatiIgraca(korisnickoIme);
   }
-  @UseGuards(JwtAuthGuard)
-  @Get('vratiIgracaIzTokena')
-  vratiIgracaIzTokena(@Headers('authorization') authorization: string) {
-    if (authorization) {
-      //const token = authorization.replace('Bearer ', ''); // Uklonimo "Bearer " prefiks
-      return this.igracService.vratiIgracaIzTokena(authorization); // Prosleđujemo token servisu
-    } else {
-      // Nema tokena u zaglavlju, obradite to kako želite
-      return null;
-    }
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('vratiIgracaIzTokena')
+  // vratiIgracaIzTokena(@Headers('authorization') authorization: string) {
+  //   if (authorization) {
+  //     //const token = authorization.replace('Bearer ', ''); // Uklonimo "Bearer " prefiks
+  //     return this.igracService.vratiIgracaIzTokena(authorization); // Prosleđujemo token servisu
+  //   } else {
+  //     // Nema tokena u zaglavlju, obradite to kako želite
+  //     return null;
+  //   }
+  // }
 
   @Get('pronadjiIgraceZaPrijavu/:id')
   async pronadjiIgraceZaPrijavu(@Param('id') id: number) {

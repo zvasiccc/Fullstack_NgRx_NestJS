@@ -1,13 +1,16 @@
 <p class="welcome-text">Dobrodošli na sajt za pronalazak turnira</p>
 
 <div class="button-container">
-  <button
-    (click)="navigirajNaKreiranjeTurnira()"
-    routerLink="/kreiranjeTurnira"
-    class="nav-button"
-  >
-    Kreiraj turnir
-  </button>
+  <div *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
+    <button
+      *ngIf="prijavljeniKorisnik.role === 'organizator'"
+      (click)="navigirajNaKreiranjeTurnira()"
+      routerLink="/kreiranjeTurnira"
+      class="nav-button"
+    >
+      Kreiraj turnir
+    </button>
+  </div>
   <!-- <button (click)="navigirajNaKorpu()" routerLink="/korpa" class="nav-button">
     Korpa
   </button> -->
@@ -17,20 +20,6 @@
   <button (click)="navigirajNaPocetnu()" routerLink="" class="nav-button">
     Početna
   </button>
-  <!-- <button
-    (click)="navigirajNaBiranjeIgraca()"
-    routerLink="sviIgraci"
-    class="nav-button"
-  >
-    Biraj igrače za tim
-  </button> -->
-  <!-- <button
-    (click)="izaberiPreference()"
-    routerLink="preference"
-    class="nav-button"
-  >
-    Izaberi preference tima
-  </button> -->
   <button
     (click)="navigirajNaPrijavu()"
     routerLink="prijava"
