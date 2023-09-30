@@ -135,4 +135,19 @@ export class TurnirService {
     if (!turniri) return [];
     return turniri;
   }
+  async daLiJeOrganizatorTurnira(organizationId: number, turnirId: number) {
+    let flag = false;
+    const turniriOrganizatora = await this.turnirRepository
+      .createQueryBuilder('turnir')
+      .leftJoinAndSelect('turnir.organizator', 'organizator')
+      .where('organizator.id=:id', { id: organizationId })
+      .getMany();
+    turniriOrganizatora.forEach((turnir) => {
+      if (turnir.id == turnirId) {
+        flag = true;
+      }
+    });
+    console.log(turniriOrganizatora);
+    return flag;
+  }
 }

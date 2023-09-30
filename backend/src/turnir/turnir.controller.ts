@@ -75,4 +75,14 @@ export class TurnirController {
   async obrisiTurnir(@Param('id') id: number) {
     return this.turnirService.obrisiTurnir(id);
   }
+  @Get('daLiJeOrganizatorTurnira/:organizatorId/:turnirId')
+  daLiJeOrganizatorTurnira(
+    @Param('organizatorId') organizationId: number,
+    @Param('turnirId') turnirId: number,
+  ) {
+    return this.turnirService.daLiJeOrganizatorTurnira(
+      organizationId,
+      turnirId,
+    );
+  }
 }

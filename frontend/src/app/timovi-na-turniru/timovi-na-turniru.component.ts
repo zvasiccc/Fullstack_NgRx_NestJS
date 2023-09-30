@@ -36,6 +36,15 @@ export class TimoviNaTurniruComponent {
       this.prijave$ = this.prijavaService.vratiPrijaveZaTurnir(this.turnirId);
     }
   }
+  daLiJeOrganizatorTurnira(
+    korisnikId: number | undefined | null,
+    turnirId: number | undefined | null
+  ): boolean {
+    console.log('idevi su ' + korisnikId + ' i ' + turnirId);
+    return true;
+    //todo pozovi sa backa, napravljena
+  }
+
   izbaciTimSaTurnira(prijavaId: number) {
     this.prijavaService.izbaciTimSaTurnira(prijavaId).subscribe(() => {
       this.prijave$ = this.prijavaService.vratiPrijaveZaTurnir(this.turnirId);

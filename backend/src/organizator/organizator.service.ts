@@ -39,6 +39,7 @@ export class OrganizatorService {
       where: { korisnickoIme: username },
     });
   }
+
   async registrujOrganizatora(organizator: OrganizatorEntity) {
     const noviOrganizator: OrganizatorEntity =
       this.organizatorRepository.create();

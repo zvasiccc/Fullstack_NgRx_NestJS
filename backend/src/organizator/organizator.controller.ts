@@ -28,11 +28,11 @@ export class OrganizatorController {
       return this.organizatorService.vratiOrganizatoraIzTokena(authorization);
     else return null;
   }
-
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.organizatorService.findOne(username);
   }
+
   @Post('registrujOrganizatora')
   async registrujOrganizatora(@Body() organizator: OrganizatorEntity) {
     await this.organizatorService.registrujOrganizatora(organizator);

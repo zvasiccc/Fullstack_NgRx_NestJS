@@ -5,7 +5,13 @@
       <h3>{{ prijava.nazivTima }}</h3>
       <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
         <ng-container *ngIf="korisnik.role == 'organizator'">
-          <button (click)="izbaciTimSaTurnira(prijava.id)">Izbaci tim</button>
+          <!-- //todo i jos ako je to njegov turnir onda da se prikaze -->
+          <!-- //todo napravljena funkcija na back samo je pozovi  -->
+          <ng-container
+            *ngIf="daLiJeOrganizatorTurnira(korisnik.id, prijava.turnir?.id)"
+          >
+            <button (click)="izbaciTimSaTurnira(prijava.id)">Izbaci tim</button>
+          </ng-container>
         </ng-container>
       </ng-container>
       <app-igrac
