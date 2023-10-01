@@ -14,16 +14,18 @@
         </button>
         <ng-container *ngIf="korisnik.role === 'igrac'">
           <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
-        </ng-container>
-        <!-- <ng-container *ngIf="korisnik.role === 'organizator'">
-          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-        </ng-container> -->
-        <ng-container>
           <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
             Vidi saigrace
           </button>
         </ng-container>
+        <!-- <ng-container *ngIf="korisnik.role === 'organizator'">
+          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
+        </ng-container> -->
+        <!-- <ng-container *ngIf="korisnik as igrac">
+          <ng-container *ngIf="jeVodjaTima(igrac)"> -->
       </ng-container>
+      <!-- </ng-container>
+      </ng-container> -->
     </ul>
   </div>
 </div>

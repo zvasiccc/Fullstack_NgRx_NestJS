@@ -1,6 +1,13 @@
 <ul>
   <li *ngFor="let igrac of mojiSaigraci$ | async">
     <app-igrac [igrac]="igrac"></app-igrac>
-    <!-- <button (click)="izbaciIgracaIzTima(igrac)">Izbaci iz tima</button> -->
+    <p>ovo je bio saigrac</p>
+    <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
+      <ng-container *ngIf="korisnik as igrac">
+        <ng-container *ngIf="jeVodjaTima(igrac)">
+          <button (click)="izbaciIgracaIzTima(igrac.id)">Izbaci iz tima</button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </li>
 </ul>
