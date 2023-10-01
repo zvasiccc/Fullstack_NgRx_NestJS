@@ -8,10 +8,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './kreiranje-turnira.component.html',
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
-//todo i neke informacije kada se klikne na turnir, da vidi svoje turnire organizator, autentifikacija passport js
-//todo da igrac vidi svoje turnire na koje je prijavljen
 //todo za svaku funkciju staviti dekorator na back, dosadasnje fje na front da mogu da pozivaju samo ko treba
-// todo da nemaju ni mogucnost da pokusaju ako nisu autorizovani, tj sakrij dugme
+//todo pregledaj moj tim ako si prijavljen na turnir
+//todo popravi brisanje sa jeOrganizator turnira ono u subscribe
+//todo napravi fju za vbracanje svih igraca koji nisu prijavljeni na turnir
+//todo doradi profil malo
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
     id: 0,

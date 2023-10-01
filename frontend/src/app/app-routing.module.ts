@@ -12,6 +12,7 @@ import { PreferenceComponent } from './preference/preference.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
+import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'mojiTurniri',
     component: MojiTurniriComponent,
+  },
+  {
+    path: 'mojiSaigraci/:turnirId/:igracId',
+    component: MojiSaigraciComponent,
   },
 ];
 

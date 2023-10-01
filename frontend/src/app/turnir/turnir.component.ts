@@ -10,6 +10,7 @@ import { Observable, map } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
+import { IgracService } from '../services/igrac/igrac.service';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -23,6 +24,7 @@ export class TurnirComponent {
   constructor(
     //private korpaService: KorpaService,
     private turnirService: TurnirService,
+    private igracService: IgracService,
     private store: Store,
     private router: Router
   ) {
@@ -30,6 +32,9 @@ export class TurnirComponent {
       .select(selectPrijavljeniKorisnik)
       .pipe(map((p: any) => p?.prijavljeniKorisnik));
   }
+  //todo vodja tima moze iz tima da izbaci saigrace,
+  //todo da se automatski doda vodja tima u tim
+  //todo autentif za vodju
   prijaviSeNaTurnir(turnir: Turnir) {
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
     this.router.navigateByUrl('sviIgraci');
@@ -38,7 +43,8 @@ export class TurnirComponent {
     this.router.navigateByUrl(`prijavljeniTimovi/${turnirId}`);
   }
 
-  // dodajTurnirUKorpu(turnir: Turnir) {
-  //   this.korpaService.dodajTurnirUKorpu(turnir);
-  // }
+  async vidiSaigrace(turnirId: number, igracId: number) {
+    this.router.navigateByUrl(`mojiSaigraci/${turnirId}/${igracId}`);
+    //this.igracService.vidiSaigrace(turnirId, igracId);
+  }
 }

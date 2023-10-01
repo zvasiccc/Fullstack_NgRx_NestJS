@@ -18,6 +18,11 @@
         <!-- <ng-container *ngIf="korisnik.role === 'organizator'">
           <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
         </ng-container> -->
+        <ng-container>
+          <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
+            Vidi saigrace
+          </button>
+        </ng-container>
       </ng-container>
     </ul>
   </div>

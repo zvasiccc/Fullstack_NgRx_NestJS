@@ -7,11 +7,16 @@ import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
 import { selectPrijavljeniIgraciZaTurnir } from 'src/app/shared/state/turnir/turnir.selector';
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
+import { StoreService } from '../store.service';
 @Injectable({
   providedIn: 'root',
 })
 export class IgracService {
-  constructor(private store: Store, private http: HttpClient) {}
+  constructor(
+    private store: Store,
+    private http: HttpClient,
+    private storeService: StoreService
+  ) {}
   private sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci';
   private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   vratiSveIgrace(): Observable<Igrac[]> {
@@ -38,5 +43,10 @@ export class IgracService {
   registrujSeKaoIgrac(igrac: Igrac) {
     const url = 'http://localhost:3000/igrac/registrujIgraca';
     return this.http.post(url, igrac).subscribe((p) => p);
+  }
+  vidiSaigrace(turnirId: number, igracId: number): Observable<Igrac[]> {
+    const headers = this.storeService.pribaviHeaders();
+    const url = `http://localhost:3000/igrac/vratiIgraceIzIstogTima/${turnirId}/${igracId}`;
+    return this.http.get<Igrac[]>(url, { headers });
   }
 }

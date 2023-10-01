@@ -15,7 +15,7 @@
     <li>
       <a (click)="navigirajNaPocetnu()" routerLink="">Pocetna</a>
     </li>
-    <li>
+    <li *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
       <a (click)="navigirajNaMojeTurnire()" routerLink="mojiTurniri"
         >Moji turniri</a
       >

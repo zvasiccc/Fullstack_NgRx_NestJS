@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IgracEntity } from './igrac.entity';
-import { In, Like, Not, Repository } from 'typeorm';
+import { In, Like, Not, Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
 import { JwtService } from '@nestjs/jwt';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class IgracService {
@@ -50,13 +51,42 @@ export class IgracService {
     });
   }
   async slobodniIgraciZaTurnir(turnirId: number) {
+    //?ne radii
     //da vratimo sve igrace koji se ne nalaze u prijavama za turnir
-    // const slobodniIgraci = await this.igracRepository
+    const prijavljeniIgraciIds = await this.igracRepository
+      .createQueryBuilder('igrac')
+      .leftJoinAndSelect('igrac.prijave', 'prijava')
+      .leftJoinAndSelect('prijava.turnir', 'turnir')
+      .where({ id: Not(turnirId) }) //!
+      .select(['igrac.id'])
+      .getMany();
+    const slobodniIgraci = await this.igracRepository
+      .createQueryBuilder('igrac')
+      .leftJoin('igrac.prijave', 'prijava')
+      .leftJoin('prijava.turnir', 'turnir')
+      .where('turnir.id != :id OR prijava.id IS NULL', { id: turnirId })
+      .getMany();
+
+    return slobodniIgraci;
+
+    return slobodniIgraci;
+    // const subQuery = (qb: SelectQueryBuilder<PrijavaEntity>) => {
+    //   return qb
+    //     .select('prijava_igrac.id')
+    //     .from(PrijavaEntity, 'prijava')
+    //     .innerJoin('prijava.igraci', 'prijava_igrac')
+    //     .where('prijava.turnir.id = :turnirId', { turnirId });
+    // };
+    // const [subQuerySql, subQueryParameters] = subQuery(
+    //   this.prijavaRepository.createQueryBuilder(),
+    // ).getQueryAndParameters();
+    // const query = this.igracRepository
     //   .createQueryBuilder('igrac')
-    //   .leftJoinAndSelect('igrac.prijave', 'prijava')
-    //   .leftJoinAndSelect('prijava.turnir', 'turnir')
-    //   .where('turnir.id Not(:id)', { id: turnirId })
-    //   .getMany();
+    //   .where(`igrac.id NOT IN (${subQuerySql})`)
+    //   .setParameters(subQueryParameters)
+    //   .setParameter('turnirId', turnirId);
+    // const igraci = await query.getMany();
+    // return igraci;
     // const queryBuilder1 = this.igracRepository.createQueryBuilder('igrac1');
     // //.select('igrac1.id');
     // const queryBuilder2 = this.igracRepository.createQueryBuilder('igrac2');
@@ -125,6 +155,18 @@ export class IgracService {
         id: In([...prijava.igraci]),
       },
     });
+    return igraci;
+  }
+  async vratiIgraceIzIstogTima(turnirId: number, igracId: number) {
+    const igraci = await this.igracRepository
+      .createQueryBuilder('igrac')
+      .leftJoinAndSelect('igrac.prijave', 'prijava')
+      .leftJoinAndSelect('prijava.turnir', 'turnir')
+      .where('turnir.id = :id', { id: turnirId })
+      //.andWhere('igrac.id !=:id', { id: igracId })
+      .andWhere({ id: Not(igracId) }) //!
+      .getMany();
+
     return igraci;
   }
 }

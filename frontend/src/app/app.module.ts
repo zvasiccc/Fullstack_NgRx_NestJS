@@ -37,6 +37,7 @@ import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
 import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
+import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
     RangeSliderComponent,
     TimoviNaTurniruComponent,
     MojiTurniriComponent,
+    MojiSaigraciComponent,
   ],
   imports: [
     CommonModule,

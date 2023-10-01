@@ -25,10 +25,7 @@ export class IgracController {
   async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
     return await this.igracService.slobodniIgraciZaTurnir(turnirId);
   }
-  // @Get('prijavljeniIgrac') //TODO hardkodirano je trenutno
-  // vratiPrijavljenogIgraca() {
-  //   return this.igracService.vratiPrijavljenogIgraca();
-  // }
+
   @UseGuards(JwtAuthGuard)
   @Get('korisnickoIme/:korisnickoIme')
   async vratiIgracePoKorisnickomImenu(
@@ -65,5 +62,12 @@ export class IgracController {
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);
+  }
+  @Get('vratiIgraceIzIstogTima/:turnirId/:igracId')
+  vratiIgraceIzIstogTima(
+    @Param('turnirId') turnirId: number,
+    @Param('igracId') igracId: number,
+  ) {
+    return this.igracService.vratiIgraceIzIstogTima(turnirId, igracId);
   }
 }

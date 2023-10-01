@@ -49,4 +49,3 @@ export class OrganizatorService {
     return await this.organizatorRepository.save(noviOrganizator);
   }
 }
-//todo iz klase korisnik izvedi igraca i organizatora i onda barataj s njega
