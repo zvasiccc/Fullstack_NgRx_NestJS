@@ -29,6 +29,7 @@ export class TimoviNaTurniruComponent {
   }
   prijave$: Observable<Prijava[]> = new Observable();
   turnirId: number = 0;
+  organizator: boolean = false;
   ngOnInit() {
     const turnirIdParam = this.route.snapshot.paramMap.get('turnirId');
     if (turnirIdParam !== null) {
@@ -40,9 +41,14 @@ export class TimoviNaTurniruComponent {
     korisnikId: number | undefined | null,
     turnirId: number | undefined | null
   ): boolean {
-    console.log('idevi su ' + korisnikId + ' i ' + turnirId);
-    return true;
-    //todo pozovi sa backa, napravljena
+    let flag = true;
+    this.turnirService
+      .daLiJeOrganizatorTurnira(korisnikId, turnirId)
+      .subscribe((p) => {
+        flag = p;
+        return flag;
+      });
+    return flag;
   }
 
   izbaciTimSaTurnira(prijavaId: number) {

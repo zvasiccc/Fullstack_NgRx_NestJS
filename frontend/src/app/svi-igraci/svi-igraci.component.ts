@@ -28,7 +28,7 @@ export class SviIgraciComponent {
   ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
     this.igracService.dodajIgracaUTim(igrac);
-    console.log(igrac.korisnickoIme);
+
     this._snackBar.open('igrac je dodat u tim', 'Zatvori', {
       duration: 100000,
       panelClass: 'custom-snackbar',

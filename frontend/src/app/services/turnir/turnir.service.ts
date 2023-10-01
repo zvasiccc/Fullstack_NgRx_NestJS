@@ -15,12 +15,17 @@ import {
 } from 'src/app/shared/state/turnir/turnir.selector';
 import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
+import { StoreService } from '../store.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TurnirService {
-  constructor(private store: Store, private http: HttpClient) {}
+  constructor(
+    private store: Store,
+    private http: HttpClient,
+    private storeService: StoreService
+  ) {}
   //private apiUrl = 'http://localhost:3000/turnir/sviTurniri';
 
   dodajTurnir(turnir: Turnir) {
@@ -55,7 +60,7 @@ export class TurnirService {
       Authorization: `Bearer ${jwtTokenString}`,
     });
     const url = 'http://localhost:3000/turnir/mojiTurniri';
-    console.log('token na frontu je' + jwtTokenString);
+
     return this.http.get<Turnir[]>(url, { headers });
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
@@ -115,5 +120,13 @@ export class TurnirService {
   async obrisiTurnir(turnirId: number) {
     const url = `http://localhost:3000/turnir/obrisiTurnir/${turnirId}`;
     return this.http.delete(url);
+  }
+  daLiJeOrganizatorTurnira(
+    korisnikId: number | undefined | null,
+    turnirId: number | undefined | null
+  ): Observable<boolean> {
+    const url = `http://localhost:3000/turnir/daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
+    const headers: HttpHeaders = this.storeService.pribaviHeaders();
+    return this.http.get<boolean>(url, { headers });
   }
 }

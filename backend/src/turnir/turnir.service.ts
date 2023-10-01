@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from 'src/roles/role.enum';
 import { OrganizatorEntity } from 'src/organizator/organizator.entity';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable()
 export class TurnirService {
@@ -135,19 +136,26 @@ export class TurnirService {
     if (!turniri) return [];
     return turniri;
   }
-  async daLiJeOrganizatorTurnira(organizationId: number, turnirId: number) {
+  daLiJeOrganizatorTurnira(
+    organizationId: number,
+    turnirId: number,
+  ): Observable<boolean> {
     let flag = false;
-    const turniriOrganizatora = await this.turnirRepository
-      .createQueryBuilder('turnir')
-      .leftJoinAndSelect('turnir.organizator', 'organizator')
-      .where('organizator.id=:id', { id: organizationId })
-      .getMany();
-    turniriOrganizatora.forEach((turnir) => {
-      if (turnir.id == turnirId) {
-        flag = true;
-      }
-    });
-    console.log(turniriOrganizatora);
-    return flag;
+    return from(
+      this.turnirRepository
+        .createQueryBuilder('turnir')
+        .leftJoinAndSelect('turnir.organizator', 'organizator')
+        .where('organizator.id = :id', { id: organizationId })
+        .getMany(),
+    ).pipe(
+      map((turniri) => {
+        return turniri.some((turnir) => turnir.id == turnirId);
+      }),
+    );
+    // turniriOrganizatora.forEach((turnir) => {
+    //   if (turnir.id == turnirId) {
+    //     flag = true;
+    //   }
+    // });
   }
 }
