@@ -1,4 +1,7 @@
-<div *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik">
+<div
+  *ngIf="trenutnoPrijavljeniKorisnik$ | async as prijavljeniKorisnik"
+  class="profile-container"
+>
   <h1>Dobrodošli, {{ prijavljeniKorisnik.korisnickoIme }}</h1>
   <div *ngIf="prijavljeniKorisnik.role === 'igrac'">
     <p>Ovo je profil igrača.</p>
@@ -6,9 +9,45 @@
   <div *ngIf="prijavljeniKorisnik.role === 'organizator'">
     <p>Ovo je profil organizatora.</p>
   </div>
-  <p>Korisnicko ime:{{ prijavljeniKorisnik.korisnickoIme }}</p>
-</div>
-<div *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)">
-  <!-- Content to display when no user is logged in -->
-  <p>Morate biti prijavljeni da biste videli profil.</p>
+  <label for="korisnickoIme">Korisničko ime</label>
+  <input
+    type="text"
+    id="korisnickoIme"
+    [value]="prijavljeniKorisnik.korisnickoIme"
+    [readonly]="!uredjivanjeOmoguceno"
+  />
+
+  <label for="ime">Ime</label>
+  <input
+    type="text"
+    id="ime"
+    [value]="prijavljeniKorisnik.ime"
+    [readonly]="!uredjivanjeOmoguceno"
+  />
+
+  <label for="prezime">Prezime</label>
+  <input
+    type="text"
+    id="prezime"
+    [value]="prijavljeniKorisnik.prezime"
+    [readonly]="!uredjivanjeOmoguceno"
+  />
+  <label for="lozinka" *ngIf="uredjivanjeOmoguceno">Lozinka</label>
+  <input
+    type="password"
+    id="lozinka"
+    [(ngModel)]="unesenaLozinka"
+    (change)="unosLozinke()"
+    *ngIf="uredjivanjeOmoguceno"
+  />
+  <button (click)="omoguciUredjivanje()">Uredi</button>
+  <button (click)="promeniPodatke()">Promeni podatke</button>
+  <div
+    *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)"
+    class="profile-container"
+  >
+    <p class="no-user-message">
+      Morate biti prijavljeni da biste videli profil.
+    </p>
+  </div>
 </div>

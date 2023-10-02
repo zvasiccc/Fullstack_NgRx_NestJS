@@ -16,6 +16,10 @@ export class OrganizatorEntity {
   korisnickoIme: string;
   @Column()
   lozinka: string;
+  @Column()
+  ime: string;
+  @Column()
+  prezime: string;
   //ima vise turnira
   roles: Role;
   @OneToMany(() => TurnirEntity, (turnir) => turnir.organizator)

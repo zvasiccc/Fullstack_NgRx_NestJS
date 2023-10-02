@@ -49,6 +49,8 @@ export class OrganizatorService {
       this.organizatorRepository.create();
     noviOrganizator.korisnickoIme = organizator.korisnickoIme;
     noviOrganizator.lozinka = organizator.lozinka;
+    noviOrganizator.ime = organizator.ime;
+    noviOrganizator.prezime = organizator.prezime;
     noviOrganizator.turniri = [];
     return await this.organizatorRepository.save(noviOrganizator);
   }

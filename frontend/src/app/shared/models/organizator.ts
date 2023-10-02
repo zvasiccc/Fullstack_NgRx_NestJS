@@ -4,5 +4,6 @@ export interface Organizator {
   lozinka: string;
   ime: string;
   prezime: string;
+
   role: string;
 }

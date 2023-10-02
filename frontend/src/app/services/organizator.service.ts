@@ -5,6 +5,7 @@ import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import { Observable } from 'rxjs';
 import { StoreService } from './store.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,15 @@ export class OrganizatorService {
   constructor(
     private store: Store,
     private http: HttpClient,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private router: Router
   ) {}
   registrujSeKaoOrganizator(organizator: Organizator) {
     const url = 'http://localhost:3000/organizator/registrujOrganizatora';
     console.log(JSON.stringify(organizator));
-    return this.http.post(url, organizator).subscribe((p) => p);
+    return this.http.post(url, organizator).subscribe(() => {
+      this.router.navigateByUrl('');
+    });
   }
   daLiJeOrganizatorTurnira(
     korisnikId: number | undefined | null,

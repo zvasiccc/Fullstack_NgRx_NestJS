@@ -123,6 +123,10 @@ export class IgracService {
 
   async registrujIgraca(igrac: IgracEntity) {
     const noviIgrac = this.igracRepository.create();
+    const postojeciIgrac = await this.igracRepository.findOne({
+      where: { korisnickoIme: igrac.korisnickoIme },
+    });
+    if (postojeciIgrac) return null; //ako vec postoji igrac sa tim korisnickim imenom
     noviIgrac.korisnickoIme = igrac.korisnickoIme;
     noviIgrac.lozinka = igrac.lozinka;
     noviIgrac.ime = igrac.ime;
@@ -130,6 +134,20 @@ export class IgracService {
     noviIgrac.vodjaTima = igrac.vodjaTima;
     //noviIgrac.roles = igrac.roles;
     return await this.igracRepository.save(noviIgrac);
+  }
+  async izmeniPodatkeOIgracu(igrac: IgracEntity) {
+    console.log('primljen id je' + igrac.id);
+    console.log('primljeno ime je' + igrac.ime);
+    const postojeciIgrac = await this.igracRepository.findOne({
+      where: { id: igrac.id },
+    });
+    if (!postojeciIgrac) return null; //ne postoji takav igrac
+    if (postojeciIgrac.lozinka != igrac.lozinka) return null; //pogresna lozinka
+    postojeciIgrac.korisnickoIme = igrac.korisnickoIme;
+    postojeciIgrac.ime = igrac.ime;
+    postojeciIgrac.prezime = igrac.prezime;
+    console.log('izmenjeni igrac je' + postojeciIgrac.ime);
+    return await this.igracRepository.save(postojeciIgrac);
   }
   async pronadjiIgraceZaPrijavu(prijavaId: number) {
     const prijava = await this.prijavaRepository.findOne({

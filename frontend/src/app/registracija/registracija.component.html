@@ -40,6 +40,26 @@
         required
       />
     </div>
+    <div>
+      <label for="ime">Ime:</label>
+      <input
+        type="text"
+        id="ime"
+        [(ngModel)]="organizator.ime"
+        name="ime"
+        required
+      />
+    </div>
+    <div>
+      <label for="prezime">Prezime:</label>
+      <input
+        type="text"
+        id="prezime"
+        [(ngModel)]="organizator.prezime"
+        name="prezime"
+        required
+      />
+    </div>
     <button (click)="registrujSeKaoOrganizator()">Registruj se</button>
   </div>
 
@@ -51,6 +71,16 @@
         id="korisnickoIme"
         [(ngModel)]="igrac.korisnickoIme"
         name="korisnickoIme"
+        required
+      />
+    </div>
+    <div>
+      <label for="lozinka">lozinka</label>
+      <input
+        type="password"
+        id="lozinka"
+        [(ngModel)]="igrac.lozinka"
+        name="lozinka"
         required
       />
     </div>
