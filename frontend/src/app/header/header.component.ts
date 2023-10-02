@@ -7,6 +7,7 @@ import { Observable, map } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
+import { StoreService } from '../services/store.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,16 +15,13 @@ import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.sel
 })
 export class HeaderComponent {
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   constructor(
     private igracService: IgracService,
     private router: Router,
-    private store: Store
-  ) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+    private store: Store,
+    private storeService: StoreService
+  ) {}
 
   navigirajNaKreiranjeTurnira() {
     this.router.navigateByUrl('kreiranjeTurnira');
@@ -41,9 +39,9 @@ export class HeaderComponent {
     this.store.dispatch(KorisnikActions.odjaviPrijavljenogKorisnika());
     this.router.navigateByUrl('');
   }
-  navigirajNaPrijavu() {
-    this.router.navigateByUrl('prijava');
-  }
+  // navigirajNaPrijavu() {
+  //   this.router.navigateByUrl('prijava');
+  // }
   navigirajNaRegistraciju() {
     this.router.navigateByUrl('registracija');
   }

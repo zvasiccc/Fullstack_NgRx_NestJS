@@ -7,6 +7,7 @@ import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-moji-turniri',
@@ -15,16 +16,13 @@ import { Store } from '@ngrx/store';
 })
 export class MojiTurniriComponent {
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   mojiTurniri$: Observable<Turnir[]> = this.turnirService.getMojiTurniri(); //new Observable<Turnir[]>(); //observable nad turnirima
 
   constructor(
     private turnirService: TurnirService,
+    private storeService: StoreService,
     private router: Router,
     private store: Store
-  ) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+  ) {}
 }

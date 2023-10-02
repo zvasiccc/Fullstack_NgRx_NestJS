@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { Organizator } from '../shared/models/organizator';
 import { Igrac } from '../shared/models/igrac';
 import { OrganizatorService } from '../services/organizator.service';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-timovi-na-turniru',
@@ -17,18 +18,15 @@ import { OrganizatorService } from '../services/organizator.service';
 })
 export class TimoviNaTurniruComponent {
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   constructor(
     private route: ActivatedRoute,
     private turnirService: TurnirService,
     private prijavaService: PrijavaService,
     private organizatorService: OrganizatorService,
+    private storeService: StoreService,
     private store: Store
-  ) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+  ) {}
   prijave$: Observable<Prijava[]> = new Observable();
   turnirId: number = 0;
   organizator: boolean = false;

@@ -6,6 +6,7 @@ import { IgracService } from '../services/igrac/igrac.service';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { Store } from '@ngrx/store';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-moji-saigraci',
@@ -15,17 +16,15 @@ import { Store } from '@ngrx/store';
 export class MojiSaigraciComponent implements OnInit {
   mojiSaigraci$: Observable<Igrac[]>;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   //todo da dugme vidi saigrace samo ako prijavljeni igrac ucestvuje na tom turniru tj isto kao org sto ce se popravi
   constructor(
     private route: ActivatedRoute,
     private igracService: IgracService,
+    private storeService: StoreService,
     private store: Store
   ) {
     this.mojiSaigraci$ = new Observable<Igrac[]>();
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
   }
 
   ngOnInit() {

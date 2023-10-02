@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-profil',
@@ -16,17 +17,17 @@ export class ProfilComponent {
   // trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
   // trenutnoPrijavljeniOrganizator$: Observable<Organizator | null> =
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   uredjivanjeOmoguceno: boolean = false;
   daLiJeLozinkaUnesena: boolean = false;
   unesenaLozinka: string = '';
   IzmenjeniKorisnik!: Igrac | Organizator;
 
-  constructor(private igracService: IgracService, private store: Store) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+  constructor(
+    private igracService: IgracService,
+    private store: Store,
+    private storeService: StoreService
+  ) {}
   omoguciUredjivanje() {
     this.uredjivanjeOmoguceno = true;
   }

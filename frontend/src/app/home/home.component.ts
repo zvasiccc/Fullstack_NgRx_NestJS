@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { Organizator } from '../shared/models/organizator';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -24,17 +25,14 @@ export class HomeComponent implements OnInit {
   postojeFiltriraniTurniri: boolean = false;
   pretragaIzvrsena: boolean = false;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   constructor(
     private turnirService: TurnirService,
     private igracService: IgracService,
+    private storeService: StoreService,
     private router: Router,
     private store: Store
-  ) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+  ) {}
   ngOnInit(): void {}
 
   handlePretragaRezultati(rezultati: Turnir[]) {

@@ -24,7 +24,7 @@ export class IgracService {
   private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   vratiSveIgrace(): Observable<Igrac[]> {
     const trenutnoPrijavljeniKorisnik$ =
-      this.storeService.pribaviTrenutnoPrijavljenogIgraca();
+      this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
     let idKorisnika: number = 0;
     trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
       idKorisnika = korisnik?.id as number;

@@ -38,7 +38,7 @@ export class StoreService {
     });
     return this.headers;
   }
-  public pribaviTrenutnoPrijavljenogIgraca() {
+  public pribaviTrenutnoPrijavljenogKorisnika() {
     return this.trenutnoPrijavljeniKorisnik$;
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {

@@ -12,6 +12,7 @@ import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { IgracService } from '../services/igrac/igrac.service';
 import { PrijavaService } from '../services/prijava.service';
+import { StoreService } from '../services/store.service';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -21,19 +22,16 @@ export class TurnirComponent {
   @Input()
   turnir!: Turnir;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    new Observable();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   constructor(
     //private korpaService: KorpaService,
     private turnirService: TurnirService,
     private igracService: IgracService,
     private prijavaService: PrijavaService,
+    private storeService: StoreService,
     private store: Store,
     private router: Router
-  ) {
-    this.trenutnoPrijavljeniKorisnik$ = this.store
-      .select(selectPrijavljeniKorisnik)
-      .pipe(map((p: any) => p?.prijavljeniKorisnik));
-  }
+  ) {}
   //todo vodja tima moze iz tima da izbaci saigrace,samo ako je to njegov tim
   //todo on ce moci i  da vidi saigrace samo ako je njegov tim tkd ez
   //todo autentif za vodju
