@@ -1,12 +1,16 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { selectTokenPrijavljenogKorisnika } from '../shared/state/korisnik/korisnik.selector';
+import {
+  selectPrijavljeniKorisnik,
+  selectTokenPrijavljenogKorisnika,
+} from '../shared/state/korisnik/korisnik.selector';
 import { Store } from '@ngrx/store';
 import { selectPrijavljeniIgraciZaTurnir } from '../shared/state/turnir/turnir.selector';
 import { Igrac } from '../shared/models/igrac';
 import { Turnir } from '../shared/models/turnir';
 import { selectTurnirUPrijavi } from '../shared/state/prijava/prijava.selector';
+import { Organizator } from '../shared/models/organizator';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +18,13 @@ import { selectTurnirUPrijavi } from '../shared/state/prijava/prijava.selector';
 export class StoreService {
   jwtTokenString: string = '';
   headers: HttpHeaders = new HttpHeaders();
-  constructor(private store: Store) {}
+  trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
+    new Observable();
+  constructor(private store: Store) {
+    this.trenutnoPrijavljeniKorisnik$ = this.store
+      .select(selectPrijavljeniKorisnik)
+      .pipe(map((p: any) => p?.prijavljeniKorisnik));
+  }
   public pribaviHeaders(): HttpHeaders {
     let jwtTokenObservable = this.store
       .select(selectTokenPrijavljenogKorisnika)
@@ -27,6 +37,9 @@ export class StoreService {
       Authorization: `Bearer ${this.jwtTokenString}`,
     });
     return this.headers;
+  }
+  public pribaviTrenutnoPrijavljenogIgraca() {
+    return this.trenutnoPrijavljeniKorisnik$;
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store

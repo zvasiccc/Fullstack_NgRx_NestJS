@@ -9,6 +9,8 @@ import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { StoreService } from '../store.service';
 import { Route, Router } from '@angular/router';
+import { Organizator } from 'src/app/shared/models/organizator';
+import { selectPrijavljeniKorisnik } from 'src/app/shared/state/korisnik/korisnik.selector';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,8 +23,15 @@ export class IgracService {
   ) {}
   private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   vratiSveIgrace(): Observable<Igrac[]> {
+    const trenutnoPrijavljeniKorisnik$ =
+      this.storeService.pribaviTrenutnoPrijavljenogIgraca();
+    let idKorisnika: number = 0;
+    trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
+      idKorisnika = korisnik?.id as number;
+    });
     const sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci'; //todo da vraca sve igrace osim trenutnog
-    return this.http.get<Igrac[]>(sviIgraciUrl);
+    const url = `http://localhost:3000/igrac/vratiSveIgraceOsimTrenutnog/${idKorisnika}`;
+    return this.http.get<Igrac[]>(url);
   }
   // vratiPrijavljenogIgraca() {
   //   // return this.http.get<Igrac>(this.prijavljeniIgracUrl);
