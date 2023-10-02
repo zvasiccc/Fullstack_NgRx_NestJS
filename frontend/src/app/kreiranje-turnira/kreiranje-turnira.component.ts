@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //todo pregledaj moj tim ako si prijavljen na turnir tj da lijeIgracNaTurniru da se implementira kao sto je i organizator(alegz)
 //todo popravi brisanje sa jeOrganizator turnira ono u subscribe
 //todo doradi profil malo
+//todo provera vodje na back
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
     id: 0,

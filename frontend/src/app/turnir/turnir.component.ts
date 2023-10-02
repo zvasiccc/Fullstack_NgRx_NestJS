@@ -11,6 +11,7 @@ import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { IgracService } from '../services/igrac/igrac.service';
+import { PrijavaService } from '../services/prijava.service';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -25,6 +26,7 @@ export class TurnirComponent {
     //private korpaService: KorpaService,
     private turnirService: TurnirService,
     private igracService: IgracService,
+    private prijavaService: PrijavaService,
     private store: Store,
     private router: Router
   ) {
@@ -35,9 +37,16 @@ export class TurnirComponent {
   //todo vodja tima moze iz tima da izbaci saigrace,
   //todo da se automatski doda vodja tima u tim
   //todo autentif za vodju
-  prijaviSeNaTurnir(turnir: Turnir) {
+  prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
+    const igrac: Igrac = korisnik as Igrac;
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
+    this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
     this.router.navigateByUrl('sviIgraci');
+  }
+  odjaviSvojTimSaTurnira(turnirId: number, igracId: number) {
+    this.prijavaService
+      .odjaviSvojTimSaTurnira(turnirId, igracId)
+      .subscribe(() => alert('uspesno ste odjavili turnir'));
   }
   async prikaziPrijavljeneTimove(turnirId: number) {
     this.router.navigateByUrl(`prijavljeniTimovi/${turnirId}`);
@@ -46,5 +55,8 @@ export class TurnirComponent {
   async vidiSaigrace(turnirId: number, igracId: number) {
     this.router.navigateByUrl(`mojiSaigraci/${turnirId}/${igracId}`);
     //this.igracService.vidiSaigrace(turnirId, igracId);
+  }
+  jeVodjaTima(user: any): user is Igrac {
+    return user.role === 'igrac' && user.vodjaTima === true;
   }
 }

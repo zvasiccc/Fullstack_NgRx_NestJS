@@ -13,7 +13,15 @@
           Prijavljeni timovi
         </button>
         <ng-container *ngIf="korisnik.role === 'igrac'">
-          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
+          <ng-container *ngIf="jeVodjaTima(korisnik)">
+            <!-- //todo ako je vec prijavljen da mu se prikaze ovde obrisi prijavu a ne prijavi se  -->
+            <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
+              Prijavi se
+            </button>
+            <button (click)="odjaviSvojTimSaTurnira(turnir.id, korisnik.id)">
+              Izbrisi prijavu
+            </button>
+          </ng-container>
           <ng-container>
             <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
               Vidi saigrace

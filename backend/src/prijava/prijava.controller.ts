@@ -46,4 +46,11 @@ export class PrijavaController {
   async izbaciTimSaTurnira(@Param('prijavaId') prijavaId: number) {
     return await this.prijavaService.izbaciTimSaTurnira(prijavaId);
   }
+  @Delete('odjaviSvojTimSaTurnira/:turnirId/:igracId')
+  async odjaviSvojTimSaTurnira(
+    @Param('turnirId') turnirId: number,
+    @Param('igracId') igracId: number,
+  ) {
+    return await this.prijavaService.odjaviSvojTimSaTurnira(turnirId, igracId);
+  }
 }

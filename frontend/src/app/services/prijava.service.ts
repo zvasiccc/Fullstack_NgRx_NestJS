@@ -49,4 +49,12 @@ export class PrijavaService {
     const url = `http://localhost:3000/prijava/izbaciTimSaTurnira/${prijavaId}`;
     return this.http.delete(url);
   }
+  odjaviSvojTimSaTurnira(
+    turnirId: number,
+    igracId: number
+  ): Observable<Prijava[]> {
+    this.pribaviToken();
+    const url = `http://localhost:3000/prijava/odjaviSvojTimSaTurnira/${turnirId}/${igracId}`;
+    return this.http.delete<Prijava[]>(url, { headers: this.headers });
+  }
 }
