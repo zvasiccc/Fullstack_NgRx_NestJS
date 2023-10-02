@@ -11,6 +11,7 @@ import { Preference } from '../shared/models/preference';
 import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
 import { Prijava } from '../shared/models/prijava';
 import { PrijavaService } from '../services/prijava.service';
+import { StoreService } from '../services/store.service';
 //import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
 
 @Component({
@@ -20,7 +21,7 @@ import { PrijavaService } from '../services/prijava.service';
 })
 export class PrijavaComponent {
   prijavljeniTurnir$: Observable<Turnir> =
-    this.turnirService.vratiPrijavljeniTUrnir();
+    this.storeService.vratiPrijavljeniTUrnir();
   igraciUTimu$: Observable<Igrac[]> = this.igracService.vratiIgraceIzTima();
   preference$: Observable<Preference> = this.store
     .select(selectPreferenceUPrijavi)
@@ -39,6 +40,7 @@ export class PrijavaComponent {
     private turnirService: TurnirService,
     private igracService: IgracService,
     private prijavaService: PrijavaService,
+    private storeService: StoreService,
     private router: Router,
     private store: Store
   ) {}

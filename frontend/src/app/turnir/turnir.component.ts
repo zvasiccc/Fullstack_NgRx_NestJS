@@ -34,8 +34,8 @@ export class TurnirComponent {
       .select(selectPrijavljeniKorisnik)
       .pipe(map((p: any) => p?.prijavljeniKorisnik));
   }
-  //todo vodja tima moze iz tima da izbaci saigrace,
-  //todo da se automatski doda vodja tima u tim
+  //todo vodja tima moze iz tima da izbaci saigrace,samo ako je to njegov tim
+  //todo on ce moci i  da vidi saigrace samo ako je njegov tim tkd ez
   //todo autentif za vodju
   prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
     const igrac: Igrac = korisnik as Igrac;

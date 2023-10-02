@@ -8,6 +8,7 @@ import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.sel
 import { Store } from '@ngrx/store';
 import { Organizator } from '../shared/models/organizator';
 import { Igrac } from '../shared/models/igrac';
+import { OrganizatorService } from '../services/organizator.service';
 
 @Component({
   selector: 'app-timovi-na-turniru',
@@ -21,6 +22,7 @@ export class TimoviNaTurniruComponent {
     private route: ActivatedRoute,
     private turnirService: TurnirService,
     private prijavaService: PrijavaService,
+    private organizatorService: OrganizatorService,
     private store: Store
   ) {
     this.trenutnoPrijavljeniKorisnik$ = this.store
@@ -42,7 +44,7 @@ export class TimoviNaTurniruComponent {
     turnirId: number | undefined | null
   ): boolean {
     let flag = true;
-    this.turnirService
+    this.organizatorService
       .daLiJeOrganizatorTurnira(korisnikId, turnirId)
       .subscribe((p) => {
         flag = p;

@@ -136,26 +136,4 @@ export class TurnirService {
     if (!turniri) return [];
     return turniri;
   }
-  daLiJeOrganizatorTurnira(
-    organizationId: number,
-    turnirId: number,
-  ): Observable<boolean> {
-    let flag = false;
-    return from(
-      this.turnirRepository
-        .createQueryBuilder('turnir')
-        .leftJoinAndSelect('turnir.organizator', 'organizator')
-        .where('organizator.id = :id', { id: organizationId })
-        .getMany(),
-    ).pipe(
-      map((turniri) => {
-        return turniri.some((turnir) => turnir.id == turnirId);
-      }),
-    );
-    // turniriOrganizatora.forEach((turnir) => {
-    //   if (turnir.id == turnirId) {
-    //     flag = true;
-    //   }
-    // });
-  }
 }

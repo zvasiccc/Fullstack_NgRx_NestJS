@@ -26,7 +26,7 @@ export class PrijavaController {
   vratiPrijavuPoId(@Param('id') id: number) {
     return this.prijavaService.vratiPrijavuPoId(id);
   }
-  //todo kada treba da stiti od nelogovanog korisnika ali bilo koji logovan da moze ne radi
+
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Post('dodajPrijavu')
   async dodajPrijavu(@Body() prijava: any) {
@@ -46,6 +46,7 @@ export class PrijavaController {
   async izbaciTimSaTurnira(@Param('prijavaId') prijavaId: number) {
     return await this.prijavaService.izbaciTimSaTurnira(prijavaId);
   }
+  @UseGuards(JwtAuthGuard, IgracGuard) //!vodja
   @Delete('odjaviSvojTimSaTurnira/:turnirId/:igracId')
   async odjaviSvojTimSaTurnira(
     @Param('turnirId') turnirId: number,

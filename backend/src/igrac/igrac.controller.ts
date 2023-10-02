@@ -11,6 +11,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Role } from 'src/roles/role.enum';
 
 import { IgracService } from './igrac.service';
+import { IgracGuard } from 'src/auth/igrac.role.guard';
 
 @Controller('igrac')
 export class IgracController {
@@ -21,6 +22,7 @@ export class IgracController {
   async vratiSveIgrace() {
     return await this.igracService.vratiSveIgrace();
   }
+  @UseGuards(JwtAuthGuard, IgracGuard) //!vodja
   @Get('slobodniIgraciZaTurnir/:turnirId')
   async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
     return await this.igracService.slobodniIgraciZaTurnir(turnirId);
@@ -28,10 +30,12 @@ export class IgracController {
 
   @UseGuards(JwtAuthGuard)
   @Get('korisnickoIme/:korisnickoIme')
-  async vratiIgracePoKorisnickomImenu(
+  async igraciSaSlicnimKorisnickimImenom(
     @Param('korisnickoIme') korisnickoIme: string,
   ) {
-    return await this.igracService.vratiIgracePoKorisnickomImenu(korisnickoIme);
+    return await this.igracService.igraciSaSlicnimKorisnickimImenom(
+      korisnickoIme,
+    );
   }
 
   @Post('registrujIgraca')

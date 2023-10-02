@@ -31,62 +31,31 @@ export class TurnirService {
   dodajTurnir(turnir: Turnir) {
     this.store.dispatch(kreirajTurnir({ turnir }));
   }
-  // vratiSveTurnire(): Observable<Turnir[]> {
-  //   return this.store.select(selectSviTurniri).pipe(map((p: any) => p.turniri));
-  // }
   getTurniriBaza(): Observable<Turnir[]> {
-    let jwtTokenObservable = this.store
-      .select(selectTokenPrijavljenogKorisnika)
-      .pipe(map((p: any) => p.token));
-    let jwtTokenString: string = '';
-    jwtTokenObservable.subscribe((token: string) => {
-      jwtTokenString = token;
-    });
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${jwtTokenString}`,
-    });
     const url = 'http://localhost:3000/turnir/sviTurniri';
-    return this.http.get<Turnir[]>(url, { headers });
+    return this.http.get<Turnir[]>(url);
   }
   getMojiTurniri(): Observable<Turnir[]> {
-    let jwtTokenObservable = this.store
-      .select(selectTokenPrijavljenogKorisnika)
-      .pipe(map((p: any) => p.token));
-    let jwtTokenString: string = '';
-    jwtTokenObservable.subscribe((token: string) => {
-      jwtTokenString = token;
-    });
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${jwtTokenString}`,
-    });
+    const headers = this.storeService.pribaviHeaders();
     const url = 'http://localhost:3000/turnir/mojiTurniri';
 
     return this.http.get<Turnir[]>(url, { headers });
   }
-  vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
-    return this.store
-      .select(selectPrijavljeniIgraciZaTurnir(turnirId))
-      .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
-  }
-  vratiPrijavljeniTUrnir(): Observable<Turnir> {
-    return this.store
-      .select(selectTurnirUPrijavi)
-      .pipe(map((p: any) => p.turnir));
-    // return this.store
-    //   .select(selectPrijavljeniTurniri)
-    //   .pipe(map((p: any) => p.prijavljeniTurniri));
-  }
+  // vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
+  //   return this.store
+  //     .select(selectPrijavljeniIgraciZaTurnir(turnirId))
+  //     .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
+  // }
+  // vratiPrijavljeniTUrnir(): Observable<Turnir> {
+  //   return this.store
+  //     .select(selectTurnirUPrijavi)
+  //     .pipe(map((p: any) => p.turnir));
+  //   // return this.store
+  //   //   .select(selectPrijavljeniTurniri)
+  //   //   .pipe(map((p: any) => p.prijavljeniTurniri));
+  // }
   kreirajTurnir(turnir: Turnir) {
-    let jwtTokenObservable = this.store
-      .select(selectTokenPrijavljenogKorisnika)
-      .pipe(map((p: any) => p.token));
-    let jwtTokenString: string = '';
-    jwtTokenObservable.subscribe((token: string) => {
-      jwtTokenString = token;
-    });
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${jwtTokenString}`,
-    });
+    const headers = this.storeService.pribaviHeaders();
     const url = 'http://localhost:3000/turnir/dodajTurnir';
     return this.http.post(url, turnir, { headers }).subscribe((p) => p);
   }
@@ -111,22 +80,15 @@ export class TurnirService {
       'pretragaKrajnjaNagrada',
       pretragaKrajnjaNagrada.toString()
     );
-
+    //todo omoguci pretragu bez svih parametara na back
     // Kreiraj URL sa parametrima
     const url =
       'http://localhost:3000/turnir/filtrirajTurnire' + '?' + params.toString();
     return this.http.get(url);
   }
   async obrisiTurnir(turnirId: number) {
+    const headers = this.storeService.pribaviHeaders();
     const url = `http://localhost:3000/turnir/obrisiTurnir/${turnirId}`;
-    return this.http.delete(url);
-  }
-  daLiJeOrganizatorTurnira(
-    korisnikId: number | undefined | null,
-    turnirId: number | undefined | null
-  ): Observable<boolean> {
-    const url = `http://localhost:3000/turnir/daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
-    const headers: HttpHeaders = this.storeService.pribaviHeaders();
-    return this.http.get<boolean>(url, { headers });
+    return this.http.delete(url, { headers });
   }
 }

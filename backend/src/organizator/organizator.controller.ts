@@ -17,17 +17,17 @@ import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
 export class OrganizatorController {
   constructor(private organizatorService: OrganizatorService) {}
   @UseGuards(JwtAuthGuard, OrganizatorGuard)
-  @Get('sviOrganizatori')
+  @Get('sviOrganizatori') //! obrsati
   vratiSveOrganizatore() {
     return this.organizatorService.vratiSveOrganizatore();
   }
-  @UseGuards(JwtAuthGuard, OrganizatorGuard)
-  @Get('vratiOrganizatoraIzTokena')
-  vratiOrganizatoraIzTokena(@Headers('authorization') authorization: string) {
-    if (authorization)
-      return this.organizatorService.vratiOrganizatoraIzTokena(authorization);
-    else return null;
-  }
+  // @UseGuards(JwtAuthGuard, OrganizatorGuard)
+  // @Get('vratiOrganizatoraIzTokena')
+  // vratiOrganizatoraIzTokena(@Headers('authorization') authorization: string) {
+  //   if (authorization)
+  //     return this.organizatorService.vratiOrganizatoraIzTokena(authorization);
+  //   else return null;
+  // }
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.organizatorService.findOne(username);
@@ -36,5 +36,16 @@ export class OrganizatorController {
   @Post('registrujOrganizatora')
   async registrujOrganizatora(@Body() organizator: OrganizatorEntity) {
     await this.organizatorService.registrujOrganizatora(organizator);
+  }
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
+  @Get('daLiJeOrganizatorTurnira/:organizatorId/:turnirId')
+  daLiJeOrganizatorTurnira(
+    @Param('organizatorId') organizationId: number,
+    @Param('turnirId') turnirId: number,
+  ) {
+    return this.organizatorService.daLiJeOrganizatorTurnira(
+      organizationId,
+      turnirId,
+    );
   }
 }

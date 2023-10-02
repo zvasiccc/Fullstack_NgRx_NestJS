@@ -69,7 +69,6 @@ export class IgracService {
 
     return slobodniIgraci;
 
-    return slobodniIgraci;
     // const subQuery = (qb: SelectQueryBuilder<PrijavaEntity>) => {
     //   return qb
     //     .select('prijava_igrac.id')
@@ -110,7 +109,7 @@ export class IgracService {
     // return presekRezultat as IgracEntity[];
   }
 
-  async vratiIgracePoKorisnickomImenu(korisnickoIme: string) {
+  async igraciSaSlicnimKorisnickimImenom(korisnickoIme: string) {
     return await this.igracRepository.find({
       where: {
         korisnickoIme: Like(`%${korisnickoIme}%`),
@@ -122,15 +121,6 @@ export class IgracService {
     return this.igracRepository.findOne({ where: { korisnickoIme: username } });
   }
 
-  vratiPrijavljenogIgraca() {
-    return {
-      id: 3,
-      korisnickoIme: 'ludjakat',
-      ime: 'Petar',
-      prezime: 'Mancic',
-      vodjaTima: false,
-    };
-  }
   async registrujIgraca(igrac: IgracEntity) {
     const noviIgrac = this.igracRepository.create();
     noviIgrac.korisnickoIme = igrac.korisnickoIme;
