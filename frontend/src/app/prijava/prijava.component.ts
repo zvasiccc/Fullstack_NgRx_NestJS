@@ -71,7 +71,7 @@ export class PrijavaComponent {
       igraci: [],
       turnir: null,
     };
-    alert('uspesno ste se priajvili na turnir');
+    //alert('uspesno ste se priajvili na turnir');
     this.router.navigateByUrl('');
   }
   izbaciIgracaIzTima(igrac: Igrac) {

@@ -31,8 +31,10 @@ export class PrijavaService {
     const url = 'http://localhost:3000/prijava/dodajPrijavu';
     return this.http
       .post(url, prijava, { headers: this.headers })
-      .subscribe((p) => {
-        if (p == null) alert('nema mesta na turniru');
+      .subscribe((p: any) => {
+        if (p.porukaGreske == undefined)
+          alert('Uspesno ste se prijavili na turnir');
+        else alert(p.porukaGreske);
       });
   }
   izbaciIgracaIzTima(igrac: Igrac) {

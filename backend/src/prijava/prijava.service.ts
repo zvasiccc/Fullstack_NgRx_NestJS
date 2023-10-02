@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { PrijavaEntity } from './prijava.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,6 +19,23 @@ export class PrijavaService {
     return this.prijavaRepository.findOne({ where: { id: id } });
   }
   async dodajPrijavu(prijava: PrijavaEntity) {
+    const igrajuVecPrijavljeni = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .innerJoin('prijava.igraci', 'igrac')
+      .where('igrac.id IN (:...igracIds) AND prijava.turnirId = :turnirId', {
+        igracIds: prijava.igraci.map((igrac) => igrac.id),
+        turnirId: prijava.turnir.id,
+      })
+      .getCount();
+
+    console.log(igrajuVecPrijavljeni);
+    if (igrajuVecPrijavljeni > 0) {
+      // // Ako neki od igrača već ima prijavu za dati turnir, vraćamo tu listu igrača
+      // const vecPrijavljeniIgraci = igrajuVecPrijavljeni.map((prijava) => prijava.igraci);
+      // return vecPrijavljeniIgraci.flat(); // Spajamo ih u jedan niz
+      console.log('neki igraci su vec prijavljeni na ovaj turnir');
+      return { porukaGreske: 'neki igraci su vec prijavljeni na ovaj turnir' };
+    }
     const novaPrijava: PrijavaEntity = this.prijavaRepository.create();
     novaPrijava.nazivTima = prijava.nazivTima;
     novaPrijava.potrebanBrojMiseva = prijava.potrebanBrojMiseva;
@@ -33,17 +50,14 @@ export class PrijavaService {
       .where('prijava.turnir = :id', { id: turnir.id })
       .leftJoinAndSelect('prijava.igraci', 'igrac')
       .getMany();
-    // let ukupanBroj = 0;
-    // postojecePrijave.forEach((prijava) => {
-    //   ukupanBroj += prijava.igraci.length;
-    // });
-    // if (ukupanBroj + prijava.igraci.length > turnir.maxBrojUcesnika)
-    //   return null;
-    if (postojecePrijave.length + 1 > turnir.maxBrojTimova) return null;
+
+    if (postojecePrijave.length + 1 > turnir.maxBrojTimova)
+      return { porukaGreske: 'nema mesta' };
     novaPrijava.turnir = turnir;
     novaPrijava.igraci = prijava.igraci;
     turnir.trenutniBrojTimova++;
     await this.turnirRepository.save(turnir);
+
     return await this.prijavaRepository.save(novaPrijava);
   }
   async prijaveNaTurniru(turnirId: number) {

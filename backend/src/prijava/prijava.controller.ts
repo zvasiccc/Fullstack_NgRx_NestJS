@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { PrijavaService } from './prijava.service';
@@ -29,8 +30,11 @@ export class PrijavaController {
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Post('dodajPrijavu')
   async dodajPrijavu(@Body() prijava: any) {
-    console.log(prijava);
-    return await this.prijavaService.dodajPrijavu(prijava);
+    try {
+      return await this.prijavaService.dodajPrijavu(prijava);
+    } catch (error) {
+      return { porukaGreske: 'Došlo je do greške prilikom obrade prijave.' };
+    }
   }
   @UseGuards(JwtAuthGuard)
   @Get('prijaveNaTurniru/:turnirId')
