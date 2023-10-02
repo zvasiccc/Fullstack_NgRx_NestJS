@@ -1,32 +1,59 @@
-/* Stilizacija za element sa klasom 'turnir' */
+/* Stilizacija turnir div-a */
 .turnir {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .turnir h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+  margin: 0;
 }
 
 .turnir p {
-  font-size: 1rem;
+  font-size: 16px;
+  color: #666;
   margin: 5px 0;
 }
 
+/* Stilizacija dugmadi */
 .turnir button {
   background-color: #007bff;
   color: #fff;
+  padding: 10px 15px;
   border: none;
-  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 10px;
   cursor: pointer;
-  border-radius: 3px;
 }
 
 .turnir button:hover {
   background-color: #0056b3;
+}
+
+/* Stilizacija kontejnera za dugmad */
+.turnir [container] {
+  display: flex;
+  justify-content: flex-end; /* Stavlja dugmad u desni ugao */
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Stilizacija lista */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+/* Stilizacija labele */
+.turnir label {
+  font-weight: bold;
+  color: #555; /* Boja teksta za labelu */
+  margin-right: 5px; /* Razmak sa desne strane labele */
 }

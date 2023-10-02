@@ -52,3 +52,4 @@ export class KreiranjeTurniraComponent {
     });
   }
 }
+//aleksa profil da se salje azurirano, je organizator da bude async da bi cekalo,provera vodje na back,fja na back za pretragu da prima proizvoljen parametre

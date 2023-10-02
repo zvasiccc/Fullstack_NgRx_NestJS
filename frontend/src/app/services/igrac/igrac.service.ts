@@ -19,10 +19,10 @@ export class IgracService {
     private storeService: StoreService,
     private router: Router
   ) {}
-  private sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci';
   private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   vratiSveIgrace(): Observable<Igrac[]> {
-    return this.http.get<Igrac[]>(this.sviIgraciUrl);
+    const sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci'; //todo da vraca sve igrace osim trenutnog
+    return this.http.get<Igrac[]>(sviIgraciUrl);
   }
   // vratiPrijavljenogIgraca() {
   //   // return this.http.get<Igrac>(this.prijavljeniIgracUrl);

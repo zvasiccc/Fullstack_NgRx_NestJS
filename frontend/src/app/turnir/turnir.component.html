@@ -7,7 +7,6 @@
   <p>trenutni broj timova: {{ turnir.trenutniBrojTimova }}</p>
   <div container>
     <ul>
-      <p>dugmici</p>
       <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
         <button (click)="prikaziPrijavljeneTimove(turnir.id)">
           Prijavljeni timovi

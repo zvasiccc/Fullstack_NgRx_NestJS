@@ -1,4 +1,4 @@
-<div>
+<div class="form-container">
   <h2>Unos podataka za Turnir</h2>
   <form>
     <div class="form-group">
@@ -22,9 +22,9 @@
       />
     </div>
     <div class="form-group">
-      <label for="mestoOdrzavanja">mesto održavanja:</label>
+      <label for="mestoOdrzavanja">Mesto održavanja:</label>
       <input
-        type="string"
+        type="text"
         id="mestoOdrzavanja"
         name="mestoOdrzavanja"
         [(ngModel)]="turnir.mestoOdrzavanja"
@@ -32,7 +32,7 @@
       />
     </div>
     <div class="form-group">
-      <label for="maxBrojTimova">Maksimalni broj timova: </label>
+      <label for="maxBrojTimova">Maksimalni broj timova:</label>
       <input
         type="number"
         id="maxBrojTimova"
@@ -42,7 +42,7 @@
       />
     </div>
     <div class="form-group">
-      <label for="nagrada"> Nagrada pobedniku: </label>
+      <label for="nagrada">Nagrada pobedniku:</label>
       <input
         type="number"
         id="nagrada"
@@ -51,6 +51,8 @@
         required
       />
     </div>
-    <button (click)="kreirajTurnir()">Kreiraj Turnir</button>
+    <button class="submit-button" (click)="kreirajTurnir()">
+      Kreiraj Turnir
+    </button>
   </form>
 </div>

@@ -36,6 +36,7 @@ export class ProfilComponent {
   promeniPodatke() {
     this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
       if (korisnik?.role == 'igrac') {
+        console.log(korisnik.ime);
         const izmenjeniIgrac: any = { ...korisnik };
         izmenjeniIgrac.korisnickoIme = this.igracService
           .izmeniPodatkeOIgracu(izmenjeniIgrac)

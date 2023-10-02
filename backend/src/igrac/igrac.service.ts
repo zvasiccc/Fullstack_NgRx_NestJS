@@ -23,6 +23,12 @@ export class IgracService {
   async vratiSveIgrace() {
     return await this.igracRepository.find();
   }
+  async vratiSveIgraceOsimTrenutnog(igracId: number) {
+    return await this.igracRepository
+      .createQueryBuilder('igrac')
+      .where({ id: Not(igracId) })
+      .getMany();
+  }
   async vratiIgracaIzTokena(token: string) {
     try {
       const noviToken = token.split(' ')[1];

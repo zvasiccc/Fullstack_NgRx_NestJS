@@ -1,7 +1,6 @@
-<ul>
+<ul class="my-list">
   <li *ngFor="let igrac of mojiSaigraci$ | async">
     <app-igrac [igrac]="igrac"></app-igrac>
-    <p>ovo je bio saigrac</p>
     <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
       <ng-container *ngIf="korisnik as igrac">
         <ng-container *ngIf="jeVodjaTima(igrac)">

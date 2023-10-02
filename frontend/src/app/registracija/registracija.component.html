@@ -1,6 +1,5 @@
 <form>
-  <div>
-    <label for="tipRegistracije">Izaberite tip registracije:</label>
+  <div class="radio-label">
     <input
       type="radio"
       id="igrac"
@@ -9,6 +8,8 @@
       [(ngModel)]="tipRegistracije"
     />
     Igrač
+  </div>
+  <div class="radio-label">
     <input
       type="radio"
       id="organizator"
@@ -18,7 +19,9 @@
     />
     Organizator
   </div>
-
+  <br />
+  <br />
+  <br />
   <div *ngIf="tipRegistracije === 'organizator'">
     <div>
       <label for="korisnickoIme">Korisničko ime:</label>

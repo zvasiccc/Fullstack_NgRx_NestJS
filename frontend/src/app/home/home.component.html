@@ -2,43 +2,10 @@
   (pretragaRezultati)="handlePretragaRezultati($event)"
 ></app-search-bar>
 <div class="container">
-  <h3>turniri</h3>
-  <ul>
+  <h3>Turniri</h3>
+  <ul class="turnir-list">
     <li *ngFor="let turnir of sviTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <!-- <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
-        <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-          Prijavljeni timovi
-        </button>
-        <ng-container *ngIf="korisnik.role === 'igrac'">
-          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
-        </ng-container>
-        <ng-container *ngIf="korisnik.role === 'organizator'">
-          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-        </ng-container>
-      </ng-container> -->
     </li>
   </ul>
-  <!-- <ul *ngIf="!pretragaIzvrsena">
-    <li>Ovde ce se prikazati turniri nakon pretrage</li>
-  </ul>
-  <ul *ngIf="pretragaIzvrsena">
-    <li *ngIf="!postojeFiltriraniTurniri">
-      Nema dostupnih turnira sa unetim parametrima
-    </li>
-  </ul>
-  <ul *ngIf="filtriraniTurniri && filtriraniTurniri.length > 0">
-    <li *ngFor="let turnir of filtriraniTurniri">
-      <app-turnir [turnir]="turnir"></app-turnir>
-      <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
-        <ng-container *ngIf="korisnik.role === 'igrac'">
-          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
-          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-          <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-            Prijavljeni timovi
-          </button>
-        </ng-container>
-      </ng-container>
-    </li>
-  </ul> -->
 </div>
