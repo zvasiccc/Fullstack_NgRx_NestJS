@@ -12,29 +12,32 @@
           Prijavljeni timovi
         </button>
         <ng-container *ngIf="korisnik.role === 'igrac'">
-          <ng-container *ngIf="jeVodjaTima(korisnik)">
+          <ng-container *ngIf="igracJeVodja(korisnik)">
             <!-- //todo ako je vec prijavljen da mu se prikaze ovde obrisi prijavu a ne prijavi se  -->
-            <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
-              Prijavi se
-            </button>
-            <button (click)="odjaviSvojTimSaTurnira(turnir.id, korisnik.id)">
-              Izbrisi prijavu
-            </button>
+            <!-- //todo ako je ovaj igrac(tu vec znamo da je vodja) ucesnik na tom turniru -->
+            <ng-container *ngIf="!(jePrijavljenNaTurnir | async)">
+              <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
+                Prijavi se
+              </button>
+            </ng-container>
+            <ng-container *ngIf="jePrijavljenNaTurnir | async">
+              <button (click)="odjaviSvojTimSaTurnira(turnir.id, korisnik.id)">
+                Izbrisi prijavu
+              </button>
+            </ng-container>
           </ng-container>
-          <ng-container>
+          <ng-container *ngIf="jePrijavljenNaTurnir | async">
             <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
               Vidi saigrace
             </button>
           </ng-container>
         </ng-container>
-        <!-- <ng-container *ngIf="korisnik.role === 'organizator'">
-          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-        </ng-container> -->
-        <!-- <ng-container *ngIf="korisnik as igrac">
-          <ng-container *ngIf="jeVodjaTima(igrac)"> -->
+        <ng-container *ngIf="korisnik.role === 'organizator'">
+          <ng-container *ngIf="jeOrganizatorTurnira | async">
+            <button (click)="obrisiTurnir()">Obrisi turnir</button>
+          </ng-container>
+        </ng-container>
       </ng-container>
-      <!-- </ng-container>
-      </ng-container> -->
     </ul>
   </div>
 </div>

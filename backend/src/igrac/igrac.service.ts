@@ -187,6 +187,17 @@ export class IgracService {
 
     return igraci;
   }
+  async daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
+    const trazenaPrijava: PrijavaEntity = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .innerJoin('prijava.igraci', 'igrac')
+      .innerJoin('prijava.turnir', 'turnir')
+      .where('turnir.id = :turnirId', { turnirId }) //! bez id:
+      .andWhere('igrac.id = :igracId', { igracId })
+      .getOne();
+    //*inner join da ne dobijemo prijavu ako ne postoji igracId ili turnirId
+    return trazenaPrijava ? true : false;
+  }
   private async hashPassword(password: string, salt: string) {
     return bcrypt.hash(password, salt);
   }

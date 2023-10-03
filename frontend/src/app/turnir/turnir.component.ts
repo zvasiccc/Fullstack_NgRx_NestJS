@@ -13,6 +13,7 @@ import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.sel
 import { IgracService } from '../services/igrac/igrac.service';
 import { PrijavaService } from '../services/prijava.service';
 import { StoreService } from '../services/store.service';
+import { OrganizatorService } from '../services/organizator.service';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -23,11 +24,14 @@ export class TurnirComponent {
   turnir!: Turnir;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
+  jePrijavljenNaTurnir: Observable<any> = new Observable();
+  jeOrganizatorTurnira: Observable<any> = new Observable();
   constructor(
     //private korpaService: KorpaService,
     private turnirService: TurnirService,
     private igracService: IgracService,
     private prijavaService: PrijavaService,
+    private organizatorService: OrganizatorService,
     private storeService: StoreService,
     private store: Store,
     private router: Router
@@ -35,7 +39,19 @@ export class TurnirComponent {
   //todo vodja tima moze iz tima da izbaci saigrace,samo ako je to njegov tim
   //todo on ce moci i  da vidi saigrace samo ako je njegov tim tkd ez
   //todo autentif za vodju
-
+  ngOnInit() {
+    const idTrenutnogKorisnika =
+      this.storeService.pribaviIdPrijavljenogKorisnika();
+    this.jePrijavljenNaTurnir = this.igracService.daLiJeIgracPrijavljenNaTurnir(
+      this.turnir.id,
+      idTrenutnogKorisnika
+    );
+    this.jeOrganizatorTurnira =
+      this.organizatorService.daLiJeOrganizatorTurnira(
+        idTrenutnogKorisnika,
+        this.turnir.id
+      );
+  }
   prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
     const igrac: Igrac = korisnik as Igrac;
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
@@ -55,7 +71,11 @@ export class TurnirComponent {
     this.router.navigateByUrl(`mojiSaigraci/${turnirId}/${igracId}`);
     //this.igracService.vidiSaigrace(turnirId, igracId);
   }
-  jeVodjaTima(user: any): user is Igrac {
+  async obrisiTurnir() {
+    this.turnirService.obrisiTurnir(this.turnir.id);
+  }
+
+  igracJeVodja(user: any): user is Igrac {
     return user.role === 'igrac' && user.vodjaTima === true;
   }
 }

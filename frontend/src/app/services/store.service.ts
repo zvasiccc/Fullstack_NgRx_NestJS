@@ -20,6 +20,7 @@ export class StoreService {
   headers: HttpHeaders = new HttpHeaders();
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     new Observable();
+  prijavljeniKorisnikId: number = 0;
   constructor(private store: Store) {
     this.trenutnoPrijavljeniKorisnik$ = this.store
       .select(selectPrijavljeniKorisnik)
@@ -41,12 +42,11 @@ export class StoreService {
   public pribaviTrenutnoPrijavljenogKorisnika() {
     return this.trenutnoPrijavljeniKorisnik$;
   }
-  public pribaviIdPrijavljenogKorisnika() {
-    let id;
+  public pribaviIdPrijavljenogKorisnika(): number {
     this.trenutnoPrijavljeniKorisnik$.subscribe((p) => {
-      id = p?.id;
+      this.prijavljeniKorisnikId = p?.id as number;
     });
-    return id;
+    return this.prijavljeniKorisnikId;
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store

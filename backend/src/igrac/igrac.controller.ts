@@ -88,4 +88,15 @@ export class IgracController {
   ) {
     return this.igracService.vratiIgraceIzIstogTima(turnirId, igracId);
   }
+  @UseGuards(JwtAuthGuard, IgracGuard) //todo provera za vodju
+  @Get('daLiJeIgracPrijavljenNaTurnir/:turnirId/:igracId')
+  async daLiJeIgracPrijavljenNaTurnir(
+    @Param('turnirId') turnirId: number,
+    @Param('igracId') igracId: number,
+  ) {
+    return await this.igracService.daLiJeIgracPrijavljenNaTurnir(
+      turnirId,
+      igracId,
+    );
+  }
 }

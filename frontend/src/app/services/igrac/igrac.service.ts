@@ -71,4 +71,10 @@ export class IgracService {
     const url = this.urlIgrac + 'izmeniPodatkeOIgracu';
     return this.http.put<Igrac>(url, igrac, { headers });
   }
+  daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
+    const headers = this.storeService.pribaviHeaders();
+    const url =
+      this.urlIgrac + `daLiJeIgracPrijavljenNaTurnir/${turnirId}/${igracId}`;
+    return this.http.get(url, { headers });
+  }
 }
