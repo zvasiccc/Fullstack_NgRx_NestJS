@@ -19,3 +19,4 @@ export const korisnikReducer = createReducer(
     token,
   }))
 );
+//todo adatapter i entites  ovde

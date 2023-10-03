@@ -39,7 +39,8 @@ export class ProfilComponent {
       if (korisnik?.role == 'igrac') {
         console.log(korisnik.ime);
         const izmenjeniIgrac: any = { ...korisnik };
-        izmenjeniIgrac.korisnickoIme = this.igracService
+        izmenjeniIgrac.korisnickoIme;
+        this.igracService
           .izmeniPodatkeOIgracu(izmenjeniIgrac)
           .subscribe(() => {});
       }

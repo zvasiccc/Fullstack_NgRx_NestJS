@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
@@ -21,7 +21,8 @@ export class IgracService {
     private storeService: StoreService,
     private router: Router
   ) {}
-  private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
+  //private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
+  private urlIgrac = 'http://localhost:3000/igrac/';
   vratiSveIgrace(): Observable<Igrac[]> {
     const trenutnoPrijavljeniKorisnik$ =
       this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
@@ -29,9 +30,10 @@ export class IgracService {
     trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
       idKorisnika = korisnik?.id as number;
     });
-    const sviIgraciUrl = 'http://localhost:3000/igrac/sviIgraci'; //todo da vraca sve igrace osim trenutnog
-    const url = `http://localhost:3000/igrac/vratiSveIgraceOsimTrenutnog/${idKorisnika}`;
-    return this.http.get<Igrac[]>(url);
+    const url: string =
+      this.urlIgrac + `vratiSveIgraceOsimTrenutnog/${idKorisnika}`;
+    const headers: HttpHeaders = this.storeService.pribaviHeaders();
+    return this.http.get<Igrac[]>(url, { headers });
   }
   // vratiPrijavljenogIgraca() {
   //   // return this.http.get<Igrac>(this.prijavljeniIgracUrl);
@@ -48,24 +50,25 @@ export class IgracService {
       .pipe(map((p: any) => p.igraciUTimu));
   }
   vratiIgracePoKorisnickomImenu(korisnickoIme: string): Observable<Igrac[]> {
-    const url = `http://localhost:3000/igrac/korisnickoIme/${korisnickoIme}`;
-    return this.http.get<Igrac[]>(url);
+    const url = this.urlIgrac + `korisnickoIme/${korisnickoIme}`;
+    const headers = this.storeService.pribaviHeaders();
+    return this.http.get<Igrac[]>(url, { headers });
   }
   registrujSeKaoIgrac(igrac: Igrac) {
-    const url = 'http://localhost:3000/igrac/registrujIgraca';
+    const url = this.urlIgrac + 'registrujIgraca';
     return this.http.post(url, igrac).subscribe(() => {
       this.router.navigateByUrl('');
     });
   }
   vidiSaigrace(turnirId: number, igracId: number): Observable<Igrac[]> {
     const headers = this.storeService.pribaviHeaders();
-    const url = `http://localhost:3000/igrac/vratiIgraceIzIstogTima/${turnirId}/${igracId}`;
+    const url = this.urlIgrac + `vratiIgraceIzIstogTima/${turnirId}/${igracId}`;
     return this.http.get<Igrac[]>(url, { headers });
   }
   //todo svaki url iz service da se nadovezuje samo
   izmeniPodatkeOIgracu(igrac: Igrac): Observable<Igrac> {
     const headers = this.storeService.pribaviHeaders();
-    const url = 'http://localhost:3000/igrac/izmeniPodatkeOIgracu';
+    const url = this.urlIgrac + 'izmeniPodatkeOIgracu';
     return this.http.put<Igrac>(url, igrac, { headers });
   }
 }

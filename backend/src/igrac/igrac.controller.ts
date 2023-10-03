@@ -24,6 +24,7 @@ export class IgracController {
   async vratiSveIgrace() {
     return await this.igracService.vratiSveIgrace();
   }
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiSveIgraceOsimTrenutnog/:igracId')
   async vratiSveIgraceOsimTrenutnog(@Param('igracId') igracId: number) {
     return await this.igracService.vratiSveIgraceOsimTrenutnog(igracId);
@@ -79,6 +80,7 @@ export class IgracController {
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);
   }
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiIgraceIzIstogTima/:turnirId/:igracId')
   vratiIgraceIzIstogTima(
     @Param('turnirId') turnirId: number,

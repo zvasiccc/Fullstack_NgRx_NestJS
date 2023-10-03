@@ -12,28 +12,15 @@ import { StoreService } from './store.service';
   providedIn: 'root',
 })
 export class PrijavaService {
-  //jwtTokenString: string = '';
-  // headers: HttpHeaders = new HttpHeaders();
   constructor(
     private store: Store,
     private http: HttpClient,
     private storeService: StoreService
   ) {}
-  // pribaviToken() {
-  //   let jwtTokenObservable = this.store
-  //     .select(selectTokenPrijavljenogKorisnika)
-  //     .pipe(map((p: any) => p.token));
-
-  //   jwtTokenObservable.subscribe((token: string) => {
-  //     this.jwtTokenString = token;
-  //   });
-  //   this.headers = new HttpHeaders({
-  //     Authorization: `Bearer ${this.jwtTokenString}`,
-  //   });
-  // }
+  prijavaUrl = 'http://localhost:3000/prijava/';
   posaljiPrijavuUBazu(prijava: Prijava) {
-    const headers = this.storeService.pribaviHeaders();
-    const url = 'http://localhost:3000/prijava/dodajPrijavu';
+    const headers = this.storeService.pribaviHeaders(); //todo da li je bolje headers van fje
+    const url = this.prijavaUrl + 'dodajPrijavu';
     return this.http.post(url, prijava, { headers }).subscribe((p: any) => {
       if (p.porukaGreske == undefined)
         alert('Uspesno ste se prijavili na turnir');
@@ -45,11 +32,11 @@ export class PrijavaService {
   }
   vratiPrijaveZaTurnir(turnirId: number): Observable<Prijava[]> {
     const headers = this.storeService.pribaviHeaders();
-    const url = `http://localhost:3000/prijava/prijaveNaTurniru/${turnirId}`;
+    const url = this.prijavaUrl + `prijaveNaTurniru/${turnirId}`;
     return this.http.get<Prijava[]>(url, { headers });
   }
   izbaciTimSaTurnira(prijavaId: number): Observable<any> {
-    const url = `http://localhost:3000/prijava/izbaciTimSaTurnira/${prijavaId}`;
+    const url = this.prijavaUrl + `izbaciTimSaTurnira/${prijavaId}`;
     return this.http.delete(url);
   }
   odjaviSvojTimSaTurnira(
@@ -57,7 +44,8 @@ export class PrijavaService {
     igracId: number
   ): Observable<Prijava[]> {
     const headers = this.storeService.pribaviHeaders();
-    const url = `http://localhost:3000/prijava/odjaviSvojTimSaTurnira/${turnirId}/${igracId}`;
+    const url =
+      this.prijavaUrl + `odjaviSvojTimSaTurnira/${turnirId}/${igracId}`;
     return this.http.delete<Prijava[]>(url, { headers });
   }
 }

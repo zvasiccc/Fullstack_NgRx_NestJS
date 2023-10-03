@@ -17,8 +17,9 @@ export class OrganizatorService {
     private storeService: StoreService,
     private router: Router
   ) {}
+  organizatorUrl: string = 'http://localhost:3000/organizator/';
   registrujSeKaoOrganizator(organizator: Organizator) {
-    const url = 'http://localhost:3000/organizator/registrujOrganizatora';
+    const url = this.organizatorUrl + 'registrujOrganizatora';
     console.log(JSON.stringify(organizator));
     return this.http.post(url, organizator).subscribe(() => {
       this.router.navigateByUrl('');
@@ -28,7 +29,9 @@ export class OrganizatorService {
     korisnikId: number | undefined | null,
     turnirId: number | undefined | null
   ): Observable<boolean> {
-    const url = `http://localhost:3000/organizator/daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
+    const url =
+      this.organizatorUrl +
+      `daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<boolean>(url, { headers });
   }

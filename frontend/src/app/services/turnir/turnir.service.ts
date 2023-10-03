@@ -26,18 +26,18 @@ export class TurnirService {
     private http: HttpClient,
     private storeService: StoreService
   ) {}
-  //private apiUrl = 'http://localhost:3000/turnir/sviTurniri';
+  private turnirUrl = 'http://localhost:3000/turnir/';
 
   dodajTurnir(turnir: Turnir) {
     this.store.dispatch(kreirajTurnir({ turnir }));
   }
   getTurniriBaza(): Observable<Turnir[]> {
-    const url = 'http://localhost:3000/turnir/sviTurniri';
+    const url = this.turnirUrl + 'sviTurniri';
     return this.http.get<Turnir[]>(url);
   }
   getMojiTurniri(): Observable<Turnir[]> {
     const headers = this.storeService.pribaviHeaders();
-    const url = 'http://localhost:3000/turnir/mojiTurniri';
+    const url = this.turnirUrl + 'mojiTurniri';
 
     return this.http.get<Turnir[]>(url, { headers });
   }
@@ -56,7 +56,7 @@ export class TurnirService {
   // }
   kreirajTurnir(turnir: Turnir) {
     const headers = this.storeService.pribaviHeaders();
-    const url = 'http://localhost:3000/turnir/dodajTurnir';
+    const url = this.turnirUrl + 'dodajTurnir';
     return this.http.post(url, turnir, { headers }).subscribe((p) => p);
   }
   async filtrirajTurnire(
@@ -82,13 +82,12 @@ export class TurnirService {
     );
     //todo omoguci pretragu bez svih parametara na back
     // Kreiraj URL sa parametrima
-    const url =
-      'http://localhost:3000/turnir/filtrirajTurnire' + '?' + params.toString();
+    const url = this.turnirUrl + 'filtrirajTurnire' + '?' + params.toString();
     return this.http.get(url);
   }
   async obrisiTurnir(turnirId: number) {
     const headers = this.storeService.pribaviHeaders();
-    const url = `http://localhost:3000/turnir/obrisiTurnir/${turnirId}`;
+    const url = this.turnirUrl + `obrisiTurnir/${turnirId}`;
     return this.http.delete(url, { headers });
   }
 }

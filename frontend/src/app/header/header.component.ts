@@ -22,7 +22,7 @@ export class HeaderComponent {
     private store: Store,
     private storeService: StoreService
   ) {}
-
+  //todo napravi adapter,effects,
   navigirajNaKreiranjeTurnira() {
     this.router.navigateByUrl('kreiranjeTurnira');
   }
