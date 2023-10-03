@@ -109,21 +109,27 @@ export class TurnirService {
   ) {
     const whereClause: any = {};
 
-    if (pretragaNaziv != '') {
+    if (pretragaNaziv !== undefined) {
       whereClause.naziv = pretragaNaziv;
     }
 
-    if (pretragaMesto != '') {
+    if (pretragaMesto !== undefined) {
       whereClause.mestoOdrzavanja = pretragaMesto;
     }
 
-    if (!pretragaPocetniDatum && !pretragaKrajnjiDatum) {
+    if (
+      pretragaPocetniDatum !== undefined &&
+      pretragaKrajnjiDatum !== undefined
+    ) {
       whereClause.datumOdrzavanja = Between(
         pretragaPocetniDatum,
         pretragaKrajnjiDatum,
       );
     }
-    if (pretragaKrajnjaNagrada != 0 && pretragaPocetnaNagrada != 0) {
+    if (
+      pretragaKrajnjaNagrada !== undefined &&
+      pretragaPocetnaNagrada !== undefined
+    ) {
       whereClause.nagrada = Between(
         pretragaPocetnaNagrada,
         pretragaKrajnjaNagrada,

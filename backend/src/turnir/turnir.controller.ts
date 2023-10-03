@@ -46,14 +46,10 @@ export class TurnirController {
     return await this.turnirService.dodajTurnir(turnir, authorization);
   }
   ///:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum
-  @Get('filtrirajTurnire')
+  @Get(
+    'filtrirajTurnire/:pretragaNaziv?/:pretragaMesto?/:pretragaPocetniDatum?/:pretragaKrajnjiDatum?/:pretragaPocetnaNagrada?/:pretragaKrajnjaNagrada?',
+  )
   async filtrirajTurnire(
-    // @Param('pretragaNaziv') pretragaNaziv: string,
-    // @Param('pretragaMesto') pretragaMesto: string,
-    // @Param('pretragaPocetniDatum') pretragaPocetniDatum: string,
-    // @Param('pretragaKrajnjiDatum') pretragaKrajnjiDatum: string,
-    // @Param('pretragaPocetnaNagrada') pretragaPocetnaNagrada: number,
-    // @Param('pretragaKrajnjaNagrada') pretragaKrajnjaNagrada: number,
     @Query('pretragaNaziv') pretragaNaziv: string,
     @Query('pretragaMesto') pretragaMesto: string,
     @Query('pretragaPocetniDatum') pretragaPocetniDatum: string,
