@@ -39,9 +39,9 @@ export class HeaderComponent {
     this.store.dispatch(KorisnikActions.odjaviPrijavljenogKorisnika());
     this.router.navigateByUrl('');
   }
-  // navigirajNaPrijavu() {
-  //   this.router.navigateByUrl('prijava');
-  // }
+  navigirajNaPrijavu() {
+    this.router.navigateByUrl('prijava');
+  }
   navigirajNaRegistraciju() {
     this.router.navigateByUrl('registracija');
   }

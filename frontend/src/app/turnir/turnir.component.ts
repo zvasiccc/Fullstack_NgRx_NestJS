@@ -4,7 +4,7 @@ import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
+
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
 import { Observable, map } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';

@@ -6,7 +6,6 @@ import { OrganizatorService } from '../services/organizator.service';
 import { mergeMap, of } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
 import { Store } from '@ngrx/store';
-import * as IgracActions from '../shared/state/igrac/igrac.actions';
 import { Organizator } from '../shared/models/organizator';
 import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
 import { Router } from '@angular/router';

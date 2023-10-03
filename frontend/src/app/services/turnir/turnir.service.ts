@@ -5,14 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import {
-  kreirajTurnir,
-  vratiSveTurnire,
-} from 'src/app/shared/state/turnir/turnir.actions';
-import {
-  selectPrijavljeniIgraciZaTurnir,
-  selectPrijavljeniTurniri,
-} from 'src/app/shared/state/turnir/turnir.selector';
+
 import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
 import { StoreService } from '../store.service';
@@ -28,9 +21,9 @@ export class TurnirService {
   ) {}
   private turnirUrl = 'http://localhost:3000/turnir/';
 
-  dodajTurnir(turnir: Turnir) {
-    this.store.dispatch(kreirajTurnir({ turnir }));
-  }
+  // dodajTurnir(turnir: Turnir) {
+  //   this.store.dispatch(kreirajTurnir({ turnir }));
+  // }
   getTurniriBaza(): Observable<Turnir[]> {
     const url = this.turnirUrl + 'sviTurniri';
     return this.http.get<Turnir[]>(url);

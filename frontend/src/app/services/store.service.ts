@@ -6,7 +6,6 @@ import {
   selectTokenPrijavljenogKorisnika,
 } from '../shared/state/korisnik/korisnik.selector';
 import { Store } from '@ngrx/store';
-import { selectPrijavljeniIgraciZaTurnir } from '../shared/state/turnir/turnir.selector';
 import { Igrac } from '../shared/models/igrac';
 import { Turnir } from '../shared/models/turnir';
 import { selectTurnirUPrijavi } from '../shared/state/prijava/prijava.selector';
@@ -50,7 +49,7 @@ export class StoreService {
   }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store
-      .select(selectPrijavljeniIgraciZaTurnir(turnirId))
+      .select(selectPrijavljeniIgraciZaTurnir)
       .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
   vratiPrijavljeniTUrnir(): Observable<Turnir> {
@@ -61,4 +60,7 @@ export class StoreService {
     //   .select(selectPrijavljeniTurniri)
     //   .pipe(map((p: any) => p.prijavljeniTurniri));
   }
+}
+function selectPrijavljeniIgraciZaTurnir(state: object): unknown {
+  throw new Error('Function not implemented.');
 }

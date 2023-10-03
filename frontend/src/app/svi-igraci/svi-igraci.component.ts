@@ -5,7 +5,7 @@ import { Igrac } from '../shared/models/igrac';
 import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Store } from '@ngrx/store';
-import { selectPrijavljeniTurniri } from '../shared/state/turnir/turnir.selector';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 @Component({

@@ -23,5 +23,9 @@ export const prijavaReducer = createReducer(
   on(PrijavaActions.dodajPreferenceUPrijavu, (state, { preference }) => ({
     ...state,
     preference: { ...preference },
+  })),
+  on(PrijavaActions.sviIgraciUPrijavi, (state) => ({
+    ...state,
+    // igraci: state.igraciUTimu.filter((igrac) => igrac.turnir?.id === turnirId),
   }))
 );
