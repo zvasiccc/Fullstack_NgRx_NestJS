@@ -32,6 +32,7 @@ export class OrganizatorService {
     const url =
       this.organizatorUrl +
       `daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
+    console.log('saljem url ' + url);
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<boolean>(url, { headers });
   }

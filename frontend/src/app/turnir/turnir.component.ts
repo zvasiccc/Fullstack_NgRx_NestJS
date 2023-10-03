@@ -35,7 +35,7 @@ export class TurnirComponent {
   //todo vodja tima moze iz tima da izbaci saigrace,samo ako je to njegov tim
   //todo on ce moci i  da vidi saigrace samo ako je njegov tim tkd ez
   //todo autentif za vodju
-  //todo innput i output,
+
   prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
     const igrac: Igrac = korisnik as Igrac;
     this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));

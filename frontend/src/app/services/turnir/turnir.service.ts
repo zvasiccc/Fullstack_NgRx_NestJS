@@ -41,6 +41,43 @@ export class TurnirService {
 
     return this.http.get<Turnir[]>(url, { headers });
   }
+
+  kreirajTurnir(turnir: Turnir) {
+    const headers = this.storeService.pribaviHeaders();
+    const url = this.turnirUrl + 'dodajTurnir';
+    return this.http.post(url, turnir, { headers }).subscribe((p) => p);
+  }
+  async filtrirajTurnire(
+    pretragaNaziv?: string,
+    pretragaMesto?: string,
+    pretragaPocetniDatum?: string,
+    pretragaKrajnjiDatum?: string,
+    pretragaPocetnaNagrada?: number,
+    pretragaKrajnjaNagrada?: number
+  ) {
+    let url = this.turnirUrl + 'filtrirajTurnire?';
+    if (pretragaNaziv !== undefined && pretragaNaziv !== '')
+      url += `pretragaNaziv=${pretragaNaziv}`;
+    if (pretragaMesto !== undefined && pretragaMesto !== '')
+      url += `pretragaMesto=${pretragaMesto}`;
+    if (pretragaPocetniDatum !== undefined && pretragaPocetniDatum !== '')
+      url += `pretragaPocetniDatum=${pretragaPocetniDatum}`;
+    if (pretragaKrajnjiDatum !== undefined && pretragaKrajnjiDatum !== '')
+      url += `pretragaKrajnjiDatum=${pretragaKrajnjiDatum}`;
+    if (pretragaPocetnaNagrada !== undefined && pretragaPocetnaNagrada !== 0)
+      url += `pretragaPocetnaNagrada=${pretragaPocetnaNagrada}`;
+    if (pretragaKrajnjaNagrada !== undefined && pretragaKrajnjaNagrada !== 0)
+      url += `pretragaKrajnjaNagrada=${pretragaKrajnjaNagrada}`;
+
+    console.log('saljem url ' + url);
+    console.log(' pretraga naziv je+ ' + pretragaNaziv);
+    return this.http.get(url);
+  }
+  async obrisiTurnir(turnirId: number) {
+    const headers = this.storeService.pribaviHeaders();
+    const url = this.turnirUrl + `obrisiTurnir/${turnirId}`;
+    return this.http.delete(url, { headers });
+  }
   // vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
   //   return this.store
   //     .select(selectPrijavljeniIgraciZaTurnir(turnirId))
@@ -54,40 +91,4 @@ export class TurnirService {
   //   //   .select(selectPrijavljeniTurniri)
   //   //   .pipe(map((p: any) => p.prijavljeniTurniri));
   // }
-  kreirajTurnir(turnir: Turnir) {
-    const headers = this.storeService.pribaviHeaders();
-    const url = this.turnirUrl + 'dodajTurnir';
-    return this.http.post(url, turnir, { headers }).subscribe((p) => p);
-  }
-  async filtrirajTurnire(
-    pretragaNaziv: string,
-    pretragaMesto: string,
-    pretragaPocetniDatum: string,
-    pretragaKrajnjiDatum: string,
-    pretragaPocetnaNagrada: number,
-    pretragaKrajnjaNagrada: number
-  ) {
-    let params = new HttpParams();
-    params = params.append('pretragaNaziv', pretragaNaziv);
-    params = params.append('pretragaMesto', pretragaMesto);
-    params = params.append('pretragaPocetniDatum', pretragaPocetniDatum);
-    params = params.append('pretragaKrajnjiDatum', pretragaKrajnjiDatum);
-    params = params.append(
-      'pretragaPocetnaNagrada',
-      pretragaPocetnaNagrada.toString()
-    );
-    params = params.append(
-      'pretragaKrajnjaNagrada',
-      pretragaKrajnjaNagrada.toString()
-    );
-    //todo omoguci pretragu bez svih parametara na back
-    // Kreiraj URL sa parametrima
-    const url = this.turnirUrl + 'filtrirajTurnire' + '?' + params.toString();
-    return this.http.get(url);
-  }
-  async obrisiTurnir(turnirId: number) {
-    const headers = this.storeService.pribaviHeaders();
-    const url = this.turnirUrl + `obrisiTurnir/${turnirId}`;
-    return this.http.delete(url, { headers });
-  }
 }

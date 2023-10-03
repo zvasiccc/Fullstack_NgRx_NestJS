@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Between, Repository } from 'typeorm';
+import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { TurnirEntity } from './turnir.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -126,6 +126,8 @@ export class TurnirService {
         pretragaKrajnjiDatum,
       );
     }
+
+    // Dodajte logiku za nagradu
     if (
       pretragaKrajnjaNagrada !== undefined &&
       pretragaPocetnaNagrada !== undefined
@@ -134,11 +136,17 @@ export class TurnirService {
         pretragaPocetnaNagrada,
         pretragaKrajnjaNagrada,
       );
+    } else if (pretragaPocetnaNagrada !== undefined) {
+      whereClause.nagrada = MoreThanOrEqual(pretragaPocetnaNagrada);
+    } else if (pretragaKrajnjaNagrada !== undefined) {
+      whereClause.nagrada = LessThanOrEqual(pretragaKrajnjaNagrada);
     }
+
     console.log(whereClause);
     const turniri: TurnirEntity[] = await this.turnirRepository.find({
       where: whereClause,
     });
+
     if (!turniri) return [];
     return turniri;
   }

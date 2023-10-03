@@ -65,7 +65,7 @@ export class IgracService {
     const url = this.urlIgrac + `vratiIgraceIzIstogTima/${turnirId}/${igracId}`;
     return this.http.get<Igrac[]>(url, { headers });
   }
-  //todo svaki url iz service da se nadovezuje samo
+
   izmeniPodatkeOIgracu(igrac: Igrac): Observable<Igrac> {
     const headers = this.storeService.pribaviHeaders();
     const url = this.urlIgrac + 'izmeniPodatkeOIgracu';

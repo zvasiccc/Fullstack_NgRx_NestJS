@@ -45,7 +45,6 @@ export class TurnirController {
   ) {
     return await this.turnirService.dodajTurnir(turnir, authorization);
   }
-  ///:pretragaNaziv/:pretragaMesto/:pretragaPocetniDatum/:pretragaKrajnjiDatum
   @Get(
     'filtrirajTurnire/:pretragaNaziv?/:pretragaMesto?/:pretragaPocetniDatum?/:pretragaKrajnjiDatum?/:pretragaPocetnaNagrada?/:pretragaKrajnjaNagrada?',
   )

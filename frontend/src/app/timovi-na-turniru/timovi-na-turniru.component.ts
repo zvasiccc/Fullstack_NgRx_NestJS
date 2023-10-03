@@ -38,17 +38,12 @@ export class TimoviNaTurniruComponent {
     }
   }
   daLiJeOrganizatorTurnira(
-    korisnikId: number | undefined | null,
-    turnirId: number | undefined | null
-  ): boolean {
-    let flag = true;
-    this.organizatorService
-      .daLiJeOrganizatorTurnira(korisnikId, turnirId)
-      .subscribe((p) => {
-        flag = p;
-        return flag;
-      });
-    return flag;
+    korisnikId: number | undefined | null
+  ): Observable<boolean> {
+    return this.organizatorService.daLiJeOrganizatorTurnira(
+      korisnikId,
+      this.turnirId
+    );
   }
 
   izbaciTimSaTurnira(prijavaId: number) {

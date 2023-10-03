@@ -28,6 +28,7 @@ export class SearchBarComponent {
       )
     ).subscribe((rezultati) => {
       this.pretragaRezultati.emit(rezultati);
+      console.log('search bar kaze' + rezultati);
     });
     // const rezultati = {
     //   naziv: this.pretragaNaziv,

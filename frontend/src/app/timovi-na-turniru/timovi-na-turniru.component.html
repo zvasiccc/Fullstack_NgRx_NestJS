@@ -7,9 +7,8 @@
         <ng-container *ngIf="korisnik.role == 'organizator'">
           <!-- //todo i jos ako je to njegov turnir onda da se prikaze -->
           <!-- //todo napravljena funkcija na back samo je pozovi  -->
-          <ng-container
-            *ngIf="daLiJeOrganizatorTurnira(korisnik.id, prijava.turnir?.id)"
-          >
+          <ng-container *ngIf="daLiJeOrganizatorTurnira(korisnik.id) | async">
+            <p>ispunjen uslov</p>
             <button (click)="izbaciTimSaTurnira(prijava.id)">Izbaci tim</button>
           </ng-container>
         </ng-container>
