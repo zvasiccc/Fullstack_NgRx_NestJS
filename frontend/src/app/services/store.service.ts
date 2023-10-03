@@ -41,6 +41,13 @@ export class StoreService {
   public pribaviTrenutnoPrijavljenogKorisnika() {
     return this.trenutnoPrijavljeniKorisnik$;
   }
+  public pribaviIdPrijavljenogKorisnika() {
+    let id;
+    this.trenutnoPrijavljeniKorisnik$.subscribe((p) => {
+      id = p?.id;
+    });
+    return id;
+  }
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store
       .select(selectPrijavljeniIgraciZaTurnir(turnirId))

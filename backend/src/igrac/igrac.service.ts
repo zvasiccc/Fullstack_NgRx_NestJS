@@ -7,7 +7,8 @@ import { TurnirEntity } from 'src/turnir/turnir.entity';
 import { JwtService } from '@nestjs/jwt';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { plainToClass } from 'class-transformer';
-
+import * as bcrypt from 'bcrypt';
+import passport from 'passport';
 @Injectable()
 export class IgracService {
   constructor(
@@ -134,6 +135,9 @@ export class IgracService {
     });
     if (postojeciIgrac) return null; //ako vec postoji igrac sa tim korisnickim imenom
     noviIgrac.korisnickoIme = igrac.korisnickoIme;
+    const salt = await bcrypt.genSalt();
+    noviIgrac.lozinka = await this.hashPassword(igrac.lozinka, salt);
+    console.log(noviIgrac.lozinka);
     noviIgrac.lozinka = igrac.lozinka;
     noviIgrac.ime = igrac.ime;
     noviIgrac.prezime = igrac.prezime;
@@ -182,5 +186,8 @@ export class IgracService {
       .getMany();
 
     return igraci;
+  }
+  private async hashPassword(password: string, salt: string) {
+    return bcrypt.hash(password, salt);
   }
 }

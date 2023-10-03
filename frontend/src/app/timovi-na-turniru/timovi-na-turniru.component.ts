@@ -19,6 +19,11 @@ import { StoreService } from '../services/store.service';
 export class TimoviNaTurniruComponent {
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
+  prijave$: Observable<Prijava[]> = new Observable();
+  turnirId: number = 0;
+  organizatorId: number = 0;
+  organizator: boolean = false;
+  jeOrganizatorTurnira: Observable<any> = new Observable();
   constructor(
     private route: ActivatedRoute,
     private turnirService: TurnirService,
@@ -27,24 +32,28 @@ export class TimoviNaTurniruComponent {
     private storeService: StoreService,
     private store: Store
   ) {}
-  prijave$: Observable<Prijava[]> = new Observable();
-  turnirId: number = 0;
-  organizator: boolean = false;
+
   ngOnInit() {
     const turnirIdParam = this.route.snapshot.paramMap.get('turnirId');
     if (turnirIdParam !== null) {
       this.turnirId = +turnirIdParam;
+      const idKorisnika = this.storeService.pribaviIdPrijavljenogKorisnika();
       this.prijave$ = this.prijavaService.vratiPrijaveZaTurnir(this.turnirId);
+      this.jeOrganizatorTurnira =
+        this.organizatorService.daLiJeOrganizatorTurnira(
+          idKorisnika,
+          this.turnirId
+        );
     }
   }
-  daLiJeOrganizatorTurnira(
-    korisnikId: number | undefined | null
-  ): Observable<boolean> {
-    return this.organizatorService.daLiJeOrganizatorTurnira(
-      korisnikId,
-      this.turnirId
-    );
-  }
+  // daLiJeOrganizatorTurnira(
+  //   korisnikId: number | undefined | null
+  // ): Observable<boolean> {
+  //   return this.organizatorService.daLiJeOrganizatorTurnira(
+  //     korisnikId,
+  //     this.turnirId
+  //   );
+  // }
 
   izbaciTimSaTurnira(prijavaId: number) {
     this.prijavaService.izbaciTimSaTurnira(prijavaId).subscribe(() => {
