@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Igrac } from '../shared/models/igrac';
@@ -14,15 +14,25 @@ import { StoreService } from '../services/store.service';
   templateUrl: './moji-turniri.component.html',
   styleUrls: ['./moji-turniri.component.css'],
 })
-export class MojiTurniriComponent {
+export class MojiTurniriComponent implements OnInit {
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
+  //bSub: BehaviorSubject<Turnir[]> = new BehaviorSubject<Turnir[]>([]);
   mojiTurniri$: Observable<Turnir[]> = this.turnirService.getMojiTurniri(); //new Observable<Turnir[]>(); //observable nad turnirima
-
   constructor(
     private turnirService: TurnirService,
     private storeService: StoreService,
     private router: Router,
     private store: Store
   ) {}
+
+  ngOnInit() {
+    //this.mojiTurniri$.subscribe(this.bSub);
+  }
+
+  // onTurnirDelete() {
+  //   console.log('Brisem turnir');
+  //   //this.bSub.next(this.bSub.value.reverse());
+  //   //this.mojiTurniri$ = this.turnirService.getMojiTurniri();
+  // }
 }

@@ -17,7 +17,6 @@ export class MojiSaigraciComponent implements OnInit {
   mojiSaigraci$: Observable<Igrac[]>;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
-  //todo da dugme vidi saigrace samo ako prijavljeni igrac ucestvuje na tom turniru tj isto kao org sto ce se popravi
   constructor(
     private route: ActivatedRoute,
     private igracService: IgracService,

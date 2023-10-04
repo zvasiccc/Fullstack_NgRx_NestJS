@@ -9,11 +9,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
 //todo za svaku funkciju staviti dekorator na back, dosadasnje fje na front da mogu da pozivaju samo ko treba
-//todo pregledaj moj tim ako si prijavljen na turnir tj da lijeIgracNaTurniru da se implementira kao sto je i organizator(alegz)
-//todo popravi brisanje sa jeOrganizator turnira ono u subscribe
 //todo omoguci menjanje podataka za profil
 //todo provera vodje na back
-//todo da izadje poruka za dodavanje igraca u tim ali na sredinu ekrana
+//todo razlicite poruke da izlaze, i kad je uspesno i neuspesno
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
     id: 0,

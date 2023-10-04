@@ -3,6 +3,7 @@
   <ul>
     <li *ngFor="let turnir of mojiTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
+      <!-- (turnirDeleteEvent)="onTurnirDelete($event)" linija gore-->
       <!-- <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
         <button (click)="prikaziPrijavljeneTimove(turnir.id)">
           Prijavljeni timovi

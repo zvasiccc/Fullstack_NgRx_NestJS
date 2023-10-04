@@ -13,13 +13,6 @@ const selectIgraciUPrijaviFeature =
   createFeatureSelector<Igrac[]>('igraciUPrijavi');
 const selectPreferenceUPrijaviFeature =
   createFeatureSelector<Prijava>('preferenceUPrijavi');
-// const selectPotrebanBrojSlusalicaFeature = createFeatureSelector<number>(
-//   'potrebanBrojSlusalica'
-// );
-// export const selectPotrebanBrojSlusalica = createSelector(
-//   selectPotrebanBrojSlusalicaFeature,
-//   (p) => p
-// );
 
 export const selectTurnirUPrijavi = createSelector(
   selectTurnirUPrijaviFeature,

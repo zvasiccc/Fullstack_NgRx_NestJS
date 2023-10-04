@@ -55,7 +55,7 @@ export class OrganizatorService {
     return await this.organizatorRepository.save(noviOrganizator);
   }
   daLiJeOrganizatorTurnira(
-    organizationId: number,
+    organizatorId: number,
     turnirId: number,
   ): Observable<boolean> {
     let flag = false;
@@ -63,7 +63,7 @@ export class OrganizatorService {
       this.turnirRepository
         .createQueryBuilder('turnir')
         .leftJoinAndSelect('turnir.organizator', 'organizator')
-        .where('organizator.id = :id', { id: organizationId })
+        .where('organizator.id = :id', { id: organizatorId })
         .getMany(),
     ).pipe(
       map((turniri) => {

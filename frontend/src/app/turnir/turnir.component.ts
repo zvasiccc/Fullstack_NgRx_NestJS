@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Turnir } from '../shared/models/turnir';
 // /import { KorpaService } from '../services/korpa/korpa.service';
 import { TurnirService } from '../services/turnir/turnir.service';
@@ -36,9 +36,7 @@ export class TurnirComponent {
     private store: Store,
     private router: Router
   ) {}
-  //todo vodja tima moze iz tima da izbaci saigrace,samo ako je to njegov tim
-  //todo on ce moci i  da vidi saigrace samo ako je njegov tim tkd ez
-  //todo autentif za vodju
+
   ngOnInit() {
     const idTrenutnogKorisnika =
       this.storeService.pribaviIdPrijavljenogKorisnika();
@@ -71,8 +69,13 @@ export class TurnirComponent {
     this.router.navigateByUrl(`mojiSaigraci/${turnirId}/${igracId}`);
     //this.igracService.vidiSaigrace(turnirId, igracId);
   }
+  //@Output() turnirDeleteEvent = new EventEmitter();
   async obrisiTurnir() {
-    this.turnirService.obrisiTurnir(this.turnir.id);
+    (await this.turnirService.obrisiTurnir(this.turnir.id)).subscribe((p) => {
+      this.turnirService.getMojiTurniri(); //todo ne radi, hocu da se azurira prikaz s novim turnirima u mojiTurniri
+    });
+    //this.turnirDeleteEvent.emit(this.turnir.id);
+    //console.log('Brisem turinr, TurnirComponent', this.turnir.id);
   }
 
   igracJeVodja(user: any): user is Igrac {

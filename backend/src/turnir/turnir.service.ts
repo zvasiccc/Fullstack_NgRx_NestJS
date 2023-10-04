@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Role } from 'src/roles/role.enum';
 import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 import { Observable, from, map } from 'rxjs';
+import { PrijavaEntity } from 'src/prijava/prijava.entity';
 
 @Injectable()
 export class TurnirService {
@@ -14,6 +15,8 @@ export class TurnirService {
     private turnirRepository: Repository<TurnirEntity>,
     @InjectRepository(OrganizatorEntity)
     private organizatorRepository: Repository<OrganizatorEntity>,
+    @InjectRepository(PrijavaEntity)
+    private prijavaRepository: Repository<PrijavaEntity>,
     private jwtService: JwtService,
   ) {}
   async vratiSveTurnire() {
@@ -97,6 +100,13 @@ export class TurnirService {
     if (!turnirZaBrisanje) {
       return null;
     }
+    const prijaveZaBrisanje = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .leftJoin('prijava.turnir', 'turnir')
+      .where('turnir.id=:id', { id: turnirId })
+      .getMany();
+    if (prijaveZaBrisanje)
+      await this.prijavaRepository.remove(prijaveZaBrisanje);
     return await this.turnirRepository.delete(turnirId);
   }
   async filtrirajTurnire(

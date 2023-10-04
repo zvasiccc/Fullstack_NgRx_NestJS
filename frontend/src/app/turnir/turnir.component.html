@@ -13,8 +13,6 @@
         </button>
         <ng-container *ngIf="korisnik.role === 'igrac'">
           <ng-container *ngIf="igracJeVodja(korisnik)">
-            <!-- //todo ako je vec prijavljen da mu se prikaze ovde obrisi prijavu a ne prijavi se  -->
-            <!-- //todo ako je ovaj igrac(tu vec znamo da je vodja) ucesnik na tom turniru -->
             <ng-container *ngIf="!(jePrijavljenNaTurnir | async)">
               <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
                 Prijavi se
