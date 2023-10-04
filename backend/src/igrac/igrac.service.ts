@@ -128,22 +128,21 @@ export class IgracService {
   }
 
   async registrujIgraca(igrac: IgracEntity) {
-    const noviIgrac = this.igracRepository.create();
-    const postojeciIgrac = await this.igracRepository.findOne({
+    const noviIgrac: IgracEntity = this.igracRepository.create();
+    const postojeciIgrac: IgracEntity = await this.igracRepository.findOne({
       where: { korisnickoIme: igrac.korisnickoIme },
     });
     if (postojeciIgrac) return null; //ako vec postoji igrac sa tim korisnickim imenom
     noviIgrac.korisnickoIme = igrac.korisnickoIme;
-    const salt = await bcrypt.genSalt();
-    noviIgrac.lozinka = await this.hashPassword(igrac.lozinka, salt);
+    const saltOrRounds = 10;
+    const hesiranaLozinka = await bcrypt.hash(igrac.lozinka, saltOrRounds);
+    noviIgrac.lozinka = hesiranaLozinka;
     console.log(noviIgrac.lozinka);
-    noviIgrac.lozinka = igrac.lozinka;
     noviIgrac.ime = igrac.ime;
     noviIgrac.prezime = igrac.prezime;
     noviIgrac.vodjaTima = igrac.vodjaTima;
     noviIgrac.id = igrac.id;
     //noviIgrac.roles = igrac.roles;
-
     return await this.igracRepository.save(noviIgrac);
   }
 

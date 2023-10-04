@@ -4,7 +4,7 @@ import { IgracEntity } from 'src/igrac/igrac.entity';
 import { IgracService } from 'src/igrac/igrac.service';
 import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 import { OrganizatorService } from 'src/organizator/organizator.service';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
@@ -13,19 +13,34 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // async validateUser(email: string, pass: string): Promise<any> {
+  //   const user = await this.usersService.findOne(email);
+  //   if(user) {
+  //     const isMatchs = await bcrypt.compare(pass, user.password);
+  //     if(isMatchs) {
+  //       const { password, ...result } = user;
+  //       return result;
+  //     }
+  //   }
+  //   return null;
+  // }
   async validateUser(username: string, pass: string): Promise<any> {
     let user: IgracEntity | OrganizatorEntity | undefined =
       await this.igracService.findOne(username);
     if (!user) {
       user = await this.organizatorService.findOne(username);
+      const isMatchs = await bcrypt.compare(pass, user.lozinka);
     }
-    if (user && user.lozinka === pass) {
-      const { lozinka, ...userBezLozinke } = user;
+    if (user) {
+      const isMatchs = await bcrypt.compare(pass, user.lozinka);
+      if (isMatchs) {
+        const { lozinka, ...userBezLozinke } = user;
 
-      return {
-        ...userBezLozinke,
-        role: user instanceof IgracEntity ? 'igrac' : 'organizator',
-      }; //koristimo sve osim lozinke
+        return {
+          ...userBezLozinke,
+          role: user instanceof IgracEntity ? 'igrac' : 'organizator',
+        }; //koristimo sve osim lozinke
+      }
     }
 
     return null;

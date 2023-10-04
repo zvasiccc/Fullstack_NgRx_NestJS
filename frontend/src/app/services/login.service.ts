@@ -12,3 +12,4 @@ export class LoginService {
     return this.http.post(url, obj); //vraca token i korisnika
   }
 }
+//todo maks i min nagrada nesto umrckane

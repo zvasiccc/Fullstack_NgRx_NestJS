@@ -5,7 +5,9 @@ import {
   Param,
   Post,
   UseGuards,
+  Request,
   Headers,
+  Put,
 } from '@nestjs/common';
 import { OrganizatorService } from './organizator.service';
 import { OrganizatorEntity } from './organizator.entity';
@@ -46,6 +48,17 @@ export class OrganizatorController {
     return this.organizatorService.daLiJeOrganizatorTurnira(
       organizationId,
       turnirId,
+    );
+  }
+  @UseGuards(JwtAuthGuard, OrganizatorGuard)
+  @Put('izmeniPodatkeOOrganizatoru')
+  async izmeniPodatkeOOrganizatoru(
+    @Request() req: any,
+    @Body() organizator: OrganizatorEntity,
+  ) {
+    return this.organizatorService.izmeniPodatkeOOrganizatoru(
+      req.user.userId,
+      organizator,
     );
   }
 }

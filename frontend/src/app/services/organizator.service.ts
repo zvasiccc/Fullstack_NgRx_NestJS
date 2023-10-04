@@ -36,4 +36,5 @@ export class OrganizatorService {
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<boolean>(url, { headers });
   }
+  //todo da li je igrac prijavljen baca gresku, probaj da prijavis turnir
 }

@@ -61,10 +61,6 @@ export class IgracController {
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Put('izmeniPodatkeOIgracu')
   async izmeniPodatkeOIgracu(@Request() req: any, @Body() igrac: IgracEntity) {
-    // Ne treba ovk console.log("User je" + req.user) ng console.log("User je", req.user)
-    // Razumes li kvo? koja je razlika
-    // Pa s + on pretvaraaha aha u string pretvara Da, i zbog tija si imal [object object],razumem, sad jos sifre da hesiram
-    //treba li nekakav salt mrtvi da pravim, vido na net nesto, ma jok, najprostije samo,kude da vidim to Ima na mn ima i u zvanictnu dokmentaciju od
     return this.igracService.izmeniPodatkeOIgracu(req.user.userId, igrac);
   }
 
