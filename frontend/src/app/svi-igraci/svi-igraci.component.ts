@@ -30,8 +30,9 @@ export class SviIgraciComponent {
     this.igracService.dodajIgracaUTim(igrac);
 
     this._snackBar.open('igrac je dodat u tim', 'Zatvori', {
-      duration: 100000,
-      panelClass: 'custom-snackbar',
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
     }); //?prikazuje se skroz na dno uvek
   }
   pretraziIgrace(uneseniIgrac: string) {

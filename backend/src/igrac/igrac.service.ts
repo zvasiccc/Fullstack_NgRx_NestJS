@@ -145,17 +145,17 @@ export class IgracService {
     //noviIgrac.roles = igrac.roles;
     return await this.igracRepository.save(noviIgrac);
   }
-  async izmeniPodatkeOIgracu(igrac: IgracEntity) {
-    console.log('primljen id je' + igrac.id);
-    console.log('primljeno ime je' + igrac.ime);
+  async izmeniPodatkeOIgracu(igracId: number, noviIgrac: IgracEntity) {
+    console.log('primljen id je' + noviIgrac.id);
+    console.log('primljeno ime je' + noviIgrac.ime);
     const postojeciIgrac = await this.igracRepository.findOne({
-      where: { id: igrac.id },
+      where: { id: igracId },
     });
     if (!postojeciIgrac) return null; //ne postoji takav igrac
-    if (postojeciIgrac.lozinka != igrac.lozinka) return null; //pogresna lozinka
-    postojeciIgrac.korisnickoIme = igrac.korisnickoIme;
-    postojeciIgrac.ime = igrac.ime;
-    postojeciIgrac.prezime = igrac.prezime;
+    if (postojeciIgrac.lozinka != noviIgrac.lozinka) return null; //pogresna lozinka
+    postojeciIgrac.korisnickoIme = noviIgrac.korisnickoIme;
+    postojeciIgrac.ime = noviIgrac.ime;
+    postojeciIgrac.prezime = noviIgrac.prezime;
     console.log('izmenjeni igrac je' + postojeciIgrac.ime);
     return await this.igracRepository.save(postojeciIgrac);
   }

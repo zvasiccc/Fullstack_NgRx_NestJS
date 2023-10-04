@@ -70,6 +70,7 @@ export class IgracService {
     const url = this.urlIgrac + 'izmeniPodatkeOIgracu';
     return this.http.put<Igrac>(url, igrac, { headers });
   }
+  //todo dodaj tipove na fje servisa
   daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
     const headers = this.storeService.pribaviHeaders();
     const url =

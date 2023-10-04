@@ -24,7 +24,6 @@
 .navbar a {
   text-decoration: none;
   color: #fff;
-  font-weight: 600;
   transition: color 0.3s, transform 0.3s;
 }
 
@@ -38,7 +37,6 @@
 .logout {
   text-decoration: none;
   color: #fff;
-  font-weight: 600;
 }
 .login-link {
   margin-left: 600px; /* Podesite željeni razmak za "Login" */

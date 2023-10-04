@@ -25,7 +25,7 @@ import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
 import { PrijavaComponent } from './prijava/prijava.component';
 import { PreferenceComponent } from './preference/preference.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';

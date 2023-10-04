@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Igrac } from '../shared/models/igrac';
 import { IgracService } from '../services/igrac/igrac.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
@@ -13,11 +13,17 @@ import { StoreService } from '../services/store.service';
   styleUrls: ['./profil.component.css'],
 })
 export class ProfilComponent {
+  korisnickoIme: string = '';
+
   //trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
   // trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
   // trenutnoPrijavljeniOrganizator$: Observable<Organizator | null> =
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
-    this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
+    this.storeService.pribaviTrenutnoPrijavljenogKorisnika().pipe(
+      tap((x) => {
+        this.korisnickoIme = x?.korisnickoIme ? x!.korisnickoIme : '';
+      })
+    );
   uredjivanjeOmoguceno: boolean = false;
   daLiJeLozinkaUnesena: boolean = false;
   unesenaLozinka: string = '';
@@ -35,15 +41,21 @@ export class ProfilComponent {
     this.daLiJeLozinkaUnesena = true;
   }
   promeniPodatke() {
-    this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
-      if (korisnik?.role == 'igrac') {
-        console.log(korisnik.ime);
-        const izmenjeniIgrac: any = { ...korisnik };
-        izmenjeniIgrac.korisnickoIme;
-        this.igracService
-          .izmeniPodatkeOIgracu(izmenjeniIgrac)
-          .subscribe(() => {});
-      }
-    });
+    console.log(this.korisnickoIme);
+    const izmenjeniIgrac: any = {
+      korisnickoIme: this.korisnickoIme,
+    };
+    this.igracService.izmeniPodatkeOIgracu(izmenjeniIgrac).subscribe(() => {});
+    //todo na back otpakuj tokjen i za njega menjaj ove podatke
+    // this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
+    //   if (korisnik?.role == 'igrac') {
+    //     const izmenjeniIgrac: any = { ...korisnik };
+    //     izmenjeniIgrac.korisnickoIme = this.korisnickoIme;
+    //     console.log(this.korisnickoIme);
+    //     this.igracService
+    //       .izmeniPodatkeOIgracu(izmenjeniIgrac)
+    //       .subscribe(() => {});
+    //   }
+    // });
   }
 }

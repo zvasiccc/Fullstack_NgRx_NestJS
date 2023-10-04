@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -56,8 +57,8 @@ export class IgracController {
   }
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Put('izmeniPodatkeOIgracu')
-  async izmeniPodatkeOIgracu(@Body() igrac: IgracEntity) {
-    return this.igracService.izmeniPodatkeOIgracu(igrac);
+  async izmeniPodatkeOIgracu(@Request() req: any, @Body() igrac: IgracEntity) {
+    return this.igracService.izmeniPodatkeOIgracu(req.user.sub, igrac);
   }
 
   // @UseGuards(JwtAuthGuard)
