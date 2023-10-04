@@ -14,6 +14,7 @@ import { IgracService } from 'src/igrac/igrac.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
 import { IgracGuard } from 'src/auth/igrac.role.guard';
+import { VodjaGuard } from 'src/auth/vodja.role.guard';
 
 @Controller('prijava')
 export class PrijavaController {
@@ -46,7 +47,7 @@ export class PrijavaController {
   async izbaciTimSaTurnira(@Param('prijavaId') prijavaId: number) {
     return await this.prijavaService.izbaciTimSaTurnira(prijavaId);
   }
-  @UseGuards(JwtAuthGuard, IgracGuard) //!vodja
+  @UseGuards(JwtAuthGuard, IgracGuard, VodjaGuard)
   @Delete('odjaviSvojTimSaTurnira/:turnirId/:igracId')
   async odjaviSvojTimSaTurnira(
     @Param('turnirId') turnirId: number,

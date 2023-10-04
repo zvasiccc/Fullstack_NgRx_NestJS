@@ -15,9 +15,9 @@ export class OrganizatorService {
     private turnirRepository: Repository<TurnirEntity>,
     private jwtService: JwtService,
   ) {}
-  async vratiSveOrganizatore() {
-    return await this.organizatorRepository.find();
-  }
+  // async vratiSveOrganizatore() {
+  //   return await this.organizatorRepository.find();
+  // }
   // async vratiOrganizatoraIzTokena(token: string) {
   //   try {
   //     const noviToken = token.split(' ')[1];

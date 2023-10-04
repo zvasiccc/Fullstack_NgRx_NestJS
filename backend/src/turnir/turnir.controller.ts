@@ -23,14 +23,6 @@ export class TurnirController {
   async vratiSveTurnire() {
     return await this.turnirService.vratiSveTurnire();
   }
-  // @Get('odgovarajuciTurniri/:naziv/:mesto/:datum')
-  // async odgovarajuciTurnir(
-  //   @Param('naziv') naziv: string,
-  //   @Param('mesto') mesto: string,
-  //   @Param('datum') datum: string,
-  // ) {
-  //   return await this.turnirService.odgovarajuciTurniri(naziv, mesto, datum);
-  // }
   @UseGuards(JwtAuthGuard)
   @Get('mojiTurniri')
   async vratiMojeTurnire(@Headers('authorization') authorization: string) {

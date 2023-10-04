@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StoreDevtools } from '@ngrx/store-devtools';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, exhaustMap, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -21,6 +21,8 @@ export class TurnirService {
   ) {}
   private turnirUrl = 'http://localhost:3000/turnir/';
 
+  private refreshSubject = new BehaviorSubject<Turnir[]>([]);
+
   // dodajTurnir(turnir: Turnir) {
   //   this.store.dispatch(kreirajTurnir({ turnir }));
   // }
@@ -29,10 +31,19 @@ export class TurnirService {
     return this.http.get<Turnir[]>(url);
   }
   getMojiTurniri(): Observable<Turnir[]> {
-    const headers = this.storeService.pribaviHeaders();
-    const url = this.turnirUrl + 'mojiTurniri';
+    return this.refreshSubject.pipe(
+      exhaustMap(() => {
+        const headers = this.storeService.pribaviHeaders();
+        const url = this.turnirUrl + 'mojiTurniri';
+        return this.http.get<Turnir[]>(url, { headers });
+      })
+    );
 
-    return this.http.get<Turnir[]>(url, { headers });
+    //return this.http.get<Turnir[]>(url, { headers });
+  }
+
+  refresh() {
+    this.refreshSubject.next([]);
   }
 
   kreirajTurnir(turnir: Turnir) {

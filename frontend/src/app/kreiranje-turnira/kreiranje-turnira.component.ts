@@ -8,9 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './kreiranje-turnira.component.html',
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
-//todo za svaku funkciju staviti dekorator na back, dosadasnje fje na front da mogu da pozivaju samo ko treba
 //todo omoguci menjanje podataka za profil
-//todo provera vodje na back
 //todo razlicite poruke da izlaze, i kad je uspesno i neuspesno
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {

@@ -21,7 +21,7 @@
   <input
     type="text"
     id="ime"
-    [value]="prijavljeniKorisnik.ime"
+    [(ngModel)]="ime"
     [readonly]="!uredjivanjeOmoguceno"
   />
 
@@ -29,7 +29,7 @@
   <input
     type="text"
     id="prezime"
-    [value]="prijavljeniKorisnik.prezime"
+    [(ngModel)]="prezime"
     [readonly]="!uredjivanjeOmoguceno"
   />
   <label for="lozinka" *ngIf="uredjivanjeOmoguceno">Lozinka</label>

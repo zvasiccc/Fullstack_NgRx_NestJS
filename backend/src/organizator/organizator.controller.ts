@@ -16,11 +16,11 @@ import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
 @Controller('organizator')
 export class OrganizatorController {
   constructor(private organizatorService: OrganizatorService) {}
-  @UseGuards(JwtAuthGuard, OrganizatorGuard)
-  @Get('sviOrganizatori') //! obrsati
-  vratiSveOrganizatore() {
-    return this.organizatorService.vratiSveOrganizatore();
-  }
+  // @UseGuards(JwtAuthGuard, OrganizatorGuard)
+  // @Get('sviOrganizatori') //! obrsati
+  // vratiSveOrganizatore() {
+  //   return this.organizatorService.vratiSveOrganizatore();
+  // }
   // @UseGuards(JwtAuthGuard, OrganizatorGuard)
   // @Get('vratiOrganizatoraIzTokena')
   // vratiOrganizatoraIzTokena(@Headers('authorization') authorization: string) {

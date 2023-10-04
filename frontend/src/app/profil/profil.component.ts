@@ -14,6 +14,8 @@ import { StoreService } from '../services/store.service';
 })
 export class ProfilComponent {
   korisnickoIme: string = '';
+  ime: string = '';
+  prezime: string = '';
 
   //trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
   // trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
@@ -22,6 +24,8 @@ export class ProfilComponent {
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika().pipe(
       tap((x) => {
         this.korisnickoIme = x?.korisnickoIme ? x!.korisnickoIme : '';
+        this.ime = x?.ime ? x!.ime : '';
+        this.prezime = x?.prezime ? x!.prezime : '';
       })
     );
   uredjivanjeOmoguceno: boolean = false;
@@ -44,9 +48,11 @@ export class ProfilComponent {
     console.log(this.korisnickoIme);
     const izmenjeniIgrac: any = {
       korisnickoIme: this.korisnickoIme,
+      ime: this.ime,
+      prezime: this.prezime,
     };
     this.igracService.izmeniPodatkeOIgracu(izmenjeniIgrac).subscribe(() => {});
-    //todo na back otpakuj tokjen i za njega menjaj ove podatke
+
     // this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
     //   if (korisnik?.role == 'igrac') {
     //     const izmenjeniIgrac: any = { ...korisnik };

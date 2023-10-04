@@ -72,7 +72,7 @@ export class TurnirComponent {
   //@Output() turnirDeleteEvent = new EventEmitter();
   async obrisiTurnir() {
     (await this.turnirService.obrisiTurnir(this.turnir.id)).subscribe((p) => {
-      this.turnirService.getMojiTurniri(); //todo ne radi, hocu da se azurira prikaz s novim turnirima u mojiTurniri
+      this.turnirService.refresh();
     });
     //this.turnirDeleteEvent.emit(this.turnir.id);
     //console.log('Brisem turinr, TurnirComponent', this.turnir.id);

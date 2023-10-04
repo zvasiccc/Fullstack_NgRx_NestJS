@@ -15,6 +15,8 @@ import { Role } from 'src/roles/role.enum';
 import { IgracService } from './igrac.service';
 import { IgracGuard } from 'src/auth/igrac.role.guard';
 import { IgracEntity } from './igrac.entity';
+import { VodjaGuard } from 'src/auth/vodja.role.guard';
+import { register } from 'module';
 
 @Controller('igrac')
 export class IgracController {
@@ -30,13 +32,13 @@ export class IgracController {
   async vratiSveIgraceOsimTrenutnog(@Param('igracId') igracId: number) {
     return await this.igracService.vratiSveIgraceOsimTrenutnog(igracId);
   }
-  @UseGuards(JwtAuthGuard, IgracGuard) //!vodja
-  @Get('slobodniIgraciZaTurnir/:turnirId')
-  async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
-    return await this.igracService.slobodniIgraciZaTurnir(turnirId);
-  }
+  // @UseGuards(JwtAuthGuard, IgracGuard, VodjaGuard)
+  // @Get('slobodniIgraciZaTurnir/:turnirId')
+  // async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
+  //   return await this.igracService.slobodniIgraciZaTurnir(turnirId);
+  // }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('korisnickoIme/:korisnickoIme')
   async igraciSaSlicnimKorisnickimImenom(
     @Param('korisnickoIme') korisnickoIme: string,
@@ -50,6 +52,7 @@ export class IgracController {
   async post(@Body() igrac: IgracEntity) {
     return await this.igracService.registrujIgraca(igrac);
   }
+
   @UseGuards(JwtAuthGuard)
   @Get('dohvatiIgraca/:korisnickoIme')
   async dohvatiIgraca(@Param('korisnickoIme') korisnickoIme: string) {
@@ -58,7 +61,11 @@ export class IgracController {
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Put('izmeniPodatkeOIgracu')
   async izmeniPodatkeOIgracu(@Request() req: any, @Body() igrac: IgracEntity) {
-    return this.igracService.izmeniPodatkeOIgracu(req.user.sub, igrac);
+    // Ne treba ovk console.log("User je" + req.user) ng console.log("User je", req.user)
+    // Razumes li kvo? koja je razlika
+    // Pa s + on pretvaraaha aha u string pretvara Da, i zbog tija si imal [object object],razumem, sad jos sifre da hesiram
+    //treba li nekakav salt mrtvi da pravim, vido na net nesto, ma jok, najprostije samo,kude da vidim to Ima na mn ima i u zvanictnu dokmentaciju od
+    return this.igracService.izmeniPodatkeOIgracu(req.user.userId, igrac);
   }
 
   // @UseGuards(JwtAuthGuard)
@@ -73,10 +80,10 @@ export class IgracController {
   //   }
   // }
 
-  @Get('pronadjiIgraceZaPrijavu/:id')
-  async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
-    return await this.igracService.pronadjiIgraceZaPrijavu(id);
-  }
+  // @Get('pronadjiIgraceZaPrijavu/:id') //?
+  // async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
+  //   return await this.igracService.pronadjiIgraceZaPrijavu(id);
+  // }
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);
@@ -89,7 +96,7 @@ export class IgracController {
   ) {
     return this.igracService.vratiIgraceIzIstogTima(turnirId, igracId);
   }
-  @UseGuards(JwtAuthGuard, IgracGuard) //todo provera za vodju
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('daLiJeIgracPrijavljenNaTurnir/:turnirId/:igracId')
   async daLiJeIgracPrijavljenNaTurnir(
     @Param('turnirId') turnirId: number,
