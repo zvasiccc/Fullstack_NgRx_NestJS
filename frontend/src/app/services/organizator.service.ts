@@ -36,5 +36,11 @@ export class OrganizatorService {
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<boolean>(url, { headers });
   }
-  //todo da li je igrac prijavljen baca gresku, probaj da prijavis turnir
+  izmeniPodatkeOOrganizatoru(
+    organizator: Organizator
+  ): Observable<Organizator> {
+    const headers = this.storeService.pribaviHeaders();
+    const url = this.organizatorUrl + 'izmeniPodatkeOOrganizatoru';
+    return this.http.put<Organizator>(url, organizator, { headers });
+  }
 }

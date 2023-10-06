@@ -19,7 +19,7 @@ export class PrijavaService {
   ) {}
   prijavaUrl = 'http://localhost:3000/prijava/';
   posaljiPrijavuUBazu(prijava: Prijava) {
-    const headers = this.storeService.pribaviHeaders(); //todo da li je bolje headers van fje
+    const headers = this.storeService.pribaviHeaders();
 
     const url = this.prijavaUrl + 'dodajPrijavu';
     return this.http.post(url, prijava, { headers }).subscribe((p: any) => {

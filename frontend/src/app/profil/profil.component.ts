@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { StoreService } from '../services/store.service';
+import { OrganizatorService } from '../services/organizator.service';
 
 @Component({
   selector: 'app-profil',
@@ -16,7 +17,7 @@ export class ProfilComponent {
   korisnickoIme: string = '';
   ime: string = '';
   prezime: string = '';
-
+  role: string = '';
   //trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
   // trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
   // trenutnoPrijavljeniOrganizator$: Observable<Organizator | null> =
@@ -26,6 +27,7 @@ export class ProfilComponent {
         this.korisnickoIme = x?.korisnickoIme ? x!.korisnickoIme : '';
         this.ime = x?.ime ? x!.ime : '';
         this.prezime = x?.prezime ? x!.prezime : '';
+        this.role = x?.role ? x!.role : '';
       })
     );
   uredjivanjeOmoguceno: boolean = false;
@@ -35,6 +37,7 @@ export class ProfilComponent {
 
   constructor(
     private igracService: IgracService,
+    private organizatorService: OrganizatorService,
     private store: Store,
     private storeService: StoreService
   ) {}
@@ -45,14 +48,19 @@ export class ProfilComponent {
     this.daLiJeLozinkaUnesena = true;
   }
   promeniPodatke() {
-    console.log(this.korisnickoIme);
-    const izmenjeniIgrac: any = {
+    const izmenjeniKorisnik: any = {
       korisnickoIme: this.korisnickoIme,
       ime: this.ime,
       prezime: this.prezime,
     };
-    this.igracService.izmeniPodatkeOIgracu(izmenjeniIgrac).subscribe(() => {});
-
+    if (this.role == 'igrac')
+      this.igracService
+        .izmeniPodatkeOIgracu(izmenjeniKorisnik)
+        .subscribe(() => {});
+    if (this.role == 'organizator')
+      this.organizatorService
+        .izmeniPodatkeOOrganizatoru(izmenjeniKorisnik)
+        .subscribe(() => {});
     // this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
     //   if (korisnik?.role == 'igrac') {
     //     const izmenjeniIgrac: any = { ...korisnik };

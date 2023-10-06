@@ -61,17 +61,17 @@ export class TurnirService {
   ) {
     let url = this.turnirUrl + 'filtrirajTurnire?';
     if (pretragaNaziv !== undefined && pretragaNaziv !== '')
-      url += `pretragaNaziv=${pretragaNaziv}`;
+      url += `&pretragaNaziv=${pretragaNaziv}`;
     if (pretragaMesto !== undefined && pretragaMesto !== '')
-      url += `pretragaMesto=${pretragaMesto}`;
+      url += `&pretragaMesto=${pretragaMesto}`;
     if (pretragaPocetniDatum !== undefined && pretragaPocetniDatum !== '')
-      url += `pretragaPocetniDatum=${pretragaPocetniDatum}`;
+      url += `&pretragaPocetniDatum=${pretragaPocetniDatum}`;
     if (pretragaKrajnjiDatum !== undefined && pretragaKrajnjiDatum !== '')
-      url += `pretragaKrajnjiDatum=${pretragaKrajnjiDatum}`;
+      url += `&pretragaKrajnjiDatum=${pretragaKrajnjiDatum}`;
     if (pretragaPocetnaNagrada !== undefined && pretragaPocetnaNagrada !== 0)
-      url += `pretragaPocetnaNagrada=${pretragaPocetnaNagrada}`;
+      url += `&pretragaPocetnaNagrada=${pretragaPocetnaNagrada}`;
     if (pretragaKrajnjaNagrada !== undefined && pretragaKrajnjaNagrada !== 0)
-      url += `pretragaKrajnjaNagrada=${pretragaKrajnjaNagrada}`;
+      url += `&pretragaKrajnjaNagrada=${pretragaKrajnjaNagrada}`;
 
     console.log('saljem url ' + url);
     console.log(' pretraga naziv je+ ' + pretragaNaziv);

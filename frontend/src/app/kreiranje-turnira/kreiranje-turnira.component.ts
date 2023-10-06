@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './kreiranje-turnira.component.html',
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
-//todo omoguci menjanje podataka za organizatora, isto kao igrac
+
 //todo razlicite poruke da izlaze, i kad je uspesno i neuspesno
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
