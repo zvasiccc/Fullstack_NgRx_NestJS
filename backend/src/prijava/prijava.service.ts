@@ -27,13 +27,8 @@ export class PrijavaService {
         turnirId: prijava.turnir.id,
       })
       .getCount();
-
     console.log(igrajuVecPrijavljeni);
     if (igrajuVecPrijavljeni > 0) {
-      // // Ako neki od igrača već ima prijavu za dati turnir, vraćamo tu listu igrača
-      // const vecPrijavljeniIgraci = igrajuVecPrijavljeni.map((prijava) => prijava.igraci);
-      // return vecPrijavljeniIgraci.flat(); // Spajamo ih u jedan niz
-      console.log('neki igraci su vec prijavljeni na ovaj turnir');
       return { porukaGreske: 'neki igraci su vec prijavljeni na ovaj turnir' };
     }
     const novaPrijava: PrijavaEntity = this.prijavaRepository.create();
@@ -52,8 +47,11 @@ export class PrijavaService {
       .getMany();
 
     if (postojecePrijave.length + 1 > turnir.maxBrojTimova)
-      return { porukaGreske: 'nema mesta' };
+      return { porukaGreske: 'nema mesta na turniru' };
     novaPrijava.turnir = turnir;
+    if (prijava.igraci.length != 3) {
+      return { porukaGreske: 'broj igraca u timu mora biti 3' };
+    }
     novaPrijava.igraci = prijava.igraci;
     turnir.trenutniBrojTimova++;
     await this.turnirRepository.save(turnir);

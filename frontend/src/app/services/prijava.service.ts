@@ -7,6 +7,7 @@ import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
 import { Observable, map } from 'rxjs';
 import { selectTokenPrijavljenogKorisnika } from '../shared/state/korisnik/korisnik.selector';
 import { StoreService } from './store.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class PrijavaService {
   constructor(
     private store: Store,
     private http: HttpClient,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private _snackBar: MatSnackBar
   ) {}
   prijavaUrl = 'http://localhost:3000/prijava/';
   posaljiPrijavuUBazu(prijava: Prijava) {
@@ -23,9 +25,16 @@ export class PrijavaService {
 
     const url = this.prijavaUrl + 'dodajPrijavu';
     return this.http.post(url, prijava, { headers }).subscribe((p: any) => {
-      if (p.porukaGreske == undefined)
+      if (p.porukaGreske == undefined) {
         alert('Uspesno ste se prijavili na turnir');
-      else alert(p.porukaGreske);
+        this._snackBar.open('Uspesno ste se prijavili na turnir', 'Zatvori', {
+          duration: 2000,
+        });
+      } else {
+        this._snackBar.open(p.porukaGreske, 'Zatvori', {
+          duration: 2000,
+        });
+      }
     });
   }
   izbaciIgracaIzTima(igrac: Igrac) {

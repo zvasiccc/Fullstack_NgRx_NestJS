@@ -19,6 +19,6 @@ export const izbaciIgracaIzTima = createAction(
   '[Prijava] izbaci igraca iz tima',
   props<{ igrac: Igrac }>()
 );
-export const sviIgraciUPrijavi = createAction(
-  '[Prijava] Dobavi igrače za turnir'
-);
+// export const sviIgraciUPrijavi = createAction(
+//   '[Prijava] Dobavi igrače za turnir'
+// );

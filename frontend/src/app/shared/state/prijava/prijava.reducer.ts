@@ -10,7 +10,6 @@ export const prijavaReducer = createReducer(
     if (
       state.igraciUTimu.some((postojeciIgrac) => postojeciIgrac.id === igrac.id)
     ) {
-      //igrac vec postoji
       return state;
     }
     const noviIgraciUTimu = [...state.igraciUTimu, igrac];
@@ -23,9 +22,9 @@ export const prijavaReducer = createReducer(
   on(PrijavaActions.dodajPreferenceUPrijavu, (state, { preference }) => ({
     ...state,
     preference: { ...preference },
-  })),
-  on(PrijavaActions.sviIgraciUPrijavi, (state) => ({
-    ...state,
-    // igraci: state.igraciUTimu.filter((igrac) => igrac.turnir?.id === turnirId),
   }))
+  // on(PrijavaActions.sviIgraciUPrijavi, (state) => ({
+  //   ...state,
+  //   // igraci: state.igraciUTimu.filter((igrac) => igrac.turnir?.id === turnirId),
+  // }))
 );

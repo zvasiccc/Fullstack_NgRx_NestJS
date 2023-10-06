@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Turnir } from '../shared/models/turnir';
 import { TurnirService } from '../services/turnir/turnir.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-kreiranje-turnira',
@@ -33,7 +36,19 @@ export class KreiranjeTurniraComponent {
   //   console.log(this.turnirService.vratiSveTurnire());
   // }
   kreirajTurnir() {
-    this.turnirService.kreirajTurnir(this.turnir);
+    if (this.brojJeStepenDvojke(this.turnir.maxBrojTimova)) {
+      this.turnirService.kreirajTurnir(this.turnir).subscribe((p) => {
+        this._snackBar.open('Turnir je uspešno kreiran', 'Zatvori', {
+          duration: 2000,
+        });
+      });
+    } else {
+      this._snackBar.open('Neodgovarajuci broj timova na turniru', 'Zatvori', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }
     this.turnir = {
       id: 0,
       naziv: '',
@@ -44,9 +59,8 @@ export class KreiranjeTurniraComponent {
       nagrada: 0,
       prijavljeniIgraci: [],
     };
-    this._snackBar.open('Turnir je uspešno kreiran', 'Zatvori', {
-      duration: 2000,
-    });
+  }
+  brojJeStepenDvojke(x: number) {
+    return x > 0 && (x & (x - 1)) === 0;
   }
 }
-//aleksa profil da se salje azurirano, je organizator da bude async da bi cekalo,provera vodje na back,fja na back za pretragu da prima proizvoljen parametre

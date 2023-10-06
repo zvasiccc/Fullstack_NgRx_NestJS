@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
@@ -40,10 +40,10 @@ export class IgracService {
   //     .select(selectPrijavljeniIgrac)
 
   // }
-  dodajIgracaUTim(igrac: Igrac) {
+  dodajIgracaUTim(igrac: Igrac): void {
     return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
   }
-  vratiIgraceIzTima() {
+  vratiIgraceIzTima(): Observable<Igrac[]> {
     return this.store
       .select(selectIgraciUPrijavi)
       .pipe(map((p: any) => p.igraciUTimu));
@@ -53,7 +53,7 @@ export class IgracService {
     const headers = this.storeService.pribaviHeaders();
     return this.http.get<Igrac[]>(url, { headers });
   }
-  registrujSeKaoIgrac(igrac: Igrac) {
+  registrujSeKaoIgrac(igrac: Igrac): Subscription {
     const url = this.urlIgrac + 'registrujIgraca';
     return this.http.post(url, igrac).subscribe(() => {
       this.router.navigateByUrl('');
@@ -70,11 +70,14 @@ export class IgracService {
     const url = this.urlIgrac + 'izmeniPodatkeOIgracu';
     return this.http.put<Igrac>(url, igrac, { headers });
   }
-  //todo dodaj tipove na fje servisa
-  daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
+
+  daLiJeIgracPrijavljenNaTurnir(
+    turnirId: number,
+    igracId: number
+  ): Observable<boolean> {
     const headers = this.storeService.pribaviHeaders();
     const url =
       this.urlIgrac + `daLiJeIgracPrijavljenNaTurnir/${turnirId}/${igracId}`;
-    return this.http.get(url, { headers });
+    return this.http.get<boolean>(url, { headers });
   }
 }

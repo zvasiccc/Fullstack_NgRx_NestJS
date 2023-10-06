@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StoreDevtools } from '@ngrx/store-devtools';
-import { BehaviorSubject, Observable, exhaustMap, map } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  exhaustMap,
+  map,
+} from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -49,7 +55,7 @@ export class TurnirService {
   kreirajTurnir(turnir: Turnir) {
     const headers = this.storeService.pribaviHeaders();
     const url = this.turnirUrl + 'dodajTurnir';
-    return this.http.post(url, turnir, { headers }).subscribe((p) => p);
+    return this.http.post<Turnir>(url, turnir, { headers });
   }
   async filtrirajTurnire(
     pretragaNaziv?: string,
@@ -58,7 +64,7 @@ export class TurnirService {
     pretragaKrajnjiDatum?: string,
     pretragaPocetnaNagrada?: number,
     pretragaKrajnjaNagrada?: number
-  ) {
+  ): Promise<Observable<Turnir[]>> {
     let url = this.turnirUrl + 'filtrirajTurnire?';
     if (pretragaNaziv !== undefined && pretragaNaziv !== '')
       url += `&pretragaNaziv=${pretragaNaziv}`;
@@ -73,9 +79,7 @@ export class TurnirService {
     if (pretragaKrajnjaNagrada !== undefined && pretragaKrajnjaNagrada !== 0)
       url += `&pretragaKrajnjaNagrada=${pretragaKrajnjaNagrada}`;
 
-    console.log('saljem url ' + url);
-    console.log(' pretraga naziv je+ ' + pretragaNaziv);
-    return this.http.get(url);
+    return this.http.get<Turnir[]>(url);
   }
   async obrisiTurnir(turnirId: number) {
     const headers = this.storeService.pribaviHeaders();
@@ -95,4 +99,5 @@ export class TurnirService {
   //   //   .select(selectPrijavljeniTurniri)
   //   //   .pipe(map((p: any) => p.prijavljeniTurniri));
   // }
+  //todo ocisti store nakon logovanja
 }

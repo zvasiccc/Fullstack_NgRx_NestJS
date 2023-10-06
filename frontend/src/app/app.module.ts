@@ -27,9 +27,9 @@ import { PrijavaComponent } from './prijava/prijava.component';
 import { PreferenceComponent } from './preference/preference.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BackArrowComponent } from './back-arrow/back-arrow.component';
+
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import { RangeSliderComponent } from './range-slider/range-slider.component';
+
 import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.component';
 import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
 import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
@@ -53,9 +53,9 @@ import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
     SviIgraciComponent,
     PrijavaComponent,
     PreferenceComponent,
-    BackArrowComponent,
+
     SearchBarComponent,
-    RangeSliderComponent,
+
     TimoviNaTurniruComponent,
     MojiTurniriComponent,
     MojiSaigraciComponent,

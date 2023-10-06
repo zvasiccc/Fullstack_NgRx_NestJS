@@ -7,9 +7,12 @@
     <h2>Igraci u timu</h2>
     <li *ngFor="let igrac of igraciUTimu$ | async">
       <app-igrac [igrac]="igrac"></app-igrac>
-      <button (click)="izbaciIgracaIzTima(igrac)">Izbaci iz tima</button>
+      <ng-container *ngIf="idTrenutnogKorisnika !== igrac.id">
+        <button (click)="izbaciIgracaIzTima(igrac)">Izbaci iz tima</button>
+      </ng-container>
     </li>
   </ul>
+  <button (click)="navigirajNaIgrace()">Izaberi igrace</button>
 </div>
 <div *ngIf="preference$ | async as preference">
   <h2>Preference</h2>

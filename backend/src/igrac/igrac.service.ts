@@ -29,6 +29,7 @@ export class IgracService {
     return await this.igracRepository
       .createQueryBuilder('igrac')
       .where({ id: Not(igracId) })
+      .andWhere({ vodjaTima: false })
       .getMany();
   }
   async vratiIgracaIzTokena(token: string) {
@@ -58,63 +59,6 @@ export class IgracService {
       where: { korisnickoIme: korisnickoIme },
     });
   }
-  // async slobodniIgraciZaTurnir(turnirId: number) {
-  //   //?ne radii
-  //   //da vratimo sve igrace koji se ne nalaze u prijavama za turnir
-  //   const prijavljeniIgraciIds = await this.igracRepository
-  //     .createQueryBuilder('igrac')
-  //     .leftJoinAndSelect('igrac.prijave', 'prijava')
-  //     .leftJoinAndSelect('prijava.turnir', 'turnir')
-  //     .where({ id: Not(turnirId) }) //!
-  //     .select(['igrac.id'])
-  //     .getMany();
-  //   const slobodniIgraci = await this.igracRepository
-  //     .createQueryBuilder('igrac')
-  //     .leftJoin('igrac.prijave', 'prijava')
-  //     .leftJoin('prijava.turnir', 'turnir')
-  //     .where('turnir.id != :id OR prijava.id IS NULL', { id: turnirId })
-  //     .getMany();
-
-  //   return slobodniIgraci;
-  // }
-  // const subQuery = (qb: SelectQueryBuilder<PrijavaEntity>) => {
-  //   return qb
-  //     .select('prijava_igrac.id')
-  //     .from(PrijavaEntity, 'prijava')
-  //     .innerJoin('prijava.igraci', 'prijava_igrac')
-  //     .where('prijava.turnir.id = :turnirId', { turnirId });
-  // };
-  // const [subQuerySql, subQueryParameters] = subQuery(
-  //   this.prijavaRepository.createQueryBuilder(),
-  // ).getQueryAndParameters();
-  // const query = this.igracRepository
-  //   .createQueryBuilder('igrac')
-  //   .where(`igrac.id NOT IN (${subQuerySql})`)
-  //   .setParameters(subQueryParameters)
-  //   .setParameter('turnirId', turnirId);
-  // const igraci = await query.getMany();
-  // return igraci;
-  // const queryBuilder1 = this.igracRepository.createQueryBuilder('igrac1');
-  // //.select('igrac1.id');
-  // const queryBuilder2 = this.igracRepository.createQueryBuilder('igrac2');
-  // //.select('igrac2.id')
-  // //.leftJoin('igrac2.prijave', 'prijava')
-  // //.leftJoin('prijava.turnir', 'turnir');
-  // //.where('turnir.id = :id', { id: turnirId });
-  // // Napravimo upit za presek koristeći podupite
-  // const presekUpita = this.igracRepository
-  //   .createQueryBuilder('igrac')
-  //   .from('(' + queryBuilder1.getQuery() + ')', 'subquery1')
-  //   //.addSelect(['subquery1.igrac1.id'])
-  //   .innerJoinAndSelect(
-  //     '(' + queryBuilder2.getQuery() + ')',
-  //     'subquery2',
-  //     //'subquery1.id = subquery2.id',
-  //   );
-  // //.addSelect(['subquery2.id']);
-  // // Izvršavanje upita za presek
-  // const presekRezultat = await presekUpita.getRawMany();
-  // return presekRezultat as IgracEntity[];
 
   async igraciSaSlicnimKorisnickimImenom(korisnickoIme: string) {
     return await this.igracRepository.find({
@@ -146,28 +90,6 @@ export class IgracService {
     //noviIgrac.roles = igrac.roles;
     return await this.igracRepository.save(noviIgrac);
   }
-
-  // async register(email: string, password: string) {
-  //   const saltOrRounds = 10;
-  //   const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-  //   const user = await this.usersService.create(email, hashedPassword);
-  //   return await this.login({
-  //     email: email,
-  //     role: user.role,
-  //   });;
-  // }
-
-  // async validateUser(email: string, pass: string): Promise<any> {
-  //   const user = await this.usersService.findOne(email);
-  //   if(user) {
-  //     const isMatchs = await bcrypt.compare(pass, user.password);
-  //     if(isMatchs) {
-  //       const { password, ...result } = user;
-  //       return result;
-  //     }
-  //   }
-  //   return null;
-  // }
 
   async izmeniPodatkeOIgracu(igracId: number, noviIgrac: IgracEntity) {
     console.log('primljen id je' + igracId);
@@ -217,25 +139,6 @@ export class IgracService {
       (igrac) => igrac.id != igracId,
     );
     return saigraci;
-    if (!trazenaPrijava) {
-      return 'ne postoji prijava';
-    }
-    const timId = trazenaPrijava.id;
-    return timId;
-    if (!timId) {
-      throw new Error('Igrac se nije prijavio za dati turnir');
-    }
-
-    const igraciIstogTima = await this.igracRepository
-      .createQueryBuilder('igrac')
-      .innerJoin('igrac.prijave', 'prijava')
-      .innerJoin('prijava.turnir', 'turnir')
-      .where('turnir.id = :turnirId', { turnirId })
-      .andWhere('igrac.id != :igracId', { igracId })
-      .andWhere('prijava.id = :timId', { timId })
-      .getMany();
-
-    return igraciIstogTima;
   }
   async daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
     const trazenaPrijava: PrijavaEntity = await this.prijavaRepository

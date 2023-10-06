@@ -29,15 +29,13 @@ export class SviIgraciComponent {
   trenutniTurnir: Turnir | null = null;
   ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
-    this.igracService.dodajIgracaUTim(igrac);
-
     this.storeService
       .vratiPrijavljeniTUrnir()
       .subscribe((p) => (this.trenutniTurnir = p));
-    const x = this.igracService
+    this.igracService
       .daLiJeIgracPrijavljenNaTurnir(this.trenutniTurnir!.id, igrac.id)
       .subscribe((p) => {
-        if (p == true)
+        if (p == true) {
           this._snackBar.open(
             'igrac vec prijavljen na ovaj turnir',
             'Zatvori',
@@ -47,12 +45,14 @@ export class SviIgraciComponent {
               verticalPosition: 'bottom',
             }
           );
-        else
+        } else {
+          this.igracService.dodajIgracaUTim(igrac);
           this._snackBar.open('Dodali ste igraca u tim', 'Zatvori', {
             duration: 2000,
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
           });
+        }
       });
   }
   pretraziIgrace(uneseniIgrac: string) {

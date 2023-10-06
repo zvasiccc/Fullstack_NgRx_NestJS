@@ -20,6 +20,7 @@ import { StoreService } from '../services/store.service';
   styleUrls: ['./prijava.component.css'],
 })
 export class PrijavaComponent {
+  idTrenutnogKorisnika = this.storeService.pribaviIdPrijavljenogKorisnika();
   prijavljeniTurnir$: Observable<Turnir> =
     this.storeService.vratiPrijavljeniTUrnir();
   igraciUTimu$: Observable<Igrac[]> = this.igracService.vratiIgraceIzTima();
@@ -78,5 +79,8 @@ export class PrijavaComponent {
   }
   izbaciIgracaIzTima(igrac: Igrac) {
     this.prijavaService.izbaciIgracaIzTima(igrac);
+  }
+  navigirajNaIgrace() {
+    this.router.navigateByUrl('sviIgraci');
   }
 }

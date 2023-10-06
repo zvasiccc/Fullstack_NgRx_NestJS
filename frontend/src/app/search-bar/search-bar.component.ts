@@ -30,12 +30,5 @@ export class SearchBarComponent {
       this.pretragaRezultati.emit(rezultati);
       console.log('search bar kaze' + rezultati);
     });
-    // const rezultati = {
-    //   naziv: this.pretragaNaziv,
-    //   mesto: this.pretragaMesto,
-    //   pocetniDatum: this.pretragaPocetniDatum,
-    //   krajnjiDatum: this.pretragaKrajnjiDatum,
-    // };
-    // this.pretragaRezultati.emit(rezultati);
   }
 }
