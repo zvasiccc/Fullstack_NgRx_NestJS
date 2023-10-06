@@ -4,11 +4,12 @@ import { TurnirService } from '../services/turnir/turnir.service';
 import { Turnir } from '../shared/models/turnir';
 //import { KorpaService } from '../services/korpa/korpa.service';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { IgracService } from '../services/igrac/igrac.service';
 import { StoreService } from '../services/store.service';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
+import { selectSviTurniri } from '../shared/state/turnir/turnir.selector';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { Organizator } from '../shared/models/organizator';
 export class HomeComponent implements OnInit {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza();
   filtriraniTurniri: Turnir[] = [];
+  turniriStore$: Observable<Turnir[]> = this.store.select(selectSviTurniri);
   postojeFiltriraniTurniri: boolean = false;
   pretragaIzvrsena: boolean = false;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =

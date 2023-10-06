@@ -5,8 +5,11 @@ import {
   BehaviorSubject,
   Observable,
   Subscription,
+  catchError,
   exhaustMap,
   map,
+  of,
+  tap,
 } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
@@ -15,6 +18,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
 import { StoreService } from '../store.service';
+import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -79,7 +83,17 @@ export class TurnirService {
     if (pretragaKrajnjaNagrada !== undefined && pretragaKrajnjaNagrada !== 0)
       url += `&pretragaKrajnjaNagrada=${pretragaKrajnjaNagrada}`;
 
-    return this.http.get<Turnir[]>(url);
+    return this.http.get<Turnir[]>(url).pipe(
+      tap((turniri) => {
+        // Dispečujte akciju za uspešno dohvatanje podataka kada su dostupni
+        this.store.dispatch(TurnirActions.fetchTurniriUspesno({ turniri }));
+      }),
+      catchError((error) => {
+        // Dispečujte akciju za grešku ako se pojavi
+        this.store.dispatch(TurnirActions.fetchTurniriNeuspesno({ error }));
+        return of([]);
+      })
+    );
   }
   async obrisiTurnir(turnirId: number) {
     const headers = this.storeService.pribaviHeaders();

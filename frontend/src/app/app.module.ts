@@ -34,6 +34,8 @@ import { TimoviNaTurniruComponent } from './timovi-na-turniru/timovi-na-turniru.
 import { korisnikReducer } from './shared/state/korisnik/korisnik.reducer';
 import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
 import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
+import { initialStateTurnir } from './shared/state/turnir/turnir.state';
+import { turnirReducer } from './shared/state/turnir/turnir.reducer';
 
 @NgModule({
   declarations: [
@@ -70,17 +72,17 @@ import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
     MatSnackBarModule,
     BrowserAnimationsModule,
 
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      turnirState: turnirReducer,
+    }),
 
-    // StoreModule.forFeature('prijavljeniTurniri', turnirReducerBaza),
-
-    // StoreModule.forFeature('igraci', igracReducer),
-    // StoreModule.forFeature('prijavljeniIgrac', igracReducer),
     StoreModule.forFeature('turnirUPrijavi', prijavaReducer),
     StoreModule.forFeature('igraciUPrijavi', prijavaReducer),
     StoreModule.forFeature('preferenceUPrijavi', prijavaReducer),
     StoreModule.forFeature('prijavljeniKorisnik', korisnikReducer),
     StoreModule.forFeature('token', korisnikReducer),
+    StoreModule.forFeature('turniriPretraga', turnirReducer),
+    StoreModule.forFeature('turniri', turnirReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

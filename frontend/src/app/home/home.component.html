@@ -6,15 +6,19 @@
   <ul class="turnir-list">
     <ng-container *ngIf="pretragaIzvrsena">
       <p>pretraga je izvrsena</p>
-      <li *ngFor="let turnir of filtriraniTurniri">
+      <!-- <li *ngFor="let turnir of filtriraniTurniri">
+        <app-turnir [turnir]="turnir"></app-turnir>
+      </li> -->
+      <p>ovo je store</p>
+      <li *ngFor="let turnir of turniriStore$ | async">
         <app-turnir [turnir]="turnir"></app-turnir>
       </li>
     </ng-container>
     <!-- Prikaz svih turnira ako nema rezultata pretrage -->
-    <ng-container *ngIf="!pretragaIzvrsena">
+    <!-- <ng-container *ngIf="!pretragaIzvrsena">
       <li *ngFor="let turnir of sviTurniri$ | async">
         <app-turnir [turnir]="turnir"></app-turnir>
       </li>
-    </ng-container>
+    </ng-container> -->
   </ul>
 </div>
