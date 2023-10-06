@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import { Turnir } from '../shared/models/turnir';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TurnirService } from '../services/turnir/turnir.service';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { Turnir } from '../shared/models/turnir';
 
 @Component({
   selector: 'app-kreiranje-turnira',
   templateUrl: './kreiranje-turnira.component.html',
   styleUrls: ['./kreiranje-turnira.component.css'],
 })
-
-//todo razlicite poruke da izlaze, i kad je uspesno i neuspesno
 export class KreiranjeTurniraComponent {
   turnir: Turnir = {
     id: 0,
@@ -28,13 +23,7 @@ export class KreiranjeTurniraComponent {
     private turnirService: TurnirService,
     private _snackBar: MatSnackBar
   ) {}
-  // submitForm() {
-  //   // Ovde možete dodati logiku za slanje podataka na server ili druge operacije
-  //   // Ovde ispisujemo unete podatke na konzoli kao primer
-  //   console.log('Podaci o turniru:', this.turnir);
-  //   this.turnirService.dodajTurnir(this.turnir);
-  //   console.log(this.turnirService.vratiSveTurnire());
-  // }
+
   kreirajTurnir() {
     if (this.brojJeStepenDvojke(this.turnir.maxBrojTimova)) {
       this.turnirService.kreirajTurnir(this.turnir).subscribe((p) => {

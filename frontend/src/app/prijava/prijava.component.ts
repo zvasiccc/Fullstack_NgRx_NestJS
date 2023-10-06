@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Turnir } from '../shared/models/turnir';
-import { TurnirService } from '../services/turnir/turnir.service';
-import { IgracService } from '../services/igrac/igrac.service';
-import { Igrac } from '../shared/models/igrac';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { PreferenceComponent } from '../preference/preference.component';
-import { Preference } from '../shared/models/preference';
-import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
-import { Prijava } from '../shared/models/prijava';
+import { Observable, map } from 'rxjs';
+import { IgracService } from '../services/igrac/igrac.service';
 import { PrijavaService } from '../services/prijava.service';
 import { StoreService } from '../services/store.service';
-//import { selectPotrebanBrojSlusalica } from '../shared/state/prijava/prijava.selector';
+import { Igrac } from '../shared/models/igrac';
+import { Preference } from '../shared/models/preference';
+import { Prijava } from '../shared/models/prijava';
+import { Turnir } from '../shared/models/turnir';
+import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
 
 @Component({
   selector: 'app-prijava',
@@ -38,7 +35,6 @@ export class PrijavaComponent {
     turnir: null,
   };
   constructor(
-    private turnirService: TurnirService,
     private igracService: IgracService,
     private prijavaService: PrijavaService,
     private storeService: StoreService,
@@ -74,7 +70,7 @@ export class PrijavaComponent {
       igraci: [],
       turnir: null,
     };
-    //alert('uspesno ste se priajvili na turnir');
+
     this.router.navigateByUrl('');
   }
   izbaciIgracaIzTima(igrac: Igrac) {

@@ -7,6 +7,7 @@ import { Organizator } from '../shared/models/organizator';
 import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { StoreService } from '../services/store.service';
 import { OrganizatorService } from '../services/organizator.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profil',
@@ -18,9 +19,7 @@ export class ProfilComponent {
   ime: string = '';
   prezime: string = '';
   role: string = '';
-  //trenutnoPrijavljeniIgrac$: Observable<Igrac> = new Observable();
-  // trenutnoPrijavljeniIgrac$: Observable<Igrac | null> = new Observable();
-  // trenutnoPrijavljeniOrganizator$: Observable<Organizator | null> =
+
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika().pipe(
       tap((x) => {
@@ -31,21 +30,18 @@ export class ProfilComponent {
       })
     );
   uredjivanjeOmoguceno: boolean = false;
-  daLiJeLozinkaUnesena: boolean = false;
   unesenaLozinka: string = '';
   IzmenjeniKorisnik!: Igrac | Organizator;
 
   constructor(
     private igracService: IgracService,
     private organizatorService: OrganizatorService,
-    private store: Store,
-    private storeService: StoreService
+
+    private storeService: StoreService,
+    private _snackBar: MatSnackBar
   ) {}
   omoguciUredjivanje() {
     this.uredjivanjeOmoguceno = true;
-  }
-  unosLozinke() {
-    this.daLiJeLozinkaUnesena = true;
   }
   promeniPodatke() {
     const izmenjeniKorisnik: any = {
@@ -61,15 +57,8 @@ export class ProfilComponent {
       this.organizatorService
         .izmeniPodatkeOOrganizatoru(izmenjeniKorisnik)
         .subscribe(() => {});
-    // this.trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
-    //   if (korisnik?.role == 'igrac') {
-    //     const izmenjeniIgrac: any = { ...korisnik };
-    //     izmenjeniIgrac.korisnickoIme = this.korisnickoIme;
-    //     console.log(this.korisnickoIme);
-    //     this.igracService
-    //       .izmeniPodatkeOIgracu(izmenjeniIgrac)
-    //       .subscribe(() => {});
-    //   }
-    // });
+    this._snackBar.open('Uspesno ste promenili svoje podatke', 'Zatvori', {
+      duration: 2000,
+    });
   }
 }

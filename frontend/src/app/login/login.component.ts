@@ -1,14 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { IgracService } from '../services/igrac/igrac.service';
-import { OrganizatorService } from '../services/organizator.service';
-import { mergeMap, of } from 'rxjs';
-import { Igrac } from '../shared/models/igrac';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { LoginService } from '../services/login.service';
+import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,15 +14,11 @@ export class LoginComponent {
   prijavljeniKorisnik: Igrac | Organizator | undefined;
   korisnickoIme: string = '';
   lozinka: string = '';
-  // isIgrac: boolean = false; // Initialize to false
-  // isOrganizator: boolean = false; // Initialize to false
-  // prijavljen: boolean = false;
+
   constructor(
-    private http: HttpClient,
     private loginService: LoginService,
     private store: Store,
-    private igracService: IgracService,
-    private organizatorService: OrganizatorService,
+
     private router: Router
   ) {}
 

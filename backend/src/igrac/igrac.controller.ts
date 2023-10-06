@@ -28,9 +28,9 @@ export class IgracController {
     return await this.igracService.vratiSveIgrace();
   }
   @UseGuards(JwtAuthGuard, IgracGuard)
-  @Get('vratiSveIgraceOsimTrenutnog/:igracId')
-  async vratiSveIgraceOsimTrenutnog(@Param('igracId') igracId: number) {
-    return await this.igracService.vratiSveIgraceOsimTrenutnog(igracId);
+  @Get('vratiMoguceSaigrace')
+  async vratiMoguceSaigrace(@Request() req: any) {
+    return await this.igracService.vratiMoguceSaigrace(req.user.userId);
   }
   // @UseGuards(JwtAuthGuard, IgracGuard, VodjaGuard)
   // @Get('slobodniIgraciZaTurnir/:turnirId')

@@ -100,7 +100,7 @@ export class PrijavaService {
       .createQueryBuilder('prijava')
       .innerJoin('prijava.igraci', 'igrac')
       .innerJoin('prijava.turnir', 'turnir')
-      .where('turnir.id = :turnirId', { turnirId }) //! bez id:
+      .where('turnir.id = :turnirId', { turnirId })
       .andWhere('igrac.id = :igracId', { igracId })
       .getOne();
     //*inner join da ne dobijemo prijavu ako ne postoji igracId ili turnirId

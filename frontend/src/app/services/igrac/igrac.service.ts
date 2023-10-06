@@ -20,7 +20,6 @@ export class IgracService {
     private storeService: StoreService,
     private router: Router
   ) {}
-  //private prijavljeniIgracUrl = 'http://localhost:3000/igrac/prijavljeniIgrac';
   private urlIgrac = 'http://localhost:3000/igrac/';
   vratiSveIgrace(): Observable<Igrac[]> {
     const trenutnoPrijavljeniKorisnik$ =
@@ -29,17 +28,11 @@ export class IgracService {
     trenutnoPrijavljeniKorisnik$.subscribe((korisnik) => {
       idKorisnika = korisnik?.id as number;
     });
-    const url: string =
-      this.urlIgrac + `vratiSveIgraceOsimTrenutnog/${idKorisnika}`;
+    const url: string = this.urlIgrac + `vratiMoguceSaigrace`;
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<Igrac[]>(url, { headers });
   }
-  // vratiPrijavljenogIgraca() {
-  //   // return this.http.get<Igrac>(this.prijavljeniIgracUrl);
-  //   return this.store
-  //     .select(selectPrijavljeniIgrac)
 
-  // }
   dodajIgracaUTim(igrac: Igrac): void {
     return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
   }

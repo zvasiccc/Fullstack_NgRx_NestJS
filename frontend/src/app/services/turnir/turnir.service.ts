@@ -86,18 +86,4 @@ export class TurnirService {
     const url = this.turnirUrl + `obrisiTurnir/${turnirId}`;
     return this.http.delete(url, { headers });
   }
-  // vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
-  //   return this.store
-  //     .select(selectPrijavljeniIgraciZaTurnir(turnirId))
-  //     .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
-  // }
-  // vratiPrijavljeniTUrnir(): Observable<Turnir> {
-  //   return this.store
-  //     .select(selectTurnirUPrijavi)
-  //     .pipe(map((p: any) => p.turnir));
-  //   // return this.store
-  //   //   .select(selectPrijavljeniTurniri)
-  //   //   .pipe(map((p: any) => p.prijavljeniTurniri));
-  // }
-  //todo ocisti store nakon logovanja
 }

@@ -1,11 +1,9 @@
-import { Igrac } from '../shared/models/igrac';
-import { TurnirService } from '../services/turnir/turnir.service';
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Turnir } from '../shared/models/turnir';
+import { Observable } from 'rxjs';
 import { StoreService } from '../services/store.service';
+import { TurnirService } from '../services/turnir/turnir.service';
+import { Igrac } from '../shared/models/igrac';
 @Component({
   selector: 'app-igraci-na-turniru',
   templateUrl: './igraci-na-turniru.component.html',

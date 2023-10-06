@@ -32,16 +32,11 @@
     [(ngModel)]="prezime"
     [readonly]="!uredjivanjeOmoguceno"
   />
-  <label for="lozinka" *ngIf="uredjivanjeOmoguceno">Lozinka</label>
-  <input
-    type="password"
-    id="lozinka"
-    [(ngModel)]="unesenaLozinka"
-    (change)="unosLozinke()"
-    *ngIf="uredjivanjeOmoguceno"
-  />
+
   <button (click)="omoguciUredjivanje()">Uredi</button>
-  <button (click)="promeniPodatke()">Promeni podatke</button>
+  <button (click)="promeniPodatke()" [disabled]="!uredjivanjeOmoguceno">
+    Promeni podatke
+  </button>
   <div
     *ngIf="!(trenutnoPrijavljeniKorisnik$ | async)"
     class="profile-container"

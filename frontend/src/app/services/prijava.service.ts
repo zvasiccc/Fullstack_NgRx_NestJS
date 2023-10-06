@@ -26,7 +26,6 @@ export class PrijavaService {
     const url = this.prijavaUrl + 'dodajPrijavu';
     return this.http.post(url, prijava, { headers }).subscribe((p: any) => {
       if (p.porukaGreske == undefined) {
-        alert('Uspesno ste se prijavili na turnir');
         this._snackBar.open('Uspesno ste se prijavili na turnir', 'Zatvori', {
           duration: 2000,
         });

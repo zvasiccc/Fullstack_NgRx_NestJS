@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
+import { Observable } from 'rxjs';
 import { IgracService } from '../services/igrac/igrac.service';
-import { Observable, map } from 'rxjs';
+import { StoreService } from '../services/store.service';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
-import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
-import { StoreService } from '../services/store.service';
+import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
+import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -37,6 +37,7 @@ export class HeaderComponent {
   }
   OdjaviSe() {
     this.store.dispatch(KorisnikActions.odjaviPrijavljenogKorisnika());
+    this.store.dispatch(PrijavaActions.odjaviSeSaNaloga());
     this.router.navigateByUrl('');
   }
   navigirajNaPrijavu() {

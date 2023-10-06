@@ -10,6 +10,6 @@ import { Turnir } from '../shared/models/turnir';
 })
 export class OdgovarajuciTurniriComponent {
   odgovarajuciTurniri$: Observable<Turnir[]> =
-    this.turnirService.getTurniriBaza(); //new Observable<Turnir[]>(); //observable nad turnirima
+    this.turnirService.getTurniriBaza();
   constructor(private turnirService: TurnirService) {}
 }

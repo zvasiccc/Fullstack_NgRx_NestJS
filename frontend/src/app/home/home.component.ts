@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Turnir } from '../shared/models/turnir';
+import { Observable } from 'rxjs';
 import { TurnirService } from '../services/turnir/turnir.service';
-import { Observable, map } from 'rxjs';
+import { Turnir } from '../shared/models/turnir';
 //import { KorpaService } from '../services/korpa/korpa.service';
-import { IgracService } from '../services/igrac/igrac.service';
-import { Igrac } from '../shared/models/igrac';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
-import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
-import { Organizator } from '../shared/models/organizator';
+import { IgracService } from '../services/igrac/igrac.service';
 import { StoreService } from '../services/store.service';
+import { Igrac } from '../shared/models/igrac';
+import { Organizator } from '../shared/models/organizator';
 
 @Component({
   selector: 'app-home',
@@ -18,9 +16,7 @@ import { StoreService } from '../services/store.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza(); //new Observable<Turnir[]>(); //observable nad turnirima
-  // sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
-  //filtriraniTurniri$: Observable<Turnir[]> = new Observable();
+  sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza();
   filtriraniTurniri: Turnir[] = [];
   postojeFiltriraniTurniri: boolean = false;
   pretragaIzvrsena: boolean = false;
@@ -36,16 +32,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   handlePretragaRezultati(rezultati: Turnir[]) {
-    // Ovde možete obraditi rezultate koji su emitovani iz SearchBarComponent
     console.log('Rezultati pretrage:', rezultati);
     this.filtriraniTurniri = rezultati;
     this.postojeFiltriraniTurniri =
       this.filtriraniTurniri && this.filtriraniTurniri.length > 0;
     this.pretragaIzvrsena = true;
   }
-  // prikaziPrijavljeneIgrace(turnir: Turnir) {
-  //   //!ne radi
-  //   //this.turnirService.vratiPrijavljeneIgrace(turnirId); //ne trebaa
-  //   this.router.navigateByUrl(`prijavljeniIgraci/${turnir.id}`);
-  // }
 }

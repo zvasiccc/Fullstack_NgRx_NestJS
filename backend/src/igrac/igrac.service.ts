@@ -25,7 +25,7 @@ export class IgracService {
   async vratiSveIgrace() {
     return await this.igracRepository.find();
   }
-  async vratiSveIgraceOsimTrenutnog(igracId: number) {
+  async vratiMoguceSaigrace(igracId: number) {
     return await this.igracRepository
       .createQueryBuilder('igrac')
       .where({ id: Not(igracId) })
