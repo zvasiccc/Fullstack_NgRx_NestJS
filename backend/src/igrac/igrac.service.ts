@@ -9,6 +9,7 @@ import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { plainToClass } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 import passport from 'passport';
+import { resourceUsage } from 'process';
 @Injectable()
 export class IgracService {
   constructor(
@@ -198,17 +199,43 @@ export class IgracService {
   //   });
   //   return igraci;
   // }
-  async vratiIgraceIzIstogTima(turnirId: number, igracId: number) {
-    const igraci = await this.igracRepository
-      .createQueryBuilder('igrac')
-      .leftJoinAndSelect('igrac.prijave', 'prijava')
+  async vratiSaigrace(turnirId: number, igracId: number) {
+    const prijaveZaTurnir = await this.prijavaRepository
+      .createQueryBuilder('prijava')
+      .leftJoinAndSelect('prijava.igraci', 'igrac')
       .leftJoinAndSelect('prijava.turnir', 'turnir')
-      .where('turnir.id = :id', { id: turnirId })
-      //.andWhere('igrac.id !=:id', { id: igracId })
-      .andWhere({ id: Not(igracId) }) //!
+      .where('turnir.id = :turnirId', { turnirId })
+
       .getMany();
 
-    return igraci;
+    const trazenaPrijava = prijaveZaTurnir.find((prijava) => {
+      return prijava.igraci.some((igrac) => igrac.id == igracId);
+    });
+    if (!trazenaPrijava) return null;
+
+    const saigraci: IgracEntity[] = trazenaPrijava.igraci.filter(
+      (igrac) => igrac.id != igracId,
+    );
+    return saigraci;
+    if (!trazenaPrijava) {
+      return 'ne postoji prijava';
+    }
+    const timId = trazenaPrijava.id;
+    return timId;
+    if (!timId) {
+      throw new Error('Igrac se nije prijavio za dati turnir');
+    }
+
+    const igraciIstogTima = await this.igracRepository
+      .createQueryBuilder('igrac')
+      .innerJoin('igrac.prijave', 'prijava')
+      .innerJoin('prijava.turnir', 'turnir')
+      .where('turnir.id = :turnirId', { turnirId })
+      .andWhere('igrac.id != :igracId', { igracId })
+      .andWhere('prijava.id = :timId', { timId })
+      .getMany();
+
+    return igraciIstogTima;
   }
   async daLiJeIgracPrijavljenNaTurnir(turnirId: number, igracId: number) {
     const trazenaPrijava: PrijavaEntity = await this.prijavaRepository

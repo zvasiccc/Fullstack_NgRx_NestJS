@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { StoreService } from '../services/store.service';
 @Component({
   selector: 'app-svi-igraci',
   templateUrl: './svi-igraci.component.html',
@@ -17,6 +18,7 @@ export class SviIgraciComponent {
   constructor(
     private igracService: IgracService,
     private turnirService: TurnirService,
+    private storeService: StoreService,
     private store: Store,
     private router: Router,
     private _snackBar: MatSnackBar
@@ -24,16 +26,34 @@ export class SviIgraciComponent {
   sviIgraci$: Observable<Igrac[]> = this.igracService.vratiSveIgrace();
   pretragaIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
   uneseniIgrac: string = '';
-
+  trenutniTurnir: Turnir | null = null;
   ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
     this.igracService.dodajIgracaUTim(igrac);
 
-    this._snackBar.open('igrac je dodat u tim', 'Zatvori', {
-      duration: 2000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    }); //?prikazuje se skroz na dno uvek
+    this.storeService
+      .vratiPrijavljeniTUrnir()
+      .subscribe((p) => (this.trenutniTurnir = p));
+    const x = this.igracService
+      .daLiJeIgracPrijavljenNaTurnir(this.trenutniTurnir!.id, igrac.id)
+      .subscribe((p) => {
+        if (p == true)
+          this._snackBar.open(
+            'igrac vec prijavljen na ovaj turnir',
+            'Zatvori',
+            {
+              duration: 2000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            }
+          );
+        else
+          this._snackBar.open('Dodali ste igraca u tim', 'Zatvori', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+          });
+      });
   }
   pretraziIgrace(uneseniIgrac: string) {
     this.pretragaIgraci$ =

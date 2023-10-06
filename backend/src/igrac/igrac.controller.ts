@@ -84,13 +84,13 @@ export class IgracController {
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);
   }
-  @UseGuards(JwtAuthGuard, IgracGuard)
+  //@UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiIgraceIzIstogTima/:turnirId/:igracId')
-  vratiIgraceIzIstogTima(
+  async vratiSaigrace(
     @Param('turnirId') turnirId: number,
     @Param('igracId') igracId: number,
   ) {
-    return this.igracService.vratiIgraceIzIstogTima(turnirId, igracId);
+    return await this.igracService.vratiSaigrace(turnirId, igracId);
   }
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('daLiJeIgracPrijavljenNaTurnir/:turnirId/:igracId')
