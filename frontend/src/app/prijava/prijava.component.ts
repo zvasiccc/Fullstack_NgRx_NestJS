@@ -10,6 +10,7 @@ import { Preference } from '../shared/models/preference';
 import { Prijava } from '../shared/models/prijava';
 import { Turnir } from '../shared/models/turnir';
 import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
 
 @Component({
   selector: 'app-prijava',
@@ -75,7 +76,7 @@ export class PrijavaComponent {
     this.router.navigateByUrl('');
   }
   izbaciIgracaIzTima(igrac: Igrac) {
-    this.prijavaService.izbaciIgracaIzTima(igrac);
+    this.store.dispatch(IgracActions.izbaciIgracaIzTima({ igracId: igrac.id }));
   }
   navigirajNaIgrace() {
     this.router.navigateByUrl('sviIgraci');

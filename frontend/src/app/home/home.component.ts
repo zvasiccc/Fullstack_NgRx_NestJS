@@ -30,11 +30,14 @@ export class HomeComponent implements OnInit {
     private storeService: StoreService,
     private router: Router,
     private store: Store
-  ) {}
-  ngOnInit(): void {}
+  ) {
+    this.turniriStore$ = this.store.select(selectSviTurniri);
+  }
+  ngOnInit(): void {
+    //this.turniriStore$ = this.store.select(selectSviTurniri);
+  }
 
   handlePretragaRezultati(rezultati: Turnir[]) {
-    console.log('Rezultati pretrage:', rezultati);
     this.filtriraniTurniri = rezultati;
     this.postojeFiltriraniTurniri =
       this.filtriraniTurniri && this.filtriraniTurniri.length > 0;

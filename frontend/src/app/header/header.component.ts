@@ -8,6 +8,8 @@ import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
 import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
+import { IgraciNaTurniruComponent } from '../igraci-na-turniru/igraci-na-turniru.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -37,7 +39,8 @@ export class HeaderComponent {
   }
   OdjaviSe() {
     this.store.dispatch(KorisnikActions.odjaviPrijavljenogKorisnika());
-    this.store.dispatch(PrijavaActions.odjaviSeSaNaloga());
+    this.store.dispatch(PrijavaActions.OcistiStore());
+    this.store.dispatch(IgracActions.ocistiStore());
     this.router.navigateByUrl('');
   }
   navigirajNaPrijavu() {

@@ -34,6 +34,7 @@ import { MojiTurniriComponent } from './moji-turniri/moji-turniri.component';
 import { MojiSaigraciComponent } from './moji-saigraci/moji-saigraci.component';
 import { initialStateTurnir } from './shared/state/turnir/turnir.state';
 import { turnirReducer } from './shared/state/turnir/turnir.reducer';
+import { igracReducer } from './shared/state/igrac/igrac.reducer';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { turnirReducer } from './shared/state/turnir/turnir.reducer';
     StoreModule.forFeature('token', korisnikReducer),
     StoreModule.forFeature('turniriPretraga', turnirReducer),
     StoreModule.forFeature('turniri', turnirReducer),
+    StoreModule.forFeature('igraci', igracReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

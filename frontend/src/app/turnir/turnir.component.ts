@@ -15,6 +15,7 @@ import { IgracService } from '../services/igrac/igrac.service';
 import { PrijavaService } from '../services/prijava.service';
 import { StoreService } from '../services/store.service';
 import { OrganizatorService } from '../services/organizator.service';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
 @Component({
   selector: 'app-turnir',
   templateUrl: './turnir.component.html',
@@ -57,7 +58,8 @@ export class TurnirComponent {
     this.store.dispatch(
       TurnirActions.setIzabraniTurnir({ turnirId: turnir.id })
     );
-    this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
+    //dodavanje trenutnog korisnika u tim
+    this.store.dispatch(IgracActions.dodajIgracaUTim({ igrac }));
     this.router.navigateByUrl('sviIgraci');
   }
   odjaviSvojTimSaTurnira(turnirId: number, igracId: number) {

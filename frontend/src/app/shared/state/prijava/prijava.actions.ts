@@ -7,16 +7,16 @@ export const prijaviSeNaTurnir = createAction(
   '[Prijava] prijavi se na turnir',
   props<{ turnir: Turnir }>()
 );
-export const dodajIgracaUTim = createAction(
-  '[Prijava] dodaj igraca u tim',
-  props<{ igrac: Igrac }>()
-);
+// export const dodajIgracaUTim = createAction(
+//   '[Prijava] dodaj igraca u tim',
+//   props<{ igrac: Igrac }>()
+// );
 export const dodajPreferenceUPrijavu = createAction(
   '[prijava] dodaj preference u prijavu',
   props<{ preference: Preference }>()
 );
-export const izbaciIgracaIzTima = createAction(
-  '[Prijava] izbaci igraca iz tima',
-  props<{ igrac: Igrac }>()
-);
-export const odjaviSeSaNaloga = createAction('[Prijava] Odjavi se sa turnira');
+// export const izbaciIgracaIzTima = createAction(
+//   '[Prijava] izbaci igraca iz tima',
+//   props<{ igrac: Igrac }>()
+// );
+export const OcistiStore = createAction('[Prijava]Ocisti stores');

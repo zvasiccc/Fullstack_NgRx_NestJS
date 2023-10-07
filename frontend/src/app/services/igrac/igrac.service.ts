@@ -5,11 +5,13 @@ import { Observable, Subscription, map } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import * as IgracActions from 'src/app/shared/state/igrac/igrac.actions';
 import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { StoreService } from '../store.service';
 import { Route, Router } from '@angular/router';
 import { Organizator } from 'src/app/shared/models/organizator';
 import { selectPrijavljeniKorisnik } from 'src/app/shared/state/korisnik/korisnik.selector';
+import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,12 +36,14 @@ export class IgracService {
   }
 
   dodajIgracaUTim(igrac: Igrac): void {
-    return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
+    //return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
+    return this.store.dispatch(IgracActions.dodajIgracaUTim({ igrac }));
   }
   vratiIgraceIzTima(): Observable<Igrac[]> {
-    return this.store
-      .select(selectIgraciUPrijavi)
-      .pipe(map((p: any) => p.igraciUTimu));
+    // return this.store
+    //   .select(selectIgraciUPrijavi)
+    //   .pipe(map((p: any) => p.igraciUTimu));
+    return this.store.select(selectSviIgraci);
   }
   vratiIgracePoKorisnickomImenu(korisnickoIme: string): Observable<Igrac[]> {
     const url = this.urlIgrac + `korisnickoIme/${korisnickoIme}`;

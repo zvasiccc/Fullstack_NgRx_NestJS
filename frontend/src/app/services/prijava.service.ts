@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Prijava } from '../shared/models/prijava';
 import { Igrac } from '../shared/models/igrac';
 import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
 import { Observable, map } from 'rxjs';
 import { selectTokenPrijavljenogKorisnika } from '../shared/state/korisnik/korisnik.selector';
 import { StoreService } from './store.service';
@@ -26,6 +27,8 @@ export class PrijavaService {
     const url = this.prijavaUrl + 'dodajPrijavu';
     return this.http.post(url, prijava, { headers }).subscribe((p: any) => {
       if (p.porukaGreske == undefined) {
+        this.store.dispatch(PrijavaActions.OcistiStore());
+        this.store.dispatch(IgracActions.ocistiStore());
         this._snackBar.open('Uspesno ste se prijavili na turnir', 'Zatvori', {
           duration: 2000,
         });
@@ -36,9 +39,9 @@ export class PrijavaService {
       }
     });
   }
-  izbaciIgracaIzTima(igrac: Igrac) {
-    this.store.dispatch(PrijavaActions.izbaciIgracaIzTima({ igrac }));
-  }
+  // izbaciIgracaIzTima(igrac: Igrac) {
+  //   this.store.dispatch(PrijavaActions.izbaciIgracaIzTima({ igrac }));
+  // }
   vratiPrijaveZaTurnir(turnirId: number): Observable<Prijava[]> {
     const headers = this.storeService.pribaviHeaders();
     const url = this.prijavaUrl + `prijaveNaTurniru/${turnirId}`;

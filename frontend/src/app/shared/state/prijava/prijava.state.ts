@@ -6,7 +6,7 @@ import { Turnir } from '../../models/turnir';
 
 export interface PrijavaState {
   //turnir: Turnir;
-  igraciUTimu: Igrac[];
+  //igraciUTimu: Igrac[];
   preference: Preference;
 }
 
@@ -21,7 +21,7 @@ export const initialStatePrijava: PrijavaState = {
   //   nagrada: 0,
   //   prijavljeniIgraci: [],
   // },
-  igraciUTimu: [],
+  // igraciUTimu: [],
   preference: {
     potrebanBrojSlusalica: 0,
     potrebanBrojRacunara: 0,

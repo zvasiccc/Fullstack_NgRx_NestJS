@@ -20,7 +20,7 @@ export class OrganizatorService {
   organizatorUrl: string = 'http://localhost:3000/organizator/';
   registrujSeKaoOrganizator(organizator: Organizator) {
     const url = this.organizatorUrl + 'registrujOrganizatora';
-    console.log(JSON.stringify(organizator));
+
     return this.http.post(url, organizator).subscribe(() => {
       this.router.navigateByUrl('');
     });
@@ -32,7 +32,6 @@ export class OrganizatorService {
     const url =
       this.organizatorUrl +
       `daLiJeOrganizatorTurnira/${korisnikId}/${turnirId}`;
-    console.log('saljem url ' + url);
     const headers: HttpHeaders = this.storeService.pribaviHeaders();
     return this.http.get<boolean>(url, { headers });
   }

@@ -31,7 +31,7 @@ export class LoginComponent {
     tokenObservable.subscribe(async (token: any) => {
       jwtToken = token.access_token;
       let korisnik: Igrac | Organizator | undefined = token.korisnik;
-      console.log(korisnik);
+
       if (korisnik) {
         this.prijavljeniKorisnik =
           korisnik.role == 'igrac'
