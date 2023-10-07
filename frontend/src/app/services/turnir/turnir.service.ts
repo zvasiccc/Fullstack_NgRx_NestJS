@@ -15,7 +15,6 @@ import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { selectTurnirUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
 import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
 import { StoreService } from '../store.service';
 import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';

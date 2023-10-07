@@ -19,7 +19,8 @@ import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.select
 export class PrijavaComponent {
   idTrenutnogKorisnika = this.storeService.pribaviIdPrijavljenogKorisnika();
   prijavljeniTurnir$: Observable<Turnir> =
-    this.storeService.vratiPrijavljeniTUrnir();
+    this.storeService.vratiPrijavljeniTurnir();
+
   igraciUTimu$: Observable<Igrac[]> = this.igracService.vratiIgraceIzTima();
   preference$: Observable<Preference> = this.store
     .select(selectPreferenceUPrijavi)

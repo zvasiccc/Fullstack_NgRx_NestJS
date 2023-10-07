@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
 import { Observable, map } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
@@ -52,7 +53,10 @@ export class TurnirComponent {
   }
   prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
     const igrac: Igrac = korisnik as Igrac;
-    this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
+    //this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
+    this.store.dispatch(
+      TurnirActions.setIzabraniTurnir({ turnirId: turnir.id })
+    );
     this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
     this.router.navigateByUrl('sviIgraci');
   }

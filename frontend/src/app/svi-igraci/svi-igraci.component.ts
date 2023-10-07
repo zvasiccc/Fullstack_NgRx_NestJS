@@ -30,7 +30,7 @@ export class SviIgraciComponent {
   ngOnInit() {}
   dodajIgracaUtim(igrac: Igrac) {
     this.storeService
-      .vratiPrijavljeniTUrnir()
+      .vratiPrijavljeniTurnir()
       .subscribe((p) => (this.trenutniTurnir = p));
     this.igracService
       .daLiJeIgracPrijavljenNaTurnir(this.trenutniTurnir!.id, igrac.id)

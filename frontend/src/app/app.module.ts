@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TurnirComponent } from './turnir/turnir.component';
@@ -9,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { KreiranjeTurniraComponent } from './kreiranje-turnira/kreiranje-turnira.component';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-
 import { CommonModule } from '@angular/common';
 //import { KorpaComponent } from './korpa/korpa.component';
 //import { korpaReducer } from './shared/state/korpa/korpa.reducer';

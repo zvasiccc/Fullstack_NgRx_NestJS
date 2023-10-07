@@ -1,4 +1,8 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  MemoizedSelector,
+  createFeatureSelector,
+  createSelector,
+} from '@ngrx/store';
 import { TurnirState } from './turnir.state';
 import { AppState } from '../app.state';
 import { Turnir } from '../../models/turnir';
@@ -9,11 +13,14 @@ const selectTurnirFeature = createFeatureSelector<TurnirState>('turniri');
 //   selectTurnirFeature,
 //   (state) => state.turniri
 // );
-export const selectSviTurniri = createSelector(selectTurnirFeature, (turniri) =>
-  turniri.ids
-    .map((id) => turniri.entities[id]) //vraca niz a ne dictionary(da smo rekli odmah samo turniri.entities)
-    .filter((turnir) => turnir != null) // ovo != znaci da nije null ni undefined a !== bi znacilo da nije null
-    .map((turnir) => <Turnir>turnir)
+export const selectSviTurniri = createSelector(
+  selectTurnirFeature,
+  (turniri) =>
+    turniri.ids
+      .map((id) => turniri.entities[id]) //vraca niz a ne dictionary(da smo rekli odmah samo turniri.entities)
+      // .filter((turnir) => turnir != null && turnir != undefined) // ovo != znaci da nije null ni undefined a !== bi znacilo da nije null
+      // .map((turnir) => <Turnir>turnir)
+      .filter((turnir) => turnir !== null && turnir !== undefined) as Turnir[]
 );
 
 export const selectIzabraniTurnirId = createSelector(

@@ -5,22 +5,22 @@ import { Prijava } from '../../models/prijava';
 import { Turnir } from '../../models/turnir';
 
 export interface PrijavaState {
-  turnir: Turnir;
+  //turnir: Turnir;
   igraciUTimu: Igrac[];
   preference: Preference;
 }
 
 export const initialStatePrijava: PrijavaState = {
-  turnir: {
-    id: 0,
-    naziv: '',
-    datumOdrzavanja: '',
-    mestoOdrzavanja: '',
-    maxBrojTimova: 0,
-    trenutniBrojTimova: 0,
-    nagrada: 0,
-    prijavljeniIgraci: [],
-  },
+  // turnir: {
+  //   id: 0,
+  //   naziv: '',
+  //   datumOdrzavanja: '',
+  //   mestoOdrzavanja: '',
+  //   maxBrojTimova: 0,
+  //   trenutniBrojTimova: 0,
+  //   nagrada: 0,
+  //   prijavljeniIgraci: [],
+  // },
   igraciUTimu: [],
   preference: {
     potrebanBrojSlusalica: 0,

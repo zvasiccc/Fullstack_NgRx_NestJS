@@ -15,5 +15,9 @@ export const turnirReducer = createReducer(
   initialStateTurnir,
   on(TurnirActions.fetchTurniriUspesno, (state, { turniri }) =>
     adapter.setAll(turniri, state)
-  )
+  ),
+  on(TurnirActions.setIzabraniTurnir, (state, { turnirId }) => ({
+    ...state,
+    izabraniTurnir: turnirId,
+  }))
 );

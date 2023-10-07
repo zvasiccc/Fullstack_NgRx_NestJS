@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import {
   selectPrijavljeniKorisnik,
   selectTokenPrijavljenogKorisnika,
@@ -8,8 +8,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Igrac } from '../shared/models/igrac';
 import { Turnir } from '../shared/models/turnir';
-import { selectTurnirUPrijavi } from '../shared/state/prijava/prijava.selector';
 import { Organizator } from '../shared/models/organizator';
+import { selectIzabraniTurnir } from '../shared/state/turnir/turnir.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -52,14 +52,16 @@ export class StoreService {
       .select(selectPrijavljeniIgraciZaTurnir)
       .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
   }
-  vratiPrijavljeniTUrnir(): Observable<Turnir> {
-    return this.store
-      .select(selectTurnirUPrijavi)
-      .pipe(map((p: any) => p.turnir));
-    //.pipe(map((p: any) => p.turnir));
-    // return this.store
-    //   .select(selectPrijavljeniTurniri)
-    //   .pipe(map((p: any) => p.prijavljeniTurniri));
+  // vratiPrijavljeniTUrnir(): Observable<Turnir> {
+  //   return this.store
+  //     .select(selectTurnirUPrijavi)
+  //     .pipe(map((p: any) => p.turnir));
+  // }
+  vratiPrijavljeniTurnir(): Observable<Turnir> {
+    return this.store.select(selectIzabraniTurnir).pipe(
+      filter((turnir) => !!turnir),
+      map((turnir) => turnir as Turnir)
+    );
   }
 }
 function selectPrijavljeniIgraciZaTurnir(state: object): unknown {
