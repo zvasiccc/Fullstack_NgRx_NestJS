@@ -43,9 +43,9 @@ export class HeaderComponent {
     this.store.dispatch(IgracActions.ocistiStore());
     this.router.navigateByUrl('');
   }
-  navigirajNaPrijavu() {
-    this.router.navigateByUrl('prijava');
-  }
+  // navigirajNaPrijavu() {
+  //   this.router.navigateByUrl('prijava');
+  // }
   navigirajNaRegistraciju() {
     this.router.navigateByUrl('registracija');
   }

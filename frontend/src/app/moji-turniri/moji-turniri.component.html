@@ -1,20 +1,7 @@
 <div class="container">
-  <h3>turniri</h3>
   <ul>
     <li *ngFor="let turnir of mojiTurniri$ | async">
       <app-turnir [turnir]="turnir"></app-turnir>
-      <!-- (turnirDeleteEvent)="onTurnirDelete($event)" linija gore-->
-      <!-- <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
-        <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-          Prijavljeni timovi
-        </button>
-        <ng-container *ngIf="korisnik.role === 'igrac'">
-          <button (click)="prijaviSeNaTurnir(turnir)">Prijavi se</button>
-        </ng-container>
-        <ng-container *ngIf="korisnik.role === 'organizator'">
-          <button (click)="obrisiTurnir(turnir.id)">Obrisi turnir</button>
-        </ng-container>
-      </ng-container> -->
     </li>
   </ul>
 </div>

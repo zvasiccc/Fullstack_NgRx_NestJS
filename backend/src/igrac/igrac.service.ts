@@ -21,7 +21,6 @@ export class IgracService {
     private turnirRepository: Repository<TurnirEntity>,
     private jwtService: JwtService,
   ) {}
-  //!
   async vratiSveIgrace() {
     return await this.igracRepository.find();
   }
@@ -32,28 +31,7 @@ export class IgracService {
       .andWhere({ vodjaTima: false })
       .getMany();
   }
-  async vratiIgracaIzTokena(token: string) {
-    try {
-      const noviToken = token.split(' ')[1];
 
-      const dekodiraniToken = (await this.jwtService.verify(noviToken, {
-        secret: 'SECRET',
-      })) as any;
-      const igrac = await this.igracRepository.findOne({
-        where: { korisnickoIme: dekodiraniToken.username },
-      });
-      console.log('IGRAC JE ', igrac);
-
-      if (!igrac) {
-        throw new NotFoundException('Igrac nije pronadjen');
-      }
-
-      const { lozinka, ...igracBezLozinke } = igrac;
-      return igracBezLozinke;
-    } catch (error) {
-      throw new NotFoundException('nevazeci token');
-    }
-  }
   async dohvatiIgraca(korisnickoIme: string) {
     return await this.igracRepository.findOne({
       where: { korisnickoIme: korisnickoIme },
@@ -67,7 +45,7 @@ export class IgracService {
       },
     });
   }
-  //!
+
   async findOne(username: string): Promise<IgracEntity | undefined> {
     return this.igracRepository.findOne({ where: { korisnickoIme: username } });
   }
@@ -87,7 +65,6 @@ export class IgracService {
     noviIgrac.prezime = igrac.prezime;
     noviIgrac.vodjaTima = igrac.vodjaTima;
     noviIgrac.id = igrac.id;
-    //noviIgrac.roles = igrac.roles;
     return await this.igracRepository.save(noviIgrac);
   }
 

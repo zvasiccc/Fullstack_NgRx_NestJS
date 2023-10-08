@@ -32,11 +32,6 @@ export class IgracController {
   async vratiMoguceSaigrace(@Request() req: any) {
     return await this.igracService.vratiMoguceSaigrace(req.user.userId);
   }
-  // @UseGuards(JwtAuthGuard, IgracGuard, VodjaGuard)
-  // @Get('slobodniIgraciZaTurnir/:turnirId')
-  // async slobodniIgraciZaTurnir(@Param('turnirId') turnirId: number) {
-  //   return await this.igracService.slobodniIgraciZaTurnir(turnirId);
-  // }
 
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('korisnickoIme/:korisnickoIme')
@@ -64,22 +59,6 @@ export class IgracController {
     return this.igracService.izmeniPodatkeOIgracu(req.user.userId, igrac);
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Get('vratiIgracaIzTokena')
-  // vratiIgracaIzTokena(@Headers('authorization') authorization: string) {
-  //   if (authorization) {
-  //     //const token = authorization.replace('Bearer ', ''); // Uklonimo "Bearer " prefiks
-  //     return this.igracService.vratiIgracaIzTokena(authorization); // Prosleđujemo token servisu
-  //   } else {
-  //     // Nema tokena u zaglavlju, obradite to kako želite
-  //     return null;
-  //   }
-  // }
-
-  // @Get('pronadjiIgraceZaPrijavu/:id') //?
-  // async pronadjiIgraceZaPrijavu(@Param('id') id: number) {
-  //   return await this.igracService.pronadjiIgraceZaPrijavu(id);
-  // }
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);

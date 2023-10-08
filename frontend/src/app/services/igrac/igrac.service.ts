@@ -1,17 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 
-import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import { Router } from '@angular/router';
 import * as IgracActions from 'src/app/shared/state/igrac/igrac.actions';
-import { selectIgraciUPrijavi } from 'src/app/shared/state/prijava/prijava.selector';
-import { StoreService } from '../store.service';
-import { Route, Router } from '@angular/router';
-import { Organizator } from 'src/app/shared/models/organizator';
-import { selectPrijavljeniKorisnik } from 'src/app/shared/state/korisnik/korisnik.selector';
 import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
+import { StoreService } from '../store.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +17,8 @@ export class IgracService {
     private store: Store,
     private http: HttpClient,
     private storeService: StoreService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
   private urlIgrac = 'http://localhost:3000/igrac/';
   vratiSveIgrace(): Observable<Igrac[]> {
@@ -36,13 +34,9 @@ export class IgracService {
   }
 
   dodajIgracaUTim(igrac: Igrac): void {
-    //return this.store.dispatch(PrijavaActions.dodajIgracaUTim({ igrac }));
     return this.store.dispatch(IgracActions.dodajIgracaUTim({ igrac }));
   }
   vratiIgraceIzTima(): Observable<Igrac[]> {
-    // return this.store
-    //   .select(selectIgraciUPrijavi)
-    //   .pipe(map((p: any) => p.igraciUTimu));
     return this.store.select(selectSviIgraci);
   }
   vratiIgracePoKorisnickomImenu(korisnickoIme: string): Observable<Igrac[]> {
@@ -52,8 +46,21 @@ export class IgracService {
   }
   registrujSeKaoIgrac(igrac: Igrac): Subscription {
     const url = this.urlIgrac + 'registrujIgraca';
-    return this.http.post(url, igrac).subscribe(() => {
-      this.router.navigateByUrl('');
+    return this.http.post(url, igrac).subscribe((p) => {
+      if (p == null) {
+        this._snackBar.open(
+          'Zeljeno korisnicko ime je vec u upotrebi',
+          'Zatvori',
+          {
+            duration: 4000,
+          }
+        );
+      } else {
+        this._snackBar.open('Uspesno ste se registrovali', 'Zatvori', {
+          duration: 2000,
+        });
+        this.router.navigateByUrl('');
+      }
     });
   }
   vidiSaigrace(turnirId: number, igracId: number): Observable<Igrac[]> {

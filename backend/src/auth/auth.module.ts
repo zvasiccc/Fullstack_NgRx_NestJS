@@ -15,23 +15,10 @@ import { OrganizatorModule } from 'src/organizator/organizator.module';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '60m' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
-
-// @Module({
-//   imports: [
-//     PassportModule,
-//     JwtModule.register({
-//       secret: jwtConstants.secret,
-//       signOptions: { expiresIn: '60s' },
-//     }),
-
-//   ],
-//   providers: [AuthService, LocalStrategy],
-//   exports: [AuthService],
-// })
 export class AuthModule {}

@@ -28,12 +28,12 @@ export class KreiranjeTurniraComponent {
     if (this.brojJeStepenDvojke(this.turnir.maxBrojTimova)) {
       this.turnirService.kreirajTurnir(this.turnir).subscribe((p) => {
         this._snackBar.open('Turnir je uspešno kreiran', 'Zatvori', {
-          duration: 2000,
+          duration: 3000,
         });
       });
     } else {
       this._snackBar.open('Neodgovarajuci broj timova na turniru', 'Zatvori', {
-        duration: 2000,
+        duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
