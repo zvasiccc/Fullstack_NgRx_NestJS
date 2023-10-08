@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Igrac } from 'src/app/shared/models/igrac';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as IgracActions from 'src/app/shared/state/igrac/igrac.actions';
 import { selectSviIgraci } from 'src/app/shared/state/igrac/igrac.selector';
 import { StoreService } from '../store.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root',
 })

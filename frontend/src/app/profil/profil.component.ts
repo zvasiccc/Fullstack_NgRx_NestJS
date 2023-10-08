@@ -1,13 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { Igrac } from '../shared/models/igrac';
-import { IgracService } from '../services/igrac/igrac.service';
-import { Observable, map, tap } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { Organizator } from '../shared/models/organizator';
-import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
-import { StoreService } from '../services/store.service';
-import { OrganizatorService } from '../services/organizator.service';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, tap } from 'rxjs';
+import { IgracService } from '../services/igrac/igrac.service';
+import { OrganizatorService } from '../services/organizator.service';
+import { StoreService } from '../services/store.service';
+import { Igrac } from '../shared/models/igrac';
+import { Organizator } from '../shared/models/organizator';
 
 @Component({
   selector: 'app-profil',

@@ -80,7 +80,7 @@
 }
 
 /* Stilizacija za .preference-button */
-.preference-button {
+.my-button {
   background-color: #333;
   color: #fff;
   padding: 10px 20px;
@@ -93,6 +93,6 @@
 }
 
 /* Dodavanje hover efekta na .preference-button */
-.preference-button:hover {
+.my-button:hover {
   background-color: #555;
 }

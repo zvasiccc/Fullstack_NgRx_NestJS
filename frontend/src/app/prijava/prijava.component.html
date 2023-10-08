@@ -1,6 +1,6 @@
 <div *ngIf="prijavljeniTurnir$ | async as turnir">
   <h2>Turnir</h2>
-  <app-turnir [turnir]="turnir"></app-turnir>
+  <app-turnir [turnir]="turnir" [prikaziDugmice]="false"></app-turnir>
 
   <ul>
     <h2>Igraci u timu</h2>
@@ -21,7 +21,7 @@
       (click)="navigirajNaIgrace()"
       class="custom-button choose-players-button"
     >
-      Izaberi druge saigrace
+      Idi na biranje igraca
     </button>
   </div>
 </div>
@@ -32,6 +32,14 @@
     <p>Potreban broj računara:{{ preference.potrebanBrojRacunara }}</p>
     <p>Potreban broj tastatura:{{ preference.potrebanBrojTastatura }}</p>
     <p>Potreban broj miševa: {{ preference.potrebanBrojMiseva }}</p>
+  </div>
+  <div class="button-container">
+    <button
+      (click)="navigirajNaPreference()"
+      class="custom-button choose-players-button"
+    >
+      Promeni preference
+    </button>
   </div>
 </div>
 <label for="nazivTima">naziv tima</label>

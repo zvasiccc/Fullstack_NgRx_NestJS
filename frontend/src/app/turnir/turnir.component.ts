@@ -24,6 +24,8 @@ import * as IgracActions from '../shared/state/igrac/igrac.actions';
 export class TurnirComponent {
   @Input()
   turnir!: Turnir;
+  @Input()
+  prikaziDugmice: boolean = true;
   trenutnoPrijavljeniKorisnik$: Observable<Igrac | Organizator | undefined> =
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   jePrijavljenNaTurnir: Observable<any> = new Observable();
@@ -73,15 +75,12 @@ export class TurnirComponent {
 
   async vidiSaigrace(turnirId: number, igracId: number) {
     this.router.navigateByUrl(`mojiSaigraci/${turnirId}/${igracId}`);
-    //this.igracService.vidiSaigrace(turnirId, igracId);
   }
-  //@Output() turnirDeleteEvent = new EventEmitter();
+
   async obrisiTurnir() {
     (await this.turnirService.obrisiTurnir(this.turnir.id)).subscribe((p) => {
       this.turnirService.refresh();
     });
-    //this.turnirDeleteEvent.emit(this.turnir.id);
-    //console.log('Brisem turinr, TurnirComponent', this.turnir.id);
   }
 
   igracJeVodja(user: any): user is Igrac {

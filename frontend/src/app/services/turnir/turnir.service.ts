@@ -1,23 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { StoreDevtools } from '@ngrx/store-devtools';
 import {
   BehaviorSubject,
   Observable,
-  Subscription,
   catchError,
   exhaustMap,
-  map,
   of,
   tap,
 } from 'rxjs';
-import { Igrac } from 'src/app/shared/models/igrac';
 import { Turnir } from 'src/app/shared/models/turnir';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { selectTokenPrijavljenogKorisnika } from 'src/app/shared/state/korisnik/korisnik.selector';
-import { StoreService } from '../store.service';
 import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
+import { StoreService } from '../store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +27,6 @@ export class TurnirService {
 
   private refreshSubject = new BehaviorSubject<Turnir[]>([]);
 
-  // dodajTurnir(turnir: Turnir) {
-  //   this.store.dispatch(kreirajTurnir({ turnir }));
-  // }
   getTurniriBaza(): Observable<Turnir[]> {
     const url = this.turnirUrl + 'sviTurniri';
     return this.http.get<Turnir[]>(url);
@@ -47,8 +39,6 @@ export class TurnirService {
         return this.http.get<Turnir[]>(url, { headers });
       })
     );
-
-    //return this.http.get<Turnir[]>(url, { headers });
   }
 
   refresh() {
@@ -84,11 +74,9 @@ export class TurnirService {
 
     return this.http.get<Turnir[]>(url).pipe(
       tap((turniri) => {
-        // Dispečujte akciju za uspešno dohvatanje podataka kada su dostupni
         this.store.dispatch(TurnirActions.fetchTurniriUspesno({ turniri }));
       }),
       catchError((error) => {
-        // Dispečujte akciju za grešku ako se pojavi
         this.store.dispatch(TurnirActions.fetchTurniriNeuspesno({ error }));
         return of([]);
       })

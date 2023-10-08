@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StoreService } from '../services/store.service';
-import { TurnirService } from '../services/turnir/turnir.service';
 import { Igrac } from '../shared/models/igrac';
 @Component({
   selector: 'app-igraci-na-turniru',
@@ -15,7 +14,7 @@ export class IgraciNaTurniruComponent {
     this.storeService.vratiPrijavljeneIgrace(this.turnirId);
   constructor(
     private route: ActivatedRoute,
-    private turnirService: TurnirService,
+
     private storeService: StoreService
   ) {}
   ngOnInit() {

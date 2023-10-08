@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IgracService } from '../services/igrac/igrac.service';
 import { Observable, map } from 'rxjs';
 import { Igrac } from '../shared/models/igrac';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
+import { selectPreferenceUPrijavi } from '../shared/state/prijava/prijava.selector';
 @Component({
   selector: 'app-svi-igraci',
   templateUrl: './svi-igraci.component.html',
@@ -27,7 +28,7 @@ export class SviIgraciComponent {
   pretragaIgraci$: Observable<Igrac[]> = new Observable<Igrac[]>();
   uneseniIgrac: string = '';
   trenutniTurnir: Turnir | null = null;
-  ngOnInit() {}
+
   dodajIgracaUtim(igrac: Igrac) {
     this.storeService
       .vratiPrijavljeniTurnir()
@@ -61,5 +62,8 @@ export class SviIgraciComponent {
   }
   navigirajNaPreference() {
     this.router.navigateByUrl('preference');
+  }
+  navigirajNaPrijavu() {
+    this.router.navigateByUrl('prijava');
   }
 }

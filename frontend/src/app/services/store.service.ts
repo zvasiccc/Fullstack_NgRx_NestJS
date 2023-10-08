@@ -50,13 +50,9 @@ export class StoreService {
   vratiPrijavljeneIgrace(turnirId: number): Observable<Igrac[]> {
     return this.store
       .select(selectPrijavljeniIgraciZaTurnir)
-      .pipe(map((p: any) => p.prijavljeniIgraci)); //this.store.select(selectPrijavljeniIgraciZaTurnir, { id: turnirId });
+      .pipe(map((p: any) => p.prijavljeniIgraci));
   }
-  // vratiPrijavljeniTUrnir(): Observable<Turnir> {
-  //   return this.store
-  //     .select(selectTurnirUPrijavi)
-  //     .pipe(map((p: any) => p.turnir));
-  // }
+
   vratiPrijavljeniTurnir(): Observable<Turnir> {
     return this.store.select(selectIzabraniTurnir).pipe(
       filter((turnir) => !!turnir),

@@ -23,10 +23,10 @@ export class IgracController {
   constructor(private igracService: IgracService) {}
   // @UseGuards(JwtAuthGuard)
   // @Roles(Role.Igrac)
-  @Get('sviIgraci')
-  async vratiSveIgrace() {
-    return await this.igracService.vratiSveIgrace();
-  }
+  // @Get('sviIgraci')
+  // async vratiSveIgrace() {
+  //   return await this.igracService.vratiSveIgrace();
+  // }
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiMoguceSaigrace')
   async vratiMoguceSaigrace(@Request() req: any) {
@@ -63,7 +63,7 @@ export class IgracController {
   findOne(@Param('username') username: string) {
     return this.igracService.findOne(username);
   }
-  //@UseGuards(JwtAuthGuard, IgracGuard)
+  @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiIgraceIzIstogTima/:turnirId/:igracId')
   async vratiSaigrace(
     @Param('turnirId') turnirId: number,

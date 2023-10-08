@@ -81,4 +81,7 @@ export class PrijavaComponent {
   navigirajNaIgrace() {
     this.router.navigateByUrl('sviIgraci');
   }
+  navigirajNaPreference() {
+    this.router.navigateByUrl('preference');
+  }
 }

@@ -1,15 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { IgracEntity } from './igrac.entity';
-import { In, Like, Not, Repository, SelectQueryBuilder } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PrijavaEntity } from 'src/prijava/prijava.entity';
-import { TurnirEntity } from 'src/turnir/turnir.entity';
-import { JwtService } from '@nestjs/jwt';
-import { JwtStrategy } from 'src/auth/jwt.strategy';
-import { plainToClass } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
-import passport from 'passport';
-import { resourceUsage } from 'process';
+import { PrijavaEntity } from 'src/prijava/prijava.entity';
+import { Like, Not, Repository } from 'typeorm';
+import { IgracEntity } from './igrac.entity';
 @Injectable()
 export class IgracService {
   constructor(
@@ -17,13 +11,10 @@ export class IgracService {
     private igracRepository: Repository<IgracEntity>,
     @InjectRepository(PrijavaEntity)
     private prijavaRepository: Repository<PrijavaEntity>,
-    @InjectRepository(TurnirEntity)
-    private turnirRepository: Repository<TurnirEntity>,
-    private jwtService: JwtService,
   ) {}
-  async vratiSveIgrace() {
-    return await this.igracRepository.find();
-  }
+  // async vratiSveIgrace() {
+  //   return await this.igracRepository.find();
+  // }
   async vratiMoguceSaigrace(igracId: number) {
     return await this.igracRepository
       .createQueryBuilder('igrac')
@@ -82,29 +73,13 @@ export class IgracService {
     console.log('izmenjeni igrac je' + postojeciIgrac.ime);
     return await this.igracRepository.save(postojeciIgrac);
   }
-  // async pronadjiIgraceZaPrijavu(prijavaId: number) {
-  //   const prijava = await this.prijavaRepository.findOne({
-  //     where: { id: prijavaId },
-  //   });
 
-  //   if (!prijava) {
-  //     console.log('ne opstoji prijava sa tim id');
-  //     return [];
-  //   }
-  //   const igraci = await this.igracRepository.find({
-  //     where: {
-  //       id: In([...prijava.igraci]),
-  //     },
-  //   });
-  //   return igraci;
-  // }
   async vratiSaigrace(turnirId: number, igracId: number) {
     const prijaveZaTurnir = await this.prijavaRepository
       .createQueryBuilder('prijava')
       .leftJoinAndSelect('prijava.igraci', 'igrac')
       .leftJoinAndSelect('prijava.turnir', 'turnir')
       .where('turnir.id = :turnirId', { turnirId })
-
       .getMany();
 
     const trazenaPrijava = prijaveZaTurnir.find((prijava) => {
@@ -122,13 +97,10 @@ export class IgracService {
       .createQueryBuilder('prijava')
       .innerJoin('prijava.igraci', 'igrac')
       .innerJoin('prijava.turnir', 'turnir')
-      .where('turnir.id = :turnirId', { turnirId }) //! bez id:
+      .where('turnir.id = :turnirId', { turnirId })
       .andWhere('igrac.id = :igracId', { igracId })
       .getOne();
-    //*inner join da ne dobijemo prijavu ako ne postoji igracId ili turnirId
+
     return trazenaPrijava ? true : false;
-  }
-  private async hashPassword(password: string, salt: string) {
-    return bcrypt.hash(password, salt);
   }
 }

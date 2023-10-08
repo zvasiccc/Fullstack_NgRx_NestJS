@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Igrac } from '../shared/models/igrac';
-import { Organizator } from '../shared/models/organizator';
 import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { IgracService } from '../services/igrac/igrac.service';
 import { OrganizatorService } from '../services/organizator.service';
+import { Igrac } from '../shared/models/igrac';
+import { Organizator } from '../shared/models/organizator';
 
 @Component({
   selector: 'app-registracija',

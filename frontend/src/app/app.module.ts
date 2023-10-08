@@ -18,7 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { HttpClientModule } from '@angular/common/http';
-import { OdgovarajuciTurniriComponent } from './odgovarajuci-turniri/odgovarajuci-turniri.component';
 import { SviIgraciComponent } from './svi-igraci/svi-igraci.component';
 import { prijavaReducer } from './shared/state/prijava/prijava.reducer';
 import { PrijavaComponent } from './prijava/prijava.component';
@@ -50,7 +49,6 @@ import { igracReducer } from './shared/state/igrac/igrac.reducer';
     IgraciNaTurniruComponent,
     LoginComponent,
     RegistracijaComponent,
-    OdgovarajuciTurniriComponent,
     SviIgraciComponent,
     PrijavaComponent,
     PreferenceComponent,

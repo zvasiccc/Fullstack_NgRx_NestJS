@@ -7,32 +7,36 @@
   <p>trenutni broj timova: {{ turnir.trenutniBrojTimova }}</p>
   <div container>
     <ul>
-      <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
-        <button (click)="prikaziPrijavljeneTimove(turnir.id)">
-          Prijavljeni timovi
-        </button>
-        <ng-container *ngIf="korisnik.role === 'igrac'">
-          <ng-container *ngIf="igracJeVodja(korisnik)">
-            <ng-container *ngIf="!(jePrijavljenNaTurnir | async)">
-              <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
-                Prijavi se
-              </button>
+      <ng-container *ngIf="prikaziDugmice">
+        <ng-container *ngIf="trenutnoPrijavljeniKorisnik$ | async as korisnik">
+          <button (click)="prikaziPrijavljeneTimove(turnir.id)">
+            Prijavljeni timovi
+          </button>
+          <ng-container *ngIf="korisnik.role === 'igrac'">
+            <ng-container *ngIf="igracJeVodja(korisnik)">
+              <ng-container *ngIf="!(jePrijavljenNaTurnir | async)">
+                <button (click)="prijaviSeNaTurnir(turnir, korisnik)">
+                  Prijavi se
+                </button>
+              </ng-container>
+              <ng-container *ngIf="jePrijavljenNaTurnir | async">
+                <button
+                  (click)="odjaviSvojTimSaTurnira(turnir.id, korisnik.id)"
+                >
+                  Izbrisi prijavu
+                </button>
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="jePrijavljenNaTurnir | async">
-              <button (click)="odjaviSvojTimSaTurnira(turnir.id, korisnik.id)">
-                Izbrisi prijavu
+              <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
+                Vidi saigrace
               </button>
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="jePrijavljenNaTurnir | async">
-            <button (click)="vidiSaigrace(turnir.id, korisnik.id)">
-              Vidi saigrace
-            </button>
-          </ng-container>
-        </ng-container>
-        <ng-container *ngIf="korisnik.role === 'organizator'">
-          <ng-container *ngIf="jeOrganizatorTurnira | async">
-            <button (click)="obrisiTurnir()">Obrisi turnir</button>
+          <ng-container *ngIf="korisnik.role === 'organizator'">
+            <ng-container *ngIf="jeOrganizatorTurnira | async">
+              <button (click)="obrisiTurnir()">Obrisi turnir</button>
+            </ng-container>
           </ng-container>
         </ng-container>
       </ng-container>

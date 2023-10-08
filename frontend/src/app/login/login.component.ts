@@ -5,6 +5,7 @@ import { LoginService } from '../services/login.service';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import * as KorisnikActions from '../shared/state/korisnik/korisnik.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,7 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private store: Store,
-
+    private _snackBar: MatSnackBar,
     private router: Router
   ) {}
 

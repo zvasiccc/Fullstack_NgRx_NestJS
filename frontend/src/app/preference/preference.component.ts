@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { dodajPreferenceUPrijavu } from '../shared/state/prijava/prijava.actions';
-import { map } from 'rxjs';
-import { Preference } from '../shared/models/preference';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Preference } from '../shared/models/preference';
+import { dodajPreferenceUPrijavu } from '../shared/state/prijava/prijava.actions';
 
 @Component({
   selector: 'app-preference',

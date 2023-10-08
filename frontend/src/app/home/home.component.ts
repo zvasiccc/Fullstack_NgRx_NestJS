@@ -3,20 +3,20 @@ import { Observable } from 'rxjs';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Turnir } from '../shared/models/turnir';
 //import { KorpaService } from '../services/korpa/korpa.service';
-import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { IgracService } from '../services/igrac/igrac.service';
+import { Store } from '@ngrx/store';
 import { StoreService } from '../services/store.service';
 import { Igrac } from '../shared/models/igrac';
 import { Organizator } from '../shared/models/organizator';
 import { selectSviTurniri } from '../shared/state/turnir/turnir.selector';
+import * as PrijavaActions from '../shared/state/prijava/prijava.actions';
+import * as IgracActions from '../shared/state/igrac/igrac.actions';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   sviTurniri$: Observable<Turnir[]> = this.turnirService.getTurniriBaza();
   filtriraniTurniri: Turnir[] = [];
   turniriStore$: Observable<Turnir[]> = this.store.select(selectSviTurniri);
@@ -26,15 +26,12 @@ export class HomeComponent implements OnInit {
     this.storeService.pribaviTrenutnoPrijavljenogKorisnika();
   constructor(
     private turnirService: TurnirService,
-    private igracService: IgracService,
     private storeService: StoreService,
-    private router: Router,
     private store: Store
   ) {
     this.turniriStore$ = this.store.select(selectSviTurniri);
-  }
-  ngOnInit(): void {
-    //this.turniriStore$ = this.store.select(selectSviTurniri);
+    this.store.dispatch(PrijavaActions.OcistiStore());
+    this.store.dispatch(IgracActions.ocistiStore());
   }
 
   handlePretragaRezultati(rezultati: Turnir[]) {

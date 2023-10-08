@@ -22,28 +22,6 @@
 }
 
 /* Stilizacija dugmadi */
-.turnir button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.turnir button:hover {
-  background-color: #0056b3;
-}
-
-/* Stilizacija kontejnera za dugmad */
-.turnir [container] {
-  display: flex;
-  justify-content: flex-end; /* Stavlja dugmad u desni ugao */
-  align-items: center;
-  margin-top: 10px;
-}
 
 /* Stilizacija lista */
 ul {
@@ -56,4 +34,23 @@ ul {
   font-weight: bold;
   color: #555; /* Boja teksta za labelu */
   margin-right: 5px; /* Razmak sa desne strane labele */
+}
+
+/* Stilizacija dugmadi */
+/* Stilizacija dugmadi */
+.turnir button {
+  background-color: #0375f7; /* Boja pozadine dugmeta */
+  color: #fff; /* Boja teksta na dugmetu */
+  padding: 12px 20px; /* Prostor unutar dugmeta */
+  border: none; /* Bez ivica oko dugmeta */
+  border-radius: 15px; /* Zaobljeni uglovi */
+  font-size: 13x; /* Veličina fonta */
+  cursor: pointer; /* Pokazivač miša se menja na ruku prilikom hover-a */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Animacija za hover efekat */
+  margin-right: 10px; /* Razmak između dugmadi */
+}
+
+.turnir button:hover {
+  background-color: #1100ff; /* Boja pozadine dugmeta na hover-u */
+  color: #fff; /* Boja teksta na hover-u */
 }
