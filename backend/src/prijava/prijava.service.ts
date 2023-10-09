@@ -1,9 +1,8 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
-import { PrijavaEntity } from './prijava.entity';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TurnirEntity } from 'src/turnir/turnir.entity';
-import { IgracEntity } from 'src/igrac/igrac.entity';
+import { Repository } from 'typeorm';
+import { PrijavaEntity } from './prijava.entity';
 
 @Injectable()
 export class PrijavaService {
@@ -12,8 +11,6 @@ export class PrijavaService {
     private prijavaRepository: Repository<PrijavaEntity>,
     @InjectRepository(TurnirEntity)
     private turnirRepository: Repository<TurnirEntity>,
-    @InjectRepository(IgracEntity)
-    private igracRepository: Repository<IgracEntity>,
   ) {}
   async vratiPrijavuPoId(id: number) {
     return this.prijavaRepository.findOne({ where: { id: id } });
@@ -59,12 +56,6 @@ export class PrijavaService {
     return await this.prijavaRepository.save(novaPrijava);
   }
   async prijaveNaTurniru(turnirId: number) {
-    // const turnir = await this.turnirRepository
-    //   .createQueryBuilder('turnir')
-    //   .where('turnir.id = :id', { id: turnirId })
-    //   .leftJoinAndSelect('turnir.prijave', 'prijava')
-    //   .leftJoinAndSelect('prijava.igraci', 'igrac')
-    //   .getOne();
     const prijave = await this.prijavaRepository
       .createQueryBuilder('prijava')
       .where('prijava.turnir = :id', { id: turnirId })
@@ -78,10 +69,6 @@ export class PrijavaService {
       .where('prijava.id=:id', { id: prijavaId })
       .leftJoinAndSelect('prijava.turnir', 'turnir')
       .getOne();
-    console.log(trazenaPrijava); //! radi
-    // const turnir = prijava.turnir;
-    // if (turnir) {
-
     const turnir = await this.turnirRepository
       .createQueryBuilder('turnir')
       .leftJoinAndSelect('turnir.prijave', 'prijava')
@@ -103,7 +90,6 @@ export class PrijavaService {
       .where('turnir.id = :turnirId', { turnirId })
       .andWhere('igrac.id = :igracId', { igracId })
       .getOne();
-    //*inner join da ne dobijemo prijavu ako ne postoji igracId ili turnirId
 
     const turnir = await this.turnirRepository
       .createQueryBuilder('turnir')

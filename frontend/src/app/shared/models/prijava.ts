@@ -1,5 +1,5 @@
-import { Igrac } from './igrac'; // Pretpostavljam da već postoji interfejs ili model za Igrac
-import { Turnir } from './turnir'; // Pretpostavljam da već postoji interfejs ili model za Turnir
+import { Igrac } from './igrac';
+import { Turnir } from './turnir';
 
 export interface Prijava {
   id: number;
@@ -8,6 +8,6 @@ export interface Prijava {
   potrebanBrojRacunara: number;
   potrebanBrojTastatura: number;
   potrebanBrojMiseva: number;
-  igraci: Igrac[]; //
-  turnir: Turnir | null; //
+  igraci: Igrac[];
+  turnir: Turnir | null;
 }

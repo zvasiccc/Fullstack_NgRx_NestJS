@@ -4,32 +4,19 @@ import {
   Get,
   Param,
   Post,
-  UseGuards,
-  Request,
-  Headers,
   Put,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
-import { OrganizatorService } from './organizator.service';
-import { OrganizatorEntity } from './organizator.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Role } from 'src/roles/role.enum';
 import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
+import { OrganizatorEntity } from './organizator.entity';
+import { OrganizatorService } from './organizator.service';
 
 @Controller('organizator')
 export class OrganizatorController {
   constructor(private organizatorService: OrganizatorService) {}
-  // @UseGuards(JwtAuthGuard, OrganizatorGuard)
-  // @Get('sviOrganizatori') //! obrsati
-  // vratiSveOrganizatore() {
-  //   return this.organizatorService.vratiSveOrganizatore();
-  // }
-  // @UseGuards(JwtAuthGuard, OrganizatorGuard)
-  // @Get('vratiOrganizatoraIzTokena')
-  // vratiOrganizatoraIzTokena(@Headers('authorization') authorization: string) {
-  //   if (authorization)
-  //     return this.organizatorService.vratiOrganizatoraIzTokena(authorization);
-  //   else return null;
-  // }
+
   @Get('findOne/:username')
   findOne(@Param('username') username: string) {
     return this.organizatorService.findOne(username);

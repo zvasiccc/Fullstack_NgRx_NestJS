@@ -15,6 +15,5 @@ export class VodjaGuard extends RolesGuard {
     return this.igracService.findOne(user.username).then((user) => {
       return user?.vodjaTima;
     });
-    // return igrac.vodjaTima == true;
   }
 }

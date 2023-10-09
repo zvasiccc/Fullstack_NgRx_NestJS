@@ -9,17 +9,12 @@ import { Turnir } from '../../models/turnir';
 
 const selectTurnirFeature = createFeatureSelector<TurnirState>('turniri');
 
-// export const selectSviTurniri = createSelector(
-//   selectTurnirFeature,
-//   (state) => state.turniri
-// );
 export const selectSviTurniri = createSelector(
   selectTurnirFeature,
   (turniri) =>
     turniri.ids
-      .map((id) => turniri.entities[id]) //vraca niz a ne dictionary(da smo rekli odmah samo turniri.entities)
-      // .filter((turnir) => turnir != null && turnir != undefined) // ovo != znaci da nije null ni undefined a !== bi znacilo da nije null
-      // .map((turnir) => <Turnir>turnir)
+      .map((id) => turniri.entities[id])
+
       .filter((turnir) => turnir !== null && turnir !== undefined) as Turnir[]
 );
 

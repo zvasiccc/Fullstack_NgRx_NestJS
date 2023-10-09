@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Headers,
   Param,
   Post,
   Put,
@@ -10,23 +9,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Role } from 'src/roles/role.enum';
-
-import { IgracService } from './igrac.service';
 import { IgracGuard } from 'src/auth/igrac.role.guard';
 import { IgracEntity } from './igrac.entity';
-import { VodjaGuard } from 'src/auth/vodja.role.guard';
-import { register } from 'module';
+import { IgracService } from './igrac.service';
 
 @Controller('igrac')
 export class IgracController {
   constructor(private igracService: IgracService) {}
-  // @UseGuards(JwtAuthGuard)
-  // @Roles(Role.Igrac)
-  // @Get('sviIgraci')
-  // async vratiSveIgrace() {
-  //   return await this.igracService.vratiSveIgrace();
-  // }
+
   @UseGuards(JwtAuthGuard, IgracGuard)
   @Get('vratiMoguceSaigrace')
   async vratiMoguceSaigrace(@Request() req: any) {

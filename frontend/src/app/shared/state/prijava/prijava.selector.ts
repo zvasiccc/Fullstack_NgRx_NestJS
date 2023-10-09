@@ -13,11 +13,6 @@ const selectIgraciUPrijaviFeature =
   createFeatureSelector<Igrac[]>('igraciUPrijavi');
 const selectPreferenceUPrijaviFeature =
   createFeatureSelector<Prijava>('preferenceUPrijavi');
-
-// export const selectTurnirUPrijavi = createSelector(
-//   selectTurnirUPrijaviFeature,
-//   (turnir) => turnir
-// );
 export const selectIgraciUPrijavi = createSelector(
   selectIgraciUPrijaviFeature,
   (igraciUTimu) => igraciUTimu

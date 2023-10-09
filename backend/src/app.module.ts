@@ -2,23 +2,22 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { IgracController } from './igrac/igrac.controller';
-import { IgracService } from './igrac/igrac.service';
-import { TurnirController } from './turnir/turnir.controller';
-import { TurnirService } from './turnir/turnir.service';
-import { PrijavaService } from './prijava/prijava.service';
-import { PrijavaController } from './prijava/prijava.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { IgracEntity } from './igrac/igrac.entity';
-import { PrijavaEntity } from './prijava/prijava.entity';
-import { TurnirEntity } from './turnir/turnir.entity';
-import { OrganizatorController } from './organizator/organizator.controller';
-import { OrganizatorService } from './organizator/organizator.service';
-import { OrganizatorEntity } from './organizator/organizator.entity';
 import { AuthModule } from './auth/auth.module';
+import { IgracController } from './igrac/igrac.controller';
+import { IgracEntity } from './igrac/igrac.entity';
 import { IgracModule } from './igrac/igrac.module';
+import { IgracService } from './igrac/igrac.service';
+import { OrganizatorController } from './organizator/organizator.controller';
+import { OrganizatorEntity } from './organizator/organizator.entity';
 import { OrganizatorModule } from './organizator/organizator.module';
-import { APP_GUARD } from '@nestjs/core';
+import { OrganizatorService } from './organizator/organizator.service';
+import { PrijavaController } from './prijava/prijava.controller';
+import { PrijavaEntity } from './prijava/prijava.entity';
+import { PrijavaService } from './prijava/prijava.service';
+import { TurnirController } from './turnir/turnir.controller';
+import { TurnirEntity } from './turnir/turnir.entity';
+import { TurnirService } from './turnir/turnir.service';
 
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
@@ -29,12 +28,8 @@ import { TurnirModule } from './turnir/turnir.module';
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
-        host: 'localhost', // Ovde ide localhost
-        port: 2345, // ovde port 2345 akvo je baza u docker, a ti rabotis lokalnoto
-
-        // Ne, sad pokrenes samo docker compose up, a u drugiti terminal kucas npm run start:dev, i promeni ovo kvo sam napisal, ovijata 2 red
-        //pa mogu li da stoje promenjeni, mogu dok ne ode u docker
-
+        host: 'localhost',
+        port: 2345,
         username: 'user',
         password: 'puflander',
         database: 'RWA_PROJEKAT',

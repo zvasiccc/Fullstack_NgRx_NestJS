@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TurnirService } from '../services/turnir/turnir.service';
 import { Turnir } from '../shared/models/turnir';
-//import { KorpaService } from '../services/korpa/korpa.service';
+
 import { Store } from '@ngrx/store';
 import { StoreService } from '../services/store.service';
 import { Igrac } from '../shared/models/igrac';

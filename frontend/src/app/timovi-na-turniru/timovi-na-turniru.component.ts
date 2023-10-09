@@ -46,14 +46,6 @@ export class TimoviNaTurniruComponent {
         );
     }
   }
-  // daLiJeOrganizatorTurnira(
-  //   korisnikId: number | undefined | null
-  // ): Observable<boolean> {
-  //   return this.organizatorService.daLiJeOrganizatorTurnira(
-  //     korisnikId,
-  //     this.turnirId
-  //   );
-  // }
 
   izbaciTimSaTurnira(prijavaId: number) {
     this.prijavaService.izbaciTimSaTurnira(prijavaId).subscribe(() => {

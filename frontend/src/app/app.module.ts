@@ -9,8 +9,7 @@ import { KreiranjeTurniraComponent } from './kreiranje-turnira/kreiranje-turnira
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-//import { KorpaComponent } from './korpa/korpa.component';
-//import { korpaReducer } from './shared/state/korpa/korpa.reducer';
+
 import { IgracComponent } from './igrac/igrac.component';
 import { ProfilComponent } from './profil/profil.component';
 import { IgraciNaTurniruComponent } from './igraci-na-turniru/igraci-na-turniru.component';
@@ -43,7 +42,6 @@ import { igracReducer } from './shared/state/igrac/igrac.reducer';
     HeaderComponent,
     TurnirComponent,
     KreiranjeTurniraComponent,
-    // KorpaComponent,
     IgracComponent,
     ProfilComponent,
     IgraciNaTurniruComponent,
@@ -52,9 +50,7 @@ import { igracReducer } from './shared/state/igrac/igrac.reducer';
     SviIgraciComponent,
     PrijavaComponent,
     PreferenceComponent,
-
     SearchBarComponent,
-
     TimoviNaTurniruComponent,
     MojiTurniriComponent,
     MojiSaigraciComponent,

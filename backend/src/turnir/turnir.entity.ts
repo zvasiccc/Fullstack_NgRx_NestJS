@@ -1,4 +1,3 @@
-import { IgracEntity } from 'src/igrac/igrac.entity';
 import { OrganizatorEntity } from 'src/organizator/organizator.entity';
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import {

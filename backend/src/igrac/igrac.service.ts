@@ -12,9 +12,7 @@ export class IgracService {
     @InjectRepository(PrijavaEntity)
     private prijavaRepository: Repository<PrijavaEntity>,
   ) {}
-  // async vratiSveIgrace() {
-  //   return await this.igracRepository.find();
-  // }
+
   async vratiMoguceSaigrace(igracId: number) {
     return await this.igracRepository
       .createQueryBuilder('igrac')

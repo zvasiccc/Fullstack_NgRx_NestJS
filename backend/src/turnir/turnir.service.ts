@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { jwtConstants } from 'src/auth/constants';
+import { OrganizatorEntity } from 'src/organizator/organizator.entity';
+import { PrijavaEntity } from 'src/prijava/prijava.entity';
+import { Role } from 'src/roles/role.enum';
 import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { TurnirEntity } from './turnir.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { Role } from 'src/roles/role.enum';
-import { OrganizatorEntity } from 'src/organizator/organizator.entity';
-import { Observable, from, map } from 'rxjs';
-import { PrijavaEntity } from 'src/prijava/prijava.entity';
 
 @Injectable()
 export class TurnirService {
@@ -23,10 +23,9 @@ export class TurnirService {
     return await this.turnirRepository.find();
   }
   async vratiMojeTurnire(token: string) {
-    console.log('orig token na backu je' + token); //undefined
     const noviToken = token.split(' ')[1];
     const dekodiraniToken = (await this.jwtService.verify(noviToken, {
-      secret: 'SECRET',
+      secret: jwtConstants.secret,
     })) as any;
     if (dekodiraniToken.role === Role.Igrac) {
       const idIgraca = dekodiraniToken.sub;
@@ -66,19 +65,11 @@ export class TurnirService {
       return turniri;
     }
   }
-  // async odgovarajuciTurniri(naziv: string, mesto: string, datum: string) {
-  //   return await this.turnirRepository.find({
-  //     where: {
-  //       naziv: naziv,
-  //       mestoOdrzavanja: mesto,
-  //       datumOdrzavanja: datum,
-  //     },
-  //   });
-  // }
+
   async dodajTurnir(turnir: TurnirEntity, token: string) {
     const noviToken = token.split(' ')[1];
     const dekodiraniToken = (await this.jwtService.verify(noviToken, {
-      secret: 'SECRET',
+      secret: jwtConstants.secret,
     })) as any;
     const noviTurnir = this.turnirRepository.create();
     noviTurnir.naziv = turnir.naziv;
@@ -137,7 +128,6 @@ export class TurnirService {
       );
     }
 
-    // Dodajte logiku za nagradu
     if (
       pretragaKrajnjaNagrada !== undefined &&
       pretragaPocetnaNagrada !== undefined

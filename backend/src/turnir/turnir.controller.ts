@@ -3,17 +3,16 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Post,
-  Headers,
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { TurnirService } from './turnir.service';
-import { TurnirEntity } from './turnir.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
-import { IgracGuard } from 'src/auth/igrac.role.guard';
+import { TurnirEntity } from './turnir.entity';
+import { TurnirService } from './turnir.service';
 
 @Controller('turnir')
 export class TurnirController {

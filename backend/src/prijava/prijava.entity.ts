@@ -23,15 +23,13 @@ export class PrijavaEntity {
   potrebanBrojTastatura: number;
   @Column()
   potrebanBrojMiseva: number;
-  //!vise igraca cine jednu prijavu tj jedan tim
 
   @ManyToMany(() => IgracEntity, (igrac) => igrac.prijave, {
-    //!ovde  bez .prijave
     cascade: true,
   })
   @JoinTable()
   igraci: IgracEntity[];
-  // Veza sa turnirom
+
   @ManyToOne(() => TurnirEntity, (turnir) => turnir.prijave)
   turnir: TurnirEntity;
 }

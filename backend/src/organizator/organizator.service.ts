@@ -15,29 +15,7 @@ export class OrganizatorService {
     private turnirRepository: Repository<TurnirEntity>,
     private jwtService: JwtService,
   ) {}
-  // async vratiSveOrganizatore() {
-  //   return await this.organizatorRepository.find();
-  // }
-  // async vratiOrganizatoraIzTokena(token: string) {
-  //   try {
-  //     const noviToken = token.split(' ')[1];
-  //     const dekodiraniToken = (await this.jwtService.verify(noviToken, {
-  //       secret: 'SECRET',
-  //     })) as any;
-  //     const organizator = await this.organizatorRepository.findOne({
-  //       where: { korisnickoIme: dekodiraniToken.username },
-  //     });
 
-  //     if (!organizator) {
-  //       throw new NotFoundException('organizator nije pronadjen');
-  //     }
-
-  //     const { lozinka, ...organizatorBezLozinke } = organizator;
-  //     return organizatorBezLozinke;
-  //   } catch (error) {
-  //     throw new NotFoundException('nevazeci token');
-  //   }
-  // }
   async findOne(username: string): Promise<OrganizatorEntity | undefined> {
     return this.organizatorRepository.findOne({
       where: { korisnickoIme: username },
@@ -91,10 +69,5 @@ export class OrganizatorService {
         return turniri.some((turnir) => turnir.id == turnirId);
       }),
     );
-    // turniriOrganizatora.forEach((turnir) => {
-    //   if (turnir.id == turnirId) {
-    //     flag = true;
-    //   }
-    // });
   }
 }

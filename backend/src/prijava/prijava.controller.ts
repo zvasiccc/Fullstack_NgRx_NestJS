@@ -5,23 +5,17 @@ import {
   Get,
   Param,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
-import { PrijavaService } from './prijava.service';
-import { PrijavaEntity } from './prijava.entity';
-import { IgracService } from 'src/igrac/igrac.service';
+import { IgracGuard } from 'src/auth/igrac.role.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizatorGuard } from 'src/auth/organizator.role.guard';
-import { IgracGuard } from 'src/auth/igrac.role.guard';
 import { VodjaGuard } from 'src/auth/vodja.role.guard';
+import { PrijavaService } from './prijava.service';
 
 @Controller('prijava')
 export class PrijavaController {
-  constructor(
-    private prijavaService: PrijavaService,
-    private igracService: IgracService,
-  ) {}
+  constructor(private prijavaService: PrijavaService) {}
   @UseGuards(JwtAuthGuard, OrganizatorGuard)
   @Get(':id')
   vratiPrijavuPoId(@Param('id') id: number) {

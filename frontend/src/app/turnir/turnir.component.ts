@@ -1,20 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Turnir } from '../shared/models/turnir';
-// /import { KorpaService } from '../services/korpa/korpa.service';
-import { TurnirService } from '../services/turnir/turnir.service';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TurnirService } from '../services/turnir/turnir.service';
+import { Turnir } from '../shared/models/turnir';
 
-import * as PrijavaActions from 'src/app/shared/state/prijava/prijava.actions';
+import { Observable } from 'rxjs';
 import * as TurnirActions from 'src/app/shared/state/turnir/turnir.actions';
-import { Observable, map } from 'rxjs';
-import { Igrac } from '../shared/models/igrac';
-import { Organizator } from '../shared/models/organizator';
-import { selectPrijavljeniKorisnik } from '../shared/state/korisnik/korisnik.selector';
 import { IgracService } from '../services/igrac/igrac.service';
+import { OrganizatorService } from '../services/organizator.service';
 import { PrijavaService } from '../services/prijava.service';
 import { StoreService } from '../services/store.service';
-import { OrganizatorService } from '../services/organizator.service';
+import { Igrac } from '../shared/models/igrac';
+import { Organizator } from '../shared/models/organizator';
 import * as IgracActions from '../shared/state/igrac/igrac.actions';
 @Component({
   selector: 'app-turnir',
@@ -31,7 +28,6 @@ export class TurnirComponent {
   jePrijavljenNaTurnir: Observable<any> = new Observable();
   jeOrganizatorTurnira: Observable<any> = new Observable();
   constructor(
-    //private korpaService: KorpaService,
     private turnirService: TurnirService,
     private igracService: IgracService,
     private prijavaService: PrijavaService,
@@ -56,7 +52,6 @@ export class TurnirComponent {
   }
   prijaviSeNaTurnir(turnir: Turnir, korisnik: Igrac | Organizator) {
     const igrac: Igrac = korisnik as Igrac;
-    //this.store.dispatch(PrijavaActions.prijaviSeNaTurnir({ turnir }));
     this.store.dispatch(
       TurnirActions.setIzabraniTurnir({ turnirId: turnir.id })
     );

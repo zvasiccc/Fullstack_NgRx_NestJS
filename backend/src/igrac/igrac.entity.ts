@@ -1,13 +1,6 @@
 import { PrijavaEntity } from 'src/prijava/prijava.entity';
 import { Role } from 'src/roles/role.enum';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  Collection,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class IgracEntity {
